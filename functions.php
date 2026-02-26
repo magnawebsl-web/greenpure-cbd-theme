@@ -270,6 +270,7 @@ function greenpure_format_price( $price ) {
 ────────────────────────────────────── */
 require_once GREENPURE_DIR . '/inc/customizer.php';
 require_once GREENPURE_DIR . '/inc/woocommerce.php';
+require_once GREENPURE_DIR . '/inc/demo-data.php';
 
 /* ──────────────────────────────────────
    10. SÉCURITÉ & LÉGAL CBD
