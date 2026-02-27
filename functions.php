@@ -198,12 +198,16 @@ add_action( 'add_meta_boxes', 'greenpure_add_product_meta_boxes' );
 
 function greenpure_cbd_meta_box_html( $post ) {
     $fields = [
-        '_cbd_concentration' => __( 'Concentration CBD (ex: 10%)', 'greenpure-cbd' ),
-        '_cbd_extraction'    => __( 'Méthode d\'extraction (ex: CO2)', 'greenpure-cbd' ),
-        '_cbd_origin'        => __( 'Origine (ex: Union Européenne)', 'greenpure-cbd' ),
-        '_cbd_lab_report'    => __( 'URL Rapport de laboratoire', 'greenpure-cbd' ),
-        '_cbd_thc'           => __( 'Taux THC (ex: < 0.3%)', 'greenpure-cbd' ),
-        '_cbd_spectrum'      => __( 'Spectre (full / broad / isolat)', 'greenpure-cbd' ),
+        '_cbd_concentration'  => __( 'Concentration CBD (ex: 10%)', 'greenpure-cbd' ),
+        '_cbd_spectrum'       => __( 'Spectre (full / broad / isolat)', 'greenpure-cbd' ),
+        '_cbd_extraction'     => __( 'Méthode d\'extraction (ex: CO2)', 'greenpure-cbd' ),
+        '_cbd_origin'         => __( 'Origine (ex: Union Européenne)', 'greenpure-cbd' ),
+        '_cbd_thc'            => __( 'Taux THC (ex: < 0.3%)', 'greenpure-cbd' ),
+        '_cbd_terpenes'       => __( 'Terpènes (ex: Myrcène, Limonène)', 'greenpure-cbd' ),
+        '_cbd_culture'        => __( 'Mode de culture (Indoor / Outdoor / Greenhouse / N/A)', 'greenpure-cbd' ),
+        '_cbd_certifications' => __( 'Certifications (ex: Agriculture Bio, Vegan, ISO 17025)', 'greenpure-cbd' ),
+        '_cbd_lot'            => __( 'N° de lot (ex: LOT-2025-GP001)', 'greenpure-cbd' ),
+        '_cbd_lab_report'     => __( 'URL Certificat d\'analyse (COA)', 'greenpure-cbd' ),
     ];
     wp_nonce_field( 'greenpure_cbd_meta', 'greenpure_cbd_nonce' );
     foreach ( $fields as $key => $label ) {
@@ -216,7 +220,7 @@ function greenpure_cbd_meta_box_html( $post ) {
 function greenpure_save_cbd_meta( $post_id ) {
     if ( ! isset($_POST['greenpure_cbd_nonce']) || ! wp_verify_nonce($_POST['greenpure_cbd_nonce'], 'greenpure_cbd_meta') ) return;
     if ( defined('DOING_AUTOSAVE') && DOING_AUTOSAVE ) return;
-    $fields = [ '_cbd_concentration','_cbd_extraction','_cbd_origin','_cbd_lab_report','_cbd_thc','_cbd_spectrum' ];
+    $fields = [ '_cbd_concentration','_cbd_spectrum','_cbd_extraction','_cbd_origin','_cbd_thc','_cbd_terpenes','_cbd_culture','_cbd_certifications','_cbd_lot','_cbd_lab_report' ];
     foreach ( $fields as $key ) {
         if ( isset($_POST[$key]) ) {
             update_post_meta( $post_id, $key, sanitize_text_field($_POST[$key]) );
