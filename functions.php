@@ -275,6 +275,7 @@ function greenpure_format_price( $price ) {
 require_once GREENPURE_DIR . '/inc/customizer.php';
 require_once GREENPURE_DIR . '/inc/woocommerce.php';
 require_once GREENPURE_DIR . '/inc/demo-data.php';
+require_once GREENPURE_DIR . '/inc/language-detector.php';
 
 /* ──────────────────────────────────────
    10. AUTO-SETUP COMPLET (une seule fois)

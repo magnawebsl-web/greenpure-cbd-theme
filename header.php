@@ -21,13 +21,13 @@
             <svg width="48" height="48" viewBox="0 0 48 48" fill="none"><path d="M24 4C13 4 4 13 4 24s9 20 20 20 20-9 20-20S35 4 24 4z" fill="#2D6A4F"/><path d="M24 12c-1 5-4 9-8 11 2 3 5 5 8 5s6-2 8-5c-4-2-7-6-8-11z" fill="#B7E4C7"/><path d="M24 12c1 5 4 9 8 11-2 3-5 5-8 5s-6-2-8-5c4-2 7-6 8-11z" fill="#52B788"/></svg>
             <span><?php bloginfo('name'); ?></span>
         </div>
-        <h2>Confirmation d'âge requise</h2>
-        <p>Nos produits CBD sont réservés aux personnes majeures.<br>Avez-vous <strong>18 ans ou plus</strong> ?</p>
+        <h2><?php echo esc_html(greenpure_t('age_title')); ?></h2>
+        <p><?php echo esc_html(greenpure_t('age_text')); ?><br><?php echo wp_kses(greenpure_t('age_question'), ['strong'=>[]]); ?></p>
         <div class="age-gate__actions">
-            <button id="age-gate-yes" class="btn btn--primary btn--lg">Oui, j'ai 18 ans ou plus</button>
-            <button id="age-gate-no" class="btn btn--outline">Non, je suis mineur(e)</button>
+            <button id="age-gate-yes" class="btn btn--primary btn--lg"><?php echo esc_html(greenpure_t('age_yes')); ?></button>
+            <button id="age-gate-no" class="btn btn--outline"><?php echo esc_html(greenpure_t('age_no')); ?></button>
         </div>
-        <p class="age-gate__legal">En entrant sur ce site, vous confirmez avoir pris connaissance de nos <a href="<?php echo esc_url(get_privacy_policy_url()); ?>">Mentions légales</a>.</p>
+        <p class="age-gate__legal"><?php echo esc_html(greenpure_t('age_legal')); ?> <a href="<?php echo esc_url(get_privacy_policy_url()); ?>"><?php echo esc_html(greenpure_t('age_legal_link')); ?></a>.</p>
     </div>
 </div>
 
@@ -39,28 +39,30 @@
         <div class="topbar__inner">
             <div class="topbar__promo">
                 <span class="topbar__icon">🌿</span>
-                <span>Livraison gratuite dès <strong>49€</strong> — Expédition sous 24h</span>
+                <span><?php echo esc_html(greenpure_t('free_shipping')); ?> — <?php echo esc_html(greenpure_t('shipping_24h')); ?></span>
                 <span class="topbar__sep">|</span>
-                <span>Paiement sécurisé 100%</span>
+                <span><?php echo esc_html(greenpure_t('secure_payment')); ?></span>
                 <span class="topbar__sep">|</span>
-                <span>Produits certifiés <strong>< 0,3% THC</strong></span>
+                <span><?php echo esc_html(greenpure_t('certified_thc')); ?></span>
             </div>
             <div class="topbar__right">
                 <?php if ( is_user_logged_in() ): ?>
                     <a href="<?php echo esc_url(get_permalink(get_option('woocommerce_myaccount_page_id'))); ?>">
                         <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/></svg>
-                        Mon compte
+                        <?php echo esc_html(greenpure_t('my_account')); ?>
                     </a>
                 <?php else: ?>
                     <a href="<?php echo esc_url(get_permalink(get_option('woocommerce_myaccount_page_id'))); ?>">
                         <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/></svg>
-                        Connexion
+                        <?php echo esc_html(greenpure_t('login')); ?>
                     </a>
                 <?php endif; ?>
-                <a href="<?php echo esc_url(get_permalink(get_option('woocommerce_myaccount_page_id'))); ?>">
+                <a href="<?php echo esc_url(home_url('/blog')); ?>">
                     <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M17 8C8 10 5.9 16.17 3.82 19.11L5.71 21l1-2.3A4.49 4.49 0 0 0 8 19c8 0 10-8 10-8s-4 2-6.53 2.65A2.5 2.5 0 0 0 12 14c-2 0-2-2-4-2a4 4 0 0 0-2.49.87L4 11c1-2 3-4 9-4l4 1z"/></svg>
                     Blog CBD
                 </a>
+                <span class="topbar__sep">|</span>
+                <?php echo greenpure_lang_switcher_html(); ?>
             </div>
         </div>
     </div>

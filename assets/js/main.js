@@ -1,787 +1,367 @@
 /**
- * GreenPure CBD - Main JavaScript
- * Theme: GreenPure CBD (Premium WordPress Theme)
- * Description: Vanilla JS + jQuery compatible frontend logic.
- *              Covers Age Gate, Sticky Header, Mobile Menu, Search Toggle,
- *              FAQ Accordion, Testimonials Slider, Product Filter,
- *              Countdown Timer, Newsletter Form (AJAX), Back to Top,
- *              Cookie Banner, Scroll Animations, Particle System,
- *              Mini Cart (WooCommerce), Add to Cart Feedback,
- *              Smooth Scroll, and WooCommerce Gallery.
- * Version: 1.0.0
+ * GreenPure CBD — main.js v2.1
+ * FIXED: sélecteurs alignés avec le HTML, variable AJAX corrigée,
+ *        tabs produit, qty +/-, notices, sidebar mobile, langue
  */
 
-/* =========================================================
-   UTILITIES
-   ========================================================= */
-
-/**
- * Get a cookie value by name.
- * @param {string} name
- * @returns {string|null}
- */
+/* === UTILITIES === */
 function getCookie(name) {
     try {
-        const match = document.cookie.match(
-            new RegExp('(?:^|; )' + name.replace(/([.$?*|{}()[\]\\/+^])/g, '\\$1') + '=([^;]*)')
-        );
-        return match ? decodeURIComponent(match[1]) : null;
-    } catch (e) {
-        console.error('[GreenPure] getCookie error:', e);
-        return null;
-    }
+        const m = document.cookie.match(new RegExp('(?:^|; )' + name.replace(/([.$?*|{}()[\]\\/+^])/g,'\\$1') + '=([^;]*)'));
+        return m ? decodeURIComponent(m[1]) : null;
+    } catch(e){ return null; }
 }
-
-/**
- * Set a cookie with a given name, value, and expiry in days.
- * @param {string} name
- * @param {string} value
- * @param {number} days
- */
 function setCookie(name, value, days) {
     try {
-        const expires = new Date(Date.now() + days * 864e5).toUTCString();
-        document.cookie = name + '=' + encodeURIComponent(value) +
-            '; expires=' + expires + '; path=/; SameSite=Lax';
-    } catch (e) {
-        console.error('[GreenPure] setCookie error:', e);
-    }
+        const e = new Date(Date.now() + days*864e5).toUTCString();
+        document.cookie = name + '=' + encodeURIComponent(value) + '; expires=' + e + '; path=/; SameSite=Lax';
+    } catch(e){}
 }
-
-/**
- * Throttle a function call to at most once per `limit` ms.
- * @param {Function} fn
- * @param {number} limit
- * @returns {Function}
- */
 function throttle(fn, limit) {
-    let lastCall = 0;
-    return function (...args) {
-        const now = Date.now();
-        if (now - lastCall >= limit) {
-            lastCall = now;
-            fn.apply(this, args);
-        }
-    };
+    let last = 0;
+    return function(...args){ const now=Date.now(); if(now-last>=limit){ last=now; fn.apply(this,args); } };
 }
 
-/* =========================================================
-   1. AGE GATE
-   ========================================================= */
+/* === 1. AGE GATE — id correct : #age-gate === */
 function initAgeGate() {
     try {
-        const modal    = document.getElementById('age-gate-modal');
-        const btnYes   = document.getElementById('age-gate-yes');
-        const btnNo    = document.getElementById('age-gate-no');
-
+        const modal  = document.getElementById('age-gate');
+        const btnYes = document.getElementById('age-gate-yes');
+        const btnNo  = document.getElementById('age-gate-no');
         if (!modal) return;
-
-        // Already confirmed → hide immediately
-        if (getCookie('greenpure_age_confirmed') === '1') {
-            modal.style.display = 'none';
-            return;
-        }
-
+        if (getCookie('greenpure_age') === '1') { modal.style.display='none'; return; }
         modal.style.display = 'flex';
         document.body.classList.add('age-gate-open');
-
-        if (btnYes) {
-            btnYes.addEventListener('click', function () {
-                setCookie('greenpure_age_confirmed', '1', 30);
-                modal.classList.add('age-gate--closing');
-                setTimeout(function () {
-                    modal.style.display = 'none';
-                    document.body.classList.remove('age-gate-open');
-                }, 400);
-            });
-        }
-
-        if (btnNo) {
-            btnNo.addEventListener('click', function () {
-                // Redirect underage visitors
-                window.location.href =
-                    (typeof greenpureCBD !== 'undefined' && greenpureCBD.ageGateRedirect)
-                        ? greenpureCBD.ageGateRedirect
-                        : 'https://www.google.com';
-            });
-        }
-    } catch (e) {
-        console.error('[GreenPure] initAgeGate error:', e);
-    }
+        btnYes && btnYes.addEventListener('click', function(){
+            setCookie('greenpure_age','1',30);
+            modal.classList.add('age-gate--closing');
+            setTimeout(function(){ modal.style.display='none'; document.body.classList.remove('age-gate-open'); }, 400);
+        });
+        btnNo && btnNo.addEventListener('click', function(){
+            window.location.href = (typeof greenpureData!=='undefined' && greenpureData.ageGateRedirect) ? greenpureData.ageGateRedirect : 'https://www.google.com';
+        });
+    } catch(e){ console.error('[GP] AgeGate:',e); }
 }
 
-/* =========================================================
-   2. STICKY HEADER
-   ========================================================= */
+/* === 2. STICKY HEADER === */
 function initStickyHeader() {
     try {
-        const header = document.querySelector('.site-header');
-        if (!header) return;
-
-        const SCROLL_THRESHOLD = 80;
-
-        const onScroll = throttle(function () {
-            if (window.scrollY > SCROLL_THRESHOLD) {
-                header.classList.add('is-scrolled');
-            } else {
-                header.classList.remove('is-scrolled');
-            }
-        }, 100);
-
-        window.addEventListener('scroll', onScroll, { passive: true });
-        onScroll(); // run once on load
-    } catch (e) {
-        console.error('[GreenPure] initStickyHeader error:', e);
-    }
+        const h = document.querySelector('.site-header');
+        if (!h) return;
+        const fn = throttle(()=>h.classList.toggle('is-scrolled',window.scrollY>80),100);
+        window.addEventListener('scroll',fn,{passive:true}); fn();
+    } catch(e){ console.error('[GP] StickyHeader:',e); }
 }
 
-/* =========================================================
-   3. MOBILE MENU
-   ========================================================= */
+/* === 3. MOBILE MENU — sélecteurs HTML réels : .burger, .mobile-menu, .mobile-menu-overlay === */
 function initMobileMenu() {
     try {
-        const burger  = document.querySelector('.burger-menu');
-        const nav     = document.querySelector('.mobile-nav');
-        const overlay = document.querySelector('.mobile-nav__overlay');
-        const closeBtn = document.querySelector('.mobile-nav__close');
-
+        const burger  = document.querySelector('.burger');
+        const nav     = document.querySelector('.mobile-menu');
+        const overlay = document.querySelector('.mobile-menu-overlay');
+        const close   = document.querySelector('.mobile-menu__close');
         if (!burger || !nav) return;
-
-        function openMenu() {
-            nav.classList.add('is-open');
-            document.body.classList.add('menu-open');
-            burger.setAttribute('aria-expanded', 'true');
-        }
-
-        function closeMenu() {
-            nav.classList.remove('is-open');
-            document.body.classList.remove('menu-open');
-            burger.setAttribute('aria-expanded', 'false');
-        }
-
-        burger.addEventListener('click', function () {
-            nav.classList.contains('is-open') ? closeMenu() : openMenu();
-        });
-
-        if (overlay) overlay.addEventListener('click', closeMenu);
-        if (closeBtn) closeBtn.addEventListener('click', closeMenu);
-
-        // Close on Escape key
-        document.addEventListener('keydown', function (e) {
-            if (e.key === 'Escape' && nav.classList.contains('is-open')) closeMenu();
-        });
-    } catch (e) {
-        console.error('[GreenPure] initMobileMenu error:', e);
-    }
+        const open  = ()=>{ nav.classList.add('is-open'); overlay&&overlay.classList.add('is-visible'); document.body.classList.add('menu-open'); burger.setAttribute('aria-expanded','true'); };
+        const close2= ()=>{ nav.classList.remove('is-open'); overlay&&overlay.classList.remove('is-visible'); document.body.classList.remove('menu-open'); burger.setAttribute('aria-expanded','false'); };
+        burger.addEventListener('click',()=>nav.classList.contains('is-open')?close2():open());
+        overlay&&overlay.addEventListener('click',close2);
+        close&&close.addEventListener('click',close2);
+        document.addEventListener('keydown',e=>e.key==='Escape'&&close2());
+    } catch(e){ console.error('[GP] MobileMenu:',e); }
 }
 
-/* =========================================================
-   4. SEARCH TOGGLE
-   ========================================================= */
+/* === 4. SEARCH — sélecteurs HTML réels : .js-search-toggle, .js-search-bar === */
 function initSearchToggle() {
     try {
-        const searchToggle = document.querySelector('.search-toggle');
-        const searchBar    = document.querySelector('.header-search');
-        const searchInput  = document.querySelector('.header-search__input');
-        const searchClose  = document.querySelector('.header-search__close');
-
-        if (!searchToggle || !searchBar) return;
-
-        function openSearch() {
-            searchBar.classList.add('is-visible');
-            searchToggle.setAttribute('aria-expanded', 'true');
-            if (searchInput) setTimeout(function () { searchInput.focus(); }, 50);
-        }
-
-        function closeSearch() {
-            searchBar.classList.remove('is-visible');
-            searchToggle.setAttribute('aria-expanded', 'false');
-        }
-
-        searchToggle.addEventListener('click', function () {
-            searchBar.classList.contains('is-visible') ? closeSearch() : openSearch();
-        });
-
-        if (searchClose) searchClose.addEventListener('click', closeSearch);
-
-        document.addEventListener('keydown', function (e) {
-            if (e.key === 'Escape') closeSearch();
-        });
-
-        // Close if click outside
-        document.addEventListener('click', function (e) {
-            if (!searchBar.contains(e.target) && !searchToggle.contains(e.target)) {
-                closeSearch();
-            }
-        });
-    } catch (e) {
-        console.error('[GreenPure] initSearchToggle error:', e);
-    }
+        const toggle = document.querySelector('.js-search-toggle');
+        const bar    = document.querySelector('.js-search-bar');
+        if (!toggle || !bar) return;
+        const open  = ()=>{ bar.classList.add('is-visible'); bar.setAttribute('aria-hidden','false'); const i=bar.querySelector('input'); i&&setTimeout(()=>i.focus(),50); };
+        const close = ()=>{ bar.classList.remove('is-visible'); bar.setAttribute('aria-hidden','true'); };
+        toggle.addEventListener('click',()=>bar.classList.contains('is-visible')?close():open());
+        document.addEventListener('keydown',e=>e.key==='Escape'&&close());
+        document.addEventListener('click',e=>{ if(!bar.contains(e.target)&&!toggle.contains(e.target)) close(); });
+    } catch(e){ console.error('[GP] Search:',e); }
 }
 
-/* =========================================================
-   5. FAQ ACCORDION
-   ========================================================= */
+/* === 5. PRODUCT TABS — NOUVEAU === */
+function initProductTabs() {
+    try {
+        const btns   = document.querySelectorAll('.product-tabs__btn');
+        const panels = document.querySelectorAll('.product-tabs__panel');
+        if (!btns.length) return;
+        btns.forEach(function(btn){
+            btn.addEventListener('click',function(){
+                const target = btn.getAttribute('data-tab');
+                btns.forEach(b=>{ b.classList.remove('is-active'); b.setAttribute('aria-selected','false'); });
+                panels.forEach(p=>p.classList.remove('is-active'));
+                btn.classList.add('is-active');
+                btn.setAttribute('aria-selected','true');
+                const panel = document.getElementById('tab-'+target);
+                if (panel) panel.classList.add('is-active');
+            });
+        });
+    } catch(e){ console.error('[GP] ProductTabs:',e); }
+}
+
+/* === 6. QUANTITY +/− — NOUVEAU === */
+function initQtyButtons() {
+    try {
+        document.addEventListener('click',function(e){
+            const btn = e.target.closest('.qty-btn--plus,.qty-btn--minus');
+            if (!btn) return;
+            const wrap  = btn.closest('.qty-selector');
+            if (!wrap) return;
+            const input = wrap.querySelector('input.qty');
+            if (!input) return;
+            const step = parseFloat(input.step)||1;
+            const min  = parseFloat(input.min)||0;
+            const max  = input.max ? parseFloat(input.max) : Infinity;
+            let val    = parseFloat(input.value)||0;
+            if (btn.classList.contains('qty-btn--plus')) val = Math.min(val+step, max);
+            else val = Math.max(val-step, min);
+            input.value = val;
+            input.dispatchEvent(new Event('change',{bubbles:true}));
+        });
+    } catch(e){ console.error('[GP] QtyButtons:',e); }
+}
+
+/* === 7. NOTICES CLOSE — NOUVEAU === */
+function initNoticesClose() {
+    try {
+        document.addEventListener('click',function(e){
+            const btn = e.target.closest('.woo-notice__close');
+            if (!btn) return;
+            const notice = btn.closest('.woo-notice');
+            if (notice){
+                notice.style.cssText += ';opacity:0;transform:translateY(-8px);transition:opacity .3s,transform .3s';
+                setTimeout(()=>notice.remove(),320);
+            }
+        });
+    } catch(e){ console.error('[GP] NoticesClose:',e); }
+}
+
+/* === 8. FAQ ACCORDION === */
 function initFaqAccordion() {
     try {
         const items = document.querySelectorAll('.faq-item');
         if (!items.length) return;
-
-        items.forEach(function (item) {
+        items.forEach(function(item){
             const trigger = item.querySelector('.faq-item__question');
             const answer  = item.querySelector('.faq-item__answer');
-
-            if (!trigger || !answer) return;
-
-            // Set initial state
-            answer.style.overflow = 'hidden';
-            answer.style.height   = '0px';
-            answer.style.transition = 'height 0.35s ease';
-            trigger.setAttribute('aria-expanded', 'false');
-
-            trigger.addEventListener('click', function () {
+            if (!trigger||!answer) return;
+            answer.style.overflow='hidden'; answer.style.height='0px'; answer.style.transition='height .35s ease';
+            trigger.setAttribute('aria-expanded','false');
+            trigger.addEventListener('click',function(){
                 const isOpen = item.classList.contains('is-open');
-
-                // Close all others
-                items.forEach(function (other) {
-                    if (other !== item && other.classList.contains('is-open')) {
-                        other.classList.remove('is-open');
-                        const otherAnswer = other.querySelector('.faq-item__answer');
-                        const otherTrigger = other.querySelector('.faq-item__question');
-                        if (otherAnswer) otherAnswer.style.height = '0px';
-                        if (otherTrigger) otherTrigger.setAttribute('aria-expanded', 'false');
-                    }
-                });
-
-                if (isOpen) {
-                    item.classList.remove('is-open');
-                    answer.style.height = '0px';
-                    trigger.setAttribute('aria-expanded', 'false');
-                } else {
-                    item.classList.add('is-open');
-                    answer.style.height = answer.scrollHeight + 'px';
-                    trigger.setAttribute('aria-expanded', 'true');
-                }
+                items.forEach(function(o){ if(o!==item&&o.classList.contains('is-open')){ o.classList.remove('is-open'); const a=o.querySelector('.faq-item__answer'); const t=o.querySelector('.faq-item__question'); if(a)a.style.height='0px'; if(t)t.setAttribute('aria-expanded','false'); } });
+                if(isOpen){ item.classList.remove('is-open'); answer.style.height='0px'; trigger.setAttribute('aria-expanded','false'); }
+                else{ item.classList.add('is-open'); answer.style.height=answer.scrollHeight+'px'; trigger.setAttribute('aria-expanded','true'); }
             });
         });
-    } catch (e) {
-        console.error('[GreenPure] initFaqAccordion error:', e);
-    }
+    } catch(e){ console.error('[GP] FAQ:',e); }
 }
 
-/* =========================================================
-   6. TESTIMONIALS SLIDER
-   ========================================================= */
+/* === 9. TESTIMONIALS SLIDER === */
 function initTestimonialsSlider() {
     try {
-        const slider   = document.querySelector('.testimonials-slider');
+        const slider = document.querySelector('.testimonials-slider');
         if (!slider) return;
-
-        const track    = slider.querySelector('.testimonials-slider__track');
-        const slides   = slider.querySelectorAll('.testimonial');
-        const prevBtn  = slider.querySelector('.slider-prev');
-        const nextBtn  = slider.querySelector('.slider-next');
+        const track = slider.querySelector('.testimonials-slider__track');
+        const slides = slider.querySelectorAll('.testimonial');
+        const prevBtn = slider.querySelector('.slider-prev');
+        const nextBtn = slider.querySelector('.slider-next');
         const dotsWrap = slider.querySelector('.slider-dots');
-
-        if (!track || slides.length === 0) return;
-
-        let current   = 0;
-        let autoTimer = null;
-        let touchStartX = 0;
-        let touchEndX   = 0;
-
-        // Build dots
-        const dots = [];
-        if (dotsWrap) {
-            slides.forEach(function (_, i) {
-                const dot = document.createElement('button');
-                dot.className = 'slider-dot' + (i === 0 ? ' is-active' : '');
-                dot.setAttribute('aria-label', 'Slide ' + (i + 1));
-                dot.addEventListener('click', function () { goTo(i); });
-                dotsWrap.appendChild(dot);
-                dots.push(dot);
-            });
-        }
-
-        function updateDots() {
-            dots.forEach(function (d, i) {
-                d.classList.toggle('is-active', i === current);
-            });
-        }
-
-        function goTo(index) {
-            current = (index + slides.length) % slides.length;
-            track.style.transform = 'translateX(-' + (current * 100) + '%)';
-            updateDots();
-        }
-
-        function next() { goTo(current + 1); }
-        function prev() { goTo(current - 1); }
-
-        if (nextBtn) nextBtn.addEventListener('click', next);
-        if (prevBtn) prevBtn.addEventListener('click', prev);
-
-        function startAuto() {
-            autoTimer = setInterval(next, 5000);
-        }
-        function stopAuto() {
-            clearInterval(autoTimer);
-        }
-
+        if (!track||!slides.length) return;
+        let cur=0, timer=null, dots=[], txStart=0;
+        if(dotsWrap){ slides.forEach((_,i)=>{ const d=document.createElement('button'); d.className='slider-dot'+(i===0?' is-active':''); d.setAttribute('aria-label','Slide '+(i+1)); d.addEventListener('click',()=>goTo(i)); dotsWrap.appendChild(d); dots.push(d); }); }
+        function goTo(i){ cur=(i+slides.length)%slides.length; track.style.transform='translateX(-'+(cur*100)+'%)'; dots.forEach((d,j)=>d.classList.toggle('is-active',j===cur)); }
+        const startAuto=()=>{ timer=setInterval(()=>goTo(cur+1),5000); };
+        const stopAuto=()=>clearInterval(timer);
+        nextBtn&&nextBtn.addEventListener('click',()=>goTo(cur+1));
+        prevBtn&&prevBtn.addEventListener('click',()=>goTo(cur-1));
         startAuto();
-        slider.addEventListener('mouseenter', stopAuto);
-        slider.addEventListener('mouseleave', startAuto);
-
-        // Touch / Swipe support
-        track.addEventListener('touchstart', function (e) {
-            touchStartX = e.changedTouches[0].screenX;
-        }, { passive: true });
-
-        track.addEventListener('touchend', function (e) {
-            touchEndX = e.changedTouches[0].screenX;
-            const diff = touchStartX - touchEndX;
-            if (Math.abs(diff) > 50) {
-                diff > 0 ? next() : prev();
-            }
-        }, { passive: true });
-    } catch (e) {
-        console.error('[GreenPure] initTestimonialsSlider error:', e);
-    }
+        slider.addEventListener('mouseenter',stopAuto);
+        slider.addEventListener('mouseleave',startAuto);
+        track.addEventListener('touchstart',e=>txStart=e.changedTouches[0].screenX,{passive:true});
+        track.addEventListener('touchend',e=>{ const d=txStart-e.changedTouches[0].screenX; if(Math.abs(d)>50) goTo(cur+(d>0?1:-1)); },{passive:true});
+    } catch(e){ console.error('[GP] Slider:',e); }
 }
 
-/* =========================================================
-   7. PRODUCT FILTER
-   ========================================================= */
+/* === 10. PRODUCT FILTER === */
 function initProductFilter() {
     try {
-        const filterBtns = document.querySelectorAll('[data-filter]');
-        const products   = document.querySelectorAll('[data-category]');
-
-        if (!filterBtns.length || !products.length) return;
-
-        filterBtns.forEach(function (btn) {
-            btn.addEventListener('click', function () {
-                const filter = btn.getAttribute('data-filter');
-
-                // Active state
-                filterBtns.forEach(function (b) { b.classList.remove('is-active'); });
-                btn.classList.add('is-active');
-
-                products.forEach(function (card) {
-                    const category = card.getAttribute('data-category');
-                    const show = filter === 'all' || category === filter;
-
-                    if (show) {
-                        card.style.opacity = '0';
-                        card.style.display = '';
-                        // Trigger reflow then fade in
-                        void card.offsetWidth;
-                        card.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
-                        card.style.opacity = '1';
-                        card.style.transform = 'translateY(0)';
-                    } else {
-                        card.style.transition = 'opacity 0.3s ease';
-                        card.style.opacity = '0';
-                        setTimeout(function () {
-                            if (card.style.opacity === '0') card.style.display = 'none';
-                        }, 300);
-                    }
+        const btns = document.querySelectorAll('[data-filter]');
+        const cards = document.querySelectorAll('[data-category]');
+        if(!btns.length||!cards.length) return;
+        btns.forEach(function(btn){
+            btn.addEventListener('click',function(){
+                const f = btn.getAttribute('data-filter');
+                btns.forEach(b=>b.classList.remove('is-active')); btn.classList.add('is-active');
+                cards.forEach(function(card){
+                    const show = f==='all'||(card.getAttribute('data-category')||'').split(' ').includes(f);
+                    if(show){ card.style.display=''; requestAnimationFrame(()=>{ card.style.opacity='1'; card.style.transform='scale(1)'; }); }
+                    else{ card.style.opacity='0'; card.style.transform='scale(0.95)'; setTimeout(()=>{ if(card.style.opacity==='0') card.style.display='none'; },300); }
                 });
             });
         });
-    } catch (e) {
-        console.error('[GreenPure] initProductFilter error:', e);
-    }
+    } catch(e){ console.error('[GP] Filter:',e); }
 }
 
-/* =========================================================
-   8. COUNTDOWN TIMER
-   ========================================================= */
+/* === 11. COUNTDOWN === */
 function initCountdownTimer() {
     try {
-        const elH = document.getElementById('timer-h');
-        const elM = document.getElementById('timer-m');
-        const elS = document.getElementById('timer-s');
-
-        if (!elH && !elM && !elS) return;
-
-        function pad(n) { return String(n).padStart(2, '0'); }
-
-        function getEndOfDay() {
-            const now = new Date();
-            return new Date(now.getFullYear(), now.getMonth(), now.getDate(), 23, 59, 59, 0);
-        }
-
-        function tick() {
-            const now  = Date.now();
-            const end  = getEndOfDay().getTime();
-            let   diff = Math.max(0, Math.floor((end - now) / 1000));
-
-            const h = Math.floor(diff / 3600);
-            diff   -= h * 3600;
-            const m = Math.floor(diff / 60);
-            const s = diff - m * 60;
-
-            if (elH) elH.textContent = pad(h);
-            if (elM) elM.textContent = pad(m);
-            if (elS) elS.textContent = pad(s);
-        }
-
-        tick();
-        setInterval(tick, 1000);
-    } catch (e) {
-        console.error('[GreenPure] initCountdownTimer error:', e);
-    }
+        const h=document.getElementById('timer-h'), m=document.getElementById('timer-m'), s=document.getElementById('timer-s');
+        if(!h&&!m&&!s) return;
+        const pad=n=>String(n).padStart(2,'0');
+        function tick(){ let d=Math.max(0,Math.floor((new Date(new Date().setHours(23,59,59,0))-Date.now())/1000)); const hv=Math.floor(d/3600); d-=hv*3600; const mv=Math.floor(d/60); const sv=d-mv*60; if(h)h.textContent=pad(hv); if(m)m.textContent=pad(mv); if(s)s.textContent=pad(sv); }
+        tick(); setInterval(tick,1000);
+    } catch(e){ console.error('[GP] Countdown:',e); }
 }
 
-/* =========================================================
-   9. NEWSLETTER FORM (AJAX)  — jQuery section
-   ========================================================= */
-function initNewsletterForm($) {
-    try {
-        const $form = $('#greenpure-newsletter-form');
-        if (!$form.length) return;
-
-        $form.on('submit', function (e) {
-            e.preventDefault();
-
-            const $btn     = $form.find('[type="submit"]');
-            const $msg     = $form.find('.newsletter-message');
-            const email    = $form.find('input[name="email"]').val().trim();
-            const nonce    = $form.find('input[name="newsletter_nonce"]').val() || '';
-
-            if (!email) {
-                showMsg($msg, 'Veuillez entrer votre adresse email.', 'error');
-                return;
-            }
-
-            $btn.prop('disabled', true).addClass('is-loading');
-            $msg.hide().removeClass('success error');
-
-            $.ajax({
-                url:    (typeof greenpureCBD !== 'undefined') ? greenpureCBD.ajaxUrl : '/wp-admin/admin-ajax.php',
-                method: 'POST',
-                data:   {
-                    action: 'greenpure_newsletter_subscribe',
-                    email:  email,
-                    nonce:  nonce
-                },
-                success: function (res) {
-                    if (res && res.success) {
-                        showMsg($msg, res.data && res.data.message
-                            ? res.data.message
-                            : 'Merci pour votre inscription !', 'success');
-                        $form[0].reset();
-                    } else {
-                        showMsg($msg, res && res.data && res.data.message
-                            ? res.data.message
-                            : 'Une erreur est survenue. Réessayez.', 'error');
-                    }
-                },
-                error: function () {
-                    showMsg($msg, 'Erreur réseau. Veuillez réessayer.', 'error');
-                },
-                complete: function () {
-                    $btn.prop('disabled', false).removeClass('is-loading');
-                }
-            });
-        });
-
-        function showMsg($el, text, type) {
-            $el.text(text).addClass(type).fadeIn(300);
-            setTimeout(function () { $el.fadeOut(400); }, 5000);
-        }
-    } catch (e) {
-        console.error('[GreenPure] initNewsletterForm error:', e);
-    }
-}
-
-/* =========================================================
-   10. BACK TO TOP
-   ========================================================= */
+/* === 12. BACK TO TOP === */
 function initBackToTop() {
     try {
         const btn = document.getElementById('back-to-top');
-        if (!btn) return;
-
-        const SHOW_AFTER = 400;
-
-        const onScroll = throttle(function () {
-            btn.classList.toggle('is-visible', window.scrollY > SHOW_AFTER);
-        }, 150);
-
-        window.addEventListener('scroll', onScroll, { passive: true });
-
-        btn.addEventListener('click', function () {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
-    } catch (e) {
-        console.error('[GreenPure] initBackToTop error:', e);
-    }
+        if(!btn) return;
+        window.addEventListener('scroll',throttle(()=>btn.classList.toggle('is-visible',window.scrollY>400),150),{passive:true});
+        btn.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
+    } catch(e){ console.error('[GP] BackToTop:',e); }
 }
 
-/* =========================================================
-   11. COOKIE BANNER
-   ========================================================= */
+/* === 13. COOKIE BANNER === */
 function initCookieBanner() {
     try {
-        const banner     = document.getElementById('cookie-banner');
-        const btnAccept  = document.getElementById('cookie-accept');
-        const btnDecline = document.getElementById('cookie-decline');
-
-        if (!banner) return;
-        if (getCookie('greenpure_cookie_consent')) {
-            banner.style.display = 'none';
-            return;
-        }
-
-        banner.style.display = '';
-        banner.setAttribute('aria-hidden', 'false');
-
-        function dismissBanner(value) {
-            setCookie('greenpure_cookie_consent', value, 365);
-            banner.classList.add('cookie-banner--hiding');
-            setTimeout(function () { banner.style.display = 'none'; }, 500);
-        }
-
-        if (btnAccept)  btnAccept.addEventListener('click',  function () { dismissBanner('accepted'); });
-        if (btnDecline) btnDecline.addEventListener('click', function () { dismissBanner('declined'); });
-    } catch (e) {
-        console.error('[GreenPure] initCookieBanner error:', e);
-    }
+        const banner=document.getElementById('cookie-banner'), a=document.getElementById('cookie-accept'), d=document.getElementById('cookie-decline');
+        if(!banner) return;
+        if(getCookie('greenpure_cookie')){ banner.style.display='none'; return; }
+        banner.style.display='';
+        const dismiss=v=>{ setCookie('greenpure_cookie',v,365); banner.classList.add('cookie-banner--hiding'); setTimeout(()=>banner.style.display='none',500); };
+        a&&a.addEventListener('click',()=>dismiss('accepted'));
+        d&&d.addEventListener('click',()=>dismiss('declined'));
+    } catch(e){ console.error('[GP] Cookie:',e); }
 }
 
-/* =========================================================
-   12. SCROLL ANIMATIONS (IntersectionObserver)
-   ========================================================= */
+/* === 14. SCROLL ANIMATIONS === */
 function initScrollAnimations() {
     try {
-        const elements = document.querySelectorAll('[data-aos]');
-        if (!elements.length) return;
-
-        if (!('IntersectionObserver' in window)) {
-            // Fallback: show everything immediately
-            elements.forEach(function (el) { el.classList.add('aos-animated'); });
-            return;
-        }
-
-        elements.forEach(function (el) {
-            el.classList.add('aos-init');
-        });
-
-        const observer = new IntersectionObserver(function (entries) {
-            entries.forEach(function (entry) {
-                if (entry.isIntersecting) {
-                    const el    = entry.target;
-                    const delay = parseInt(el.getAttribute('data-aos-delay') || '0', 10);
-                    setTimeout(function () {
-                        el.classList.add('aos-animated');
-                    }, delay);
-                    observer.unobserve(el);
-                }
-            });
-        }, { threshold: 0.15 });
-
-        elements.forEach(function (el) { observer.observe(el); });
-    } catch (e) {
-        console.error('[GreenPure] initScrollAnimations error:', e);
-    }
+        const els = document.querySelectorAll('[data-aos]');
+        if(!els.length) return;
+        if(!('IntersectionObserver' in window)){ els.forEach(el=>el.classList.add('aos-animated')); return; }
+        els.forEach(el=>el.classList.add('aos-init'));
+        const obs = new IntersectionObserver(function(entries){ entries.forEach(function(entry){ if(entry.isIntersecting){ const delay=parseInt(entry.target.getAttribute('data-aos-delay')||'0',10); setTimeout(()=>entry.target.classList.add('aos-animated'),delay); obs.unobserve(entry.target); } }); },{threshold:0.12});
+        els.forEach(el=>obs.observe(el));
+    } catch(e){ console.error('[GP] ScrollAnim:',e); }
 }
 
-/* =========================================================
-   13. PARTICLE SYSTEM
-   ========================================================= */
+/* === 15. PARTICLES === */
 function initParticles() {
     try {
-        const container = document.getElementById('particles');
-        if (!container) return;
-
-        const PARTICLE_COUNT = 40;
-        const particles = [];
-
-        function rand(min, max) { return Math.random() * (max - min) + min; }
-
-        for (let i = 0; i < PARTICLE_COUNT; i++) {
-            const p = document.createElement('span');
-            p.className = 'particle';
-
-            const size = rand(4, 12);
-            const x    = rand(0, 100);
-            const y    = rand(0, 100);
-            const dur  = rand(8, 20);
-            const del  = rand(0, 10);
-            const op   = rand(0.15, 0.5);
-
-            p.style.cssText =
-                'position:absolute;' +
-                'width:'   + size + 'px;' +
-                'height:'  + size + 'px;' +
-                'left:'    + x + '%;' +
-                'top:'     + y + '%;' +
-                'opacity:' + op + ';' +
-                'border-radius:50%;' +
-                'background:currentColor;' +
-                'pointer-events:none;' +
-                'animation:particleFloat ' + dur + 's ' + del + 's ease-in-out infinite;';
-
-            container.appendChild(p);
-            particles.push(p);
-        }
-
-        // Inject keyframes if not already present
-        if (!document.getElementById('particle-keyframes')) {
-            const style = document.createElement('style');
-            style.id = 'particle-keyframes';
-            style.textContent =
-                '@keyframes particleFloat {' +
-                '  0%,100% { transform: translateY(0) scale(1); }' +
-                '  33%      { transform: translateY(-30px) scale(1.1); }' +
-                '  66%      { transform: translateY(20px) scale(0.9); }' +
-                '}';
-            document.head.appendChild(style);
-        }
-    } catch (e) {
-        console.error('[GreenPure] initParticles error:', e);
-    }
+        const c = document.getElementById('particles');
+        if(!c) return;
+        const f = document.createDocumentFragment();
+        for(let i=0;i<30;i++){ const p=document.createElement('span'); const sz=Math.random()*8+4; p.className='particle'; p.style.cssText=`position:absolute;width:${sz}px;height:${sz}px;left:${Math.random()*100}%;top:${Math.random()*100}%;opacity:${(Math.random()*.35+.1).toFixed(2)};border-radius:50%;background:currentColor;pointer-events:none;animation:particleFloat ${(Math.random()*12+8).toFixed(1)}s ${(Math.random()*8).toFixed(1)}s ease-in-out infinite`; f.appendChild(p); }
+        c.appendChild(f);
+        if(!document.getElementById('pkf')){ const s=document.createElement('style'); s.id='pkf'; s.textContent='@keyframes particleFloat{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-28px) scale(1.08)}}'; document.head.appendChild(s); }
+    } catch(e){ console.error('[GP] Particles:',e); }
 }
 
-/* =========================================================
-   14. MINI CART — WooCommerce Fragments  (jQuery)
-   ========================================================= */
-function initMiniCart($) {
-    try {
-        // WooCommerce fires this event after cart fragments update
-        $(document.body).on('wc_fragments_refreshed wc_fragments_loaded', function () {
-            const count = $('.cart-count').text();
-            if (parseInt(count, 10) > 0) {
-                $('.cart-icon-wrap').addClass('has-items');
-            } else {
-                $('.cart-icon-wrap').removeClass('has-items');
-            }
-        });
-
-        // Mini cart toggle
-        const $cartToggle = $('.mini-cart-toggle');
-        const $miniCart   = $('.mini-cart-dropdown');
-
-        if ($cartToggle.length && $miniCart.length) {
-            $cartToggle.on('click', function (e) {
-                e.preventDefault();
-                $miniCart.toggleClass('is-open');
-                $cartToggle.attr('aria-expanded', $miniCart.hasClass('is-open') ? 'true' : 'false');
-            });
-
-            $(document).on('click', function (e) {
-                if (!$miniCart.is(e.target) && !$miniCart.has(e.target).length &&
-                    !$cartToggle.is(e.target) && !$cartToggle.has(e.target).length) {
-                    $miniCart.removeClass('is-open');
-                    $cartToggle.attr('aria-expanded', 'false');
-                }
-            });
-        }
-    } catch (e) {
-        console.error('[GreenPure] initMiniCart error:', e);
-    }
-}
-
-/* =========================================================
-   15. ADD TO CART FEEDBACK  (jQuery)
-   ========================================================= */
-function initAddToCartFeedback($) {
-    try {
-        $(document.body).on('added_to_cart', function (e, fragments, cartHash, $btn) {
-            if (!$btn || !$btn.length) return;
-
-            const originalText = $btn.text();
-            $btn.text('Ajouté !').addClass('added-feedback');
-
-            setTimeout(function () {
-                $btn.text(originalText).removeClass('added-feedback');
-            }, 2500);
-        });
-    } catch (e) {
-        console.error('[GreenPure] initAddToCartFeedback error:', e);
-    }
-}
-
-/* =========================================================
-   16. SMOOTH SCROLL
-   ========================================================= */
+/* === 16. SMOOTH SCROLL === */
 function initSmoothScroll() {
     try {
-        const anchors = document.querySelectorAll('a[href^="#"]');
-        if (!anchors.length) return;
-
-        anchors.forEach(function (anchor) {
-            anchor.addEventListener('click', function (e) {
-                const href   = anchor.getAttribute('href');
-                if (!href || href === '#') return;
-
-                const target = document.querySelector(href);
-                if (!target) return;
-
-                e.preventDefault();
-
-                const headerH = (document.querySelector('.site-header') || {}).offsetHeight || 0;
-                const top     = target.getBoundingClientRect().top + window.scrollY - headerH - 16;
-
-                window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
-
-                // Update URL hash without jump
-                if (history.pushState) {
-                    history.pushState(null, null, href);
-                }
-            });
+        document.addEventListener('click',function(e){
+            const a = e.target.closest('a[href^="#"]');
+            if(!a) return;
+            const href=a.getAttribute('href');
+            if(!href||href==='#') return;
+            const target=document.querySelector(href);
+            if(!target) return;
+            e.preventDefault();
+            const hh=(document.querySelector('.site-header')||{}).offsetHeight||0;
+            window.scrollTo({top:target.getBoundingClientRect().top+window.scrollY-hh-16,behavior:'smooth'});
+            if(history.pushState) history.pushState(null,null,href);
         });
-    } catch (e) {
-        console.error('[GreenPure] initSmoothScroll error:', e);
-    }
+    } catch(e){ console.error('[GP] SmoothScroll:',e); }
 }
 
-/* =========================================================
-   17. WOOCOMMERCE GALLERY — Thumbnail Switching
-   ========================================================= */
-function initWooCommerceGallery() {
+/* === 17. WOO GALLERY === */
+function initWooGallery() {
     try {
-        const mainImage = document.querySelector('.woocommerce-product-gallery__image img');
-        const thumbs    = document.querySelectorAll('.woocommerce-product-gallery__image:not(:first-child) img, .flex-control-thumbs img');
-
-        if (!mainImage || !thumbs.length) return;
-
-        let originalSrc   = mainImage.src;
-        let originalSrcSet = mainImage.srcset || '';
-
-        thumbs.forEach(function (thumb) {
-            thumb.style.cursor = 'pointer';
-            thumb.addEventListener('click', function () {
-                mainImage.src    = thumb.getAttribute('data-large_image') || thumb.src;
-                mainImage.srcset = '';
-                thumbs.forEach(function (t) { t.classList.remove('active-thumb'); });
-                thumb.classList.add('active-thumb');
-            });
-        });
-
-        // Reset on main image click
-        mainImage.addEventListener('click', function () {
-            mainImage.src    = originalSrc;
-            mainImage.srcset = originalSrcSet;
-            thumbs.forEach(function (t) { t.classList.remove('active-thumb'); });
-        });
-    } catch (e) {
-        console.error('[GreenPure] initWooCommerceGallery error:', e);
-    }
+        const main = document.querySelector('.woocommerce-product-gallery__image:first-child img');
+        const thumbs = document.querySelectorAll('.flex-control-thumbs img');
+        if(!main||!thumbs.length) return;
+        thumbs.forEach(function(t){ t.style.cursor='pointer'; t.addEventListener('click',function(){ main.src=t.getAttribute('data-large_image')||t.src; main.srcset=''; thumbs.forEach(x=>x.classList.remove('active-thumb')); t.classList.add('active-thumb'); }); });
+    } catch(e){ console.error('[GP] WooGallery:',e); }
 }
 
-/* =========================================================
-   BOOTSTRAP — DOM READY
-   ========================================================= */
+/* === 18. LANGUE — switcher === */
+function initLangSwitcher() {
+    try {
+        const sw = document.getElementById('lang-switcher');
+        if(!sw) return;
+        const saved = getCookie('greenpure_lang');
+        if(saved) sw.value = saved;
+        sw.addEventListener('change',function(){ setCookie('greenpure_lang',sw.value,365); window.location.reload(); });
+    } catch(e){ console.error('[GP] LangSwitcher:',e); }
+}
 
-// Vanilla JS initializations (no jQuery dependency)
-document.addEventListener('DOMContentLoaded', function () {
+/* === jQuery — Mini Cart, Add to Cart, Newsletter === */
+(function($){
+    'use strict';
+    function initMiniCart(){
+        try{
+            $(document.body).on('wc_fragments_refreshed wc_fragments_loaded',function(){ const n=parseInt($('.cart-count').first().text(),10)||0; $('.cart-count').text(n); });
+            const $t=$('.mini-cart-toggle,.header-btn--cart'), $d=$('.mini-cart-dropdown');
+            if($t.length&&$d.length){
+                $t.on('click',function(e){ e.preventDefault(); $d.toggleClass('is-open'); });
+                $(document).on('click',function(e){ if(!$(e.target).closest('.mini-cart-toggle,.header-btn--cart,.mini-cart-dropdown').length) $d.removeClass('is-open'); });
+            }
+        }catch(e){ console.error('[GP] MiniCart:',e); }
+    }
+    function initAddToCart(){
+        try{
+            $(document.body).on('added_to_cart',function(e,f,h,$btn){
+                if(!$btn||!$btn.length) return;
+                const orig=$btn.html();
+                $btn.html('✓ Ajouté !').addClass('added-feedback');
+                setTimeout(()=>$btn.html(orig).removeClass('added-feedback'),2500);
+            });
+        }catch(e){ console.error('[GP] AddToCart:',e); }
+    }
+    function initNewsletter(){
+        try{
+            const $form=$('#greenpure-newsletter-form');
+            if(!$form.length) return;
+            $form.on('submit',function(e){
+                e.preventDefault();
+                const $btn=$form.find('[type="submit"]'), $msg=$form.find('.newsletter-message');
+                const email=$form.find('input[name="email"]').val().trim();
+                const nonce=$form.find('input[name="newsletter_nonce"]').val()||'';
+                if(!email){ show($msg,'Veuillez entrer votre email.','error'); return; }
+                $btn.prop('disabled',true).addClass('is-loading');
+                $.ajax({
+                    url:(typeof greenpureData!=='undefined')?greenpureData.ajaxUrl:'/wp-admin/admin-ajax.php',
+                    method:'POST', data:{action:'greenpure_newsletter',email,nonce},
+                    success:function(r){ show($msg,r&&r.data&&r.data.message?r.data.message:(r.success?'Merci !':'Erreur.'),r&&r.success?'success':'error'); if(r&&r.success)$form[0].reset(); },
+                    error:()=>show($msg,'Erreur réseau.','error'),
+                    complete:()=>$btn.prop('disabled',false).removeClass('is-loading')
+                });
+                function show($el,txt,type){ $el.removeClass('success error').text(txt).addClass(type).fadeIn(300); setTimeout(()=>$el.fadeOut(400),5000); }
+            });
+        }catch(e){ console.error('[GP] Newsletter:',e); }
+    }
+    $(document).ready(function(){ initMiniCart(); initAddToCart(); initNewsletter(); });
+}(typeof jQuery!=='undefined'?jQuery:{fn:{},ready:function(cb){document.addEventListener('DOMContentLoaded',cb);},on:function(){}}));
+
+/* === BOOTSTRAP === */
+document.addEventListener('DOMContentLoaded',function(){
     initAgeGate();
     initStickyHeader();
     initMobileMenu();
     initSearchToggle();
+    initProductTabs();
+    initQtyButtons();
+    initNoticesClose();
     initFaqAccordion();
     initTestimonialsSlider();
     initProductFilter();
@@ -791,18 +371,6 @@ document.addEventListener('DOMContentLoaded', function () {
     initScrollAnimations();
     initParticles();
     initSmoothScroll();
-    initWooCommerceGallery();
+    initWooGallery();
+    initLangSwitcher();
 });
-
-// jQuery-dependent initializations
-/* global jQuery */
-(function ($) {
-    'use strict';
-
-    $(document).ready(function () {
-        initNewsletterForm($);
-        initMiniCart($);
-        initAddToCartFeedback($);
-    });
-
-}(typeof jQuery !== 'undefined' ? jQuery : { fn: {}, extend: function () {} }));
