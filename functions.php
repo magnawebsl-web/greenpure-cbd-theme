@@ -277,7 +277,111 @@ require_once GREENPURE_DIR . '/inc/woocommerce.php';
 require_once GREENPURE_DIR . '/inc/demo-data.php';
 
 /* ──────────────────────────────────────
-   10. SÉCURITÉ & LÉGAL CBD
+   10. AUTO-SETUP COMPLET (une seule fois)
+────────────────────────────────────── */
+function greenpure_auto_setup() {
+    if ( get_option( 'greenpure_v2_setup_done' ) ) return;
+    if ( ! class_exists( 'WooCommerce' ) ) return;
+
+    /* -- Pages WooCommerce -- */
+    $wc_pages = [
+        'shop'      => [ 'title' => 'Boutique',   'slug' => 'boutique' ],
+        'cart'      => [ 'title' => 'Panier',      'slug' => 'panier' ],
+        'checkout'  => [ 'title' => 'Commande',    'slug' => 'commande' ],
+        'myaccount' => [ 'title' => 'Mon compte',  'slug' => 'mon-compte' ],
+    ];
+
+    foreach ( $wc_pages as $key => $data ) {
+        $existing = get_option( 'woocommerce_' . $key . '_page_id' );
+        if ( $existing && get_post( $existing ) ) continue;
+
+        $page_id = wp_insert_post( [
+            'post_title'     => $data['title'],
+            'post_name'      => $data['slug'],
+            'post_status'    => 'publish',
+            'post_type'      => 'page',
+            'comment_status' => 'closed',
+        ] );
+        if ( $page_id && ! is_wp_error( $page_id ) ) {
+            update_option( 'woocommerce_' . $key . '_page_id', $page_id );
+        }
+    }
+
+    /* -- Page CGV -- */
+    $cgv_exists = get_page_by_path( 'cgv' );
+    if ( ! $cgv_exists ) {
+        wp_insert_post( [
+            'post_title'  => 'Conditions Générales de Vente',
+            'post_name'   => 'cgv',
+            'post_status' => 'publish',
+            'post_type'   => 'page',
+            'post_content' => '<p>Nos conditions générales de vente sont disponibles sur demande.</p>',
+        ] );
+    }
+
+    /* -- Page d\'accueil statique -- */
+    $front_exists = get_page_by_path( 'accueil' );
+    if ( ! $front_exists ) {
+        $front_id = wp_insert_post( [
+            'post_title'     => 'Accueil',
+            'post_name'      => 'accueil',
+            'post_status'    => 'publish',
+            'post_type'      => 'page',
+            'comment_status' => 'closed',
+        ] );
+    } else {
+        $front_id = $front_exists->ID;
+    }
+
+    if ( ! empty( $front_id ) && ! is_wp_error( $front_id ) ) {
+        update_option( 'page_on_front', $front_id );
+        update_option( 'show_on_front', 'page' );
+    }
+
+    /* -- Installer les données démo -- */
+    if ( function_exists( 'greenpure_install_demo_products' ) ) {
+        greenpure_install_demo_products();
+    }
+
+    update_option( 'greenpure_v2_setup_done', '1' );
+}
+add_action( 'admin_init', 'greenpure_auto_setup' );
+
+/* ──────────────────────────────────────
+   11. ADMIN NOTICE — Produits manquants
+────────────────────────────────────── */
+function greenpure_admin_notice_products() {
+    if ( ! current_user_can( 'manage_woocommerce' ) ) return;
+    if ( ! class_exists( 'WooCommerce' ) ) return;
+    if ( get_option( 'greenpure_demo_notice_dismissed' ) ) return;
+
+    $count = wp_count_posts( 'product' );
+    $total = ( $count->publish ?? 0 ) + ( $count->draft ?? 0 );
+
+    if ( $total >= 5 ) return;
+
+    $install_url = add_query_arg( 'greenpure_install_demo', '1', admin_url() );
+    $dismiss_url = add_query_arg( 'greenpure_dismiss_notice', '1', admin_url() );
+
+    echo '<div class="notice notice-warning is-dismissible greenpure-notice" data-dismiss-url="' . esc_url( $dismiss_url ) . '">';
+    echo '<p><strong>GreenPure CBD</strong> — Aucun produit n\'est encore installé.</p>';
+    echo '<p><a href="' . esc_url( $install_url ) . '" class="button button-primary">Installer les 70 produits de démo</a>';
+    echo ' &nbsp; <a href="' . esc_url( $dismiss_url ) . '" class="button">Ignorer</a></p>';
+    echo '</div>';
+}
+add_action( 'admin_notices', 'greenpure_admin_notice_products' );
+
+function greenpure_handle_notice_dismiss() {
+    if ( isset( $_GET['greenpure_dismiss_notice'] ) && current_user_can( 'manage_woocommerce' ) ) {
+        update_option( 'greenpure_demo_notice_dismissed', '1' );
+        wp_safe_redirect( remove_query_arg( 'greenpure_dismiss_notice' ) );
+        exit;
+    }
+}
+add_action( 'admin_init', 'greenpure_handle_notice_dismiss' );
+
+/* ──────────────────────────────────────
+   12. SÉCURITÉ & LÉGAL CBD
 ────────────────────────────────────── */
 // Bannière âge (cookie-based, JS gère l'affichage)
 function greenpure_age_gate_scripts() {

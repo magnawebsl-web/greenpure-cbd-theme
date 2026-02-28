@@ -26,6 +26,33 @@ add_action('init', function () {
 });
 
 /* ──────────────────────────────────────────────
+   Auto-install sur activation du thème
+────────────────────────────────────────────── */
+add_action('after_switch_theme', function () {
+    if (class_exists('WooCommerce')) {
+        greenpure_install_demo_products();
+    }
+});
+
+/* ──────────────────────────────────────────────
+   Auto-install via admin_init si aucun produit
+────────────────────────────────────────────── */
+add_action('admin_init', function () {
+    if (!class_exists('WooCommerce')) return;
+    if (get_option('greenpure_demo_auto_installed')) return;
+
+    $count = wp_count_posts('product');
+    $total = ($count->publish ?? 0) + ($count->draft ?? 0) + ($count->private ?? 0);
+
+    if ($total === 0) {
+        greenpure_install_demo_products();
+        update_option('greenpure_demo_auto_installed', '1');
+    } else {
+        update_option('greenpure_demo_auto_installed', '1');
+    }
+});
+
+/* ──────────────────────────────────────────────
    FONCTION PRINCIPALE
 ────────────────────────────────────────────── */
 function greenpure_install_demo_products() {
