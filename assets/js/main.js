@@ -168,23 +168,34 @@ function initTestimonialsSlider() {
         const slider = document.querySelector('.testimonials-slider');
         if (!slider) return;
         const track = slider.querySelector('.testimonials-slider__track');
-        const slides = slider.querySelectorAll('.testimonial');
-        const prevBtn = slider.querySelector('.slider-prev');
-        const nextBtn = slider.querySelector('.slider-next');
-        const dotsWrap = slider.querySelector('.slider-dots');
-        if (!track||!slides.length) return;
+        if (!track) return;
+        // Supporte .testimonial ET .testimonial-card comme slides
+        const slides = track.querySelectorAll('.testimonial, .testimonial-card');
+        if (!slides.length) return;
+        const prevBtn = document.querySelector('.slider-prev, .js-prev');
+        const nextBtn = document.querySelector('.slider-next, .js-next');
+        const dotsWrap = document.querySelector('.slider-dots, .js-dots');
         let cur=0, timer=null, dots=[], txStart=0;
-        if(dotsWrap){ slides.forEach((_,i)=>{ const d=document.createElement('button'); d.className='slider-dot'+(i===0?' is-active':''); d.setAttribute('aria-label','Slide '+(i+1)); d.addEventListener('click',()=>goTo(i)); dotsWrap.appendChild(d); dots.push(d); }); }
-        function goTo(i){ cur=(i+slides.length)%slides.length; track.style.transform='translateX(-'+(cur*100)+'%)'; dots.forEach((d,j)=>d.classList.toggle('is-active',j===cur)); }
-        const startAuto=()=>{ timer=setInterval(()=>goTo(cur+1),5000); };
+        // Assurer que le track est flex
+        track.style.cssText += 'display:flex;overflow:hidden;';
+        slides.forEach(s => { s.style.minWidth='100%'; s.style.flexShrink='0'; });
+        if(dotsWrap){ slides.forEach((_,i)=>{ const d=document.createElement('button'); d.className='slider-dot'+(i===0?' is-active':''); d.setAttribute('aria-label','Avis '+(i+1)); d.addEventListener('click',()=>goTo(i)); dotsWrap.appendChild(d); dots.push(d); }); }
+        function goTo(i){
+            cur=(i+slides.length)%slides.length;
+            track.style.transform='translateX(-'+(cur*100)+'%)';
+            track.style.transition='transform 0.5s cubic-bezier(0.4,0,0.2,1)';
+            dots.forEach((d,j)=>d.classList.toggle('is-active',j===cur));
+        }
+        const startAuto=()=>{ stopAuto(); timer=setInterval(()=>goTo(cur+1),5500); };
         const stopAuto=()=>clearInterval(timer);
-        nextBtn&&nextBtn.addEventListener('click',()=>goTo(cur+1));
-        prevBtn&&prevBtn.addEventListener('click',()=>goTo(cur-1));
+        nextBtn&&nextBtn.addEventListener('click',()=>{ stopAuto(); goTo(cur+1); startAuto(); });
+        prevBtn&&prevBtn.addEventListener('click',()=>{ stopAuto(); goTo(cur-1); startAuto(); });
         startAuto();
         slider.addEventListener('mouseenter',stopAuto);
         slider.addEventListener('mouseleave',startAuto);
-        track.addEventListener('touchstart',e=>txStart=e.changedTouches[0].screenX,{passive:true});
-        track.addEventListener('touchend',e=>{ const d=txStart-e.changedTouches[0].screenX; if(Math.abs(d)>50) goTo(cur+(d>0?1:-1)); },{passive:true});
+        // Swipe tactile
+        track.addEventListener('touchstart',e=>{ txStart=e.changedTouches[0].screenX; stopAuto(); },{passive:true});
+        track.addEventListener('touchend',e=>{ const dx=txStart-e.changedTouches[0].screenX; if(Math.abs(dx)>50){ goTo(cur+(dx>0?1:-1)); } startAuto(); },{passive:true});
     } catch(e){ console.error('[GP] Slider:',e); }
 }
 
@@ -222,7 +233,8 @@ function initCountdownTimer() {
 /* === 12. BACK TO TOP === */
 function initBackToTop() {
     try {
-        const btn = document.getElementById('back-to-top');
+        // Supporte #back-to-top ET .js-back-to-top
+        const btn = document.getElementById('back-to-top') || document.querySelector('.js-back-to-top');
         if(!btn) return;
         window.addEventListener('scroll',throttle(()=>btn.classList.toggle('is-visible',window.scrollY>400),150),{passive:true});
         btn.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
@@ -232,13 +244,20 @@ function initBackToTop() {
 /* === 13. COOKIE BANNER === */
 function initCookieBanner() {
     try {
-        const banner=document.getElementById('cookie-banner'), a=document.getElementById('cookie-accept'), d=document.getElementById('cookie-decline');
+        const banner = document.getElementById('cookie-banner');
         if(!banner) return;
-        if(getCookie('greenpure_cookie')){ banner.style.display='none'; return; }
-        banner.style.display='';
-        const dismiss=v=>{ setCookie('greenpure_cookie',v,365); banner.classList.add('cookie-banner--hiding'); setTimeout(()=>banner.style.display='none',500); };
-        a&&a.addEventListener('click',()=>dismiss('accepted'));
-        d&&d.addEventListener('click',()=>dismiss('declined'));
+        if(getCookie('greenpure_cookie')){ banner.hidden=true; return; }
+        banner.hidden = false; // enlever l'attribut hidden
+        // Supporte #cookie-accept / .js-cookie-accept
+        const a = document.getElementById('cookie-accept') || document.querySelector('.js-cookie-accept');
+        const d = document.getElementById('cookie-decline') || document.querySelector('.js-cookie-decline');
+        const dismiss = v => {
+            setCookie('greenpure_cookie', v, 365);
+            banner.classList.add('cookie-banner--hiding');
+            setTimeout(() => { banner.hidden = true; }, 500);
+        };
+        a && a.addEventListener('click', () => dismiss('accepted'));
+        d && d.addEventListener('click', () => dismiss('declined'));
     } catch(e){ console.error('[GP] Cookie:',e); }
 }
 
@@ -294,15 +313,67 @@ function initWooGallery() {
     } catch(e){ console.error('[GP] WooGallery:',e); }
 }
 
-/* === 18. LANGUE — switcher === */
+/* === 18. LANGUE — switcher (géré par language-detector.php inline JS) === */
 function initLangSwitcher() {
     try {
+        // Le switcher dropdown est géré par language-detector.php
+        // Fallback pour un <select id="lang-switcher"> si présent
         const sw = document.getElementById('lang-switcher');
         if(!sw) return;
         const saved = getCookie('greenpure_lang');
         if(saved) sw.value = saved;
         sw.addEventListener('change',function(){ setCookie('greenpure_lang',sw.value,365); window.location.reload(); });
     } catch(e){ console.error('[GP] LangSwitcher:',e); }
+}
+
+/* === 19. STICKY TOPBAR + HEADER === */
+function initStickyBehavior() {
+    try {
+        const header = document.querySelector('.site-header');
+        if(!header) return;
+        const fn = throttle(function(){
+            const scrolled = window.scrollY > 60;
+            header.classList.toggle('is-scrolled', scrolled);
+        }, 100);
+        window.addEventListener('scroll', fn, {passive: true});
+        fn();
+    } catch(e){ console.error('[GP] StickyBehavior:',e); }
+}
+
+/* === 20. PRODUCT FILTER ANIMATION === */
+function initProductFilterAnim() {
+    try {
+        const btns  = document.querySelectorAll('[data-filter]');
+        const cards = document.querySelectorAll('[data-category]');
+        if(!btns.length || !cards.length) return;
+        btns.forEach(function(btn){
+            btn.addEventListener('click',function(){
+                const f = btn.getAttribute('data-filter');
+                btns.forEach(b => { b.classList.remove('is-active', 'active'); });
+                btn.classList.add('is-active');
+                cards.forEach(function(card){
+                    const cats = (card.getAttribute('data-category') || '').split(/\s+/);
+                    const show = f === 'all' || cats.includes(f);
+                    if(show){
+                        card.style.opacity = '0';
+                        card.style.display = '';
+                        requestAnimationFrame(function(){
+                            requestAnimationFrame(function(){
+                                card.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+                                card.style.opacity = '1';
+                                card.style.transform = 'scale(1)';
+                            });
+                        });
+                    } else {
+                        card.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+                        card.style.opacity = '0';
+                        card.style.transform = 'scale(0.95)';
+                        setTimeout(function(){ if(card.style.opacity === '0') card.style.display = 'none'; }, 320);
+                    }
+                });
+            });
+        });
+    } catch(e){ console.error('[GP] FilterAnim:',e); }
 }
 
 /* === jQuery — Mini Cart, Add to Cart, Newsletter === */
@@ -357,6 +428,7 @@ function initLangSwitcher() {
 document.addEventListener('DOMContentLoaded',function(){
     initAgeGate();
     initStickyHeader();
+    initStickyBehavior();
     initMobileMenu();
     initSearchToggle();
     initProductTabs();
@@ -365,6 +437,7 @@ document.addEventListener('DOMContentLoaded',function(){
     initFaqAccordion();
     initTestimonialsSlider();
     initProductFilter();
+    initProductFilterAnim();
     initCountdownTimer();
     initBackToTop();
     initCookieBanner();
