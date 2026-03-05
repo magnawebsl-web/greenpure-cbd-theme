@@ -382,10 +382,214 @@ function greenpure_handle_notice_dismiss() {
 add_action( 'admin_init', 'greenpure_handle_notice_dismiss' );
 
 /* ──────────────────────────────────────
-   12. SÉCURITÉ & LÉGAL CBD
+   12. SEO — Meta Description & Open Graph
+────────────────────────────────────── */
+function greenpure_seo_meta() {
+    // Ne pas ajouter si Yoast / RankMath / AIOSEO est actif
+    if ( function_exists('wpseo_head') || function_exists('rank_math_head') || class_exists('All_in_One_SEO_Pack') ) return;
+
+    $site_name = get_bloginfo('name');
+    $site_url  = home_url('/');
+    $logo_url  = has_custom_logo() ? wp_get_attachment_image_url(get_theme_mod('custom_logo'), 'full') : GREENPURE_URI . '/assets/images/og-logo.jpg';
+
+    if ( is_front_page() || is_home() ) {
+        $title       = $site_name . ' — CBD Premium Certifié Bio | Livraison Europe';
+        $description = 'Boutique CBD n°1 en Europe. Huiles CBD, gummies, fleurs certifiées bio. Extraction CO2, < 0,3% THC. Livraison express 24h. Satisfait ou remboursé 14 jours.';
+        $image       = GREENPURE_URI . '/assets/images/og-home.jpg';
+        $type        = 'website';
+        $url         = $site_url;
+    } elseif ( is_product() ) {
+        global $product;
+        $title       = get_the_title() . ' — ' . $site_name;
+        $description = wp_strip_all_tags($product->get_short_description()) ?: get_the_excerpt();
+        $description = wp_trim_words($description, 25, '...');
+        $image       = wp_get_attachment_image_url($product->get_image_id(), 'greenpure-banner') ?: $logo_url;
+        $type        = 'product';
+        $url         = get_permalink();
+    } elseif ( is_singular() ) {
+        $title       = get_the_title() . ' — ' . $site_name;
+        $description = wp_trim_words(get_the_excerpt() ?: wp_strip_all_tags(get_the_content()), 25, '...');
+        $image       = get_the_post_thumbnail_url(null, 'greenpure-banner') ?: $logo_url;
+        $type        = 'article';
+        $url         = get_permalink();
+    } elseif ( is_tax() || is_category() || is_archive() ) {
+        $term        = get_queried_object();
+        $title       = $term->name . ' CBD — ' . $site_name;
+        $description = $term->description ? wp_trim_words($term->description, 25, '...') : 'Découvrez notre sélection de ' . $term->name . ' certifiés bio.';
+        $image       = $logo_url;
+        $type        = 'website';
+        $url         = get_term_link($term);
+    } else {
+        return;
+    }
+
+    // Meta description
+    echo '<meta name="description" content="' . esc_attr($description) . '">' . "\n";
+
+    // Canonical
+    echo '<link rel="canonical" href="' . esc_url($url) . '">' . "\n";
+
+    // Open Graph
+    echo '<meta property="og:type" content="' . esc_attr($type) . '">' . "\n";
+    echo '<meta property="og:title" content="' . esc_attr($title) . '">' . "\n";
+    echo '<meta property="og:description" content="' . esc_attr($description) . '">' . "\n";
+    echo '<meta property="og:image" content="' . esc_url($image) . '">' . "\n";
+    echo '<meta property="og:url" content="' . esc_url($url) . '">' . "\n";
+    echo '<meta property="og:site_name" content="' . esc_attr($site_name) . '">' . "\n";
+    echo '<meta property="og:locale" content="fr_FR">' . "\n";
+
+    // Twitter Card
+    echo '<meta name="twitter:card" content="summary_large_image">' . "\n";
+    echo '<meta name="twitter:title" content="' . esc_attr($title) . '">' . "\n";
+    echo '<meta name="twitter:description" content="' . esc_attr($description) . '">' . "\n";
+    echo '<meta name="twitter:image" content="' . esc_url($image) . '">' . "\n";
+}
+add_action( 'wp_head', 'greenpure_seo_meta', 1 );
+
+/* ──────────────────────────────────────
+   13. SCHEMA.ORG — Site Web & Organisation (Homepage)
+────────────────────────────────────── */
+function greenpure_homepage_schema() {
+    if ( ! is_front_page() ) return;
+    $schema = [
+        '@context' => 'https://schema.org',
+        '@graph'   => [
+            [
+                '@type'  => 'WebSite',
+                '@id'    => home_url('/#website'),
+                'url'    => home_url('/'),
+                'name'   => get_bloginfo('name'),
+                'description' => get_bloginfo('description'),
+                'potentialAction' => [
+                    '@type'       => 'SearchAction',
+                    'target'      => ['@type' => 'EntryPoint', 'urlTemplate' => home_url('/?s={search_term_string}')],
+                    'query-input' => 'required name=search_term_string',
+                ],
+            ],
+            [
+                '@type'  => 'Organization',
+                '@id'    => home_url('/#organization'),
+                'name'   => get_bloginfo('name'),
+                'url'    => home_url('/'),
+                'logo'   => ['@type' => 'ImageObject', 'url' => GREENPURE_URI . '/assets/images/logo.png'],
+                'email'  => 'contact@greenpure-cbd.com',
+                'sameAs' => [
+                    'https://www.instagram.com/greenpurecbd',
+                    'https://www.facebook.com/greenpurecbd',
+                    'https://www.tiktok.com/@greenpurecbd',
+                ],
+                'areaServed' => ['FR', 'DE', 'NL', 'BE', 'ES', 'IT', 'GB', 'AT', 'PL'],
+                'hasOfferCatalog' => [
+                    '@type' => 'OfferCatalog',
+                    'name'  => 'Produits CBD Premium',
+                ],
+            ],
+        ],
+    ];
+    echo '<script type="application/ld+json">' . wp_json_encode($schema, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT) . '</script>' . "\n";
+}
+add_action( 'wp_head', 'greenpure_homepage_schema' );
+
+/* ──────────────────────────────────────
+   14. PERFORMANCE — Preload & Resource Hints
+────────────────────────────────────── */
+function greenpure_resource_hints() {
+    // Précharger la police principale
+    echo '<link rel="preload" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel=\'stylesheet\'">' . "\n";
+    echo '<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@400;500;600;700&display=swap"></noscript>' . "\n";
+    // DNS prefetch
+    echo '<link rel="dns-prefetch" href="//fonts.googleapis.com">' . "\n";
+    echo '<link rel="dns-prefetch" href="//fonts.gstatic.com">' . "\n";
+}
+add_action( 'wp_head', 'greenpure_resource_hints', 2 );
+
+// Désactiver le chargement bloquant de Google Fonts (déjà géré en preload ci-dessus)
+function greenpure_dequeue_blocking_fonts( $tag, $handle ) {
+    if ( $handle === 'greenpure-fonts' ) {
+        // Remplacer rel="stylesheet" par media="print" pour le chargement non-bloquant
+        return str_replace( "rel='stylesheet'", "rel='preload' as='style' onload=\"this.onload=null;this.rel='stylesheet'\"", $tag );
+    }
+    return $tag;
+}
+add_filter( 'style_loader_tag', 'greenpure_dequeue_blocking_fonts', 10, 2 );
+
+/* ──────────────────────────────────────
+   15. SÉCURITÉ & LÉGAL CBD
 ────────────────────────────────────── */
 // Bannière âge (cookie-based, JS gère l'affichage)
 function greenpure_age_gate_scripts() {
     // Géré dans main.js
 }
 add_action( 'wp_footer', 'greenpure_age_gate_scripts' );
+
+/* ──────────────────────────────────────
+   16. HEADERS DE SÉCURITÉ
+────────────────────────────────────── */
+function greenpure_security_headers() {
+    if ( ! headers_sent() ) {
+        header( 'X-Content-Type-Options: nosniff' );
+        header( 'X-Frame-Options: SAMEORIGIN' );
+        header( 'Referrer-Policy: strict-origin-when-cross-origin' );
+        header( 'Permissions-Policy: geolocation=(), microphone=(), camera=()' );
+    }
+}
+add_action( 'send_headers', 'greenpure_security_headers' );
+
+/* ──────────────────────────────────────
+   17. CACHER LA VERSION WP (sécurité)
+────────────────────────────────────── */
+remove_action( 'wp_head', 'wp_generator' );
+add_filter( 'the_generator', '__return_empty_string' );
+
+/* ──────────────────────────────────────
+   18. FILTRE — Retirer l'emoji WP (performance)
+────────────────────────────────────── */
+function greenpure_disable_emojis() {
+    remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
+    remove_action( 'admin_print_scripts', 'print_emoji_detection_script' );
+    remove_action( 'wp_print_styles', 'print_emoji_styles' );
+    remove_action( 'admin_print_styles', 'print_emoji_styles' );
+    remove_filter( 'the_content_feed', 'wp_staticize_emoji' );
+    remove_filter( 'comment_text_rss', 'wp_staticize_emoji' );
+    remove_filter( 'wp_mail', 'wp_staticize_emoji_for_email' );
+    add_filter( 'tiny_mce_plugins', function($plugins) { return is_array($plugins) ? array_diff($plugins, ['wpemoji']) : []; } );
+    add_filter( 'wp_resource_hints', function($urls, $relation_type) {
+        if ( $relation_type === 'dns-prefetch' ) {
+            return array_filter($urls, function($u) { return !strstr($u, 'https://s.w.org'); });
+        }
+        return $urls;
+    }, 10, 2 );
+}
+add_action( 'init', 'greenpure_disable_emojis' );
+
+/* ──────────────────────────────────────
+   19. PROGRAMME FIDÉLITÉ — Points simples
+────────────────────────────────────── */
+function greenpure_add_loyalty_points( $order_id ) {
+    $order = wc_get_order($order_id);
+    if ( ! $order ) return;
+    $user_id = $order->get_user_id();
+    if ( ! $user_id ) return;
+    $total  = (float) $order->get_total();
+    $points = (int) floor($total); // 1 point par € dépensé
+    $current = (int) get_user_meta($user_id, 'greenpure_loyalty_points', true);
+    update_user_meta($user_id, 'greenpure_loyalty_points', $current + $points);
+}
+if ( class_exists('WooCommerce') ) {
+    add_action( 'woocommerce_order_status_completed', 'greenpure_add_loyalty_points' );
+}
+
+/* ──────────────────────────────────────
+   20. URGENCY — Stock faible
+────────────────────────────────────── */
+function greenpure_low_stock_badge() {
+    global $product;
+    if ( ! $product || ! $product->managing_stock() ) return;
+    $stock = $product->get_stock_quantity();
+    if ( $stock !== null && $stock > 0 && $stock <= 5 ) {
+        echo '<div class="low-stock-alert" role="alert">⚠️ Plus que ' . esc_html($stock) . ' en stock !</div>';
+    }
+}
+if ( class_exists('WooCommerce') ) {
+    add_action( 'woocommerce_single_product_summary', 'greenpure_low_stock_badge', 22 );
+}

@@ -4,46 +4,52 @@
      SECTION 1 — HERO
 ══════════════════════════════════════════════════ -->
 <section class="hero" aria-label="Section principale">
-    <div class="hero__bg"></div>
-    <div class="hero__particles" id="particles"></div>
+    <div class="hero__bg" aria-hidden="true"></div>
+    <!-- Formes décoratives animées -->
+    <div class="hero__shapes" aria-hidden="true">
+        <div class="hero__shape hero__shape--1"></div>
+        <div class="hero__shape hero__shape--2"></div>
+        <div class="hero__shape hero__shape--3"></div>
+    </div>
+    <div id="particles" class="hero__particles" aria-hidden="true"></div>
     <div class="container">
         <div class="hero__inner">
             <div class="hero__content" data-aos="fade-right">
                 <span class="hero__eyebrow">
-                    <span class="eyebrow-dot"></span>
+                    <svg width="8" height="8" viewBox="0 0 8 8" fill="#F4CC6A"><circle cx="4" cy="4" r="4"/></svg>
                     Certifié &lt; 0,3% THC • Agriculture Biologique
                 </span>
                 <h1 class="hero__title">
-                    Le CBD<br>
-                    <em>qui change</em><br>
-                    votre vie
+                    <span class="line">Le CBD</span>
+                    <span class="line"><em>qui change</em></span>
+                    <span class="line">votre vie</span>
                 </h1>
                 <p class="hero__subtitle">
                     Découvrez notre gamme premium de produits CBD 100% naturels.
                     Huiles, gummies, fleurs — formulés pour votre bien-être,
                     testés par des laboratoires indépendants.
                 </p>
-                <div class="hero__cta">
+                <div class="hero__actions">
                     <?php if ( class_exists('WooCommerce') ): ?>
-                    <a href="<?php echo esc_url(get_permalink(wc_get_page_id('shop'))); ?>" class="btn btn--primary btn--xl">
+                    <a href="<?php echo esc_url(get_permalink(wc_get_page_id('shop'))); ?>" class="btn btn--gold btn--lg">
                         Découvrir nos produits
-                        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                     </a>
                     <?php endif; ?>
-                    <a href="#bestsellers" class="btn btn--ghost btn--xl">Nos bestsellers</a>
+                    <a href="#bestsellers" class="btn btn--outline-white btn--lg">Nos bestsellers</a>
                 </div>
                 <div class="hero__trust">
-                    <div class="trust-pill">
-                        <svg width="16" height="16" fill="#52B788" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                    <div class="hero__trust-item">
+                        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
                         Livraison offerte dès 49€
                     </div>
-                    <div class="trust-pill">
-                        <svg width="16" height="16" fill="#52B788" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                    <div class="hero__trust-item">
+                        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
                         Satisfait ou remboursé 14j
                     </div>
-                    <div class="trust-pill">
-                        <svg width="16" height="16" fill="#52B788" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                        4.9/5 — 2000+ avis clients
+                    <div class="hero__trust-item">
+                        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+                        4.9/5 — 2 000+ avis vérifiés
                     </div>
                 </div>
             </div>
@@ -335,7 +341,7 @@
                     <?php endforeach;
                 }
                 ?>
-        </div>
+        </div><!-- /.products-grid -->
         <div class="section-cta" data-aos="fade-up">
             <?php if ( class_exists('WooCommerce') ): ?>
             <a href="<?php echo esc_url(get_permalink(wc_get_page_id('shop'))); ?>" class="btn btn--outline btn--lg">
@@ -346,8 +352,8 @@
             <a href="<?php echo esc_url(home_url('/boutique')); ?>" class="btn btn--outline btn--lg">Voir tous nos produits →</a>
             <?php endif; ?>
         </div>
-            <?php } ?>
-    </div>
+        <?php } // fin du if class_exists WooCommerce ?>
+    </div><!-- /.container -->
 </section>
 
 <!-- ══════════════════════════════════════════════════
@@ -470,6 +476,7 @@
             </div>
         </div>
         <div class="testimonials-slider js-testimonials-slider" data-aos="fade-up" data-aos-delay="100">
+            <div class="testimonials-slider__track">
             <?php
             $testimonials = get_posts(['post_type' => 'testimonial', 'posts_per_page' => 6, 'post_status' => 'publish']);
             if ( $testimonials ) {
@@ -478,17 +485,17 @@
                     $product = get_post_meta($t->ID, '_product', true);
                     setup_postdata($t);
                     ?>
-                    <div class="testimonial-card">
+                    <div class="testimonial-card testimonial">
                         <div class="testimonial-card__stars"><?php echo str_repeat('★', intval($rating)) . str_repeat('☆', 5 - intval($rating)); ?></div>
                         <blockquote class="testimonial-card__quote"><?php echo wp_kses_post($t->post_content); ?></blockquote>
                         <div class="testimonial-card__author">
                             <?php if ( has_post_thumbnail($t->ID) ): ?>
                                 <?php echo get_the_post_thumbnail($t->ID, [48,48], ['class' => 'testimonial-avatar']); ?>
                             <?php else: ?>
-                                <div class="testimonial-avatar testimonial-avatar--default"><?php echo mb_substr(get_the_title($t->ID), 0, 1); ?></div>
+                                <div class="testimonial-avatar testimonial-avatar--default" aria-hidden="true"><?php echo mb_substr(get_the_title($t->ID), 0, 1); ?></div>
                             <?php endif; ?>
                             <div>
-                                <strong><?php echo get_the_title($t->ID); ?></strong>
+                                <strong><?php echo esc_html(get_the_title($t->ID)); ?></strong>
                                 <?php if ($product): ?><span>À propos de : <?php echo esc_html($product); ?></span><?php endif; ?>
                                 <span class="verified-badge">✓ Achat vérifié</span>
                             </div>
@@ -509,11 +516,11 @@
                 ];
                 foreach ($demos as $d):
                 ?>
-                <div class="testimonial-card">
+                <div class="testimonial-card testimonial">
                     <div class="testimonial-card__stars"><?php echo str_repeat('★', $d['rating']); ?></div>
                     <blockquote class="testimonial-card__quote">"<?php echo esc_html($d['text']); ?>"</blockquote>
                     <div class="testimonial-card__author">
-                        <div class="testimonial-avatar testimonial-avatar--default"><?php echo mb_substr($d['name'], 0, 1); ?></div>
+                        <div class="testimonial-avatar testimonial-avatar--default" aria-hidden="true"><?php echo mb_substr($d['name'], 0, 1); ?></div>
                         <div>
                             <strong><?php echo esc_html($d['name']); ?></strong>
                             <span>À propos de : <?php echo esc_html($d['product']); ?></span>
@@ -524,13 +531,14 @@
                 <?php endforeach;
             }
             ?>
+            </div><!-- /.testimonials-slider__track -->
         </div>
         <div class="slider-controls">
-            <button class="slider-btn slider-btn--prev js-prev" aria-label="Précédent">
+            <button class="slider-btn slider-btn--prev slider-prev js-prev" aria-label="Avis précédent">
                 <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
             </button>
             <div class="slider-dots js-dots"></div>
-            <button class="slider-btn slider-btn--next js-next" aria-label="Suivant">
+            <button class="slider-btn slider-btn--next slider-next js-next" aria-label="Avis suivant">
                 <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
             </button>
         </div>

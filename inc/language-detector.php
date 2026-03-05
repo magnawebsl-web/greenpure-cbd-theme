@@ -57,6 +57,7 @@ $GLOBALS['greenpure_lang_map'] = [
             'logout'            => 'Déconnexion',
             'cart'              => 'Panier',
             'shop'              => 'Boutique',
+            'skip_to_content'   => 'Aller au contenu',
         ],
     ],
     'en' => [
