@@ -1,6 +1,6 @@
 <?php
 /**
- * GreenPure CBD — functions.php
+ * BORÉA CBD — functions.php
  * Setup du thème, WooCommerce, scripts, styles, widgets, menus
  */
 
@@ -83,6 +83,12 @@ function greenpure_scripts() {
     }
 }
 add_action( 'wp_enqueue_scripts', 'greenpure_scripts' );
+
+/* Supprimer le CSS "layout" du plugin WooCommerce — on gère nous-mêmes */
+add_filter( 'woocommerce_enqueue_styles', function( $styles ) {
+    unset( $styles['woocommerce-layout'] );
+    return $styles;
+} );
 
 /* ──────────────────────────────────────
    3. WIDGETS / SIDEBARS
@@ -388,7 +394,7 @@ function greenpure_admin_notice_products() {
     $dismiss_url = add_query_arg( 'greenpure_dismiss_notice', '1', admin_url() );
 
     echo '<div class="notice notice-warning is-dismissible greenpure-notice" data-dismiss-url="' . esc_url( $dismiss_url ) . '">';
-    echo '<p><strong>GreenPure CBD</strong> — Aucun produit n\'est encore installé.</p>';
+    echo '<p><strong>BORÉA CBD</strong> — Aucun produit n\'est encore installé.</p>';
     echo '<p><a href="' . esc_url( $install_url ) . '" class="button button-primary">Installer les 70 produits de démo</a>';
     echo ' &nbsp; <a href="' . esc_url( $dismiss_url ) . '" class="button">Ignorer</a></p>';
     echo '</div>';

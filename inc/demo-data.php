@@ -1,6 +1,6 @@
 <?php
 /**
- * GreenPure CBD — Données démo
+ * BORÉA CBD — Données démo
  * Crée automatiquement les catégories + produits de démonstration.
  *
  * Utilisation : ajouter ?greenpure_install_demo=1 dans l'URL une fois
@@ -1196,7 +1196,7 @@ function greenpure_install_demo_products() {
             'cat'         => 'e-liquides',
             'featured'    => true,
             'short_desc'  =>  "3 e-liquides 600mg au choix : Fruits Rouges + Menthe + Mangue. -15%.",
-            'description' =>  "<p>Le Pack Découverte réunit nos 3 best-sellers en e-liquides CBD 600 mg : Fruits Rouges, Menthe Glaciale et Mangue-Passion. Idéal pour découvrir les saveurs GreenPure CBD ou comme cadeau. Économisez 15% par rapport à l'achat unitaire. Base 70VG/30PG, 0mg nicotine.</p>",
+            'description' =>  "<p>Le Pack Découverte réunit nos 3 best-sellers en e-liquides CBD 600 mg : Fruits Rouges, Menthe Glaciale et Mangue-Passion. Idéal pour découvrir les saveurs BORÉA CBD ou comme cadeau. Économisez 15% par rapport à l'achat unitaire. Base 70VG/30PG, 0mg nicotine.</p>",
             'cbd_concentration' => '600mg x 3 / 30ml total',
             'cbd_spectrum'      => 'Broad Spectrum',
             'cbd_extraction'    => 'CO₂ Supercritique',

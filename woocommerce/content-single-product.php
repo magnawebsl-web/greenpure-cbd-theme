@@ -1,6 +1,6 @@
 <?php
 /**
- * GreenPure CBD — Contenu fiche produit individuelle
+ * BORÉA CBD — Contenu fiche produit individuelle
  * Remplace le template WooCommerce par défaut
  */
 defined('ABSPATH') || exit;

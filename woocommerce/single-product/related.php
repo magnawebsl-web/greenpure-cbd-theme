@@ -1,6 +1,6 @@
 <?php
 /**
- * GreenPure CBD — Produits similaires
+ * BORÉA CBD — Produits similaires
  */
 defined('ABSPATH') || exit;
 

@@ -8,7 +8,7 @@
         <div class="newsletter-section__inner">
             <div class="newsletter-section__content">
                 <div class="newsletter-icon">🌿</div>
-                <h2>Rejoignez la communauté GreenPure</h2>
+                <h2>Rejoignez la communauté BORÉA</h2>
                 <p>Recevez <strong>-10% sur votre première commande</strong>, nos guides CBD exclusifs et les dernières nouveautés.</p>
             </div>
             <form id="greenpure-newsletter-form" class="newsletter-form js-newsletter-form" novalidate>

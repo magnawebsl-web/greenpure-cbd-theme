@@ -1,5 +1,5 @@
 /**
- * GreenPure CBD — main.js v2.1
+ * BORÉA CBD — main.js v2.1
  * FIXED: sélecteurs alignés avec le HTML, variable AJAX corrigée,
  *        tabs produit, qty +/-, notices, sidebar mobile, langue
  */
@@ -306,11 +306,22 @@ function initSmoothScroll() {
 /* === 17. WOO GALLERY === */
 function initWooGallery() {
     try {
+        /* Annule le width inline que flexslider.js injecte */
+        function fixGalleryWidth() {
+            const gallery = document.querySelector('.woocommerce-product-gallery, .woocommerce div.product div.images');
+            if (gallery) { gallery.style.removeProperty('width'); gallery.style.removeProperty('float'); }
+            const viewport = document.querySelector('.woocommerce-product-gallery .flex-viewport');
+            if (viewport) viewport.style.removeProperty('height');
+        }
+        fixGalleryWidth();
+        /* Re-appliquer après que flexslider a fini son init (100ms) */
+        setTimeout(fixGalleryWidth, 150);
+
         const main = document.querySelector('.woocommerce-product-gallery__image:first-child img');
         const thumbs = document.querySelectorAll('.flex-control-thumbs img');
         if(!main||!thumbs.length) return;
-        thumbs.forEach(function(t){ t.style.cursor='pointer'; t.addEventListener('click',function(){ main.src=t.getAttribute('data-large_image')||t.src; main.srcset=''; thumbs.forEach(x=>x.classList.remove('active-thumb')); t.classList.add('active-thumb'); }); });
-    } catch(e){ console.error('[GP] WooGallery:',e); }
+        thumbs.forEach(function(t){ t.style.cursor='pointer'; t.addEventListener('click',function(){ main.src=t.getAttribute('data-large_image')||t.src; main.srcset=''; thumbs.forEach(x=>x.classList.remove('active-thumb')); t.classList.add('active-thumb'); fixGalleryWidth(); }); });
+    } catch(e){ console.error('[BOREA] WooGallery:',e); }
 }
 
 /* === 18. LANGUE — switcher (géré par language-detector.php inline JS) === */

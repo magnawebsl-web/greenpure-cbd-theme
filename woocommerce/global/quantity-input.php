@@ -1,6 +1,6 @@
 <?php
 /**
- * GreenPure CBD — Sélecteur de quantité personnalisé
+ * BORÉA CBD — Sélecteur de quantité personnalisé
  */
 defined('ABSPATH') || exit;
 

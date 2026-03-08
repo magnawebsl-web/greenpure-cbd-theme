@@ -1,6 +1,6 @@
 <?php
 /**
- * GreenPure CBD — Étoiles de notation fiche produit
+ * BORÉA CBD — Étoiles de notation fiche produit
  */
 defined('ABSPATH') || exit;
 

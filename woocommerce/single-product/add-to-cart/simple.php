@@ -1,6 +1,6 @@
 <?php
 /**
- * GreenPure CBD — Bouton Ajouter au panier — Produit Simple
+ * BORÉA CBD — Bouton Ajouter au panier — Produit Simple
  */
 defined('ABSPATH') || exit;
 

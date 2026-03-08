@@ -1,6 +1,6 @@
 <?php
 /**
- * GreenPure CBD — Customizer WordPress
+ * BORÉA CBD — Customizer WordPress
  * Options du thème accessibles dans Apparence > Personnaliser
  */
 if ( ! defined('ABSPATH') ) exit;
@@ -11,7 +11,7 @@ function greenpure_customizer_register( $wp_customize ) {
        SECTION : Identité & Couleurs
     ────────────────────────────────────── */
     $wp_customize->add_section('greenpure_brand', [
-        'title'    => __('GreenPure — Couleurs & Identité', 'greenpure-cbd'),
+        'title'    => __('BORÉA — Couleurs & Identité', 'greenpure-cbd'),
         'priority' => 30,
     ]);
 
@@ -38,7 +38,7 @@ function greenpure_customizer_register( $wp_customize ) {
        SECTION : Hero
     ────────────────────────────────────── */
     $wp_customize->add_section('greenpure_hero', [
-        'title'    => __('GreenPure — Section Hero', 'greenpure-cbd'),
+        'title'    => __('BORÉA — Section Hero', 'greenpure-cbd'),
         'priority' => 31,
     ]);
 
@@ -67,13 +67,13 @@ function greenpure_customizer_register( $wp_customize ) {
        SECTION : Informations de contact
     ────────────────────────────────────── */
     $wp_customize->add_section('greenpure_contact', [
-        'title'    => __('GreenPure — Contact & Réseaux', 'greenpure-cbd'),
+        'title'    => __('BORÉA — Contact & Réseaux', 'greenpure-cbd'),
         'priority' => 32,
     ]);
 
     $contact_fields = [
         'contact_phone'     => ['label' => 'Téléphone',         'default' => '+33 1 23 45 67 89'],
-        'contact_email'     => ['label' => 'Email contact',     'default' => 'contact@greenpure-cbd.com'],
+        'contact_email'     => ['label' => 'Email contact',     'default' => 'contact@cbdborea.com'],
         'contact_address'   => ['label' => 'Adresse',           'default' => 'Paris, France'],
         'social_instagram'  => ['label' => 'Instagram URL',     'default' => 'https://instagram.com'],
         'social_facebook'   => ['label' => 'Facebook URL',      'default' => 'https://facebook.com'],
@@ -94,7 +94,7 @@ function greenpure_customizer_register( $wp_customize ) {
        SECTION : Bannière & Promotions
     ────────────────────────────────────── */
     $wp_customize->add_section('greenpure_promos', [
-        'title'    => __('GreenPure — Promotions', 'greenpure-cbd'),
+        'title'    => __('BORÉA — Promotions', 'greenpure-cbd'),
         'priority' => 33,
     ]);
 

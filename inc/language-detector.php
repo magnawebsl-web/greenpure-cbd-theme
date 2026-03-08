@@ -1,6 +1,6 @@
 <?php
 /**
- * GreenPure CBD — Détection de langue européenne automatique
+ * BORÉA CBD — Détection de langue européenne automatique
  * Détecte la langue via : 1) cookie, 2) Accept-Language header, 3) IP géolocalisation (optionnel)
  * Langues supportées : fr, en, de, nl, es, it, pt, pl
  */
@@ -34,7 +34,7 @@ $GLOBALS['greenpure_lang_map'] = [
             'age_no'            => 'Non, je suis mineur(e)',
             'age_legal'         => 'En entrant sur ce site, vous confirmez avoir pris connaissance de nos',
             'age_legal_link'    => 'Mentions légales',
-            'newsletter_title'  => 'Rejoignez la communauté GreenPure',
+            'newsletter_title'  => 'Rejoignez la communauté BORÉA',
             'newsletter_sub'    => 'Recevez nos offres exclusives, conseils CBD et nouveautés',
             'newsletter_btn'    => 'S\'inscrire',
             'newsletter_ph'     => 'Votre adresse email',
@@ -79,7 +79,7 @@ $GLOBALS['greenpure_lang_map'] = [
             'age_no'            => 'No, I am a minor',
             'age_legal'         => 'By entering this site, you confirm you have read our',
             'age_legal_link'    => 'Legal Notice',
-            'newsletter_title'  => 'Join the GreenPure Community',
+            'newsletter_title'  => 'Join the BORÉA Community',
             'newsletter_sub'    => 'Receive exclusive offers, CBD tips and new arrivals',
             'newsletter_btn'    => 'Subscribe',
             'newsletter_ph'     => 'Your email address',
@@ -123,7 +123,7 @@ $GLOBALS['greenpure_lang_map'] = [
             'age_no'            => 'Nein, ich bin minderjährig',
             'age_legal'         => 'Mit dem Betreten bestätigen Sie unsere',
             'age_legal_link'    => 'Rechtliche Hinweise',
-            'newsletter_title'  => 'Treten Sie der GreenPure Community bei',
+            'newsletter_title'  => 'Treten Sie der BORÉA Community bei',
             'newsletter_sub'    => 'Erhalten Sie exklusive Angebote, CBD-Tipps und Neuheiten',
             'newsletter_btn'    => 'Anmelden',
             'newsletter_ph'     => 'Ihre E-Mail-Adresse',
@@ -167,7 +167,7 @@ $GLOBALS['greenpure_lang_map'] = [
             'age_no'            => 'Nee, ik ben minderjarig',
             'age_legal'         => 'Door het betreden bevestigt u onze',
             'age_legal_link'    => 'Juridische kennisgeving',
-            'newsletter_title'  => 'Word lid van de GreenPure Community',
+            'newsletter_title'  => 'Word lid van de BORÉA Community',
             'newsletter_sub'    => 'Ontvang exclusieve aanbiedingen en CBD-tips',
             'newsletter_btn'    => 'Inschrijven',
             'newsletter_ph'     => 'Uw e-mailadres',
@@ -211,7 +211,7 @@ $GLOBALS['greenpure_lang_map'] = [
             'age_no'            => 'No, soy menor de edad',
             'age_legal'         => 'Al entrar, confirma haber leído nuestro',
             'age_legal_link'    => 'Aviso legal',
-            'newsletter_title'  => 'Únase a la comunidad GreenPure',
+            'newsletter_title'  => 'Únase a la comunidad BORÉA',
             'newsletter_sub'    => 'Reciba ofertas exclusivas, consejos CBD y novedades',
             'newsletter_btn'    => 'Suscribirse',
             'newsletter_ph'     => 'Su dirección de email',
@@ -255,7 +255,7 @@ $GLOBALS['greenpure_lang_map'] = [
             'age_no'            => 'No, sono minorenne',
             'age_legal'         => 'Entrando nel sito, conferma di aver letto la nostra',
             'age_legal_link'    => 'Nota legale',
-            'newsletter_title'  => 'Unisciti alla community GreenPure',
+            'newsletter_title'  => 'Unisciti alla community BORÉA',
             'newsletter_sub'    => 'Ricevi offerte esclusive, consigli CBD e novità',
             'newsletter_btn'    => 'Iscriviti',
             'newsletter_ph'     => 'Il tuo indirizzo email',

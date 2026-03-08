@@ -1,6 +1,6 @@
 <?php
 /**
- * GreenPure CBD — Formulaire de recherche
+ * BORÉA CBD — Formulaire de recherche
  */
 $unique_id = esc_attr( uniqid( 'search-form-' ) );
 ?>

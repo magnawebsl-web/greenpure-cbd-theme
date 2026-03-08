@@ -1,6 +1,6 @@
 <?php
 /**
- * GreenPure CBD — Wrapper WooCommerce start
+ * BORÉA CBD — Wrapper WooCommerce start
  */
 defined('ABSPATH') || exit;
 ?>

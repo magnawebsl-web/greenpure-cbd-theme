@@ -1,6 +1,6 @@
 <?php
 /**
- * GreenPure CBD — WooCommerce helpers & overrides
+ * BORÉA CBD — WooCommerce helpers & overrides
  */
 if ( ! defined('ABSPATH') ) exit;
 if ( ! class_exists('WooCommerce') ) return;

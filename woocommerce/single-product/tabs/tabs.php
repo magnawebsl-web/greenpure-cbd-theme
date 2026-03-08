@@ -1,6 +1,6 @@
 <?php
 /**
- * GreenPure CBD — Single Product Tabs
+ * BORÉA CBD — Single Product Tabs
  * Onglets : Description, Infos CBD, Analyses labo, Avis
  */
 defined('ABSPATH') || exit;

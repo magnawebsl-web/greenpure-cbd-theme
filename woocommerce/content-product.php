@@ -1,6 +1,6 @@
 <?php
 /**
- * GreenPure CBD — Template carte produit (boucle boutique) v2.0
+ * BORÉA CBD — Template carte produit (boucle boutique) v2.0
  * Avec placeholders SVG colorés par catégorie quand aucune image n'existe.
  */
 defined('ABSPATH') || exit;

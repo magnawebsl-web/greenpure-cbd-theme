@@ -1,6 +1,6 @@
 <?php
 /**
- * GreenPure CBD — Compteur de résultats
+ * BORÉA CBD — Compteur de résultats
  */
 defined('ABSPATH') || exit;
 

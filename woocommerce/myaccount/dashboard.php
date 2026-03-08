@@ -1,6 +1,6 @@
 <?php
 /**
- * GreenPure CBD — Dashboard Mon Compte
+ * BORÉA CBD — Dashboard Mon Compte
  */
 defined('ABSPATH') || exit;
 

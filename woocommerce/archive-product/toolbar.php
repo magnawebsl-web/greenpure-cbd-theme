@@ -1,6 +1,6 @@
 <?php
 /**
- * GreenPure CBD — Toolbar boutique (tri + compteur)
+ * BORÉA CBD — Toolbar boutique (tri + compteur)
  */
 defined('ABSPATH') || exit;
 ?>

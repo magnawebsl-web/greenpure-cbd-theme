@@ -1,6 +1,6 @@
 <?php
 /**
- * GreenPure CBD — Titre fiche produit
+ * BORÉA CBD — Titre fiche produit
  */
 defined('ABSPATH') || exit;
 ?>
