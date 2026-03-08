@@ -161,17 +161,41 @@
         </div>
         <div class="categories-grid" data-aos="fade-up" data-aos-delay="100">
             <?php
+            /* SVG illustrations inline par catégorie */
+            $cat_svgs = [
+                'huiles-cbd'    => ['bg'=>'#1a3a2a','grad'=>'#2D6A4F,#52B788','svg'=>'<path d="M14 2H10C9 2 8 2.5 8 3.5V5H7C6 5 5 6 5 7v1c0 3 2 5 4 6v5H8v2h8v-2h-1v-5c2-1 4-3 4-6V7c0-1-1-2-2-2h-1V3.5C16 2.5 15 2 14 2zM9 5h6v1H9V5zm5.5 12h-3v-4.3C13 13 14.5 11.5 15 10H9c.5 1.5 2 3 3.5 2.7V17H10v-4C8.5 12 7 10 7 8V7h10v1c0 2-1.5 4-3 5v4z" fill="white"/>'],
+                'fleurs-cbd'    => ['bg'=>'#2d1b4e','grad'=>'#6B3FA0,#9B59B6','svg'=>'<path d="M12 2c-1 3-3 5-6 5 1 3 3 5 6 5s5-2 6-5c-3 0-5-2-6-5z" fill="white"/><path d="M12 12c-1 3-3 5-6 5 1 2 3 4 6 4s5-2 6-4c-3 0-5-2-6-5z" fill="rgba(255,255,255,0.6)"/><line x1="12" y1="12" x2="12" y2="21" stroke="white" stroke-width="1.5"/>'],
+                'gummies-cbd'   => ['bg'=>'#6b3a00','grad'=>'#D4700A,#F39C12','svg'=>'<circle cx="8" cy="8" r="4.5" fill="white"/><circle cx="16" cy="8" r="4.5" fill="rgba(255,255,255,0.7)"/><circle cx="8" cy="16" r="4.5" fill="rgba(255,255,255,0.7)"/><circle cx="16" cy="16" r="4.5" fill="rgba(255,255,255,0.5)"/>'],
+                'cosmetiques'   => ['bg'=>'#5a0a2a','grad'=>'#C2185B,#E91E63','svg'=>'<path d="M12 2a5 5 0 0 1 5 5c0 2-1 3.5-2.5 4.5V20a2.5 2.5 0 0 1-5 0v-8.5C8 10.5 7 9 7 7a5 5 0 0 1 5-5z" fill="white"/><ellipse cx="12" cy="7" rx="2.5" ry="3" fill="rgba(255,255,255,0.4)"/>'],
+                'infusions-cbd' => ['bg'=>'#0d2b0d','grad'=>'#2E7D32,#4CAF50','svg'=>'<path d="M6 4h12l-1.5 10H7.5L6 4z" fill="rgba(255,255,255,0.4)"/><path d="M7.5 14s0 5 4.5 5 4.5-5 4.5-5H7.5z" fill="white"/><path d="M10 4c0-1.5 1-2.5 2-2.5s2 1 2 2.5" fill="none" stroke="white" stroke-width="1.5"/><path d="M17 8c1 0 3 .5 3 2.5S18 13 17 13" fill="none" stroke="white" stroke-width="1.5"/>'],
+                'capsules-cbd'  => ['bg'=>'#012b4a','grad'=>'#0277BD,#0288D1','svg'=>'<ellipse cx="12" cy="12" rx="5" ry="9" fill="none" stroke="white" stroke-width="1.5"/><line x1="7" y1="12" x2="17" y2="12" stroke="white" stroke-width="1.5"/><ellipse cx="12" cy="8" rx="5" ry="4" fill="rgba(255,255,255,0.5)"/>'],
+                'e-liquides'    => ['bg'=>'#1a2530','grad'=>'#37474F,#546E7A','svg'=>'<rect x="9" y="2" width="6" height="3" rx="1.5" fill="white"/><rect x="8" y="5" width="8" height="14" rx="2" fill="rgba(255,255,255,0.7)"/><path d="M11 9c0 2 1 3 1 5" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round"/>'],
+                'hash-cbd'      => ['bg'=>'#2a1500','grad'=>'#795548,#A1887F','svg'=>'<rect x="5" y="7" width="14" height="10" rx="2" fill="white"/><rect x="8" y="10" width="8" height="1.5" rx=".75" fill="rgba(120,80,40,0.6)"/><rect x="8" y="13" width="8" height="1.5" rx=".75" fill="rgba(120,80,40,0.6)"/>'],
+                'packs'         => ['bg'=>'#0a2a3a','grad'=>'#00695C,#26A69A','svg'=>'<rect x="5" y="11" width="6" height="8" rx="1" fill="white"/><rect x="13" y="8" width="6" height="11" rx="1" fill="rgba(255,255,255,0.8)"/><rect x="8" y="5" width="5" height="6" rx="1" fill="rgba(255,255,255,0.6)"/>'],
+                'pet-cbd'       => ['bg'=>'#1a3040','grad'=>'#0277BD,#4FC3F7','svg'=>'<path d="M8 5a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm8 0a2 2 0 1 0 0-4 2 2 0 0 0 0 4zM4 8a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm16 0a2 2 0 1 0 0-4 2 2 0 0 0 0 4zM6 14c0-3.3 2.7-6 6-6s6 2.7 6 6c0 3-1 5-3 6H9c-2-1-3-3-3-6z" fill="white"/>'],
+                'concentres'    => ['bg'=>'#2a0a3a','grad'=>'#7B1FA2,#BA68C8','svg'=>'<rect x="9" y="2" width="6" height="10" rx="3" fill="white"/><path d="M8 12h8l-1 9H9l-1-9z" fill="rgba(255,255,255,0.7)"/>'],
+                'cbn'           => ['bg'=>'#1a2a1a','grad'=>'#388E3C,#66BB6A','svg'=>'<circle cx="12" cy="12" r="8" fill="none" stroke="white" stroke-width="1.5"/><path d="M9 12h6M12 9v6" stroke="white" stroke-width="2"/><circle cx="12" cy="12" r="3" fill="rgba(255,255,255,0.4)"/>'],
+            ];
+
             if ( class_exists('WooCommerce') ) {
-                $cats = get_terms(['taxonomy' => 'product_cat', 'hide_empty' => false, 'exclude' => [get_option('default_product_cat')], 'number' => 6]);
+                $cats = get_terms(['taxonomy' => 'product_cat', 'hide_empty' => false, 'exclude' => [get_option('default_product_cat')], 'number' => 12, 'orderby' => 'count', 'order' => 'DESC']);
                 if ( !empty($cats) && !is_wp_error($cats) ) {
                     foreach ( $cats as $cat ) {
                         $thumb_id  = get_term_meta($cat->term_id, 'thumbnail_id', true);
-                        $thumb_url = $thumb_id ? wp_get_attachment_image_url($thumb_id, 'greenpure-product') : GREENPURE_URI . '/assets/images/cat-placeholder.jpg';
                         $link      = get_term_link($cat);
+                        $cfg       = $cat_svgs[$cat->slug] ?? ['bg'=>'#1a3a2a','grad'=>'#2D6A4F,#52B788','svg'=>'<circle cx="12" cy="12" r="8" fill="rgba(255,255,255,0.5)"/>'];
                         ?>
                         <a href="<?php echo esc_url($link); ?>" class="category-card">
                             <div class="category-card__image">
-                                <img src="<?php echo esc_url($thumb_url); ?>" alt="<?php echo esc_attr($cat->name); ?>" loading="lazy" width="300" height="300">
+                                <?php if ( $thumb_id ) : ?>
+                                    <?php echo wp_get_attachment_image($thumb_id, 'greenpure-product', false, ['loading' => 'lazy', 'alt' => esc_attr($cat->name)]); ?>
+                                <?php else : ?>
+                                    <div class="category-card__svg-bg" style="background:linear-gradient(135deg,<?php echo esc_attr($cfg['grad']); ?>);">
+                                        <svg width="80" height="80" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <?php echo $cfg['svg']; ?>
+                                        </svg>
+                                    </div>
+                                <?php endif; ?>
                                 <div class="category-card__overlay"></div>
                             </div>
                             <div class="category-card__content">
@@ -182,30 +206,6 @@
                         </a>
                         <?php
                     }
-                } else {
-                    // Catégories statiques de démonstration
-                    $demo_cats = [
-                        ['name' => 'Huiles CBD',       'icon' => '💧', 'count' => 12, 'slug' => 'huiles-cbd'],
-                        ['name' => 'Fleurs CBD',       'icon' => '🌸', 'count' => 8,  'slug' => 'fleurs-cbd'],
-                        ['name' => 'Gummies CBD',      'icon' => '🍬', 'count' => 6,  'slug' => 'gummies-cbd'],
-                        ['name' => 'Cosmétiques CBD',  'icon' => '✨', 'count' => 10, 'slug' => 'cosmetiques-cbd'],
-                        ['name' => 'Infusions CBD',    'icon' => '🍵', 'count' => 5,  'slug' => 'infusions-cbd'],
-                        ['name' => 'Vape & E-liquides','icon' => '💨', 'count' => 7,  'slug' => 'vape-cbd'],
-                    ];
-                    foreach ($demo_cats as $cat):
-                    ?>
-                    <a href="<?php echo esc_url(home_url('/boutique/' . $cat['slug'])); ?>" class="category-card">
-                        <div class="category-card__image category-card__image--demo">
-                            <div class="cat-demo-icon"><?php echo $cat['icon']; ?></div>
-                            <div class="category-card__overlay"></div>
-                        </div>
-                        <div class="category-card__content">
-                            <h3><?php echo esc_html($cat['name']); ?></h3>
-                            <span class="cat-count"><?php echo esc_html($cat['count']); ?> produits</span>
-                            <span class="cat-arrow">→</span>
-                        </div>
-                    </a>
-                    <?php endforeach;
                 }
             }
             ?>
@@ -227,10 +227,13 @@
         <!-- Filtres produits -->
         <div class="product-filters" data-aos="fade-up" data-aos-delay="50">
             <button class="filter-btn active" data-filter="all">Tous</button>
-            <button class="filter-btn" data-filter="huiles">Huiles CBD</button>
-            <button class="filter-btn" data-filter="fleurs">Fleurs</button>
-            <button class="filter-btn" data-filter="gummies">Gummies</button>
+            <button class="filter-btn" data-filter="huiles-cbd">Huiles CBD</button>
+            <button class="filter-btn" data-filter="fleurs-cbd">Fleurs</button>
+            <button class="filter-btn" data-filter="gummies-cbd">Gummies</button>
             <button class="filter-btn" data-filter="cosmetiques">Cosmétiques</button>
+            <button class="filter-btn" data-filter="hash-cbd">Hash</button>
+            <button class="filter-btn" data-filter="capsules-cbd">Capsules</button>
+            <button class="filter-btn" data-filter="packs">Packs</button>
         </div>
 
         <div class="products-grid products-grid--4" data-aos="fade-up" data-aos-delay="100">
@@ -749,6 +752,162 @@
                 <div class="cert-item__icon">✅</div>
                 <strong>THC &lt; 0,3%</strong>
                 <span>Légal & contrôlé</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════
+     SECTION 12 — PACKS & COFFRETS SPOTLIGHT
+══════════════════════════════════════════════════ -->
+<section class="packs-section">
+    <div class="container">
+        <div class="section-header" data-aos="fade-up">
+            <span class="section-eyebrow">Offres groupées</span>
+            <h2 class="section-title">Packs & Coffrets CBD — Économisez jusqu'à 30%</h2>
+            <p class="section-subtitle">Nos coffrets sont conçus pour maximiser les effets du CBD grâce à une synergie de produits complémentaires.</p>
+        </div>
+        <div class="packs-grid" data-aos="fade-up" data-aos-delay="100">
+            <div class="pack-card pack-card--featured">
+                <div class="pack-card__badge">Bestseller</div>
+                <div class="pack-card__icon">
+                    <svg width="60" height="60" viewBox="0 0 60 60" fill="none"><rect x="8" y="28" width="18" height="24" rx="3" fill="#52B788"/><rect x="34" y="20" width="18" height="32" rx="3" fill="#2D6A4F"/><rect x="18" y="12" width="14" height="18" rx="3" fill="#B7E4C7"/></svg>
+                </div>
+                <h3>Pack Sommeil Profond</h3>
+                <p>Huile CBD 15% + Mélatonine, Gummies Sommeil, Infusion Lavande</p>
+                <div class="pack-card__savings"><span>-15€</span> par rapport aux achats séparés</div>
+                <div class="pack-card__price"><span class="pack-old">84,70 €</span> <strong>69,90 €</strong></div>
+                <?php if ( class_exists('WooCommerce') ): ?>
+                <?php
+                $pack_id = wc_get_product_id_by_sku('GP-PKS-SOM');
+                if ($pack_id): ?>
+                <a href="<?php echo esc_url(get_permalink($pack_id)); ?>" class="btn btn--primary btn--full">Voir ce pack</a>
+                <?php else: ?>
+                <a href="<?php echo esc_url(get_permalink(wc_get_page_id('shop'))); ?>" class="btn btn--primary btn--full">Voir les packs</a>
+                <?php endif; ?>
+                <?php endif; ?>
+            </div>
+            <div class="pack-card">
+                <div class="pack-card__icon">
+                    <svg width="60" height="60" viewBox="0 0 60 60" fill="none"><rect x="8" y="28" width="18" height="24" rx="3" fill="#0288D1"/><rect x="34" y="20" width="18" height="32" rx="3" fill="#0277BD"/><rect x="18" y="12" width="14" height="18" rx="3" fill="#B3E5FC"/></svg>
+                </div>
+                <h3>Pack Sport Recovery</h3>
+                <p>Huile Sport 10%, Crème Anti-Douleur 500mg, Baume Muscles 300mg</p>
+                <div class="pack-card__savings"><span>-15€</span> par rapport aux achats séparés</div>
+                <div class="pack-card__price"><span class="pack-old">104,70 €</span> <strong>79,90 €</strong></div>
+                <?php if ( class_exists('WooCommerce') ): ?>
+                <a href="<?php echo esc_url(get_permalink(wc_get_page_id('shop'))); ?>" class="btn btn--outline btn--full">Voir ce pack</a>
+                <?php endif; ?>
+            </div>
+            <div class="pack-card">
+                <div class="pack-card__icon">
+                    <svg width="60" height="60" viewBox="0 0 60 60" fill="none"><rect x="8" y="28" width="18" height="24" rx="3" fill="#C2185B"/><rect x="34" y="20" width="18" height="32" rx="3" fill="#E91E63"/><rect x="18" y="12" width="14" height="18" rx="3" fill="#FFD6E7"/></svg>
+                </div>
+                <h3>Coffret Luxe Cadeau</h3>
+                <p>Huile 20%, Gummies Anti-Stress, Sérum Anti-Âge, Infusion. Coffret bois gravé.</p>
+                <div class="pack-card__savings"><span>-15€</span> par rapport aux achats séparés</div>
+                <div class="pack-card__price"><span class="pack-old">149,60 €</span> <strong>99,90 €</strong></div>
+                <?php if ( class_exists('WooCommerce') ): ?>
+                <a href="<?php echo esc_url(get_permalink(wc_get_page_id('shop'))); ?>" class="btn btn--outline btn--full">Offrir ce coffret</a>
+                <?php endif; ?>
+            </div>
+            <div class="pack-card">
+                <div class="pack-card__icon">
+                    <svg width="60" height="60" viewBox="0 0 60 60" fill="none"><rect x="8" y="28" width="18" height="24" rx="3" fill="#2D6A4F"/><rect x="34" y="20" width="18" height="32" rx="3" fill="#52B788"/><rect x="18" y="12" width="14" height="18" rx="3" fill="#B7E4C7"/></svg>
+                </div>
+                <h3>Pack Découverte</h3>
+                <p>Huile 5%, 3 variétés de fleurs, Gummies Relaxation. Parfait pour débuter.</p>
+                <div class="pack-card__savings"><span>-10€</span> par rapport aux achats séparés</div>
+                <div class="pack-card__price"><span class="pack-old">59,60 €</span> <strong>49,90 €</strong></div>
+                <?php if ( class_exists('WooCommerce') ): ?>
+                <a href="<?php echo esc_url(get_permalink(wc_get_page_id('shop'))); ?>" class="btn btn--outline btn--full">Commencer ici</a>
+                <?php endif; ?>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════
+     SECTION 13 — PRESSE & MÉDIAS
+══════════════════════════════════════════════════ -->
+<section class="press-section">
+    <div class="container">
+        <p class="press-section__label" data-aos="fade-up">Parlé dans les médias</p>
+        <div class="press-logos" data-aos="fade-up" data-aos-delay="50">
+            <div class="press-logo">
+                <svg width="120" height="40" viewBox="0 0 120 40"><text x="10" y="28" font-family="Georgia,serif" font-size="18" font-weight="bold" fill="#999">Le Monde</text></svg>
+            </div>
+            <div class="press-logo">
+                <svg width="120" height="40" viewBox="0 0 120 40"><text x="10" y="28" font-family="Arial,sans-serif" font-size="16" font-weight="700" fill="#999">FIGARO</text></svg>
+            </div>
+            <div class="press-logo">
+                <svg width="120" height="40" viewBox="0 0 120 40"><text x="5" y="28" font-family="Georgia,serif" font-size="14" font-weight="bold" fill="#999">L'Express</text></svg>
+            </div>
+            <div class="press-logo">
+                <svg width="120" height="40" viewBox="0 0 120 40"><text x="10" y="28" font-family="Arial,sans-serif" font-size="15" font-weight="700" fill="#999">ELLE</text></svg>
+            </div>
+            <div class="press-logo">
+                <svg width="120" height="40" viewBox="0 0 120 40"><text x="5" y="28" font-family="Arial,sans-serif" font-size="13" font-weight="700" fill="#999">Forbes FR</text></svg>
+            </div>
+            <div class="press-logo">
+                <svg width="120" height="40" viewBox="0 0 120 40"><text x="5" y="28" font-family="Arial,sans-serif" font-size="13" font-weight="700" fill="#999">Capital</text></svg>
+            </div>
+        </div>
+        <div class="press-quotes" data-aos="fade-up" data-aos-delay="100">
+            <blockquote class="press-quote">
+                <p>"GreenPure se distingue par une transparence exemplaire et une qualité de CBD parmi les meilleures du marché européen."</p>
+                <cite>— Le Monde Santé</cite>
+            </blockquote>
+            <blockquote class="press-quote">
+                <p>"La référence française du CBD premium. Des produits rigoureusement testés, une traçabilité totale de la graine au flacon."</p>
+                <cite>— Forbes France</cite>
+            </blockquote>
+            <blockquote class="press-quote">
+                <p>"Avec plus de 100 références CBD, GreenPure s'impose comme le leader européen de la vente de cannabidiol en ligne."</p>
+                <cite>— Capital Magazine</cite>
+            </blockquote>
+        </div>
+    </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════
+     SECTION 14 — NEWSLETTER
+══════════════════════════════════════════════════ -->
+<section class="newsletter-section">
+    <div class="container">
+        <div class="newsletter-section__inner" data-aos="fade-up">
+            <div class="newsletter-section__content">
+                <span class="section-eyebrow">Newsletter</span>
+                <h2>-10% sur votre première commande</h2>
+                <p>Inscrivez-vous et recevez immédiatement un code de réduction de 10% + nos guides exclusifs sur le CBD.</p>
+                <ul class="newsletter-perks">
+                    <li><svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg> Code promo -10% immédiat</li>
+                    <li><svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg> Accès aux ventes privées</li>
+                    <li><svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg> Guides & conseils experts CBD</li>
+                    <li><svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg> Désinscription en 1 clic</li>
+                </ul>
+            </div>
+            <div class="newsletter-section__form">
+                <form class="newsletter-form js-newsletter-form" method="post">
+                    <?php wp_nonce_field('greenpure_newsletter', 'nonce'); ?>
+                    <div class="newsletter-form__field">
+                        <label for="nl-name" class="sr-only">Votre prénom</label>
+                        <input type="text" id="nl-name" name="name" placeholder="Votre prénom" autocomplete="given-name">
+                    </div>
+                    <div class="newsletter-form__field">
+                        <label for="nl-email" class="sr-only">Votre email</label>
+                        <input type="email" id="nl-email" name="email" placeholder="Votre adresse email" required autocomplete="email">
+                    </div>
+                    <button type="submit" class="btn btn--primary btn--full btn--lg">
+                        Recevoir mon code -10%
+                        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </button>
+                    <p class="newsletter-form__legal">En vous inscrivant, vous acceptez notre <a href="<?php echo esc_url(get_privacy_policy_url()); ?>">politique de confidentialité</a>. Désinscription à tout moment.</p>
+                    <div class="newsletter-form__success" style="display:none">
+                        <svg width="40" height="40" fill="none" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke="#52B788" stroke-width="2"/><path d="M9 12l2 2 4-4" stroke="#52B788" stroke-width="2"/></svg>
+                        <p>Merci ! Votre code <strong>BIENVENUE10</strong> a été envoyé par email.</p>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

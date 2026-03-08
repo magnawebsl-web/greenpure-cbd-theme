@@ -1,0 +1,132 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+  <defs>
+    <radialGradient id="bg-h30" cx="50%" cy="35%" r="65%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#f0f5f0"/>
+    </radialGradient>
+    <!-- Dark amber bottle for max strength -->
+    <linearGradient id="glass-h30" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#7a9a7a" stop-opacity="0.60"/>
+      <stop offset="15%" stop-color="#b8d8b8" stop-opacity="0.78"/>
+      <stop offset="35%" stop-color="#dff5df" stop-opacity="0.92"/>
+      <stop offset="55%" stop-color="#f0fff0" stop-opacity="0.97"/>
+      <stop offset="78%" stop-color="#b0d0b0" stop-opacity="0.80"/>
+      <stop offset="100%" stop-color="#608060" stop-opacity="0.55"/>
+    </linearGradient>
+    <!-- Very dark rich oil for 30% -->
+    <linearGradient id="oil-h30" x1="0%" y1="0%" x2="10%" y2="100%">
+      <stop offset="0%" stop-color="#906820" stop-opacity="0.75"/>
+      <stop offset="50%" stop-color="#704808" stop-opacity="0.82"/>
+      <stop offset="100%" stop-color="#402800" stop-opacity="0.90"/>
+    </linearGradient>
+    <linearGradient id="neck-h30" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#88b088" stop-opacity="0.6"/>
+      <stop offset="35%" stop-color="#d5ecd5" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#78a078" stop-opacity="0.55"/>
+    </linearGradient>
+    <!-- Darker premium gold for top-tier -->
+    <linearGradient id="cap-h30" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#e8c848"/>
+      <stop offset="20%" stop-color="#c9a227"/>
+      <stop offset="55%" stop-color="#d8b035"/>
+      <stop offset="85%" stop-color="#8a6010"/>
+      <stop offset="100%" stop-color="#6a4808"/>
+    </linearGradient>
+    <radialGradient id="cap-top-h30" cx="40%" cy="40%" r="60%">
+      <stop offset="0%" stop-color="#e8c848"/>
+      <stop offset="100%" stop-color="#6a4808"/>
+    </radialGradient>
+    <linearGradient id="label-h30" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#f2faf2"/>
+    </linearGradient>
+    <linearGradient id="label-green-h30" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#133a15"/>
+      <stop offset="50%" stop-color="#1b5e20"/>
+      <stop offset="100%" stop-color="#133a15"/>
+    </linearGradient>
+    <linearGradient id="gold-h30" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#8b6810"/>
+      <stop offset="30%" stop-color="#c9a227"/>
+      <stop offset="65%" stop-color="#f0d055"/>
+      <stop offset="100%" stop-color="#a07818"/>
+    </linearGradient>
+    <filter id="shadow-h30" x="-30%" y="-20%" width="160%" height="160%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="12" result="blur"/>
+      <feOffset dx="5" dy="18" result="offsetBlur"/>
+      <feFlood flood-color="#1a4020" flood-opacity="0.25" result="color"/>
+      <feComposite in="color" in2="offsetBlur" operator="in" result="shadow"/>
+      <feMerge><feMergeNode in="shadow"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="label-shadow-h30">
+      <feDropShadow dx="0" dy="1" stdDeviation="2" flood-color="#000" flood-opacity="0.08"/>
+    </filter>
+    <clipPath id="bottle-clip-h30">
+      <rect x="145" y="100" width="110" height="255" rx="17"/>
+    </clipPath>
+  </defs>
+
+  <rect width="400" height="400" fill="url(#bg-h30)"/>
+  <!-- Warm amber ambient glow to match premium oil -->
+  <ellipse cx="200" cy="210" rx="130" ry="145" fill="#c9a227" opacity="0.04"/>
+  <ellipse cx="201" cy="366" rx="66" ry="11" fill="#1a3a1a" opacity="0.15"/>
+
+  <g filter="url(#shadow-h30)">
+    <!-- Largest bottle footprint for 30% -->
+    <rect x="145" y="100" width="110" height="255" rx="17" fill="url(#oil-h30)" clip-path="url(#bottle-clip-h30)"/>
+    <rect x="145" y="100" width="110" height="255" rx="17" fill="url(#glass-h30)" stroke="#98b898" stroke-width="1"/>
+    <rect x="165" y="60" width="70" height="44" rx="10" fill="url(#neck-h30)" stroke="#98b898" stroke-width="0.7"/>
+    <rect x="172" y="66" width="11" height="34" rx="5.5" fill="white" opacity="0.38"/>
+    <rect x="163" y="98" width="74" height="8" rx="4" fill="url(#gold-h30)"/>
+    <rect x="163" y="98" width="74" height="2.5" rx="1.25" fill="white" opacity="0.3"/>
+    <rect x="165" y="58" width="70" height="5" rx="2.5" fill="url(#gold-h30)"/>
+    <!-- Extra gold ring for premium -->
+    <rect x="163" y="316" width="74" height="6" rx="3" fill="url(#gold-h30)"/>
+    <rect x="153" y="110" width="16" height="230" rx="8" fill="white" opacity="0.52"/>
+    <rect x="172" y="108" width="7" height="120" rx="3.5" fill="white" opacity="0.22"/>
+    <ellipse cx="200" cy="107" rx="46" ry="9" fill="white" opacity="0.30"/>
+    <rect x="231" y="120" width="8" height="180" rx="4" fill="white" opacity="0.13"/>
+    <ellipse cx="200" cy="350" rx="50" ry="7" fill="white" opacity="0.20"/>
+
+    <rect x="153" y="156" width="94" height="155" rx="7" fill="url(#label-h30)" filter="url(#label-shadow-h30)" stroke="#d0e8d0" stroke-width="0.8"/>
+    <rect x="153" y="156" width="94" height="26" rx="7" fill="url(#label-green-h30)"/>
+    <rect x="153" y="170" width="94" height="12" fill="url(#label-green-h30)"/>
+    <text x="200" y="166" font-family="'Helvetica Neue', Arial, sans-serif" font-size="7.5" font-weight="700" fill="white" text-anchor="middle" letter-spacing="3">GREENPURE</text>
+    <text x="200" y="178" font-family="'Helvetica Neue', Arial, sans-serif" font-size="5" fill="#b0d8b0" text-anchor="middle" letter-spacing="1.5">CBD PREMIUM</text>
+
+    <!-- Double leaf for luxury tier -->
+    <g transform="translate(185, 200)">
+      <path d="M0,-11.5 C8,-5.5 8,5.5 0,11.5 C-8,5.5 -8,-5.5 0,-11.5Z" fill="#2e7d32" opacity="0.70"/>
+      <line x1="0" y1="-9" x2="0" y2="9.5" stroke="#c9a227" stroke-width="0.9"/>
+    </g>
+    <g transform="translate(215, 200)">
+      <path d="M0,-11.5 C8,-5.5 8,5.5 0,11.5 C-8,5.5 -8,-5.5 0,-11.5Z" fill="#2e7d32" opacity="0.70"/>
+      <line x1="0" y1="-9" x2="0" y2="9.5" stroke="#c9a227" stroke-width="0.9"/>
+    </g>
+
+    <text x="200" y="222" font-family="'Helvetica Neue', Arial, sans-serif" font-size="8.5" font-weight="600" fill="#222222" text-anchor="middle" letter-spacing="1.8">HUILE CBD</text>
+    <!-- 30% – largest hero text -->
+    <text x="200" y="256" font-family="'Helvetica Neue', Arial, sans-serif" font-size="40" font-weight="900" fill="#133a15" text-anchor="middle" letter-spacing="-1.5">30%</text>
+    <rect x="163" y="263" width="74" height="3" rx="1.5" fill="url(#gold-h30)"/>
+    <text x="200" y="278" font-family="'Helvetica Neue', Arial, sans-serif" font-size="7.5" fill="#444444" text-anchor="middle" letter-spacing="0.5">30 ml · 9000 mg CBD</text>
+    <text x="200" y="291" font-family="'Helvetica Neue', Arial, sans-serif" font-size="6.5" fill="#777777" text-anchor="middle" letter-spacing="0.3">Full Spectrum · Chanvre BIO</text>
+    <!-- Prestige badge -->
+    <rect x="163" y="297" width="74" height="14" rx="7" fill="url(#label-green-h30)"/>
+    <text x="200" y="307" font-family="'Helvetica Neue', Arial, sans-serif" font-size="6" font-weight="700" fill="#c9a227" text-anchor="middle" letter-spacing="1.2">FORCE MAXIMALE</text>
+
+    <rect x="176" y="30" width="48" height="34" rx="8" fill="url(#cap-h30)"/>
+    <ellipse cx="200" cy="30" rx="24" ry="8" fill="url(#cap-top-h30)"/>
+    <rect x="181" y="34" width="12" height="22" rx="5" fill="white" opacity="0.22"/>
+    <rect x="196" y="12" width="8" height="20" rx="4" fill="url(#cap-h30)"/>
+    <ellipse cx="200" cy="12" rx="4" ry="3" fill="#6a4808"/>
+    <ellipse cx="200" cy="6" rx="3.5" ry="4.2" fill="#c9a227" opacity="0.80"/>
+    <ellipse cx="198.5" cy="4.5" rx="1.1" ry="1.4" fill="white" opacity="0.55"/>
+  </g>
+
+  <g opacity="0.05" transform="translate(335, 52) rotate(35) scale(2.5)">
+    <path d="M0,-16 C11,-8 11,8 0,16 C-11,8 -11,-8 0,-16Z" fill="#2e7d32"/>
+  </g>
+  <g opacity="0.04" transform="translate(55, 315) rotate(-30) scale(2)">
+    <path d="M0,-16 C11,-8 11,8 0,16 C-11,8 -11,-8 0,-16Z" fill="#2e7d32"/>
+  </g>
+</svg>

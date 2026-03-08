@@ -1,0 +1,140 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+  <defs>
+    <radialGradient id="bg-inf" cx="50%" cy="38%" r="62%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#faf6f0"/>
+    </radialGradient>
+    <!-- Kraft paper bag gradient -->
+    <linearGradient id="kraft-inf" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#d4a870"/>
+      <stop offset="25%" stop-color="#c49060"/>
+      <stop offset="55%" stop-color="#b87848"/>
+      <stop offset="80%" stop-color="#c49060"/>
+      <stop offset="100%" stop-color="#a86838"/>
+    </linearGradient>
+    <!-- Kraft left shine -->
+    <linearGradient id="kraft-shine-inf" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#d4a870" stop-opacity="0.0"/>
+      <stop offset="20%" stop-color="#e8c090" stop-opacity="0.35"/>
+      <stop offset="45%" stop-color="#f5d5a8" stop-opacity="0.50"/>
+      <stop offset="70%" stop-color="#e0b878" stop-opacity="0.20"/>
+      <stop offset="100%" stop-color="#c49060" stop-opacity="0.0"/>
+    </linearGradient>
+    <!-- Bag fold/crease gradient -->
+    <linearGradient id="fold-inf" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#8a5820" stop-opacity="0.3"/>
+      <stop offset="50%" stop-color="#a06830" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#8a5820" stop-opacity="0.3"/>
+    </linearGradient>
+    <!-- White label on bag -->
+    <linearGradient id="label-inf" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#f8f5f0"/>
+    </linearGradient>
+    <!-- Green header -->
+    <linearGradient id="label-green-inf" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#1b5e20"/>
+      <stop offset="50%" stop-color="#2e7d32"/>
+      <stop offset="100%" stop-color="#1b5e20"/>
+    </linearGradient>
+    <!-- Gold accent -->
+    <linearGradient id="gold-inf" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#8b6810"/>
+      <stop offset="50%" stop-color="#c9a227"/>
+      <stop offset="100%" stop-color="#a07818"/>
+    </linearGradient>
+    <!-- Heat seal top -->
+    <linearGradient id="seal-inf" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#c49060"/>
+      <stop offset="50%" stop-color="#a87040"/>
+      <stop offset="100%" stop-color="#c49060"/>
+    </linearGradient>
+    <filter id="shadow-inf" x="-25%" y="-15%" width="150%" height="145%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="10" result="blur"/>
+      <feOffset dx="3" dy="15" result="offsetBlur"/>
+      <feFlood flood-color="#6a3010" flood-opacity="0.20" result="color"/>
+      <feComposite in="color" in2="offsetBlur" operator="in" result="shadow"/>
+      <feMerge><feMergeNode in="shadow"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="label-shadow-inf">
+      <feDropShadow dx="0" dy="1" stdDeviation="2" flood-color="#000" flood-opacity="0.08"/>
+    </filter>
+  </defs>
+
+  <rect width="400" height="400" fill="url(#bg-inf)"/>
+  <ellipse cx="200" cy="200" rx="140" ry="135" fill="#c9a227" opacity="0.03"/>
+  <ellipse cx="200" cy="362" rx="80" ry="11" fill="#6a3010" opacity="0.11"/>
+
+  <g filter="url(#shadow-inf)">
+    <!-- KRAFT PAPER BAG - main body -->
+    <!-- Bottom fold -->
+    <path d="M140,350 L140,148 L260,148 L260,350 Q200,360 140,350Z" fill="url(#kraft-inf)" stroke="#9a6030" stroke-width="0.8"/>
+
+    <!-- Left edge fold highlight -->
+    <rect x="140" y="148" width="12" height="202" fill="url(#fold-inf)"/>
+    <!-- Right edge fold shadow -->
+    <rect x="248" y="148" width="12" height="202" fill="#8a5820" opacity="0.25"/>
+
+    <!-- Kraft texture / grain (subtle horizontal lines) -->
+    <rect x="142" y="155" width="116" height="0.8" fill="#a06830" opacity="0.20"/>
+    <rect x="142" y="175" width="116" height="0.8" fill="#a06830" opacity="0.18"/>
+    <rect x="142" y="195" width="116" height="0.8" fill="#a06830" opacity="0.16"/>
+    <rect x="142" y="215" width="116" height="0.8" fill="#a06830" opacity="0.14"/>
+    <rect x="142" y="235" width="116" height="0.8" fill="#a06830" opacity="0.12"/>
+    <rect x="142" y="255" width="116" height="0.8" fill="#a06830" opacity="0.12"/>
+    <rect x="142" y="275" width="116" height="0.8" fill="#a06830" opacity="0.10"/>
+    <rect x="142" y="295" width="116" height="0.8" fill="#a06830" opacity="0.10"/>
+    <rect x="142" y="315" width="116" height="0.8" fill="#a06830" opacity="0.10"/>
+
+    <!-- Main shine on bag face -->
+    <rect x="140" y="148" width="120" height="202" fill="url(#kraft-shine-inf)"/>
+
+    <!-- HEAT SEAL TOP (folded & sealed top of bag) -->
+    <!-- Main fold over -->
+    <path d="M135,148 L265,148 L265,115 Q200,108 135,115 Z" fill="url(#kraft-inf)" stroke="#9a6030" stroke-width="0.8"/>
+    <!-- Fold crease line -->
+    <line x1="140" y1="130" x2="260" y2="130" stroke="#9a6030" stroke-width="1.2" opacity="0.45"/>
+    <line x1="137" y1="140" x2="263" y2="140" stroke="#a06830" stroke-width="0.8" opacity="0.30"/>
+    <!-- Heat seal area (darker band) -->
+    <rect x="140" y="144" width="120" height="8" fill="#9a6030" opacity="0.50"/>
+    <rect x="140" y="144" width="120" height="3" fill="white" opacity="0.10"/>
+
+    <!-- Clip / zip seal notches at top fold corners -->
+    <circle cx="152" cy="120" r="5" fill="#c49060" stroke="#9a5820" stroke-width="1"/>
+    <circle cx="152" cy="120" r="2.5" fill="#8a5018"/>
+    <circle cx="248" cy="120" r="5" fill="#c49060" stroke="#9a5820" stroke-width="1"/>
+    <circle cx="248" cy="120" r="2.5" fill="#8a5018"/>
+
+    <!-- LABEL (white sticker on bag front) -->
+    <rect x="153" y="175" width="94" height="135" rx="6" fill="url(#label-inf)" filter="url(#label-shadow-inf)" stroke="#e0d5c0" stroke-width="0.8"/>
+
+    <!-- Green header band -->
+    <rect x="153" y="175" width="94" height="22" rx="6" fill="url(#label-green-inf)"/>
+    <rect x="153" y="188" width="94" height="9" fill="url(#label-green-inf)"/>
+    <text x="200" y="184" font-family="'Helvetica Neue', Arial, sans-serif" font-size="7" font-weight="700" fill="white" text-anchor="middle" letter-spacing="2.5">GREENPURE</text>
+    <text x="200" y="194" font-family="'Helvetica Neue', Arial, sans-serif" font-size="4.5" fill="#c8e8c8" text-anchor="middle" letter-spacing="1.5">CBD TISANE</text>
+
+    <!-- Tea leaf icon -->
+    <g transform="translate(200, 212)">
+      <path d="M0,-12 C8,-6 8,6 0,12 C-8,6 -8,-6 0,-12Z" fill="#2e7d32" opacity="0.80"/>
+      <line x1="0" y1="-10" x2="0" y2="10" stroke="#c9a227" stroke-width="0.9"/>
+      <line x1="-6" y1="1" x2="6" y2="1" stroke="#c9a227" stroke-width="0.6" opacity="0.65"/>
+      <line x1="-4" y1="-4" x2="4" y2="-4" stroke="#c9a227" stroke-width="0.5" opacity="0.50"/>
+    </g>
+
+    <text x="200" y="231" font-family="'Helvetica Neue', Arial, sans-serif" font-size="8.5" font-weight="700" fill="#222222" text-anchor="middle" letter-spacing="0.8">INFUSION CBD</text>
+    <text x="200" y="244" font-family="'Helvetica Neue', Arial, sans-serif" font-size="7" fill="#2e7d32" text-anchor="middle" letter-spacing="0.5">100 mg CBD · 20 sachets</text>
+    <rect x="165" y="249" width="70" height="1.5" rx="0.75" fill="url(#gold-inf)"/>
+    <text x="200" y="260" font-family="'Helvetica Neue', Arial, sans-serif" font-size="6.5" fill="#555555" text-anchor="middle" letter-spacing="0.3">Chanvre · Camomille · Tilleul</text>
+    <text x="200" y="272" font-family="'Helvetica Neue', Arial, sans-serif" font-size="6" fill="#777777" text-anchor="middle" letter-spacing="0.2">Mélisse · Verveine · Lavande</text>
+    <rect x="163" y="278" width="74" height="10" rx="5" fill="#2e7d32" opacity="0.10"/>
+    <text x="200" y="286" font-family="'Helvetica Neue', Arial, sans-serif" font-size="5.5" fill="#1b5e20" text-anchor="middle" letter-spacing="0.8">BIO · SANS OGM · VEGAN</text>
+    <text x="200" y="298" font-family="'Helvetica Neue', Arial, sans-serif" font-size="6" fill="#888888" text-anchor="middle">Infuser 5-8 min · 80-90°C</text>
+    <text x="200" y="308" font-family="'Helvetica Neue', Arial, sans-serif" font-size="6" fill="#888888" text-anchor="middle">Origine: France</text>
+
+    <!-- Hanging tear-off indicator at top right -->
+    <path d="M258,115 L270,102 L275,108 L263,121" fill="#c49060" stroke="#9a5820" stroke-width="0.7"/>
+    <circle cx="272" cy="104" r="4" fill="#c49060" stroke="#9a5820" stroke-width="0.8"/>
+    <circle cx="272" cy="104" r="2" fill="#8a5018"/>
+  </g>
+</svg>

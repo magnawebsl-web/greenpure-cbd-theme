@@ -1,0 +1,122 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+  <defs>
+    <radialGradient id="bg-hsp" cx="50%" cy="35%" r="65%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#f2f5f0"/>
+    </radialGradient>
+    <!-- Green-tinted glass for sport -->
+    <linearGradient id="glass-hsp" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#7aaa7a" stop-opacity="0.55"/>
+      <stop offset="12%" stop-color="#b8dab8" stop-opacity="0.75"/>
+      <stop offset="30%" stop-color="#e0f5e0" stop-opacity="0.92"/>
+      <stop offset="55%" stop-color="#f5fff5" stop-opacity="0.97"/>
+      <stop offset="75%" stop-color="#b0d0b0" stop-opacity="0.82"/>
+      <stop offset="100%" stop-color="#6a986a" stop-opacity="0.50"/>
+    </linearGradient>
+    <!-- Fresh green-gold oil -->
+    <linearGradient id="oil-hsp" x1="0%" y1="0%" x2="10%" y2="100%">
+      <stop offset="0%" stop-color="#90c890" stop-opacity="0.55"/>
+      <stop offset="50%" stop-color="#c9a227" stop-opacity="0.65"/>
+      <stop offset="100%" stop-color="#507050" stop-opacity="0.75"/>
+    </linearGradient>
+    <linearGradient id="neck-hsp" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#80aa80" stop-opacity="0.6"/>
+      <stop offset="35%" stop-color="#d5ecd5" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#70a070" stop-opacity="0.55"/>
+    </linearGradient>
+    <!-- Bold green sport cap -->
+    <linearGradient id="cap-hsp" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4caf50"/>
+      <stop offset="25%" stop-color="#2e7d32"/>
+      <stop offset="60%" stop-color="#43a047"/>
+      <stop offset="100%" stop-color="#1b5e20"/>
+    </linearGradient>
+    <radialGradient id="cap-top-hsp" cx="40%" cy="40%" r="60%">
+      <stop offset="0%" stop-color="#66bb6a"/>
+      <stop offset="100%" stop-color="#1b5e20"/>
+    </radialGradient>
+    <linearGradient id="label-hsp" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#f3faf3"/>
+    </linearGradient>
+    <!-- Bold sport green header -->
+    <linearGradient id="label-sport-hsp" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#1b5e20"/>
+      <stop offset="50%" stop-color="#2e7d32"/>
+      <stop offset="100%" stop-color="#1b5e20"/>
+    </linearGradient>
+    <linearGradient id="gold-hsp" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#8b6810"/>
+      <stop offset="30%" stop-color="#c9a227"/>
+      <stop offset="65%" stop-color="#f0d055"/>
+      <stop offset="100%" stop-color="#a07818"/>
+    </linearGradient>
+    <filter id="shadow-hsp" x="-30%" y="-20%" width="160%" height="160%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="10" result="blur"/>
+      <feOffset dx="4" dy="16" result="offsetBlur"/>
+      <feFlood flood-color="#1a4020" flood-opacity="0.22" result="color"/>
+      <feComposite in="color" in2="offsetBlur" operator="in" result="shadow"/>
+      <feMerge><feMergeNode in="shadow"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="label-shadow-hsp">
+      <feDropShadow dx="0" dy="1" stdDeviation="2" flood-color="#000" flood-opacity="0.08"/>
+    </filter>
+    <clipPath id="bottle-clip-hsp">
+      <rect x="150" y="115" width="100" height="235" rx="15"/>
+    </clipPath>
+  </defs>
+
+  <rect width="400" height="400" fill="url(#bg-hsp)"/>
+  <ellipse cx="200" cy="200" rx="140" ry="150" fill="#2e7d32" opacity="0.025"/>
+  <ellipse cx="201" cy="362" rx="62" ry="10" fill="#1a3a1a" opacity="0.14"/>
+
+  <g filter="url(#shadow-hsp)">
+    <rect x="150" y="115" width="100" height="235" rx="15" fill="url(#oil-hsp)" clip-path="url(#bottle-clip-hsp)"/>
+    <rect x="150" y="115" width="100" height="235" rx="15" fill="url(#glass-hsp)" stroke="#a0c8a0" stroke-width="0.8"/>
+    <rect x="170" y="75" width="60" height="44" rx="9" fill="url(#neck-hsp)" stroke="#98c098" stroke-width="0.7"/>
+    <rect x="176" y="80" width="10" height="34" rx="5" fill="white" opacity="0.38"/>
+    <rect x="168" y="113" width="64" height="7" rx="3.5" fill="url(#gold-hsp)"/>
+    <rect x="168" y="113" width="64" height="2" rx="1" fill="white" opacity="0.3"/>
+    <rect x="170" y="73" width="60" height="5" rx="2.5" fill="url(#gold-hsp)"/>
+    <rect x="158" y="125" width="14" height="215" rx="7" fill="white" opacity="0.52"/>
+    <rect x="175" y="123" width="6" height="100" rx="3" fill="white" opacity="0.24"/>
+    <ellipse cx="200" cy="122" rx="42" ry="8" fill="white" opacity="0.30"/>
+    <rect x="228" y="135" width="7" height="160" rx="3.5" fill="white" opacity="0.14"/>
+    <ellipse cx="200" cy="345" rx="44" ry="6" fill="white" opacity="0.22"/>
+
+    <rect x="158" y="168" width="84" height="140" rx="6" fill="url(#label-hsp)" filter="url(#label-shadow-hsp)" stroke="#c8e0c8" stroke-width="0.8"/>
+    <rect x="158" y="168" width="84" height="24" rx="6" fill="url(#label-sport-hsp)"/>
+    <rect x="158" y="180" width="84" height="12" fill="url(#label-sport-hsp)"/>
+    <text x="200" y="177" font-family="'Helvetica Neue', Arial, sans-serif" font-size="7.5" font-weight="700" fill="white" text-anchor="middle" letter-spacing="3">GREENPURE</text>
+    <text x="200" y="188" font-family="'Helvetica Neue', Arial, sans-serif" font-size="5" fill="#b0e0b0" text-anchor="middle" letter-spacing="1.5">CBD SPORT</text>
+
+    <!-- Chevron/lightning sport symbol -->
+    <g transform="translate(200, 210)">
+      <polygon points="0,-13 7,0 3,0 10,13 -0,13 -10,13 -3,0 -7,0" fill="#2e7d32" opacity="0.15"/>
+      <polygon points="0,-11 5.5,-1.5 2.5,-1.5 8,10 0,10 -8,10 -2.5,-1.5 -5.5,-1.5" fill="#2e7d32" opacity="0.75"/>
+    </g>
+
+    <text x="200" y="229" font-family="'Helvetica Neue', Arial, sans-serif" font-size="8" font-weight="700" fill="#1b5e20" text-anchor="middle" letter-spacing="1.5">HUILE SPORT</text>
+    <text x="200" y="245" font-family="'Helvetica Neue', Arial, sans-serif" font-size="22" font-weight="900" fill="#2e7d32" text-anchor="middle" letter-spacing="-0.5">15%</text>
+    <text x="200" y="258" font-family="'Helvetica Neue', Arial, sans-serif" font-size="7" fill="#3a7a3a" text-anchor="middle" letter-spacing="0.5">CBD + Arnica + Menthol</text>
+    <rect x="168" y="264" width="64" height="2" rx="1" fill="url(#gold-hsp)"/>
+    <text x="200" y="277" font-family="'Helvetica Neue', Arial, sans-serif" font-size="7.5" fill="#444444" text-anchor="middle" letter-spacing="0.5">10 ml · 1500 mg CBD</text>
+    <text x="200" y="290" font-family="'Helvetica Neue', Arial, sans-serif" font-size="6.5" fill="#777777" text-anchor="middle" letter-spacing="0.3">Récupération Musculaire</text>
+    <!-- Sport badge -->
+    <rect x="168" y="296" width="64" height="12" rx="6" fill="#2e7d32"/>
+    <text x="200" y="305" font-family="'Helvetica Neue', Arial, sans-serif" font-size="6" font-weight="600" fill="white" text-anchor="middle" letter-spacing="1">PERFORMANCE</text>
+
+    <!-- Green sport cap -->
+    <rect x="178" y="44" width="44" height="34" rx="7" fill="url(#cap-hsp)"/>
+    <ellipse cx="200" cy="44" rx="22" ry="7.5" fill="url(#cap-top-hsp)"/>
+    <rect x="182" y="48" width="11" height="22" rx="4.5" fill="white" opacity="0.22"/>
+    <rect x="195" y="27" width="10" height="20" rx="4" fill="url(#cap-hsp)"/>
+    <ellipse cx="200" cy="27" rx="5" ry="3.5" fill="#1b5e20"/>
+    <ellipse cx="200" cy="20" rx="3.8" ry="4.5" fill="#4caf50" opacity="0.75"/>
+    <ellipse cx="198.5" cy="18.5" rx="1.2" ry="1.5" fill="white" opacity="0.4"/>
+  </g>
+
+  <g opacity="0.04" transform="translate(330, 58) rotate(30) scale(2.2)">
+    <path d="M0,-16 C11,-8 11,8 0,16 C-11,8 -11,-8 0,-16Z" fill="#2e7d32"/>
+  </g>
+</svg>

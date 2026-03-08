@@ -270,7 +270,30 @@ function greenpure_format_price( $price ) {
 }
 
 /* ──────────────────────────────────────
-   9. INCLUDES
+   9. SVG & MEDIA SUPPORT
+────────────────────────────────────── */
+// Autoriser upload SVG pour les admins
+add_filter( 'upload_mimes', function( $mimes ) {
+    if ( current_user_can( 'manage_options' ) ) {
+        $mimes['svg']  = 'image/svg+xml';
+        $mimes['svgz'] = 'image/svg+xml';
+    }
+    return $mimes;
+});
+
+// Indiquer à WordPress que SVG est bien une image
+add_filter( 'file_is_displayable_image', function( $result, $path ) {
+    if ( ! $result ) {
+        $info = pathinfo( $path );
+        if ( isset( $info['extension'] ) && strtolower( $info['extension'] ) === 'svg' ) {
+            $result = true;
+        }
+    }
+    return $result;
+}, 10, 2 );
+
+/* ──────────────────────────────────────
+   10. INCLUDES
 ────────────────────────────────────── */
 require_once GREENPURE_DIR . '/inc/customizer.php';
 require_once GREENPURE_DIR . '/inc/woocommerce.php';

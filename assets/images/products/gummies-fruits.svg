@@ -1,0 +1,187 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+  <defs>
+    <radialGradient id="bg-gf" cx="50%" cy="38%" r="62%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#fdf6f0"/>
+    </radialGradient>
+    <!-- Jar body gradient -->
+    <linearGradient id="jar-side-gf" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#d0d0d0" stop-opacity="0.6"/>
+      <stop offset="15%" stop-color="#f0f0f0" stop-opacity="0.85"/>
+      <stop offset="40%" stop-color="#fafafa" stop-opacity="0.95"/>
+      <stop offset="65%" stop-color="#f0f0f0" stop-opacity="0.90"/>
+      <stop offset="85%" stop-color="#c8c8c8" stop-opacity="0.70"/>
+      <stop offset="100%" stop-color="#a0a0a0" stop-opacity="0.55"/>
+    </linearGradient>
+    <!-- Jar lid - golden -->
+    <linearGradient id="lid-gf" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f0d060"/>
+      <stop offset="25%" stop-color="#c9a227"/>
+      <stop offset="60%" stop-color="#e8c040"/>
+      <stop offset="100%" stop-color="#8a6210"/>
+    </linearGradient>
+    <radialGradient id="lid-top-gf" cx="40%" cy="35%" r="65%">
+      <stop offset="0%" stop-color="#f5dc70"/>
+      <stop offset="50%" stop-color="#c9a227"/>
+      <stop offset="100%" stop-color="#7a5808"/>
+    </radialGradient>
+    <!-- Gummy colors -->
+    <radialGradient id="gummy-red-gf" cx="35%" cy="35%" r="65%">
+      <stop offset="0%" stop-color="#ff7070"/>
+      <stop offset="40%" stop-color="#e53935"/>
+      <stop offset="100%" stop-color="#b71c1c"/>
+    </radialGradient>
+    <radialGradient id="gummy-orange-gf" cx="35%" cy="35%" r="65%">
+      <stop offset="0%" stop-color="#ffab40"/>
+      <stop offset="40%" stop-color="#fb8c00"/>
+      <stop offset="100%" stop-color="#e65100"/>
+    </radialGradient>
+    <radialGradient id="gummy-yellow-gf" cx="35%" cy="35%" r="65%">
+      <stop offset="0%" stop-color="#fff176"/>
+      <stop offset="40%" stop-color="#fdd835"/>
+      <stop offset="100%" stop-color="#f9a825"/>
+    </radialGradient>
+    <radialGradient id="gummy-green-gf" cx="35%" cy="35%" r="65%">
+      <stop offset="0%" stop-color="#a5d6a7"/>
+      <stop offset="40%" stop-color="#4caf50"/>
+      <stop offset="100%" stop-color="#1b5e20"/>
+    </radialGradient>
+    <radialGradient id="gummy-pink-gf" cx="35%" cy="35%" r="65%">
+      <stop offset="0%" stop-color="#f48fb1"/>
+      <stop offset="40%" stop-color="#e91e63"/>
+      <stop offset="100%" stop-color="#880e4f"/>
+    </radialGradient>
+    <linearGradient id="label-gf" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#fff8f0"/>
+    </linearGradient>
+    <linearGradient id="label-top-gf" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#1b5e20"/>
+      <stop offset="50%" stop-color="#2e7d32"/>
+      <stop offset="100%" stop-color="#1b5e20"/>
+    </linearGradient>
+    <linearGradient id="gold-gf" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#8b6810"/>
+      <stop offset="50%" stop-color="#c9a227"/>
+      <stop offset="100%" stop-color="#a07818"/>
+    </linearGradient>
+    <filter id="shadow-gf" x="-25%" y="-15%" width="150%" height="145%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="10" result="blur"/>
+      <feOffset dx="3" dy="14" result="offsetBlur"/>
+      <feFlood flood-color="#402010" flood-opacity="0.18" result="color"/>
+      <feComposite in="color" in2="offsetBlur" operator="in" result="shadow"/>
+      <feMerge><feMergeNode in="shadow"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="gummy-shine-gf">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="1.5" result="blur"/>
+      <feOffset dx="0" dy="1"/>
+      <feFlood flood-color="white" flood-opacity="0.4"/>
+      <feComposite operator="in" in2="blur"/>
+    </filter>
+    <clipPath id="jar-clip-gf">
+      <rect x="148" y="148" width="104" height="185" rx="14"/>
+    </clipPath>
+  </defs>
+
+  <rect width="400" height="400" fill="url(#bg-gf)"/>
+  <!-- Warm colorful ambient glow -->
+  <ellipse cx="200" cy="200" rx="140" ry="135" fill="#ff9800" opacity="0.04"/>
+  <ellipse cx="200" cy="360" rx="72" ry="11" fill="#402010" opacity="0.11"/>
+
+  <g filter="url(#shadow-gf)">
+    <!-- GUMMIES visible inside jar (colorful) -->
+    <g clip-path="url(#jar-clip-gf)">
+      <!-- Background gummy fill colors -->
+      <rect x="148" y="148" width="104" height="185" fill="#fff3e0" rx="14"/>
+      <!-- Gummy bears / shapes scattered inside -->
+      <!-- Row bottom -->
+      <ellipse cx="168" cy="305" rx="13" ry="11" fill="url(#gummy-red-gf)" opacity="0.92"/>
+      <ellipse cx="168" cy="305" rx="7" ry="5" fill="white" opacity="0.25" transform="translate(-3,-3)"/>
+      <ellipse cx="192" cy="310" rx="12" ry="10" fill="url(#gummy-orange-gf)" opacity="0.92"/>
+      <ellipse cx="192" cy="310" rx="6" ry="4" fill="white" opacity="0.25" transform="translate(-2,-2)"/>
+      <ellipse cx="215" cy="305" rx="13" ry="11" fill="url(#gummy-green-gf)" opacity="0.92"/>
+      <ellipse cx="215" cy="305" rx="7" ry="5" fill="white" opacity="0.25" transform="translate(-2,-3)"/>
+      <ellipse cx="237" cy="310" rx="11" ry="10" fill="url(#gummy-yellow-gf)" opacity="0.92"/>
+      <ellipse cx="237" cy="310" rx="5" ry="4" fill="white" opacity="0.25" transform="translate(-2,-2)"/>
+      <!-- Row mid-bottom -->
+      <ellipse cx="160" cy="282" rx="12" ry="10" fill="url(#gummy-pink-gf)" opacity="0.90"/>
+      <ellipse cx="180" cy="288" rx="13" ry="11" fill="url(#gummy-yellow-gf)" opacity="0.90"/>
+      <ellipse cx="202" cy="283" rx="12" ry="10" fill="url(#gummy-red-gf)" opacity="0.90"/>
+      <ellipse cx="222" cy="289" rx="13" ry="11" fill="url(#gummy-green-gf)" opacity="0.90"/>
+      <ellipse cx="244" cy="283" rx="11" ry="9" fill="url(#gummy-orange-gf)" opacity="0.88"/>
+      <!-- Row middle -->
+      <ellipse cx="163" cy="260" rx="11" ry="10" fill="url(#gummy-orange-gf)" opacity="0.85"/>
+      <ellipse cx="184" cy="265" rx="12" ry="10" fill="url(#gummy-pink-gf)" opacity="0.85"/>
+      <ellipse cx="205" cy="259" rx="12" ry="10" fill="url(#gummy-yellow-gf)" opacity="0.85"/>
+      <ellipse cx="226" cy="265" rx="11" ry="10" fill="url(#gummy-red-gf)" opacity="0.85"/>
+      <ellipse cx="244" cy="259" rx="10" ry="9" fill="url(#gummy-green-gf)" opacity="0.82"/>
+      <!-- Row upper-mid -->
+      <ellipse cx="165" cy="238" rx="11" ry="9" fill="url(#gummy-green-gf)" opacity="0.80"/>
+      <ellipse cx="186" cy="242" rx="12" ry="10" fill="url(#gummy-red-gf)" opacity="0.80"/>
+      <ellipse cx="207" cy="237" rx="11" ry="9" fill="url(#gummy-orange-gf)" opacity="0.78"/>
+      <ellipse cx="228" cy="242" rx="12" ry="10" fill="url(#gummy-pink-gf)" opacity="0.78"/>
+      <ellipse cx="246" cy="237" rx="9" ry="9" fill="url(#gummy-yellow-gf)" opacity="0.75"/>
+      <!-- Shine on top gummies -->
+      <ellipse cx="165" cy="234" rx="5" ry="3.5" fill="white" opacity="0.30"/>
+      <ellipse cx="186" cy="238" rx="5.5" ry="3.5" fill="white" opacity="0.30"/>
+      <ellipse cx="207" cy="233" rx="5" ry="3.5" fill="white" opacity="0.28"/>
+    </g>
+
+    <!-- Jar glass body -->
+    <rect x="148" y="148" width="104" height="185" rx="14" fill="url(#jar-side-gf)" stroke="#c8c8c8" stroke-width="0.8"/>
+    <!-- Jar left shine -->
+    <rect x="155" y="158" width="12" height="165" rx="6" fill="white" opacity="0.48"/>
+    <!-- Jar secondary shine -->
+    <rect x="171" y="156" width="5" height="80" rx="2.5" fill="white" opacity="0.22"/>
+    <!-- Jar top highlight ellipse -->
+    <ellipse cx="200" cy="155" rx="44" ry="8" fill="white" opacity="0.28"/>
+    <!-- Jar right edge -->
+    <rect x="233" y="165" width="7" height="140" rx="3.5" fill="#d0d0d0" opacity="0.25"/>
+
+    <!-- Jar threads (top) -->
+    <rect x="152" y="145" width="96" height="8" rx="4" fill="#c0c0c0" opacity="0.5"/>
+    <rect x="155" y="148" width="90" height="3" rx="1.5" fill="white" opacity="0.3"/>
+
+    <!-- LABEL on jar -->
+    <rect x="158" y="195" width="84" height="100" rx="5" fill="url(#label-gf)" stroke="#e8e0d0" stroke-width="0.8"/>
+    <rect x="158" y="195" width="84" height="20" rx="5" fill="url(#label-top-gf)"/>
+    <rect x="158" y="207" width="84" height="8" fill="url(#label-top-gf)"/>
+    <text x="200" y="204" font-family="'Helvetica Neue', Arial, sans-serif" font-size="7" font-weight="700" fill="white" text-anchor="middle" letter-spacing="2.5">GREENPURE</text>
+    <text x="200" y="213" font-family="'Helvetica Neue', Arial, sans-serif" font-size="4.5" fill="#c8e8c8" text-anchor="middle" letter-spacing="1.5">CBD GUMMIES</text>
+
+    <!-- Leaf icon on label -->
+    <g transform="translate(200, 228)">
+      <path d="M0,-9 C6,-4 6,4 0,9 C-6,4 -6,-4 0,-9Z" fill="#2e7d32" opacity="0.75"/>
+      <line x1="0" y1="-7" x2="0" y2="7.5" stroke="#c9a227" stroke-width="0.8"/>
+    </g>
+
+    <text x="200" y="244" font-family="'Helvetica Neue', Arial, sans-serif" font-size="8" font-weight="700" fill="#222222" text-anchor="middle" letter-spacing="1">GUMMIES FRUITS</text>
+    <text x="200" y="257" font-family="'Helvetica Neue', Arial, sans-serif" font-size="16" font-weight="900" fill="#e65100" text-anchor="middle">25 mg</text>
+    <text x="200" y="267" font-family="'Helvetica Neue', Arial, sans-serif" font-size="6" fill="#888888" text-anchor="middle" letter-spacing="0.5">CBD par gummy</text>
+    <rect x="168" y="273" width="64" height="1.5" rx="0.75" fill="url(#gold-gf)"/>
+    <text x="200" y="282" font-family="'Helvetica Neue', Arial, sans-serif" font-size="6.5" fill="#555555" text-anchor="middle" letter-spacing="0.3">30 pièces · Vegan · Sans sucre</text>
+    <text x="200" y="292" font-family="'Helvetica Neue', Arial, sans-serif" font-size="6" fill="#888888" text-anchor="middle" letter-spacing="0.3">Fraise · Orange · Citron · Pomme</text>
+
+    <!-- LID (golden) -->
+    <ellipse cx="200" cy="147" rx="54" ry="15" fill="url(#lid-top-gf)"/>
+    <!-- Lid rim -->
+    <rect x="148" y="132" width="104" height="16" rx="8" fill="url(#lid-gf)"/>
+    <ellipse cx="200" cy="132" rx="52" ry="10" fill="url(#lid-top-gf)"/>
+    <!-- Lid shine -->
+    <ellipse cx="186" cy="130" rx="18" ry="5" fill="white" opacity="0.25"/>
+    <!-- Lid grip ridges -->
+    <rect x="150" y="134" width="100" height="2" rx="1" fill="#a07818" opacity="0.35"/>
+    <rect x="150" y="138" width="100" height="2" rx="1" fill="#a07818" opacity="0.25"/>
+    <rect x="150" y="142" width="100" height="2" rx="1" fill="#a07818" opacity="0.20"/>
+
+    <!-- Jar bottom shadow -->
+    <ellipse cx="200" cy="330" rx="48" ry="7" fill="#a0a0a0" opacity="0.15"/>
+  </g>
+
+  <!-- Loose gummies outside jar (marketing flair) -->
+  <ellipse cx="305" cy="285" rx="14" ry="12" fill="url(#gummy-red-gf)" opacity="0.85" filter="url(#shadow-gf)"/>
+  <ellipse cx="305" cy="285" rx="7" ry="5" fill="white" opacity="0.30" transform="translate(-3,-3)"/>
+  <ellipse cx="320" cy="305" rx="13" ry="11" fill="url(#gummy-yellow-gf)" opacity="0.80" filter="url(#shadow-gf)"/>
+  <ellipse cx="90" cy="295" rx="13" ry="11" fill="url(#gummy-green-gf)" opacity="0.80" filter="url(#shadow-gf)"/>
+  <ellipse cx="78" cy="275" rx="12" ry="10" fill="url(#gummy-orange-gf)" opacity="0.78" filter="url(#shadow-gf)"/>
+</svg>

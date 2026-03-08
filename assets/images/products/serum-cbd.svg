@@ -1,0 +1,142 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+  <defs>
+    <radialGradient id="bg-sc" cx="50%" cy="35%" r="65%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#f8f5ff"/>
+    </radialGradient>
+    <!-- Elegant serum bottle - frosted glass -->
+    <linearGradient id="bottle-sc" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#c8c8d8" stop-opacity="0.60"/>
+      <stop offset="15%" stop-color="#e8e8f5" stop-opacity="0.82"/>
+      <stop offset="35%" stop-color="#f8f8ff" stop-opacity="0.95"/>
+      <stop offset="55%" stop-color="#f5f5ff" stop-opacity="0.97"/>
+      <stop offset="78%" stop-color="#dcdce8" stop-opacity="0.85"/>
+      <stop offset="100%" stop-color="#b8b8d0" stop-opacity="0.60"/>
+    </linearGradient>
+    <!-- Neck -->
+    <linearGradient id="neck-sc" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#c0c0d0" stop-opacity="0.65"/>
+      <stop offset="40%" stop-color="#e8e8f8" stop-opacity="0.90"/>
+      <stop offset="100%" stop-color="#b0b0c8" stop-opacity="0.60"/>
+    </linearGradient>
+    <!-- Pipette/dropper cap - glossy black -->
+    <linearGradient id="cap-sc" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#505060"/>
+      <stop offset="30%" stop-color="#202028"/>
+      <stop offset="65%" stop-color="#303038"/>
+      <stop offset="100%" stop-color="#101018"/>
+    </linearGradient>
+    <radialGradient id="cap-top-sc" cx="35%" cy="32%" r="65%">
+      <stop offset="0%" stop-color="#606070"/>
+      <stop offset="100%" stop-color="#080810"/>
+    </radialGradient>
+    <!-- Serum content - golden/amber -->
+    <linearGradient id="serum-sc" x1="0%" y1="0%" x2="10%" y2="100%">
+      <stop offset="0%" stop-color="#d4c0f0" stop-opacity="0.45"/>
+      <stop offset="50%" stop-color="#a8a0e0" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="#8080c8" stop-opacity="0.65"/>
+    </linearGradient>
+    <!-- Gold ring accents -->
+    <linearGradient id="gold-sc" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#8b6810"/>
+      <stop offset="30%" stop-color="#c9a227"/>
+      <stop offset="65%" stop-color="#f0d055"/>
+      <stop offset="100%" stop-color="#a07818"/>
+    </linearGradient>
+    <!-- Label elegant -->
+    <linearGradient id="label-sc" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#f5f2ff"/>
+    </linearGradient>
+    <linearGradient id="label-top-sc" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#1b5e20"/>
+      <stop offset="50%" stop-color="#2e7d32"/>
+      <stop offset="100%" stop-color="#1b5e20"/>
+    </linearGradient>
+    <filter id="shadow-sc" x="-30%" y="-20%" width="160%" height="160%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="10" result="blur"/>
+      <feOffset dx="4" dy="16" result="offsetBlur"/>
+      <feFlood flood-color="#201830" flood-opacity="0.20" result="color"/>
+      <feComposite in="color" in2="offsetBlur" operator="in" result="shadow"/>
+      <feMerge><feMergeNode in="shadow"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="label-shadow-sc">
+      <feDropShadow dx="0" dy="1" stdDeviation="2" flood-color="#000" flood-opacity="0.07"/>
+    </filter>
+    <clipPath id="bottle-clip-sc">
+      <rect x="160" y="120" width="80" height="230" rx="12"/>
+    </clipPath>
+  </defs>
+
+  <rect width="400" height="400" fill="url(#bg-sc)"/>
+  <ellipse cx="200" cy="200" rx="140" ry="150" fill="#7b1fa2" opacity="0.02"/>
+  <ellipse cx="201" cy="364" rx="55" ry="9" fill="#201830" opacity="0.13"/>
+
+  <g filter="url(#shadow-sc)">
+    <!-- Serum content (through frosted glass) -->
+    <rect x="160" y="120" width="80" height="230" rx="12" fill="url(#serum-sc)" clip-path="url(#bottle-clip-sc)"/>
+
+    <!-- Bottle body - elegant tall narrow -->
+    <rect x="160" y="120" width="80" height="230" rx="12" fill="url(#bottle-sc)" stroke="#c0c0d5" stroke-width="0.8"/>
+
+    <!-- Neck narrow section -->
+    <rect x="175" y="82" width="50" height="42" rx="8" fill="url(#neck-sc)" stroke="#b8b8d0" stroke-width="0.7"/>
+    <!-- Neck shine -->
+    <rect x="180" y="87" width="8" height="32" rx="4" fill="white" opacity="0.40"/>
+
+    <!-- Gold collar rings -->
+    <rect x="158" y="118" width="84" height="7" rx="3.5" fill="url(#gold-sc)"/>
+    <rect x="158" y="118" width="84" height="2" rx="1" fill="white" opacity="0.3"/>
+    <rect x="173" y="80" width="54" height="5" rx="2.5" fill="url(#gold-sc)"/>
+
+    <!-- Frosted glass shines -->
+    <rect x="167" y="130" width="11" height="210" rx="5.5" fill="white" opacity="0.38"/>
+    <rect x="181" y="128" width="5" height="100" rx="2.5" fill="white" opacity="0.18"/>
+    <ellipse cx="200" cy="127" rx="35" ry="7" fill="white" opacity="0.22"/>
+    <rect x="222" y="138" width="6" height="160" rx="3" fill="white" opacity="0.10"/>
+    <ellipse cx="200" cy="346" rx="36" ry="5" fill="white" opacity="0.18"/>
+
+    <!-- LABEL (elegant, tall on bottle) -->
+    <rect x="168" y="175" width="64" height="140" rx="5" fill="url(#label-sc)" filter="url(#label-shadow-sc)" stroke="#d8d0e8" stroke-width="0.7"/>
+    <rect x="168" y="175" width="64" height="22" rx="5" fill="url(#label-top-sc)"/>
+    <rect x="168" y="188" width="64" height="9" fill="url(#label-top-sc)"/>
+    <text x="200" y="184" font-family="'Helvetica Neue', Arial, sans-serif" font-size="6.5" font-weight="700" fill="white" text-anchor="middle" letter-spacing="2.5">GREENPURE</text>
+    <text x="200" y="194" font-family="'Helvetica Neue', Arial, sans-serif" font-size="4.5" fill="#c8e8c8" text-anchor="middle" letter-spacing="1.5">CBD BEAUTY</text>
+
+    <!-- Elegant leaf on label -->
+    <g transform="translate(200, 210)">
+      <path d="M0,-10 C7,-5 7,5 0,10 C-7,5 -7,-5 0,-10Z" fill="#2e7d32" opacity="0.75"/>
+      <line x1="0" y1="-8" x2="0" y2="8" stroke="#c9a227" stroke-width="0.8"/>
+    </g>
+
+    <text x="200" y="226" font-family="'Helvetica Neue', Arial, sans-serif" font-size="8" font-weight="700" fill="#222222" text-anchor="middle" letter-spacing="1">SÉRUM CBD</text>
+    <!-- Luxury sizing text -->
+    <text x="200" y="240" font-family="'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="900" fill="#7b1fa2" text-anchor="middle">500mg</text>
+    <text x="200" y="250" font-family="'Helvetica Neue', Arial, sans-serif" font-size="6" fill="#888888" text-anchor="middle" letter-spacing="0.5">CBD · 30 ml</text>
+    <rect x="176" y="256" width="48" height="1.5" rx="0.75" fill="url(#gold-sc)"/>
+    <text x="200" y="265" font-family="'Helvetica Neue', Arial, sans-serif" font-size="6.5" fill="#444444" text-anchor="middle" letter-spacing="0.3">Anti-rides · Éclat · Hydratation</text>
+    <text x="200" y="277" font-family="'Helvetica Neue', Arial, sans-serif" font-size="6" fill="#666666" text-anchor="middle" letter-spacing="0.2">Acide hyaluronique · Rétinol</text>
+    <text x="200" y="289" font-family="'Helvetica Neue', Arial, sans-serif" font-size="6" fill="#666666" text-anchor="middle" letter-spacing="0.2">CBD Full Spectrum Bio</text>
+    <!-- Luxury badge bottom of label -->
+    <rect x="168" y="305" width="64" height="10" rx="5" fill="#2e7d32" opacity="0.12"/>
+    <text x="200" y="313" font-family="'Helvetica Neue', Arial, sans-serif" font-size="5.5" fill="#1b5e20" text-anchor="middle" letter-spacing="0.8">LUXE · VEGAN · BIO</text>
+
+    <!-- BLACK DROPPER CAP (pipette style) -->
+    <rect x="183" y="48" width="34" height="36" rx="6" fill="url(#cap-sc)"/>
+    <ellipse cx="200" cy="48" rx="17" ry="6.5" fill="url(#cap-top-sc)"/>
+    <!-- Cap highlight -->
+    <rect x="186" y="52" width="8" height="24" rx="4" fill="white" opacity="0.12"/>
+    <!-- Cap squeeze bulb at top -->
+    <ellipse cx="200" cy="40" rx="14" ry="12" fill="url(#cap-sc)"/>
+    <ellipse cx="200" cy="40" rx="11" ry="9" fill="#303038"/>
+    <ellipse cx="194" cy="36" rx="5" ry="4" fill="white" opacity="0.12"/>
+    <!-- Pipette needle -->
+    <rect x="198" y="84" width="4" height="38" rx="2" fill="#202028"/>
+    <ellipse cx="200" cy="84" rx="3" ry="2" fill="#101018"/>
+  </g>
+
+  <!-- Background decorative -->
+  <g opacity="0.04" transform="translate(320, 65) rotate(30) scale(2)">
+    <path d="M0,-16 C11,-8 11,8 0,16 C-11,8 -11,-8 0,-16Z" fill="#7b1fa2"/>
+  </g>
+</svg>

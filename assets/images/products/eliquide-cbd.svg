@@ -1,0 +1,145 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+  <defs>
+    <radialGradient id="bg-el" cx="50%" cy="35%" r="65%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#f5f3f0"/>
+    </radialGradient>
+    <!-- Amber glass bottle (10ml e-liquid) -->
+    <linearGradient id="bottle-el" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#8a5a20" stop-opacity="0.75"/>
+      <stop offset="15%" stop-color="#c88840" stop-opacity="0.88"/>
+      <stop offset="35%" stop-color="#e8b060" stop-opacity="0.92"/>
+      <stop offset="55%" stop-color="#f5c870" stop-opacity="0.95"/>
+      <stop offset="75%" stop-color="#d09040" stop-opacity="0.85"/>
+      <stop offset="90%" stop-color="#a06820" stop-opacity="0.75"/>
+      <stop offset="100%" stop-color="#704810" stop-opacity="0.60"/>
+    </linearGradient>
+    <!-- Liquid fill inside -->
+    <linearGradient id="liquid-el" x1="0%" y1="0%" x2="10%" y2="100%">
+      <stop offset="0%" stop-color="#60a880" stop-opacity="0.70"/>
+      <stop offset="50%" stop-color="#2e7d32" stop-opacity="0.80"/>
+      <stop offset="100%" stop-color="#1a4a20" stop-opacity="0.90"/>
+    </linearGradient>
+    <!-- Neck (narrow) -->
+    <linearGradient id="neck-el" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#8a5a20" stop-opacity="0.75"/>
+      <stop offset="40%" stop-color="#d09040" stop-opacity="0.90"/>
+      <stop offset="100%" stop-color="#7a5018" stop-opacity="0.65"/>
+    </linearGradient>
+    <!-- Black childproof cap -->
+    <linearGradient id="cap-el" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#404040"/>
+      <stop offset="30%" stop-color="#1a1a1a"/>
+      <stop offset="65%" stop-color="#282828"/>
+      <stop offset="100%" stop-color="#080808"/>
+    </linearGradient>
+    <radialGradient id="cap-top-el" cx="35%" cy="30%" r="65%">
+      <stop offset="0%" stop-color="#555555"/>
+      <stop offset="100%" stop-color="#050505"/>
+    </radialGradient>
+    <!-- Gold rings -->
+    <linearGradient id="gold-el" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#8b6810"/>
+      <stop offset="50%" stop-color="#c9a227"/>
+      <stop offset="100%" stop-color="#a07818"/>
+    </linearGradient>
+    <!-- Label -->
+    <linearGradient id="label-el" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#f5f3f0"/>
+    </linearGradient>
+    <linearGradient id="label-green-el" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#1b5e20"/>
+      <stop offset="50%" stop-color="#2e7d32"/>
+      <stop offset="100%" stop-color="#1b5e20"/>
+    </linearGradient>
+    <filter id="shadow-el" x="-30%" y="-20%" width="160%" height="160%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="10" result="blur"/>
+      <feOffset dx="4" dy="16" result="offsetBlur"/>
+      <feFlood flood-color="#401808" flood-opacity="0.22" result="color"/>
+      <feComposite in="color" in2="offsetBlur" operator="in" result="shadow"/>
+      <feMerge><feMergeNode in="shadow"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="label-shadow-el">
+      <feDropShadow dx="0" dy="1" stdDeviation="2" flood-color="#000" flood-opacity="0.08"/>
+    </filter>
+    <clipPath id="bottle-clip-el">
+      <rect x="163" y="120" width="74" height="225" rx="12"/>
+    </clipPath>
+  </defs>
+
+  <rect width="400" height="400" fill="url(#bg-el)"/>
+  <ellipse cx="200" cy="200" rx="140" ry="150" fill="#c9a227" opacity="0.025"/>
+  <ellipse cx="201" cy="362" rx="50" ry="9" fill="#401808" opacity="0.13"/>
+
+  <g filter="url(#shadow-el)">
+    <!-- Liquid inside (green CBD liquid through amber glass) -->
+    <rect x="163" y="120" width="74" height="225" rx="12" fill="url(#liquid-el)" clip-path="url(#bottle-clip-el)"/>
+
+    <!-- Amber glass bottle body -->
+    <rect x="163" y="120" width="74" height="225" rx="12" fill="url(#bottle-el)" stroke="#a07030" stroke-width="0.8"/>
+
+    <!-- Bottle neck (narrow) -->
+    <rect x="178" y="82" width="44" height="42" rx="7" fill="url(#neck-el)" stroke="#986820" stroke-width="0.7"/>
+    <rect x="183" y="88" width="8" height="30" rx="4" fill="white" opacity="0.30"/>
+
+    <!-- Gold collar rings -->
+    <rect x="161" y="118" width="78" height="7" rx="3.5" fill="url(#gold-el)"/>
+    <rect x="161" y="118" width="78" height="2" rx="1" fill="white" opacity="0.28"/>
+    <rect x="176" y="80" width="48" height="5" rx="2.5" fill="url(#gold-el)"/>
+
+    <!-- Amber glass shines -->
+    <rect x="170" y="130" width="12" height="205" rx="6" fill="white" opacity="0.28"/>
+    <rect x="185" y="128" width="5" height="90" rx="2.5" fill="white" opacity="0.18"/>
+    <ellipse cx="200" cy="127" rx="32" ry="7" fill="white" opacity="0.20"/>
+    <rect x="222" y="138" width="6" height="155" rx="3" fill="white" opacity="0.10"/>
+    <!-- Amber light caustic at bottom -->
+    <ellipse cx="200" cy="340" rx="34" ry="5" fill="#f0c050" opacity="0.15"/>
+
+    <!-- LABEL on bottle -->
+    <rect x="170" y="170" width="60" height="140" rx="5" fill="url(#label-el)" filter="url(#label-shadow-el)" stroke="#d8c8a8" stroke-width="0.8"/>
+    <rect x="170" y="170" width="60" height="22" rx="5" fill="url(#label-green-el)"/>
+    <rect x="170" y="183" width="60" height="9" fill="url(#label-green-el)"/>
+    <text x="200" y="180" font-family="'Helvetica Neue', Arial, sans-serif" font-size="6.5" font-weight="700" fill="white" text-anchor="middle" letter-spacing="2">GREENPURE</text>
+    <text x="200" y="190" font-family="'Helvetica Neue', Arial, sans-serif" font-size="4" fill="#c8e8c8" text-anchor="middle" letter-spacing="1.5">CBD E-LIQUID</text>
+
+    <!-- Vape leaf icon -->
+    <g transform="translate(200, 207)">
+      <path d="M0,-9.5 C6.5,-4.5 6.5,4.5 0,9.5 C-6.5,4.5 -6.5,-4.5 0,-9.5Z" fill="#2e7d32" opacity="0.80"/>
+      <line x1="0" y1="-7.5" x2="0" y2="7.5" stroke="#c9a227" stroke-width="0.8"/>
+    </g>
+
+    <!-- Vapor cloud icon (subtle) -->
+    <path d="M183,222 C183,218 187,216 190,218 C191,215 195,214 198,216 C200,213 205,213 207,216 C210,215 214,217 213,220 C215,221 215,224 213,225 L185,225 C183,224 183,222 183,222Z" fill="#e0e0f0" opacity="0.50"/>
+
+    <text x="200" y="234" font-family="'Helvetica Neue', Arial, sans-serif" font-size="7.5" font-weight="700" fill="#222222" text-anchor="middle" letter-spacing="0.5">E-LIQUIDE CBD</text>
+    <text x="200" y="248" font-family="'Helvetica Neue', Arial, sans-serif" font-size="16" font-weight="900" fill="#1b5e20" text-anchor="middle">300mg</text>
+    <text x="200" y="258" font-family="'Helvetica Neue', Arial, sans-serif" font-size="6" fill="#777777" text-anchor="middle">CBD · 10 ml</text>
+    <rect x="177" y="263" width="46" height="1.5" rx="0.75" fill="url(#gold-el)"/>
+    <text x="200" y="273" font-family="'Helvetica Neue', Arial, sans-serif" font-size="6.5" fill="#444444" text-anchor="middle" letter-spacing="0.3">Fruits Rouges · 50PG/50VG</text>
+    <text x="200" y="284" font-family="'Helvetica Neue', Arial, sans-serif" font-size="6" fill="#666666" text-anchor="middle" letter-spacing="0.2">Sans nicotine · Lab testé</text>
+    <text x="200" y="295" font-family="'Helvetica Neue', Arial, sans-serif" font-size="5.5" fill="#999999" text-anchor="middle">ISO 22716 · Made in France</text>
+    <!-- Warning marker -->
+    <rect x="170" y="300" width="60" height="10" rx="5" fill="#ff8f00" opacity="0.15"/>
+    <text x="200" y="308" font-family="'Helvetica Neue', Arial, sans-serif" font-size="5" fill="#e65100" text-anchor="middle" letter-spacing="0.5">+18 · Déconseillé aux femmes enceintes</text>
+
+    <!-- BLACK CHILDPROOF CAP -->
+    <rect x="183" y="48" width="34" height="37" rx="8" fill="url(#cap-el)"/>
+    <ellipse cx="200" cy="48" rx="17" ry="7" fill="url(#cap-top-el)"/>
+    <rect x="187" y="52" width="9" height="25" rx="4" fill="white" opacity="0.10"/>
+    <!-- Press-and-turn indicator arrows -->
+    <text x="200" y="68" font-family="Arial" font-size="8" fill="white" text-anchor="middle" opacity="0.35">↺</text>
+    <!-- Dropper tip opening -->
+    <rect x="196" y="80" width="8" height="5" rx="2" fill="#1a1a1a"/>
+    <!-- Top of cap -->
+    <ellipse cx="200" cy="36" rx="14" ry="5" fill="url(#cap-top-el)"/>
+    <rect x="186" y="30" width="28" height="12" rx="5" fill="url(#cap-el)"/>
+    <ellipse cx="200" cy="30" rx="14" ry="5" fill="url(#cap-top-el)"/>
+    <ellipse cx="193" cy="28" rx="5" ry="3" fill="white" opacity="0.08"/>
+  </g>
+
+  <!-- Background decorative amber circles -->
+  <g opacity="0.04" transform="translate(320, 65) rotate(25)">
+    <circle cx="0" cy="0" r="40" fill="#c9a227"/>
+  </g>
+</svg>

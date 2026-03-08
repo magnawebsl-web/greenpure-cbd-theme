@@ -1,0 +1,137 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+  <defs>
+    <radialGradient id="bg-hh" cx="50%" cy="38%" r="62%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#f5f0e8"/>
+    </radialGradient>
+    <!-- Hash/resin block - warm brown/khaki -->
+    <linearGradient id="hash-face-hh" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#8d6e3a"/>
+      <stop offset="30%" stop-color="#7a5a28"/>
+      <stop offset="60%" stop-color="#6a4c1e"/>
+      <stop offset="100%" stop-color="#5a3e14"/>
+    </linearGradient>
+    <radialGradient id="hash-glow-hh" cx="40%" cy="35%" r="65%">
+      <stop offset="0%" stop-color="#c8a060" stop-opacity="0.8"/>
+      <stop offset="50%" stop-color="#8d6a30" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#4a3010" stop-opacity="1.0"/>
+    </radialGradient>
+    <!-- Hash side (darker) -->
+    <linearGradient id="hash-side-hh" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#5a3e14"/>
+      <stop offset="50%" stop-color="#4a3010"/>
+      <stop offset="100%" stop-color="#3a2008"/>
+    </linearGradient>
+    <!-- Hash right side -->
+    <linearGradient id="hash-right-hh" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#6a4c1e"/>
+      <stop offset="100%" stop-color="#3a2808"/>
+    </linearGradient>
+    <!-- Gold foil packaging hint -->
+    <linearGradient id="foil-hh" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#e8d080"/>
+      <stop offset="25%" stop-color="#c9a227"/>
+      <stop offset="55%" stop-color="#d8b840"/>
+      <stop offset="80%" stop-color="#a07818"/>
+      <stop offset="100%" stop-color="#8a6010"/>
+    </linearGradient>
+    <!-- Gold accent -->
+    <linearGradient id="gold-hh" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#8b6810"/>
+      <stop offset="50%" stop-color="#c9a227"/>
+      <stop offset="100%" stop-color="#a07818"/>
+    </linearGradient>
+    <filter id="shadow-hh" x="-25%" y="-15%" width="150%" height="145%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="12" result="blur"/>
+      <feOffset dx="5" dy="16" result="offsetBlur"/>
+      <feFlood flood-color="#3a2010" flood-opacity="0.25" result="color"/>
+      <feComposite in="color" in2="offsetBlur" operator="in" result="shadow"/>
+      <feMerge><feMergeNode in="shadow"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="hash-texture-hh">
+      <feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" seed="8" result="noise"/>
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="2" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+  </defs>
+
+  <rect width="400" height="400" fill="url(#bg-hh)"/>
+  <ellipse cx="200" cy="200" rx="140" ry="130" fill="#c9a227" opacity="0.03"/>
+  <ellipse cx="205" cy="365" rx="100" ry="13" fill="#3a2010" opacity="0.12"/>
+
+  <g filter="url(#shadow-hh)">
+    <!-- HASH BLOCK (3D isometric view) -->
+
+    <!-- Bottom face (ground) -->
+    <path d="M130,285 L270,285 L300,255 L160,255 Z" fill="url(#hash-side-hh)"/>
+
+    <!-- Right side face -->
+    <path d="M270,285 L300,255 L300,165 L270,195 Z" fill="url(#hash-right-hh)"/>
+
+    <!-- Main top face (largest visible) -->
+    <path d="M130,195 L270,195 L270,285 L130,285 Z" fill="url(#hash-face-hh)"/>
+
+    <!-- Top face (upper angled) -->
+    <path d="M130,195 L160,165 L300,165 L270,195 Z" fill="url(#hash-glow-hh)"/>
+
+    <!-- Hash surface texture lines (grain/press marks) -->
+    <!-- Main face lines -->
+    <line x1="135" y1="210" x2="265" y2="210" stroke="#5a3e14" stroke-width="0.8" opacity="0.40"/>
+    <line x1="135" y1="225" x2="265" y2="225" stroke="#5a3e14" stroke-width="0.8" opacity="0.35"/>
+    <line x1="135" y1="240" x2="265" y2="240" stroke="#5a3e14" stroke-width="0.8" opacity="0.30"/>
+    <line x1="135" y1="255" x2="265" y2="255" stroke="#5a3e14" stroke-width="0.8" opacity="0.25"/>
+    <line x1="135" y1="270" x2="265" y2="270" stroke="#5a3e14" stroke-width="0.8" opacity="0.20"/>
+    <!-- Vertical grain lines on face -->
+    <line x1="170" y1="198" x2="170" y2="282" stroke="#5a3e14" stroke-width="0.7" opacity="0.20"/>
+    <line x1="210" y1="198" x2="210" y2="282" stroke="#5a3e14" stroke-width="0.7" opacity="0.18"/>
+    <line x1="250" y1="198" x2="250" y2="282" stroke="#5a3e14" stroke-width="0.7" opacity="0.18"/>
+
+    <!-- Main face shine (resinous look) -->
+    <path d="M132,197 L200,197 L200,240 L132,240 Z" fill="white" opacity="0.08"/>
+    <path d="M135,200 L175,200 L175,220 L135,220 Z" fill="white" opacity="0.10"/>
+
+    <!-- Top face lines (top surface) -->
+    <line x1="165" y1="170" x2="295" y2="170" stroke="#c9a227" stroke-width="0.7" opacity="0.25"/>
+    <line x1="168" y1="178" x2="298" y2="178" stroke="#c9a227" stroke-width="0.7" opacity="0.20"/>
+    <!-- Top shine -->
+    <path d="M163,167 L220,167 L213,193 L156,193 Z" fill="white" opacity="0.18"/>
+    <path d="M163,167 L195,167 L188,183 L156,183 Z" fill="white" opacity="0.12"/>
+
+    <!-- Right side ridges -->
+    <line x1="272" y1="200" x2="298" y2="170" stroke="#2a1808" stroke-width="0.8" opacity="0.35"/>
+    <line x1="272" y1="220" x2="298" y2="190" stroke="#2a1808" stroke-width="0.7" opacity="0.30"/>
+    <line x1="272" y1="240" x2="298" y2="210" stroke="#2a1808" stroke-width="0.7" opacity="0.25"/>
+    <line x1="272" y1="260" x2="298" y2="230" stroke="#2a1808" stroke-width="0.7" opacity="0.20"/>
+
+    <!-- Piece broken off (foreground fragment) -->
+    <path d="M115,270 L165,270 L155,310 L105,310 Z" fill="url(#hash-face-hh)" opacity="0.90"/>
+    <path d="M115,270 L165,270 L175,250 L125,250 Z" fill="url(#hash-glow-hh)" opacity="0.85"/>
+    <!-- Fragment texture -->
+    <path d="M118,272 L162,272 L152,308 L108,308 Z" fill="url(#hash-face-hh)" opacity="0.05"/>
+    <line x1="120" y1="280" x2="158" y2="280" stroke="#5a3e14" stroke-width="0.7" opacity="0.35"/>
+    <line x1="118" y1="293" x2="155" y2="293" stroke="#5a3e14" stroke-width="0.7" opacity="0.30"/>
+    <!-- Fragment shine -->
+    <path d="M118,272 L140,272 L138,285 L116,285 Z" fill="white" opacity="0.12"/>
+
+    <!-- Gold foil strip (packaging detail) -->
+    <rect x="155" y="200" width="80" height="18" rx="4" fill="url(#foil-hh)" opacity="0.90"/>
+    <rect x="157" y="202" width="76" height="4" rx="2" fill="white" opacity="0.25"/>
+    <text x="195" y="213" font-family="'Helvetica Neue', Arial, sans-serif" font-size="6.5" font-weight="700" fill="#3a2010" text-anchor="middle" letter-spacing="1.5">GREENPURE</text>
+
+    <!-- Label/info plaque on front face -->
+    <rect x="153" y="225" width="110" height="55" rx="5" fill="white" opacity="0.88"/>
+    <rect x="153" y="225" width="110" height="14" rx="5" fill="#2e7d32"/>
+    <rect x="153" y="232" width="110" height="7" fill="#2e7d32"/>
+    <text x="208" y="231" font-family="'Helvetica Neue', Arial, sans-serif" font-size="6" font-weight="700" fill="white" text-anchor="middle" letter-spacing="2">GREENPURE</text>
+    <text x="208" y="239" font-family="'Helvetica Neue', Arial, sans-serif" font-size="4.5" fill="#c8e8c8" text-anchor="middle" letter-spacing="1">CBD HASH</text>
+
+    <text x="208" y="251" font-family="'Helvetica Neue', Arial, sans-serif" font-size="9" font-weight="800" fill="#1b5e20" text-anchor="middle">HASH CBD</text>
+    <text x="208" y="263" font-family="'Helvetica Neue', Arial, sans-serif" font-size="6.5" fill="#444444" text-anchor="middle">~30% CBD · 5g</text>
+    <rect x="163" y="267" width="90" height="1.5" rx="0.75" fill="url(#gold-hh)"/>
+    <text x="208" y="276" font-family="'Helvetica Neue', Arial, sans-serif" font-size="6" fill="#666666" text-anchor="middle">Résine · Pollen · Bio</text>
+  </g>
+
+  <!-- Background warm glow circles -->
+  <g opacity="0.04" transform="translate(325, 75) rotate(20)">
+    <circle cx="0" cy="0" r="45" fill="#c9a227"/>
+  </g>
+</svg>

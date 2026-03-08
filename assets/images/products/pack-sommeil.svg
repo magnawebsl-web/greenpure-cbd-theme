@@ -1,0 +1,246 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+  <defs>
+    <radialGradient id="bg-psom" cx="50%" cy="38%" r="62%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#f2f0f8"/>
+    </radialGradient>
+    <!-- Night blue bottle glass -->
+    <linearGradient id="glass-psom" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#6060a0" stop-opacity="0.55"/>
+      <stop offset="25%" stop-color="#a8a8d8" stop-opacity="0.80"/>
+      <stop offset="50%" stop-color="#d8d8f5" stop-opacity="0.92"/>
+      <stop offset="75%" stop-color="#9898c8" stop-opacity="0.80"/>
+      <stop offset="100%" stop-color="#5050a0" stop-opacity="0.55"/>
+    </linearGradient>
+    <!-- Night oil (lavender) -->
+    <linearGradient id="oil-psom" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#8080b8" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="#404080" stop-opacity="0.75"/>
+    </linearGradient>
+    <!-- Night cap (midnight) -->
+    <linearGradient id="cap-psom" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3a3a7a"/>
+      <stop offset="50%" stop-color="#1a1a5e"/>
+      <stop offset="100%" stop-color="#0a0a38"/>
+    </linearGradient>
+    <!-- Purple gummies jar glass -->
+    <linearGradient id="jar-psom" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#b0b0c8" stop-opacity="0.6"/>
+      <stop offset="40%" stop-color="#f0f0ff" stop-opacity="0.95"/>
+      <stop offset="100%" stop-color="#9898b8" stop-opacity="0.55"/>
+    </linearGradient>
+    <!-- Purple gummies colors -->
+    <radialGradient id="g-purple-psom" cx="35%" cy="35%" r="65%">
+      <stop offset="0%" stop-color="#ce93d8"/>
+      <stop offset="100%" stop-color="#4a148c"/>
+    </radialGradient>
+    <radialGradient id="g-blue-psom" cx="35%" cy="35%" r="65%">
+      <stop offset="0%" stop-color="#90caf9"/>
+      <stop offset="100%" stop-color="#0d47a1"/>
+    </radialGradient>
+    <!-- Night lid (midnight) -->
+    <linearGradient id="lid-psom" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3a3a7a"/>
+      <stop offset="50%" stop-color="#1a1a5e"/>
+      <stop offset="100%" stop-color="#0a0a38"/>
+    </linearGradient>
+    <radialGradient id="lid-top-psom" cx="38%" cy="32%" r="65%">
+      <stop offset="0%" stop-color="#5a5a9a"/>
+      <stop offset="100%" stop-color="#06063a"/>
+    </radialGradient>
+    <!-- Infusion bag kraft -->
+    <linearGradient id="kraft-psom" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#c4a070"/>
+      <stop offset="50%" stop-color="#b07848"/>
+      <stop offset="100%" stop-color="#9a6030"/>
+    </linearGradient>
+    <!-- Gold accent -->
+    <linearGradient id="gold-psom" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#8b6810"/>
+      <stop offset="50%" stop-color="#c9a227"/>
+      <stop offset="100%" stop-color="#a07818"/>
+    </linearGradient>
+    <!-- Box night navy -->
+    <linearGradient id="box-psom" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0d1b4a"/>
+      <stop offset="50%" stop-color="#1a2870"/>
+      <stop offset="100%" stop-color="#0d1b4a"/>
+    </linearGradient>
+    <filter id="shadow-psom" x="-20%" y="-15%" width="140%" height="140%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="8" result="blur"/>
+      <feOffset dx="3" dy="12" result="offsetBlur"/>
+      <feFlood flood-color="#0d1b4a" flood-opacity="0.20" result="color"/>
+      <feComposite in="color" in2="offsetBlur" operator="in" result="shadow"/>
+      <feMerge><feMergeNode in="shadow"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <clipPath id="jar-clip-psom">
+      <rect x="258" y="198" width="72" height="125" rx="10"/>
+    </clipPath>
+    <clipPath id="b1-clip-psom">
+      <rect x="90" y="108" width="65" height="190" rx="10"/>
+    </clipPath>
+  </defs>
+
+  <rect width="400" height="400" fill="url(#bg-psom)"/>
+  <!-- Night ambient -->
+  <ellipse cx="200" cy="200" rx="155" ry="145" fill="#1a2870" opacity="0.04"/>
+  <!-- Stars -->
+  <circle cx="60" cy="55" r="1.5" fill="#c9a227" opacity="0.60"/>
+  <circle cx="80" cy="38" r="1" fill="white" opacity="0.45"/>
+  <circle cx="335" cy="62" r="1.5" fill="#c9a227" opacity="0.55"/>
+  <circle cx="355" cy="45" r="1" fill="white" opacity="0.40"/>
+  <circle cx="318" cy="78" r="1.2" fill="#c9a227" opacity="0.45"/>
+  <ellipse cx="205" cy="365" rx="148" ry="13" fill="#0d1b4a" opacity="0.11"/>
+
+  <!-- PACK BOX (navy) -->
+  <rect x="45" y="300" width="310" height="60" rx="8" fill="url(#box-psom)"/>
+  <rect x="45" y="300" width="310" height="15" rx="8" fill="#060e2a"/>
+  <rect x="48" y="302" width="304" height="8" rx="4" fill="white" opacity="0.06"/>
+  <rect x="45" y="315" width="310" height="6" rx="0" fill="url(#gold-psom)" opacity="0.70"/>
+  <rect x="45" y="353" width="310" height="7" rx="4" fill="#040c1e"/>
+  <!-- Stars on box -->
+  <circle cx="70" cy="330" r="1.5" fill="#c9a227" opacity="0.65"/>
+  <circle cx="82" cy="342" r="1" fill="#c9a227" opacity="0.50"/>
+  <circle cx="320" cy="332" r="1.5" fill="#c9a227" opacity="0.60"/>
+  <circle cx="335" cy="344" r="1" fill="#c9a227" opacity="0.50"/>
+  <text x="200" y="335" font-family="'Helvetica Neue', Arial, sans-serif" font-size="9" font-weight="700" fill="white" text-anchor="middle" letter-spacing="2">PACK NUIT SOMMEIL</text>
+  <text x="200" y="347" font-family="'Helvetica Neue', Arial, sans-serif" font-size="7" fill="#c9a227" text-anchor="middle" letter-spacing="1">GREENPURE CBD · 3 produits inclus</text>
+
+  <g filter="url(#shadow-psom)">
+    <!-- BOTTLE: Huile Sommeil (left) -->
+    <g transform="translate(-10, 6)">
+      <rect x="90" y="108" width="65" height="190" rx="10" fill="url(#oil-psom)" clip-path="url(#b1-clip-psom)"/>
+      <rect x="90" y="108" width="65" height="190" rx="10" fill="url(#glass-psom)" stroke="#9898c8" stroke-width="0.7"/>
+      <rect x="98" y="118" width="9" height="170" rx="4.5" fill="white" opacity="0.42"/>
+      <ellipse cx="122" cy="115" rx="28" ry="6" fill="white" opacity="0.22"/>
+      <!-- Gold ring -->
+      <rect x="88" y="106" width="69" height="6" rx="3" fill="url(#gold-psom)"/>
+      <!-- Mini label -->
+      <rect x="97" y="148" width="51" height="98" rx="4" fill="white" opacity="0.92"/>
+      <rect x="97" y="148" width="51" height="15" rx="4" fill="#0d1b4a"/>
+      <rect x="97" y="156" width="51" height="7" fill="#0d1b4a"/>
+      <text x="122" y="155" font-family="'Helvetica Neue', Arial, sans-serif" font-size="4.5" font-weight="700" fill="white" text-anchor="middle" letter-spacing="1">GREENPURE</text>
+      <text x="122" y="163" font-family="'Helvetica Neue', Arial, sans-serif" font-size="3.5" fill="#b0b8e0" text-anchor="middle">CBD NUIT</text>
+      <!-- Moon icon small -->
+      <g transform="translate(122, 175)">
+        <path d="M-6,-2 A6,6 0 1,0 2,6 A4,4 0 1,1 -6,-2Z" fill="#1a2870" opacity="0.80"/>
+      </g>
+      <circle cx="110" cy="174" r="1.2" fill="#c9a227" opacity="0.70"/>
+      <circle cx="134" cy="174" r="1.2" fill="#c9a227" opacity="0.70"/>
+      <text x="122" y="188" font-family="'Helvetica Neue', Arial, sans-serif" font-size="5.5" font-weight="700" fill="#1a2870" text-anchor="middle">SOMMEIL</text>
+      <text x="122" y="202" font-family="'Helvetica Neue', Arial, sans-serif" font-size="20" font-weight="900" fill="#1a2870" text-anchor="middle">15%</text>
+      <rect x="103" y="208" width="38" height="1.5" rx="0.75" fill="url(#gold-psom)"/>
+      <text x="122" y="217" font-family="'Helvetica Neue', Arial, sans-serif" font-size="5" fill="#666666" text-anchor="middle">10ml · 1500mg</text>
+      <text x="122" y="227" font-family="'Helvetica Neue', Arial, sans-serif" font-size="4.5" fill="#888888" text-anchor="middle">+Mélatonine</text>
+      <text x="122" y="238" font-family="'Helvetica Neue', Arial, sans-serif" font-size="4" fill="#888888" text-anchor="middle">+Lavande BIO</text>
+      <!-- Night dropper cap -->
+      <rect x="104" y="76" width="36" height="35" rx="6" fill="url(#cap-psom)"/>
+      <ellipse cx="122" cy="76" rx="18" ry="7" fill="#1a1a5e"/>
+      <rect x="108" y="80" width="8" height="23" rx="3.5" fill="white" opacity="0.12"/>
+      <rect x="118" y="57" width="8" height="22" rx="3" fill="url(#cap-psom)"/>
+      <ellipse cx="122" cy="57" rx="4" ry="3" fill="#0a0a30"/>
+      <ellipse cx="122" cy="51" rx="3" ry="3.5" fill="#9090c0" opacity="0.75"/>
+    </g>
+
+    <!-- GUMMIES JAR: Gummies Sommeil (center-right) -->
+    <g>
+      <g clip-path="url(#jar-clip-psom)">
+        <rect x="258" y="198" width="72" height="125" rx="10" fill="#ede7f6"/>
+        <!-- Purple/blue gummies inside -->
+        <ellipse cx="278" cy="300" rx="11" ry="9" fill="url(#g-purple-psom)" opacity="0.90"/>
+        <ellipse cx="278" cy="297" rx="6" ry="3.5" fill="white" opacity="0.25"/>
+        <ellipse cx="295" cy="305" rx="10" ry="9" fill="url(#g-blue-psom)" opacity="0.88"/>
+        <ellipse cx="295" cy="302" rx="5.5" ry="3" fill="white" opacity="0.23"/>
+        <ellipse cx="313" cy="300" rx="10" ry="8" fill="url(#g-purple-psom)" opacity="0.88"/>
+        <ellipse cx="280" cy="285" rx="10" ry="8" fill="url(#g-blue-psom)" opacity="0.85"/>
+        <ellipse cx="298" cy="288" rx="10" ry="8" fill="url(#g-purple-psom)" opacity="0.85"/>
+        <ellipse cx="314" cy="283" rx="9" ry="7" fill="url(#g-blue-psom)" opacity="0.82"/>
+        <ellipse cx="278" cy="270" rx="10" ry="8" fill="url(#g-purple-psom)" opacity="0.80"/>
+        <ellipse cx="298" cy="272" rx="10" ry="8" fill="url(#g-blue-psom)" opacity="0.78"/>
+        <ellipse cx="315" cy="268" rx="8" ry="7" fill="url(#g-purple-psom)" opacity="0.75"/>
+      </g>
+      <rect x="258" y="198" width="72" height="125" rx="10" fill="url(#jar-psom)" stroke="#b0b0c8" stroke-width="0.7"/>
+      <rect x="265" y="207" width="9" height="108" rx="4.5" fill="white" opacity="0.38"/>
+      <ellipse cx="294" cy="205" rx="32" ry="7" fill="white" opacity="0.20"/>
+      <rect x="260" y="195" width="66" height="7" rx="3.5" fill="#b0b0c0" opacity="0.6"/>
+      <!-- Jar label -->
+      <rect x="265" y="215" width="58" height="72" rx="4" fill="white" opacity="0.92"/>
+      <rect x="265" y="215" width="58" height="15" rx="4" fill="#0d1b4a"/>
+      <rect x="265" y="223" width="58" height="7" fill="#0d1b4a"/>
+      <text x="294" y="222" font-family="'Helvetica Neue', Arial, sans-serif" font-size="4.5" font-weight="700" fill="white" text-anchor="middle" letter-spacing="1">GREENPURE</text>
+      <text x="294" y="229" font-family="'Helvetica Neue', Arial, sans-serif" font-size="3.5" fill="#b0b8e0" text-anchor="middle">CBD NUIT</text>
+      <!-- Moon + stars on label -->
+      <g transform="translate(294, 243)">
+        <path d="M-6,-2 A6,6 0 1,0 2,6 A4,4 0 1,1 -6,-2Z" fill="#1a2870" opacity="0.80"/>
+      </g>
+      <circle cx="278" cy="241" r="1.2" fill="#c9a227" opacity="0.70"/>
+      <circle cx="310" cy="241" r="1.2" fill="#c9a227" opacity="0.70"/>
+      <text x="294" y="256" font-family="'Helvetica Neue', Arial, sans-serif" font-size="5.5" font-weight="700" fill="#1a2870" text-anchor="middle">SOMMEIL</text>
+      <text x="294" y="267" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="900" fill="#4a148c" text-anchor="middle">25mg</text>
+      <rect x="273" y="271" width="42" height="1" rx="0.5" fill="url(#gold-psom)"/>
+      <text x="294" y="280" font-family="'Helvetica Neue', Arial, sans-serif" font-size="4.5" fill="#555555" text-anchor="middle">30 pc · +Mélatonine</text>
+      <text x="294" y="289" font-family="'Helvetica Neue', Arial, sans-serif" font-size="4" fill="#777777" text-anchor="middle">Myrtille · Lavande</text>
+      <!-- Night lid -->
+      <ellipse cx="294" cy="195" rx="37" ry="10" fill="url(#lid-top-psom)"/>
+      <rect x="258" y="180" width="72" height="18" rx="8" fill="url(#lid-psom)"/>
+      <ellipse cx="294" cy="180" rx="36" ry="9" fill="url(#lid-top-psom)"/>
+      <ellipse cx="280" cy="177" rx="15" ry="5" fill="white" opacity="0.12"/>
+      <!-- Gold star on lid -->
+      <polygon points="294,169 296,175 302,175 297.5,179 299,185 294,181.5 289,185 290.5,179 286,175 292,175" fill="#c9a227" opacity="0.55"/>
+    </g>
+
+    <!-- INFUSION BAG: Infusion Sommeil (center) -->
+    <g transform="translate(3, 0)">
+      <!-- Kraft bag body -->
+      <path d="M168,142 L240,142 L240,298 Q204,308 168,298 Z" fill="url(#kraft-psom)" stroke="#9a6030" stroke-width="0.7"/>
+      <!-- Bag shine -->
+      <rect x="168" y="142" width="18" height="156" fill="#c4a070" opacity="0.20"/>
+      <!-- Texture lines -->
+      <line x1="170" y1="155" x2="238" y2="155" stroke="#9a6030" stroke-width="0.7" opacity="0.20"/>
+      <line x1="170" y1="175" x2="238" y2="175" stroke="#9a6030" stroke-width="0.7" opacity="0.18"/>
+      <line x1="170" y1="195" x2="238" y2="195" stroke="#9a6030" stroke-width="0.7" opacity="0.16"/>
+      <line x1="170" y1="215" x2="238" y2="215" stroke="#9a6030" stroke-width="0.7" opacity="0.14"/>
+      <line x1="170" y1="235" x2="238" y2="235" stroke="#9a6030" stroke-width="0.7" opacity="0.12"/>
+      <line x1="170" y1="255" x2="238" y2="255" stroke="#9a6030" stroke-width="0.7" opacity="0.10"/>
+      <line x1="170" y1="275" x2="238" y2="275" stroke="#9a6030" stroke-width="0.7" opacity="0.10"/>
+      <!-- Top seal/fold -->
+      <path d="M163,142 L245,142 L245,112 Q204,105 163,112 Z" fill="url(#kraft-psom)" stroke="#9a6030" stroke-width="0.7"/>
+      <line x1="168" y1="124" x2="240" y2="124" stroke="#9a6030" stroke-width="1" opacity="0.40"/>
+      <rect x="168" y="138" width="72" height="7" fill="#9a6030" opacity="0.45"/>
+      <!-- Hang holes -->
+      <circle cx="180" cy="116" r="4" fill="#c4a070" stroke="#9a5820" stroke-width="0.8"/>
+      <circle cx="180" cy="116" r="2" fill="#8a5018"/>
+      <circle cx="228" cy="116" r="4" fill="#c4a070" stroke="#9a5820" stroke-width="0.8"/>
+      <circle cx="228" cy="116" r="2" fill="#8a5018"/>
+
+      <!-- Label sticker on bag -->
+      <rect x="174" y="160" width="70" height="125" rx="5" fill="white" opacity="0.92"/>
+      <rect x="174" y="160" width="70" height="18" rx="5" fill="#0d1b4a"/>
+      <rect x="174" y="171" width="70" height="7" fill="#0d1b4a"/>
+      <text x="209" y="168" font-family="'Helvetica Neue', Arial, sans-serif" font-size="5" font-weight="700" fill="white" text-anchor="middle" letter-spacing="1.5">GREENPURE</text>
+      <text x="209" y="176" font-family="'Helvetica Neue', Arial, sans-serif" font-size="3.5" fill="#b0b8e0" text-anchor="middle" letter-spacing="1">CBD NUIT</text>
+      <!-- Moon icon small -->
+      <g transform="translate(209, 192)">
+        <path d="M-7,-2 A7,7 0 1,0 2,7 A4.5,4.5 0 1,1 -7,-2Z" fill="#1a2870" opacity="0.80"/>
+      </g>
+      <circle cx="195" cy="190" r="1.2" fill="#c9a227" opacity="0.70"/>
+      <circle cx="223" cy="190" r="1.2" fill="#c9a227" opacity="0.70"/>
+      <circle cx="192" cy="197" r="0.9" fill="#c9a227" opacity="0.55"/>
+      <circle cx="226" cy="197" r="0.9" fill="#c9a227" opacity="0.55"/>
+      <text x="209" y="209" font-family="'Helvetica Neue', Arial, sans-serif" font-size="7.5" font-weight="700" fill="#1a2870" text-anchor="middle">INFUSION</text>
+      <text x="209" y="220" font-family="'Helvetica Neue', Arial, sans-serif" font-size="7" font-weight="700" fill="#0d1b4a" text-anchor="middle">SOMMEIL</text>
+      <text x="209" y="232" font-family="'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="900" fill="#4a148c" text-anchor="middle">100mg</text>
+      <text x="209" y="242" font-family="'Helvetica Neue', Arial, sans-serif" font-size="5.5" fill="#777777" text-anchor="middle">CBD · 20 sachets</text>
+      <rect x="181" y="246" width="56" height="1.5" rx="0.75" fill="url(#gold-psom)"/>
+      <text x="209" y="256" font-family="'Helvetica Neue', Arial, sans-serif" font-size="5.5" fill="#555555" text-anchor="middle">Camomille · Tilleul</text>
+      <text x="209" y="266" font-family="'Helvetica Neue', Arial, sans-serif" font-size="5" fill="#777777" text-anchor="middle">Lavande · Valériane</text>
+      <rect x="181" y="271" width="56" height="9" rx="4.5" fill="#0d1b4a" opacity="0.10"/>
+      <text x="209" y="278" font-family="'Helvetica Neue', Arial, sans-serif" font-size="5" fill="#1a2870" text-anchor="middle">BIO · VEGAN · RELAXANT</text>
+    </g>
+  </g>
+
+  <!-- PROMO BANNER -->
+  <rect x="45" y="278" width="310" height="26" rx="5" fill="url(#gold-psom)"/>
+  <rect x="45" y="278" width="310" height="6" rx="5" fill="white" opacity="0.15"/>
+  <text x="200" y="294" font-family="'Helvetica Neue', Arial, sans-serif" font-size="9" font-weight="800" fill="#0d1b4a" text-anchor="middle" letter-spacing="1">PACK NUIT · 3 PRODUITS · ÉCONOMISEZ 30%</text>
+</svg>

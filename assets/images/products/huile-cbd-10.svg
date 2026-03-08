@@ -1,0 +1,123 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+  <defs>
+    <radialGradient id="bg-h10" cx="50%" cy="35%" r="65%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#f0f5f0"/>
+    </radialGradient>
+    <linearGradient id="glass-h10" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#8ab88a" stop-opacity="0.55"/>
+      <stop offset="12%" stop-color="#c8e8c8" stop-opacity="0.75"/>
+      <stop offset="30%" stop-color="#edfaed" stop-opacity="0.92"/>
+      <stop offset="55%" stop-color="#f8fff8" stop-opacity="0.97"/>
+      <stop offset="75%" stop-color="#c5e0c5" stop-opacity="0.82"/>
+      <stop offset="90%" stop-color="#90b890" stop-opacity="0.65"/>
+      <stop offset="100%" stop-color="#6a9a6a" stop-opacity="0.50"/>
+    </linearGradient>
+    <linearGradient id="oil-h10" x1="0%" y1="0%" x2="10%" y2="100%">
+      <stop offset="0%" stop-color="#d4a840" stop-opacity="0.60"/>
+      <stop offset="50%" stop-color="#b88a20" stop-opacity="0.70"/>
+      <stop offset="100%" stop-color="#7a5a08" stop-opacity="0.80"/>
+    </linearGradient>
+    <linearGradient id="neck-h10" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#90b890" stop-opacity="0.6"/>
+      <stop offset="35%" stop-color="#daf0da" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#80a880" stop-opacity="0.55"/>
+    </linearGradient>
+    <linearGradient id="cap-h10" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f0d060"/>
+      <stop offset="25%" stop-color="#c9a227"/>
+      <stop offset="60%" stop-color="#e8c040"/>
+      <stop offset="100%" stop-color="#8a6210"/>
+    </linearGradient>
+    <radialGradient id="cap-top-h10" cx="40%" cy="40%" r="60%">
+      <stop offset="0%" stop-color="#f0d060"/>
+      <stop offset="100%" stop-color="#8a6210"/>
+    </radialGradient>
+    <linearGradient id="label-h10" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#f3faf3"/>
+    </linearGradient>
+    <linearGradient id="label-green-h10" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#1b5e20"/>
+      <stop offset="50%" stop-color="#2e7d32"/>
+      <stop offset="100%" stop-color="#1b5e20"/>
+    </linearGradient>
+    <linearGradient id="gold-h10" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#8b6810"/>
+      <stop offset="30%" stop-color="#c9a227"/>
+      <stop offset="65%" stop-color="#f0d055"/>
+      <stop offset="100%" stop-color="#a07818"/>
+    </linearGradient>
+    <filter id="shadow-h10" x="-30%" y="-20%" width="160%" height="160%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="10" result="blur"/>
+      <feOffset dx="4" dy="16" result="offsetBlur"/>
+      <feFlood flood-color="#1a4020" flood-opacity="0.22" result="color"/>
+      <feComposite in="color" in2="offsetBlur" operator="in" result="shadow"/>
+      <feMerge><feMergeNode in="shadow"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="label-shadow-h10">
+      <feDropShadow dx="0" dy="1" stdDeviation="2" flood-color="#000" flood-opacity="0.08"/>
+    </filter>
+    <clipPath id="bottle-clip-h10">
+      <rect x="150" y="115" width="100" height="235" rx="15"/>
+    </clipPath>
+  </defs>
+
+  <rect width="400" height="400" fill="url(#bg-h10)"/>
+  <ellipse cx="200" cy="200" rx="140" ry="150" fill="#2e7d32" opacity="0.025"/>
+  <ellipse cx="201" cy="362" rx="62" ry="10" fill="#1a3a1a" opacity="0.14"/>
+
+  <g filter="url(#shadow-h10)">
+    <rect x="150" y="115" width="100" height="235" rx="15" fill="url(#oil-h10)" clip-path="url(#bottle-clip-h10)"/>
+    <rect x="150" y="115" width="100" height="235" rx="15" fill="url(#glass-h10)" stroke="#a8c8a8" stroke-width="0.8"/>
+    <rect x="170" y="75" width="60" height="44" rx="9" fill="url(#neck-h10)" stroke="#a0c0a0" stroke-width="0.7"/>
+    <rect x="176" y="80" width="10" height="34" rx="5" fill="white" opacity="0.38"/>
+    <rect x="168" y="113" width="64" height="7" rx="3.5" fill="url(#gold-h10)"/>
+    <rect x="168" y="113" width="64" height="2" rx="1" fill="white" opacity="0.3"/>
+    <rect x="170" y="73" width="60" height="5" rx="2.5" fill="url(#gold-h10)"/>
+    <!-- Glass shines -->
+    <rect x="158" y="125" width="14" height="215" rx="7" fill="white" opacity="0.52"/>
+    <rect x="175" y="123" width="6" height="100" rx="3" fill="white" opacity="0.24"/>
+    <ellipse cx="200" cy="122" rx="42" ry="8" fill="white" opacity="0.30"/>
+    <rect x="228" y="135" width="7" height="160" rx="3.5" fill="white" opacity="0.14"/>
+    <ellipse cx="200" cy="345" rx="44" ry="6" fill="white" opacity="0.22"/>
+
+    <!-- LABEL -->
+    <rect x="158" y="168" width="84" height="140" rx="6" fill="url(#label-h10)" filter="url(#label-shadow-h10)" stroke="#d8ead8" stroke-width="0.8"/>
+    <rect x="158" y="168" width="84" height="24" rx="6" fill="url(#label-green-h10)"/>
+    <rect x="158" y="180" width="84" height="12" fill="url(#label-green-h10)"/>
+    <text x="200" y="177" font-family="'Helvetica Neue', Arial, sans-serif" font-size="7.5" font-weight="700" fill="white" text-anchor="middle" letter-spacing="3">GREENPURE</text>
+    <text x="200" y="188" font-family="'Helvetica Neue', Arial, sans-serif" font-size="5" fill="#c8e8c8" text-anchor="middle" letter-spacing="1.5">CBD PREMIUM</text>
+
+    <!-- Leaf icon -->
+    <g transform="translate(200, 208)">
+      <path d="M0,-11.5 C8,-5.5 8,5.5 0,11.5 C-8,5.5 -8,-5.5 0,-11.5Z" fill="#2e7d32" opacity="0.80"/>
+      <line x1="0" y1="-9" x2="0" y2="9.5" stroke="#c9a227" stroke-width="0.9"/>
+      <line x1="-5.5" y1="1" x2="5.5" y2="1" stroke="#c9a227" stroke-width="0.6" opacity="0.7"/>
+    </g>
+
+    <text x="200" y="228" font-family="'Helvetica Neue', Arial, sans-serif" font-size="8.5" font-weight="600" fill="#222222" text-anchor="middle" letter-spacing="1.8">HUILE CBD</text>
+    <!-- Concentration hero - slightly darker green for 10% -->
+    <text x="200" y="258" font-family="'Helvetica Neue', Arial, sans-serif" font-size="36" font-weight="900" fill="#1b5e20" text-anchor="middle" letter-spacing="-1">10%</text>
+    <rect x="168" y="265" width="64" height="2" rx="1" fill="url(#gold-h10)"/>
+    <text x="200" y="278" font-family="'Helvetica Neue', Arial, sans-serif" font-size="7.5" fill="#444444" text-anchor="middle" letter-spacing="0.5">10 ml · 1000 mg CBD</text>
+    <text x="200" y="291" font-family="'Helvetica Neue', Arial, sans-serif" font-size="6.5" fill="#777777" text-anchor="middle" letter-spacing="0.3">Full Spectrum · Chanvre BIO</text>
+    <rect x="158" y="301" width="84" height="7" rx="3" fill="#c9a227" opacity="0.18"/>
+
+    <!-- Dropper cap -->
+    <rect x="178" y="44" width="44" height="34" rx="7" fill="url(#cap-h10)"/>
+    <ellipse cx="200" cy="44" rx="22" ry="7.5" fill="url(#cap-top-h10)"/>
+    <rect x="182" y="48" width="11" height="22" rx="4.5" fill="white" opacity="0.24"/>
+    <rect x="195" y="27" width="10" height="20" rx="4" fill="url(#cap-h10)"/>
+    <ellipse cx="200" cy="27" rx="5" ry="3.5" fill="#8a6210"/>
+    <ellipse cx="200" cy="20" rx="3.8" ry="4.5" fill="#c9a227" opacity="0.75"/>
+    <ellipse cx="198.5" cy="18.5" rx="1.2" ry="1.5" fill="white" opacity="0.5"/>
+  </g>
+
+  <g opacity="0.045" transform="translate(330, 58) rotate(30) scale(2.2)">
+    <path d="M0,-16 C11,-8 11,8 0,16 C-11,8 -11,-8 0,-16Z" fill="#2e7d32"/>
+  </g>
+  <g opacity="0.04" transform="translate(62, 320) rotate(-25) scale(1.8)">
+    <path d="M0,-16 C11,-8 11,8 0,16 C-11,8 -11,-8 0,-16Z" fill="#2e7d32"/>
+  </g>
+</svg>

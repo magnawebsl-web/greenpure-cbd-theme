@@ -1,0 +1,221 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+  <defs>
+    <radialGradient id="bg-ps" cx="50%" cy="38%" r="62%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#f0f5f0"/>
+    </radialGradient>
+    <!-- Bottle 1 (5% - light green glass) -->
+    <linearGradient id="glass1-ps" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#8ab88a" stop-opacity="0.55"/>
+      <stop offset="30%" stop-color="#edfaed" stop-opacity="0.92"/>
+      <stop offset="65%" stop-color="#c5e0c5" stop-opacity="0.82"/>
+      <stop offset="100%" stop-color="#6a9a6a" stop-opacity="0.50"/>
+    </linearGradient>
+    <!-- Bottle 2 (10% - slightly darker) -->
+    <linearGradient id="glass2-ps" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#6a9a6a" stop-opacity="0.55"/>
+      <stop offset="30%" stop-color="#d5f0d5" stop-opacity="0.90"/>
+      <stop offset="65%" stop-color="#a8c8a8" stop-opacity="0.80"/>
+      <stop offset="100%" stop-color="#5a8a5a" stop-opacity="0.50"/>
+    </linearGradient>
+    <!-- Gummies jar glass -->
+    <linearGradient id="jar-ps" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#d0d0d0" stop-opacity="0.60"/>
+      <stop offset="40%" stop-color="#f8f8f8" stop-opacity="0.95"/>
+      <stop offset="100%" stop-color="#a8a8a8" stop-opacity="0.50"/>
+    </linearGradient>
+    <!-- Oil fill -->
+    <linearGradient id="oil-ps" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#e8c84a" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="#7a5e10" stop-opacity="0.72"/>
+    </linearGradient>
+    <!-- Golden cap -->
+    <linearGradient id="cap-ps" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f0d060"/>
+      <stop offset="50%" stop-color="#c9a227"/>
+      <stop offset="100%" stop-color="#8a6210"/>
+    </linearGradient>
+    <!-- Jar lid gold -->
+    <linearGradient id="lid-ps" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f0d060"/>
+      <stop offset="50%" stop-color="#c9a227"/>
+      <stop offset="100%" stop-color="#8a6210"/>
+    </linearGradient>
+    <radialGradient id="lid-top-ps" cx="38%" cy="32%" r="65%">
+      <stop offset="0%" stop-color="#f5dc70"/>
+      <stop offset="100%" stop-color="#6a4808"/>
+    </radialGradient>
+    <!-- Gold accent -->
+    <linearGradient id="gold-ps" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#8b6810"/>
+      <stop offset="50%" stop-color="#c9a227"/>
+      <stop offset="100%" stop-color="#a07818"/>
+    </linearGradient>
+    <!-- Pack box -->
+    <linearGradient id="box-ps" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1b5e20"/>
+      <stop offset="50%" stop-color="#2e7d32"/>
+      <stop offset="100%" stop-color="#1b5e20"/>
+    </linearGradient>
+    <!-- Banner -->
+    <linearGradient id="banner-ps" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#8b6810"/>
+      <stop offset="30%" stop-color="#c9a227"/>
+      <stop offset="60%" stop-color="#f0d055"/>
+      <stop offset="100%" stop-color="#a07818"/>
+    </linearGradient>
+    <!-- Gummy colors -->
+    <radialGradient id="g-red-ps" cx="35%" cy="35%" r="65%">
+      <stop offset="0%" stop-color="#ff7070"/>
+      <stop offset="100%" stop-color="#b71c1c"/>
+    </radialGradient>
+    <radialGradient id="g-green-ps" cx="35%" cy="35%" r="65%">
+      <stop offset="0%" stop-color="#a5d6a7"/>
+      <stop offset="100%" stop-color="#1b5e20"/>
+    </radialGradient>
+    <radialGradient id="g-orange-ps" cx="35%" cy="35%" r="65%">
+      <stop offset="0%" stop-color="#ffab40"/>
+      <stop offset="100%" stop-color="#e65100"/>
+    </radialGradient>
+    <filter id="shadow-ps" x="-20%" y="-15%" width="140%" height="140%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="8" result="blur"/>
+      <feOffset dx="3" dy="12" result="offsetBlur"/>
+      <feFlood flood-color="#1a3a10" flood-opacity="0.18" result="color"/>
+      <feComposite in="color" in2="offsetBlur" operator="in" result="shadow"/>
+      <feMerge><feMergeNode in="shadow"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <clipPath id="jar-clip-ps">
+      <rect x="265" y="198" width="68" height="125" rx="10"/>
+    </clipPath>
+    <clipPath id="b1-clip-ps">
+      <rect x="100" y="108" width="62" height="190" rx="10"/>
+    </clipPath>
+    <clipPath id="b2-clip-ps">
+      <rect x="177" y="120" width="62" height="178" rx="10"/>
+    </clipPath>
+  </defs>
+
+  <rect width="400" height="400" fill="url(#bg-ps)"/>
+  <ellipse cx="200" cy="200" rx="155" ry="145" fill="#2e7d32" opacity="0.025"/>
+  <!-- Ground shadow for whole pack -->
+  <ellipse cx="205" cy="365" rx="148" ry="13" fill="#1a3a10" opacity="0.11"/>
+
+  <!-- PACK BOX (background element) -->
+  <rect x="45" y="300" width="310" height="60" rx="8" fill="url(#box-ps)"/>
+  <rect x="45" y="300" width="310" height="15" rx="8" fill="#133a15"/>
+  <!-- Box top highlight -->
+  <rect x="48" y="302" width="304" height="8" rx="4" fill="white" opacity="0.08"/>
+  <!-- Box gold stripe -->
+  <rect x="45" y="315" width="310" height="6" rx="0" fill="url(#gold-ps)" opacity="0.70"/>
+  <!-- Box bottom -->
+  <rect x="45" y="353" width="310" height="7" rx="4" fill="#0a2810"/>
+  <!-- Box text -->
+  <text x="200" y="335" font-family="'Helvetica Neue', Arial, sans-serif" font-size="9" font-weight="700" fill="white" text-anchor="middle" letter-spacing="2">PACK DÉCOUVERTE STARTER</text>
+  <text x="200" y="347" font-family="'Helvetica Neue', Arial, sans-serif" font-size="7" fill="#c9a227" text-anchor="middle" letter-spacing="1">GREENPURE CBD · 3 produits inclus</text>
+
+  <g filter="url(#shadow-ps)">
+    <!-- BOTTLE 1 (5% CBD oil) - left, slightly angled back -->
+    <g transform="translate(-8, 8)">
+      <rect x="100" y="108" width="62" height="190" rx="10" fill="url(#oil-ps)" clip-path="url(#b1-clip-ps)"/>
+      <rect x="100" y="108" width="62" height="190" rx="10" fill="url(#glass1-ps)" stroke="#a0c0a0" stroke-width="0.7"/>
+      <rect x="108" y="118" width="9" height="170" rx="4.5" fill="white" opacity="0.48"/>
+      <ellipse cx="131" cy="115" rx="27" ry="6" fill="white" opacity="0.25"/>
+      <!-- Gold ring -->
+      <rect x="98" y="106" width="66" height="6" rx="3" fill="url(#gold-ps)"/>
+      <!-- Mini label -->
+      <rect x="106" y="148" width="50" height="90" rx="4" fill="white" opacity="0.90"/>
+      <rect x="106" y="148" width="50" height="15" rx="4" fill="#2e7d32"/>
+      <rect x="106" y="156" width="50" height="7" fill="#2e7d32"/>
+      <text x="131" y="155" font-family="'Helvetica Neue', Arial, sans-serif" font-size="4.5" font-weight="700" fill="white" text-anchor="middle" letter-spacing="1.5">GREENPURE</text>
+      <text x="131" y="162" font-family="'Helvetica Neue', Arial, sans-serif" font-size="3.5" fill="#c8e8c8" text-anchor="middle" letter-spacing="1">CBD</text>
+      <text x="131" y="176" font-family="'Helvetica Neue', Arial, sans-serif" font-size="6" font-weight="600" fill="#333333" text-anchor="middle">HUILE CBD</text>
+      <text x="131" y="192" font-family="'Helvetica Neue', Arial, sans-serif" font-size="22" font-weight="900" fill="#2e7d32" text-anchor="middle">5%</text>
+      <rect x="113" y="198" width="36" height="1.5" rx="0.75" fill="url(#gold-ps)"/>
+      <text x="131" y="207" font-family="'Helvetica Neue', Arial, sans-serif" font-size="5" fill="#666666" text-anchor="middle">10ml · 500mg</text>
+      <text x="131" y="217" font-family="'Helvetica Neue', Arial, sans-serif" font-size="4.5" fill="#888888" text-anchor="middle">Full Spectrum</text>
+      <!-- Dropper cap -->
+      <rect x="112" y="75" width="38" height="36" rx="6" fill="url(#cap-ps)"/>
+      <ellipse cx="131" cy="75" rx="19" ry="7" fill="#c9a227"/>
+      <rect x="116" y="79" width="9" height="24" rx="3.5" fill="white" opacity="0.20"/>
+      <rect x="127" y="55" width="8" height="22" rx="3" fill="url(#cap-ps)"/>
+      <ellipse cx="131" cy="55" rx="4" ry="3" fill="#8a6210"/>
+      <ellipse cx="131" cy="49" rx="3" ry="3.5" fill="#c9a227" opacity="0.75"/>
+    </g>
+
+    <!-- BOTTLE 2 (10% CBD oil) - center -->
+    <g transform="translate(5, 0)">
+      <rect x="177" y="120" width="62" height="178" rx="10" fill="url(#oil-ps)" clip-path="url(#b2-clip-ps)"/>
+      <rect x="177" y="120" width="62" height="178" rx="10" fill="url(#glass2-ps)" stroke="#98b898" stroke-width="0.7"/>
+      <rect x="185" y="130" width="9" height="158" rx="4.5" fill="white" opacity="0.44"/>
+      <ellipse cx="208" cy="127" rx="27" ry="6" fill="white" opacity="0.22"/>
+      <rect x="175" y="118" width="66" height="6" rx="3" fill="url(#gold-ps)"/>
+      <!-- Mini label -->
+      <rect x="183" y="158" width="50" height="88" rx="4" fill="white" opacity="0.92"/>
+      <rect x="183" y="158" width="50" height="15" rx="4" fill="#1b5e20"/>
+      <rect x="183" y="166" width="50" height="7" fill="#1b5e20"/>
+      <text x="208" y="165" font-family="'Helvetica Neue', Arial, sans-serif" font-size="4.5" font-weight="700" fill="white" text-anchor="middle" letter-spacing="1.5">GREENPURE</text>
+      <text x="208" y="172" font-family="'Helvetica Neue', Arial, sans-serif" font-size="3.5" fill="#c8e8c8" text-anchor="middle" letter-spacing="1">CBD</text>
+      <text x="208" y="184" font-family="'Helvetica Neue', Arial, sans-serif" font-size="6" font-weight="600" fill="#333333" text-anchor="middle">HUILE CBD</text>
+      <text x="208" y="200" font-family="'Helvetica Neue', Arial, sans-serif" font-size="22" font-weight="900" fill="#1b5e20" text-anchor="middle">10%</text>
+      <rect x="190" y="206" width="36" height="1.5" rx="0.75" fill="url(#gold-ps)"/>
+      <text x="208" y="215" font-family="'Helvetica Neue', Arial, sans-serif" font-size="5" fill="#666666" text-anchor="middle">10ml · 1000mg</text>
+      <text x="208" y="224" font-family="'Helvetica Neue', Arial, sans-serif" font-size="4.5" fill="#888888" text-anchor="middle">Full Spectrum</text>
+      <text x="208" y="238" font-family="'Helvetica Neue', Arial, sans-serif" font-size="4" fill="#888888" text-anchor="middle">Chanvre BIO</text>
+      <!-- Dropper cap -->
+      <rect x="189" y="88" width="38" height="35" rx="6" fill="url(#cap-ps)"/>
+      <ellipse cx="208" cy="88" rx="19" ry="7" fill="#c9a227"/>
+      <rect x="193" y="92" width="9" height="22" rx="3.5" fill="white" opacity="0.20"/>
+      <rect x="204" y="68" width="8" height="22" rx="3" fill="url(#cap-ps)"/>
+      <ellipse cx="208" cy="68" rx="4" ry="3" fill="#8a6210"/>
+      <ellipse cx="208" cy="62" rx="3" ry="3.5" fill="#c9a227" opacity="0.75"/>
+    </g>
+
+    <!-- GUMMIES JAR - right -->
+    <g clip-path="url(#jar-clip-ps)">
+      <rect x="265" y="198" width="68" height="125" rx="10" fill="#fff3e0"/>
+      <!-- Gummies inside -->
+      <ellipse cx="285" cy="300" rx="10" ry="8" fill="url(#g-red-ps)" opacity="0.90"/>
+      <ellipse cx="300" cy="305" rx="10" ry="8" fill="url(#g-green-ps)" opacity="0.88"/>
+      <ellipse cx="316" cy="300" rx="9" ry="8" fill="url(#g-orange-ps)" opacity="0.88"/>
+      <ellipse cx="288" cy="285" rx="10" ry="8" fill="url(#g-green-ps)" opacity="0.85"/>
+      <ellipse cx="305" cy="288" rx="9" ry="8" fill="url(#g-red-ps)" opacity="0.85"/>
+      <ellipse cx="319" cy="282" rx="9" ry="7" fill="url(#g-orange-ps)" opacity="0.82"/>
+      <ellipse cx="284" cy="270" rx="9" ry="7" fill="url(#g-orange-ps)" opacity="0.80"/>
+      <ellipse cx="302" cy="272" rx="10" ry="8" fill="url(#g-green-ps)" opacity="0.78"/>
+      <!-- Shine on visible gummies -->
+      <ellipse cx="283" cy="297" rx="5" ry="3" fill="white" opacity="0.28"/>
+      <ellipse cx="298" cy="302" rx="5" ry="3" fill="white" opacity="0.26"/>
+      <ellipse cx="313" cy="297" rx="4" ry="3" fill="white" opacity="0.25"/>
+    </g>
+    <rect x="265" y="198" width="68" height="125" rx="10" fill="url(#jar-ps)" stroke="#c0c0c0" stroke-width="0.7"/>
+    <rect x="271" y="207" width="9" height="108" rx="4.5" fill="white" opacity="0.40"/>
+    <ellipse cx="299" cy="205" rx="30" ry="7" fill="white" opacity="0.22"/>
+    <!-- Jar threads -->
+    <rect x="267" y="195" width="64" height="7" rx="3.5" fill="#b8b8b8" opacity="0.6"/>
+    <!-- Jar label mini -->
+    <rect x="272" y="215" width="56" height="70" rx="4" fill="white" opacity="0.90"/>
+    <rect x="272" y="215" width="56" height="14" rx="4" fill="#2e7d32"/>
+    <rect x="272" y="222" width="56" height="7" fill="#2e7d32"/>
+    <text x="300" y="221" font-family="'Helvetica Neue', Arial, sans-serif" font-size="4.5" font-weight="700" fill="white" text-anchor="middle" letter-spacing="1.5">GREENPURE</text>
+    <text x="300" y="228" font-family="'Helvetica Neue', Arial, sans-serif" font-size="3.5" fill="#c8e8c8" text-anchor="middle">GUMMIES</text>
+    <g transform="translate(300, 240)">
+      <path d="M0,-7 C5,-3.5 5,3.5 0,7 C-5,3.5 -5,-3.5 0,-7Z" fill="#2e7d32" opacity="0.75"/>
+      <line x1="0" y1="-5.5" x2="0" y2="5.5" stroke="#c9a227" stroke-width="0.7"/>
+    </g>
+    <text x="300" y="252" font-family="'Helvetica Neue', Arial, sans-serif" font-size="6" font-weight="700" fill="#222222" text-anchor="middle">GUMMIES</text>
+    <text x="300" y="263" font-family="'Helvetica Neue', Arial, sans-serif" font-size="5" fill="#e65100" text-anchor="middle" font-weight="700">25mg CBD</text>
+    <rect x="279" y="267" width="42" height="1" rx="0.5" fill="url(#gold-ps)"/>
+    <text x="300" y="276" font-family="'Helvetica Neue', Arial, sans-serif" font-size="4.5" fill="#666666" text-anchor="middle">30 pièces · Fruits</text>
+    <text x="300" y="284" font-family="'Helvetica Neue', Arial, sans-serif" font-size="4" fill="#888888" text-anchor="middle">Vegan · Sans sucre</text>
+    <!-- Jar lid -->
+    <ellipse cx="299" cy="195" rx="36" ry="10" fill="url(#lid-top-ps)"/>
+    <rect x="265" y="180" width="68" height="18" rx="8" fill="url(#lid-ps)"/>
+    <ellipse cx="299" cy="180" rx="34" ry="9" fill="url(#lid-top-ps)"/>
+    <ellipse cx="288" cy="177" rx="14" ry="5" fill="white" opacity="0.20"/>
+  </g>
+
+  <!-- PROMO BANNER / RIBBON -->
+  <rect x="45" y="278" width="310" height="26" rx="5" fill="url(#banner-ps)"/>
+  <rect x="45" y="278" width="310" height="6" rx="5" fill="white" opacity="0.15"/>
+  <text x="200" y="294" font-family="'Helvetica Neue', Arial, sans-serif" font-size="9" font-weight="800" fill="#1b5e20" text-anchor="middle" letter-spacing="1">PACK STARTER · 3 PRODUITS · ÉCONOMISEZ 25%</text>
+</svg>
