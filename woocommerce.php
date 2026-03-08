@@ -78,11 +78,15 @@ if ( function_exists('woocommerce_breadcrumb') ) {
                         </ul>
                     </div>
 
-                    <!-- Produits populaires -->
+                    <!-- Produits populaires (cachés 12h pour ne pas faire la requête à chaque chargement) -->
                     <div class="sidebar-widget">
                         <h3 class="widget__title">Populaires</h3>
                         <?php
-                        $pop = wc_get_products(['limit' => 4, 'orderby' => 'popularity', 'status' => 'publish']);
+                        $pop = get_transient('borea_sidebar_popular_products');
+                        if ( false === $pop ) {
+                            $pop = wc_get_products(['limit' => 4, 'orderby' => 'date', 'order' => 'DESC', 'status' => 'publish']);
+                            set_transient('borea_sidebar_popular_products', $pop, 12 * HOUR_IN_SECONDS);
+                        }
                         if ( $pop ):
                         ?>
                         <ul class="sidebar-products">

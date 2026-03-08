@@ -90,6 +90,17 @@ add_filter( 'woocommerce_enqueue_styles', function( $styles ) {
     return $styles;
 } );
 
+/* Invalider les transients sidebar/toolbar quand un produit ou une catégorie change */
+function borea_flush_shop_transients() {
+    delete_transient('borea_sidebar_popular_products');
+    delete_transient('borea_toolbar_top_cats');
+}
+add_action( 'save_post_product',          'borea_flush_shop_transients' );
+add_action( 'woocommerce_product_set_stock', 'borea_flush_shop_transients' );
+add_action( 'created_product_cat',        'borea_flush_shop_transients' );
+add_action( 'edited_product_cat',         'borea_flush_shop_transients' );
+add_action( 'deleted_product_cat',        'borea_flush_shop_transients' );
+
 /* ──────────────────────────────────────
    3. WIDGETS / SIDEBARS
 ────────────────────────────────────── */

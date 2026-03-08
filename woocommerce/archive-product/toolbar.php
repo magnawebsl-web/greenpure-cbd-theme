@@ -13,12 +13,18 @@ defined('ABSPATH') || exit;
         <!-- Filtre catégories rapides -->
         <?php
         $current_cat = get_queried_object();
-        $top_cats    = get_terms([
-            'taxonomy'   => 'product_cat',
-            'hide_empty' => true,
-            'parent'     => 0,
-            'number'     => 8,
-        ]);
+        $top_cats    = get_transient('borea_toolbar_top_cats');
+        if ( false === $top_cats ) {
+            $top_cats = get_terms([
+                'taxonomy'   => 'product_cat',
+                'hide_empty' => true,
+                'parent'     => 0,
+                'number'     => 8,
+            ]);
+            if ( ! is_wp_error($top_cats) && ! empty($top_cats) ) {
+                set_transient('borea_toolbar_top_cats', $top_cats, 12 * HOUR_IN_SECONDS);
+            }
+        }
         if ( ! is_wp_error($top_cats) && ! empty($top_cats) ) :
         ?>
         <div class="woo-cat-filter">
