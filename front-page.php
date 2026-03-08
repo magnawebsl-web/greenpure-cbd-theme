@@ -888,7 +888,7 @@
         </div>
         <div class="press-quotes" data-aos="fade-up" data-aos-delay="100">
             <blockquote class="press-quote">
-                <p>"GreenPure se distingue par une transparence exemplaire et une qualité de CBD parmi les meilleures du marché européen."</p>
+                <p>"CBD Borea se distingue par une transparence exemplaire et une qualité de CBD parmi les meilleures du marché européen."</p>
                 <cite>— Le Monde Santé</cite>
             </blockquote>
             <blockquote class="press-quote">
@@ -896,7 +896,7 @@
                 <cite>— Forbes France</cite>
             </blockquote>
             <blockquote class="press-quote">
-                <p>"Avec plus de 100 références CBD, GreenPure s'impose comme le leader européen de la vente de cannabidiol en ligne."</p>
+                <p>"Avec plus de 100 références CBD, CBD Borea s'impose comme le leader européen de la vente de cannabidiol en ligne."</p>
                 <cite>— Capital Magazine</cite>
             </blockquote>
         </div>
