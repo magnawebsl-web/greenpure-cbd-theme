@@ -423,6 +423,10 @@ function greenpure_seo_meta() {
         $url         = $site_url;
     } elseif ( is_product() ) {
         global $product;
+        if ( ! $product instanceof WC_Product ) {
+            $product = wc_get_product( get_queried_object_id() );
+        }
+        if ( ! $product instanceof WC_Product ) return;
         $title       = get_the_title() . ' — ' . $site_name;
         $description = wp_strip_all_tags($product->get_short_description()) ?: get_the_excerpt();
         $description = wp_trim_words($description, 25, '...');
