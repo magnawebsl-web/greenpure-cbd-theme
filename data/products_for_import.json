@@ -1,0 +1,482 @@
+[
+    {
+        "name": "Vapes / E-liquides",
+        "category": "Produits Inhalables",
+        "description": "Large gamme de saveurs et de concentrations (CBD, HHC-PO, THCP, CBN, CBG).",
+        "attributes": {
+            "Concentration": "",
+            "Spectre": "",
+            "Origine": "Union Européenne",
+            "Méthode d'extraction": "CO2 supercritique",
+            "Certifications": "Bio, Vegan, ISO 17025",
+            "URL Rapport Labo": "",
+            "Profil Terpénique": "",
+            "Effets": "",
+            "Conseils d'utilisation": ""
+        }
+    },
+    {
+        "name": "Puffs / Disposables",
+        "category": "Produits Inhalables",
+        "description": "Vapes jetables pour une utilisation facile et discrète.",
+        "attributes": {
+            "Concentration": "",
+            "Spectre": "",
+            "Origine": "Union Européenne",
+            "Méthode d'extraction": "CO2 supercritique",
+            "Certifications": "Bio, Vegan, ISO 17025",
+            "URL Rapport Labo": "",
+            "Profil Terpénique": "",
+            "Effets": "",
+            "Conseils d'utilisation": ""
+        }
+    },
+    {
+        "name": "Cartouches",
+        "category": "Produits Inhalables",
+        "description": "Pour batteries réutilisables, avec différentes souches et profils terpéniques.",
+        "attributes": {
+            "Concentration": "",
+            "Spectre": "",
+            "Origine": "Union Européenne",
+            "Méthode d'extraction": "CO2 supercritique",
+            "Certifications": "Bio, Vegan, ISO 17025",
+            "URL Rapport Labo": "",
+            "Profil Terpénique": "",
+            "Effets": "",
+            "Conseils d'utilisation": ""
+        }
+    },
+    {
+        "name": "Fleurs Premium",
+        "category": "Produits Inhalables",
+        "description": "Sélection de souches rares et exotiques (Indoor, Greenhouse, Outdoor) avec des profils terpéniques détaillés.",
+        "attributes": {
+            "Concentration": "",
+            "Spectre": "",
+            "Origine": "Union Européenne",
+            "Méthode d'extraction": "CO2 supercritique",
+            "Certifications": "Bio, Vegan, ISO 17025",
+            "URL Rapport Labo": "",
+            "Profil Terpénique": "",
+            "Effets": "",
+            "Conseils d'utilisation": ""
+        }
+    },
+    {
+        "name": "Résines / Hash",
+        "category": "Produits Inhalables",
+        "description": "Variétés de hash traditionnels et modernes, avec différentes textures et concentrations.",
+        "attributes": {
+            "Concentration": "",
+            "Spectre": "",
+            "Origine": "Union Européenne",
+            "Méthode d'extraction": "CO2 supercritique",
+            "Certifications": "Bio, Vegan, ISO 17025",
+            "URL Rapport Labo": "",
+            "Profil Terpénique": "",
+            "Effets": "",
+            "Conseils d'utilisation": ""
+        }
+    },
+    {
+        "name": "Moonrocks / Icerocks",
+        "category": "Produits Inhalables",
+        "description": "Fleurs enrobées de distillat et de kief pour une puissance accrue.",
+        "attributes": {
+            "Concentration": "",
+            "Spectre": "",
+            "Origine": "Union Européenne",
+            "Méthode d'extraction": "CO2 supercritique",
+            "Certifications": "Bio, Vegan, ISO 17025",
+            "URL Rapport Labo": "",
+            "Profil Terpénique": "",
+            "Effets": "",
+            "Conseils d'utilisation": ""
+        }
+    },
+    {
+        "name": "Gummies",
+        "category": "Produits Comestibles",
+        "description": "Variétés pour différents usages (sommeil, énergie, relaxation, concentration), avec des mélanges de cannabinoïdes (CBD+CBN, CBD+CBG).",
+        "attributes": {
+            "Concentration": "",
+            "Spectre": "",
+            "Origine": "Union Européenne",
+            "Méthode d'extraction": "CO2 supercritique",
+            "Certifications": "Bio, Vegan, ISO 17025",
+            "URL Rapport Labo": "",
+            "Profil Terpénique": "",
+            "Effets": "",
+            "Conseils d'utilisation": ""
+        }
+    },
+    {
+        "name": "Chocolats / Confiseries",
+        "category": "Produits Comestibles",
+        "description": "Options gourmandes avec différentes concentrations de CBD/cannabinoïdes.",
+        "attributes": {
+            "Concentration": "",
+            "Spectre": "",
+            "Origine": "Union Européenne",
+            "Méthode d'extraction": "CO2 supercritique",
+            "Certifications": "Bio, Vegan, ISO 17025",
+            "URL Rapport Labo": "",
+            "Profil Terpénique": "",
+            "Effets": "",
+            "Conseils d'utilisation": ""
+        }
+    },
+    {
+        "name": "Boissons Infusées",
+        "category": "Produits Comestibles",
+        "description": "Thés, cafés, boissons gazeuses au CBD/CBG.",
+        "attributes": {
+            "Concentration": "",
+            "Spectre": "",
+            "Origine": "Union Européenne",
+            "Méthode d'extraction": "CO2 supercritique",
+            "Certifications": "Bio, Vegan, ISO 17025",
+            "URL Rapport Labo": "",
+            "Profil Terpénique": "",
+            "Effets": "",
+            "Conseils d'utilisation": ""
+        }
+    },
+    {
+        "name": "Aliments Fonctionnels",
+        "category": "Produits Comestibles",
+        "description": "Miel, huiles de cuisine, beurres infusés au CBD.",
+        "attributes": {
+            "Concentration": "",
+            "Spectre": "",
+            "Origine": "Union Européenne",
+            "Méthode d'extraction": "CO2 supercritique",
+            "Certifications": "Bio, Vegan, ISO 17025",
+            "URL Rapport Labo": "",
+            "Profil Terpénique": "",
+            "Effets": "",
+            "Conseils d'utilisation": ""
+        }
+    },
+    {
+        "name": "Crèmes / Baumes",
+        "category": "Produits Topiques et Cosmétiques",
+        "description": "Pour douleurs musculaires, articulaires, récupération sportive.",
+        "attributes": {
+            "Concentration": "",
+            "Spectre": "",
+            "Origine": "Union Européenne",
+            "Méthode d'extraction": "CO2 supercritique",
+            "Certifications": "Bio, Vegan, ISO 17025",
+            "URL Rapport Labo": "",
+            "Profil Terpénique": "",
+            "Effets": "",
+            "Conseils d'utilisation": ""
+        }
+    },
+    {
+        "name": "Sérums Visage / Huiles Corporelles",
+        "category": "Produits Topiques et Cosmétiques",
+        "description": "Cosmétiques anti-âge, hydratants, apaisants pour peaux sensibles.",
+        "attributes": {
+            "Concentration": "",
+            "Spectre": "",
+            "Origine": "Union Européenne",
+            "Méthode d'extraction": "CO2 supercritique",
+            "Certifications": "Bio, Vegan, ISO 17025",
+            "URL Rapport Labo": "",
+            "Profil Terpénique": "",
+            "Effets": "",
+            "Conseils d'utilisation": ""
+        }
+    },
+    {
+        "name": "Masques / Gommages",
+        "category": "Produits Topiques et Cosmétiques",
+        "description": "Soins spécifiques pour le visage et le corps.",
+        "attributes": {
+            "Concentration": "",
+            "Spectre": "",
+            "Origine": "Union Européenne",
+            "Méthode d'extraction": "CO2 supercritique",
+            "Certifications": "Bio, Vegan, ISO 17025",
+            "URL Rapport Labo": "",
+            "Profil Terpénique": "",
+            "Effets": "",
+            "Conseils d'utilisation": ""
+        }
+    },
+    {
+        "name": "Produits Capillaires",
+        "category": "Produits Topiques et Cosmétiques",
+        "description": "Shampoings, après-shampoings, sérums pour le cuir chevelu.",
+        "attributes": {
+            "Concentration": "",
+            "Spectre": "",
+            "Origine": "Union Européenne",
+            "Méthode d'extraction": "CO2 supercritique",
+            "Certifications": "Bio, Vegan, ISO 17025",
+            "URL Rapport Labo": "",
+            "Profil Terpénique": "",
+            "Effets": "",
+            "Conseils d'utilisation": ""
+        }
+    },
+    {
+        "name": "Huiles CBD pour Animaux",
+        "category": "Produits pour Animaux",
+        "description": "Adaptées aux chiens et chats, différentes concentrations.",
+        "attributes": {
+            "Concentration": "",
+            "Spectre": "",
+            "Origine": "Union Européenne",
+            "Méthode d'extraction": "CO2 supercritique",
+            "Certifications": "Bio, Vegan, ISO 17025",
+            "URL Rapport Labo": "",
+            "Profil Terpénique": "",
+            "Effets": "",
+            "Conseils d'utilisation": ""
+        }
+    },
+    {
+        "name": "Friandises au CBD",
+        "category": "Produits pour Animaux",
+        "description": "Pour l'anxiété, la douleur, le bien-être général des animaux.",
+        "attributes": {
+            "Concentration": "",
+            "Spectre": "",
+            "Origine": "Union Européenne",
+            "Méthode d'extraction": "CO2 supercritique",
+            "Certifications": "Bio, Vegan, ISO 17025",
+            "URL Rapport Labo": "",
+            "Profil Terpénique": "",
+            "Effets": "",
+            "Conseils d'utilisation": ""
+        }
+    },
+    {
+        "name": "Baumes Topiques",
+        "category": "Produits pour Animaux",
+        "description": "Pour les coussinets ou les irritations cutanées des animaux.",
+        "attributes": {
+            "Concentration": "",
+            "Spectre": "",
+            "Origine": "Union Européenne",
+            "Méthode d'extraction": "CO2 supercritique",
+            "Certifications": "Bio, Vegan, ISO 17025",
+            "URL Rapport Labo": "",
+            "Profil Terpénique": "",
+            "Effets": "",
+            "Conseils d'utilisation": ""
+        }
+    },
+    {
+        "name": "Capsules / Gélules",
+        "category": "Autres Formats",
+        "description": "Pour une dose précise et discrète, avec des mélanges de cannabinoïdes.",
+        "attributes": {
+            "Concentration": "",
+            "Spectre": "",
+            "Origine": "Union Européenne",
+            "Méthode d'extraction": "CO2 supercritique",
+            "Certifications": "Bio, Vegan, ISO 17025",
+            "URL Rapport Labo": "",
+            "Profil Terpénique": "",
+            "Effets": "",
+            "Conseils d'utilisation": ""
+        }
+    },
+    {
+        "name": "Teintures / Sprays Sublinguaux",
+        "category": "Autres Formats",
+        "description": "Absorption rapide, facile à doser.",
+        "attributes": {
+            "Concentration": "",
+            "Spectre": "",
+            "Origine": "Union Européenne",
+            "Méthode d'extraction": "CO2 supercritique",
+            "Certifications": "Bio, Vegan, ISO 17025",
+            "URL Rapport Labo": "",
+            "Profil Terpénique": "",
+            "Effets": "",
+            "Conseils d'utilisation": ""
+        }
+    },
+    {
+        "name": "Concentrés / Isolats",
+        "category": "Autres Formats",
+        "description": "Pour les utilisateurs expérimentés ou pour la fabrication DIY.",
+        "attributes": {
+            "Concentration": "",
+            "Spectre": "",
+            "Origine": "Union Européenne",
+            "Méthode d'extraction": "CO2 supercritique",
+            "Certifications": "Bio, Vegan, ISO 17025",
+            "URL Rapport Labo": "",
+            "Profil Terpénique": "",
+            "Effets": "",
+            "Conseils d'utilisation": ""
+        }
+    },
+    {
+        "name": "Concentration en Cannabinoïdes",
+        "category": "Autres Formats",
+        "description": "CBD, THC (<0.3%), HHC-PO, THCP, CBN, CBG, etc.",
+        "attributes": {
+            "Concentration": "",
+            "Spectre": "",
+            "Origine": "Union Européenne",
+            "Méthode d'extraction": "CO2 supercritique",
+            "Certifications": "Bio, Vegan, ISO 17025",
+            "URL Rapport Labo": "",
+            "Profil Terpénique": "",
+            "Effets": "",
+            "Conseils d'utilisation": ""
+        }
+    },
+    {
+        "name": "Spectre",
+        "category": "Autres Formats",
+        "description": "Full Spectrum, Broad Spectrum, Isolat.",
+        "attributes": {
+            "Concentration": "",
+            "Spectre": "",
+            "Origine": "Union Européenne",
+            "Méthode d'extraction": "CO2 supercritique",
+            "Certifications": "Bio, Vegan, ISO 17025",
+            "URL Rapport Labo": "",
+            "Profil Terpénique": "",
+            "Effets": "",
+            "Conseils d'utilisation": ""
+        }
+    },
+    {
+        "name": "Origine du Chanvre",
+        "category": "Autres Formats",
+        "description": "Pays de culture (UE), méthodes de culture (Bio, Indoor, Greenhouse).",
+        "attributes": {
+            "Concentration": "",
+            "Spectre": "",
+            "Origine": "Union Européenne",
+            "Méthode d'extraction": "CO2 supercritique",
+            "Certifications": "Bio, Vegan, ISO 17025",
+            "URL Rapport Labo": "",
+            "Profil Terpénique": "",
+            "Effets": "",
+            "Conseils d'utilisation": ""
+        }
+    },
+    {
+        "name": "Méthode d'Extraction",
+        "category": "Autres Formats",
+        "description": "CO2 supercritique, éthanol, etc.",
+        "attributes": {
+            "Concentration": "",
+            "Spectre": "",
+            "Origine": "Union Européenne",
+            "Méthode d'extraction": "CO2 supercritique",
+            "Certifications": "Bio, Vegan, ISO 17025",
+            "URL Rapport Labo": "",
+            "Profil Terpénique": "",
+            "Effets": "",
+            "Conseils d'utilisation": ""
+        }
+    },
+    {
+        "name": "Certifications",
+        "category": "Autres Formats",
+        "description": "Bio, Vegan, ISO 17025, GMP.",
+        "attributes": {
+            "Concentration": "",
+            "Spectre": "",
+            "Origine": "Union Européenne",
+            "Méthode d'extraction": "CO2 supercritique",
+            "Certifications": "Bio, Vegan, ISO 17025",
+            "URL Rapport Labo": "",
+            "Profil Terpénique": "",
+            "Effets": "",
+            "Conseils d'utilisation": ""
+        }
+    },
+    {
+        "name": "Rapports de Laboratoire (COA)",
+        "category": "Autres Formats",
+        "description": "Lien direct vers le PDF pour chaque lot.",
+        "attributes": {
+            "Concentration": "",
+            "Spectre": "",
+            "Origine": "Union Européenne",
+            "Méthode d'extraction": "CO2 supercritique",
+            "Certifications": "Bio, Vegan, ISO 17025",
+            "URL Rapport Labo": "",
+            "Profil Terpénique": "",
+            "Effets": "",
+            "Conseils d'utilisation": ""
+        }
+    },
+    {
+        "name": "Profil Terpénique",
+        "category": "Autres Formats",
+        "description": "Description des terpènes dominants et de leurs effets.",
+        "attributes": {
+            "Concentration": "",
+            "Spectre": "",
+            "Origine": "Union Européenne",
+            "Méthode d'extraction": "CO2 supercritique",
+            "Certifications": "Bio, Vegan, ISO 17025",
+            "URL Rapport Labo": "",
+            "Profil Terpénique": "",
+            "Effets": "",
+            "Conseils d'utilisation": ""
+        }
+    },
+    {
+        "name": "Effets Attribués",
+        "category": "Autres Formats",
+        "description": "Relaxation, sommeil, énergie, concentration, anti-douleur, anti-inflammatoire.",
+        "attributes": {
+            "Concentration": "",
+            "Spectre": "",
+            "Origine": "Union Européenne",
+            "Méthode d'extraction": "CO2 supercritique",
+            "Certifications": "Bio, Vegan, ISO 17025",
+            "URL Rapport Labo": "",
+            "Profil Terpénique": "",
+            "Effets": "",
+            "Conseils d'utilisation": ""
+        }
+    },
+    {
+        "name": "Conseils d'Utilisation",
+        "category": "Autres Formats",
+        "description": "Posologie, mode d'administration.",
+        "attributes": {
+            "Concentration": "",
+            "Spectre": "",
+            "Origine": "Union Européenne",
+            "Méthode d'extraction": "CO2 supercritique",
+            "Certifications": "Bio, Vegan, ISO 17025",
+            "URL Rapport Labo": "",
+            "Profil Terpénique": "",
+            "Effets": "",
+            "Conseils d'utilisation": ""
+        }
+    },
+    {
+        "name": "Avis Clients",
+        "category": "Autres Formats",
+        "description": "Intégration visible et vérifiée.",
+        "attributes": {
+            "Concentration": "",
+            "Spectre": "",
+            "Origine": "Union Européenne",
+            "Méthode d'extraction": "CO2 supercritique",
+            "Certifications": "Bio, Vegan, ISO 17025",
+            "URL Rapport Labo": "",
+            "Profil Terpénique": "",
+            "Effets": "",
+            "Conseils d'utilisation": ""
+        }
+    }
+]
