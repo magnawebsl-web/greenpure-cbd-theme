@@ -115,13 +115,13 @@
     <!-- Gold foil strip (packaging detail) -->
     <rect x="155" y="200" width="80" height="18" rx="4" fill="url(#foil-hh)" opacity="0.90"/>
     <rect x="157" y="202" width="76" height="4" rx="2" fill="white" opacity="0.25"/>
-    <text x="195" y="213" font-family="'Helvetica Neue', Arial, sans-serif" font-size="6.5" font-weight="700" fill="#3a2010" text-anchor="middle" letter-spacing="1.5">GREENPURE</text>
+    <text x="195" y="213" font-family="'Helvetica Neue', Arial, sans-serif" font-size="6.5" font-weight="700" fill="#3a2010" text-anchor="middle" letter-spacing="1.5">BORÉA</text>
 
     <!-- Label/info plaque on front face -->
     <rect x="153" y="225" width="110" height="55" rx="5" fill="white" opacity="0.88"/>
     <rect x="153" y="225" width="110" height="14" rx="5" fill="#2e7d32"/>
     <rect x="153" y="232" width="110" height="7" fill="#2e7d32"/>
-    <text x="208" y="231" font-family="'Helvetica Neue', Arial, sans-serif" font-size="6" font-weight="700" fill="white" text-anchor="middle" letter-spacing="2">GREENPURE</text>
+    <text x="208" y="231" font-family="'Helvetica Neue', Arial, sans-serif" font-size="6" font-weight="700" fill="white" text-anchor="middle" letter-spacing="2">BORÉA</text>
     <text x="208" y="239" font-family="'Helvetica Neue', Arial, sans-serif" font-size="4.5" fill="#c8e8c8" text-anchor="middle" letter-spacing="1">CBD HASH</text>
 
     <text x="208" y="251" font-family="'Helvetica Neue', Arial, sans-serif" font-size="9" font-weight="800" fill="#1b5e20" text-anchor="middle">HASH CBD</text>

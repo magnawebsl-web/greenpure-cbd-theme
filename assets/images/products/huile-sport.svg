@@ -87,7 +87,7 @@
     <rect x="158" y="168" width="84" height="140" rx="6" fill="url(#label-hsp)" filter="url(#label-shadow-hsp)" stroke="#c8e0c8" stroke-width="0.8"/>
     <rect x="158" y="168" width="84" height="24" rx="6" fill="url(#label-sport-hsp)"/>
     <rect x="158" y="180" width="84" height="12" fill="url(#label-sport-hsp)"/>
-    <text x="200" y="177" font-family="'Helvetica Neue', Arial, sans-serif" font-size="7.5" font-weight="700" fill="white" text-anchor="middle" letter-spacing="3">GREENPURE</text>
+    <text x="200" y="177" font-family="'Helvetica Neue', Arial, sans-serif" font-size="7.5" font-weight="700" fill="white" text-anchor="middle" letter-spacing="3">BORÉA</text>
     <text x="200" y="188" font-family="'Helvetica Neue', Arial, sans-serif" font-size="5" fill="#b0e0b0" text-anchor="middle" letter-spacing="1.5">CBD SPORT</text>
 
     <!-- Chevron/lightning sport symbol -->

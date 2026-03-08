@@ -100,7 +100,7 @@
     <rect x="170" y="170" width="60" height="140" rx="5" fill="url(#label-el)" filter="url(#label-shadow-el)" stroke="#d8c8a8" stroke-width="0.8"/>
     <rect x="170" y="170" width="60" height="22" rx="5" fill="url(#label-green-el)"/>
     <rect x="170" y="183" width="60" height="9" fill="url(#label-green-el)"/>
-    <text x="200" y="180" font-family="'Helvetica Neue', Arial, sans-serif" font-size="6.5" font-weight="700" fill="white" text-anchor="middle" letter-spacing="2">GREENPURE</text>
+    <text x="200" y="180" font-family="'Helvetica Neue', Arial, sans-serif" font-size="6.5" font-weight="700" fill="white" text-anchor="middle" letter-spacing="2">BORÉA</text>
     <text x="200" y="190" font-family="'Helvetica Neue', Arial, sans-serif" font-size="4" fill="#c8e8c8" text-anchor="middle" letter-spacing="1.5">CBD E-LIQUID</text>
 
     <!-- Vape leaf icon -->

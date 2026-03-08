@@ -126,8 +126,8 @@
     <rect x="158" y="168" width="84" height="24" rx="6" fill="url(#label-green-h5)"/>
     <rect x="158" y="180" width="84" height="12" fill="url(#label-green-h5)"/>
 
-    <!-- GREENPURE brand text -->
-    <text x="200" y="177" font-family="'Helvetica Neue', Arial, sans-serif" font-size="7.5" font-weight="700" fill="white" text-anchor="middle" letter-spacing="3">GREENPURE</text>
+    <!-- BORÉA brand text -->
+    <text x="200" y="177" font-family="'Helvetica Neue', Arial, sans-serif" font-size="7.5" font-weight="700" fill="white" text-anchor="middle" letter-spacing="3">BORÉA</text>
     <text x="200" y="188" font-family="'Helvetica Neue', Arial, sans-serif" font-size="5" font-weight="400" fill="#c8e8c8" text-anchor="middle" letter-spacing="1.5">CBD PREMIUM</text>
 
     <!-- Leaf icon (centered) -->

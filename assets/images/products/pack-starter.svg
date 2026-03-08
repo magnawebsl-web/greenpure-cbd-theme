@@ -111,7 +111,7 @@
   <rect x="45" y="353" width="310" height="7" rx="4" fill="#0a2810"/>
   <!-- Box text -->
   <text x="200" y="335" font-family="'Helvetica Neue', Arial, sans-serif" font-size="9" font-weight="700" fill="white" text-anchor="middle" letter-spacing="2">PACK DÉCOUVERTE STARTER</text>
-  <text x="200" y="347" font-family="'Helvetica Neue', Arial, sans-serif" font-size="7" fill="#c9a227" text-anchor="middle" letter-spacing="1">GREENPURE CBD · 3 produits inclus</text>
+  <text x="200" y="347" font-family="'Helvetica Neue', Arial, sans-serif" font-size="7" fill="#c9a227" text-anchor="middle" letter-spacing="1">BORÉA CBD · 3 produits inclus</text>
 
   <g filter="url(#shadow-ps)">
     <!-- BOTTLE 1 (5% CBD oil) - left, slightly angled back -->
@@ -126,7 +126,7 @@
       <rect x="106" y="148" width="50" height="90" rx="4" fill="white" opacity="0.90"/>
       <rect x="106" y="148" width="50" height="15" rx="4" fill="#2e7d32"/>
       <rect x="106" y="156" width="50" height="7" fill="#2e7d32"/>
-      <text x="131" y="155" font-family="'Helvetica Neue', Arial, sans-serif" font-size="4.5" font-weight="700" fill="white" text-anchor="middle" letter-spacing="1.5">GREENPURE</text>
+      <text x="131" y="155" font-family="'Helvetica Neue', Arial, sans-serif" font-size="4.5" font-weight="700" fill="white" text-anchor="middle" letter-spacing="1.5">BORÉA</text>
       <text x="131" y="162" font-family="'Helvetica Neue', Arial, sans-serif" font-size="3.5" fill="#c8e8c8" text-anchor="middle" letter-spacing="1">CBD</text>
       <text x="131" y="176" font-family="'Helvetica Neue', Arial, sans-serif" font-size="6" font-weight="600" fill="#333333" text-anchor="middle">HUILE CBD</text>
       <text x="131" y="192" font-family="'Helvetica Neue', Arial, sans-serif" font-size="22" font-weight="900" fill="#2e7d32" text-anchor="middle">5%</text>
@@ -153,7 +153,7 @@
       <rect x="183" y="158" width="50" height="88" rx="4" fill="white" opacity="0.92"/>
       <rect x="183" y="158" width="50" height="15" rx="4" fill="#1b5e20"/>
       <rect x="183" y="166" width="50" height="7" fill="#1b5e20"/>
-      <text x="208" y="165" font-family="'Helvetica Neue', Arial, sans-serif" font-size="4.5" font-weight="700" fill="white" text-anchor="middle" letter-spacing="1.5">GREENPURE</text>
+      <text x="208" y="165" font-family="'Helvetica Neue', Arial, sans-serif" font-size="4.5" font-weight="700" fill="white" text-anchor="middle" letter-spacing="1.5">BORÉA</text>
       <text x="208" y="172" font-family="'Helvetica Neue', Arial, sans-serif" font-size="3.5" fill="#c8e8c8" text-anchor="middle" letter-spacing="1">CBD</text>
       <text x="208" y="184" font-family="'Helvetica Neue', Arial, sans-serif" font-size="6" font-weight="600" fill="#333333" text-anchor="middle">HUILE CBD</text>
       <text x="208" y="200" font-family="'Helvetica Neue', Arial, sans-serif" font-size="22" font-weight="900" fill="#1b5e20" text-anchor="middle">10%</text>
@@ -196,7 +196,7 @@
     <rect x="272" y="215" width="56" height="70" rx="4" fill="white" opacity="0.90"/>
     <rect x="272" y="215" width="56" height="14" rx="4" fill="#2e7d32"/>
     <rect x="272" y="222" width="56" height="7" fill="#2e7d32"/>
-    <text x="300" y="221" font-family="'Helvetica Neue', Arial, sans-serif" font-size="4.5" font-weight="700" fill="white" text-anchor="middle" letter-spacing="1.5">GREENPURE</text>
+    <text x="300" y="221" font-family="'Helvetica Neue', Arial, sans-serif" font-size="4.5" font-weight="700" fill="white" text-anchor="middle" letter-spacing="1.5">BORÉA</text>
     <text x="300" y="228" font-family="'Helvetica Neue', Arial, sans-serif" font-size="3.5" fill="#c8e8c8" text-anchor="middle">GUMMIES</text>
     <g transform="translate(300, 240)">
       <path d="M0,-7 C5,-3.5 5,3.5 0,7 C-5,3.5 -5,-3.5 0,-7Z" fill="#2e7d32" opacity="0.75"/>

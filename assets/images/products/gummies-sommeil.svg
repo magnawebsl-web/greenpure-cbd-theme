@@ -126,7 +126,7 @@
     <rect x="158" y="195" width="84" height="100" rx="5" fill="url(#label-gs)" stroke="#d5d0e8" stroke-width="0.8"/>
     <rect x="158" y="195" width="84" height="20" rx="5" fill="url(#label-top-gs)"/>
     <rect x="158" y="207" width="84" height="8" fill="url(#label-top-gs)"/>
-    <text x="200" y="204" font-family="'Helvetica Neue', Arial, sans-serif" font-size="7" font-weight="700" fill="white" text-anchor="middle" letter-spacing="2.5">GREENPURE</text>
+    <text x="200" y="204" font-family="'Helvetica Neue', Arial, sans-serif" font-size="7" font-weight="700" fill="white" text-anchor="middle" letter-spacing="2.5">BORÉA</text>
     <text x="200" y="213" font-family="'Helvetica Neue', Arial, sans-serif" font-size="4.5" fill="#b0b8e0" text-anchor="middle" letter-spacing="1.5">CBD NUIT</text>
 
     <!-- Moon icon -->

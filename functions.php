@@ -563,7 +563,15 @@ function greenpure_security_headers() {
 add_action( 'send_headers', 'greenpure_security_headers' );
 
 /* ──────────────────────────────────────
-   17. CACHER LA VERSION WP (sécurité)
+   17. DEVISE — Forcer EUR (€)
+────────────────────────────────────── */
+if ( class_exists('WooCommerce') ) {
+    add_filter( 'woocommerce_currency',        function() { return 'EUR'; } );
+    add_filter( 'woocommerce_currency_symbol', function() { return '€'; } );
+}
+
+/* ──────────────────────────────────────
+   18. CACHER LA VERSION WP (sécurité)
 ────────────────────────────────────── */
 remove_action( 'wp_head', 'wp_generator' );
 add_filter( 'the_generator', '__return_empty_string' );

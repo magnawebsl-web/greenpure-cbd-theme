@@ -100,7 +100,7 @@
     <rect x="168" y="175" width="64" height="140" rx="5" fill="url(#label-sc)" filter="url(#label-shadow-sc)" stroke="#d8d0e8" stroke-width="0.7"/>
     <rect x="168" y="175" width="64" height="22" rx="5" fill="url(#label-top-sc)"/>
     <rect x="168" y="188" width="64" height="9" fill="url(#label-top-sc)"/>
-    <text x="200" y="184" font-family="'Helvetica Neue', Arial, sans-serif" font-size="6.5" font-weight="700" fill="white" text-anchor="middle" letter-spacing="2.5">GREENPURE</text>
+    <text x="200" y="184" font-family="'Helvetica Neue', Arial, sans-serif" font-size="6.5" font-weight="700" fill="white" text-anchor="middle" letter-spacing="2.5">BORÉA</text>
     <text x="200" y="194" font-family="'Helvetica Neue', Arial, sans-serif" font-size="4.5" fill="#c8e8c8" text-anchor="middle" letter-spacing="1.5">CBD BEAUTY</text>
 
     <!-- Elegant leaf on label -->

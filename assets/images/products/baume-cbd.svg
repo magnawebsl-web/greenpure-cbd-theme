@@ -73,7 +73,7 @@
 
     <!-- Label inner green arch top -->
     <path d="M128,260 A72,46 0 0,1 272,260" fill="#2e7d32"/>
-    <text x="200" y="255" font-family="'Helvetica Neue', Arial, sans-serif" font-size="7" font-weight="700" fill="white" text-anchor="middle" letter-spacing="2.5">GREENPURE</text>
+    <text x="200" y="255" font-family="'Helvetica Neue', Arial, sans-serif" font-size="7" font-weight="700" fill="white" text-anchor="middle" letter-spacing="2.5">BORÉA</text>
 
     <!-- Leaf icon -->
     <g transform="translate(200, 270)">
@@ -99,7 +99,7 @@
     <rect x="105" y="210" width="190" height="3" rx="1.5" fill="url(#gold-bc)" opacity="0.35"/>
 
     <!-- Brand on lid -->
-    <text x="200" y="184" font-family="'Helvetica Neue', Arial, sans-serif" font-size="8" font-weight="700" fill="white" text-anchor="middle" letter-spacing="2" opacity="0.85">GREENPURE</text>
+    <text x="200" y="184" font-family="'Helvetica Neue', Arial, sans-serif" font-size="8" font-weight="700" fill="white" text-anchor="middle" letter-spacing="2" opacity="0.85">BORÉA</text>
 
     <!-- CBD leaf on lid -->
     <g transform="translate(200, 168)" opacity="0.60">

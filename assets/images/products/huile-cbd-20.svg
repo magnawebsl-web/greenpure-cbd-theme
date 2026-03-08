@@ -86,7 +86,7 @@
     <rect x="156" y="162" width="88" height="145" rx="6" fill="url(#label-h20)" filter="url(#label-shadow-h20)" stroke="#d8ead8" stroke-width="0.8"/>
     <rect x="156" y="162" width="88" height="25" rx="6" fill="url(#label-green-h20)"/>
     <rect x="156" y="175" width="88" height="12" fill="url(#label-green-h20)"/>
-    <text x="200" y="172" font-family="'Helvetica Neue', Arial, sans-serif" font-size="7.5" font-weight="700" fill="white" text-anchor="middle" letter-spacing="3">GREENPURE</text>
+    <text x="200" y="172" font-family="'Helvetica Neue', Arial, sans-serif" font-size="7.5" font-weight="700" fill="white" text-anchor="middle" letter-spacing="3">BORÉA</text>
     <text x="200" y="183" font-family="'Helvetica Neue', Arial, sans-serif" font-size="5" fill="#c8e8c8" text-anchor="middle" letter-spacing="1.5">CBD PREMIUM</text>
 
     <g transform="translate(200, 203)">
