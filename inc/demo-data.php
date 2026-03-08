@@ -36,18 +36,19 @@ add_action('after_switch_theme', function () {
 
 /* ──────────────────────────────────────────────
    Auto-install via admin_init si aucun produit
+   (toujours vérifier le vrai compte, pas juste le flag)
 ────────────────────────────────────────────── */
 add_action('admin_init', function () {
     if (!class_exists('WooCommerce')) return;
-    if (get_option('greenpure_demo_auto_installed')) return;
 
     $count = wp_count_posts('product');
     $total = ($count->publish ?? 0) + ($count->draft ?? 0) + ($count->private ?? 0);
 
     if ($total === 0) {
+        // Réinitialiser les flags pour forcer une nouvelle installation
+        delete_option('greenpure_demo_auto_installed');
+        delete_option('greenpure_v2_setup_done');
         greenpure_install_demo_products();
-        update_option('greenpure_demo_auto_installed', '1');
-    } else {
         update_option('greenpure_demo_auto_installed', '1');
     }
 });
@@ -2088,9 +2089,12 @@ function greenpure_install_demo_products() {
             $sku_image_map = [
                 'GP-HFS-05'  => 'huile-cbd-5.svg',
                 'GP-HFS-10'  => 'huile-cbd-10.svg',
+                'GP-HFS-20'  => 'huile-cbd-20.svg',
+                'GP-HBS-10'  => 'huile-cbd-10.svg',
                 'GP-HBS-15'  => 'huile-cbd-15.svg',
                 'GP-HBS-20'  => 'huile-cbd-20.svg',
                 'GP-HBS-30'  => 'huile-cbd-30.svg',
+                'GP-HSM-15'  => 'huile-sommeil.svg',
                 'GP-HSO'     => 'huile-sommeil.svg',
                 'GP-HSP'     => 'huile-sport.svg',
                 'GP-FIN'     => 'fleur-indoor.svg',
