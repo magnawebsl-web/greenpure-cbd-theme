@@ -90,6 +90,28 @@ add_filter( 'woocommerce_enqueue_styles', function( $styles ) {
     return $styles;
 } );
 
+/* Forcer l'affichage des images premium si l'image WooCommerce est manquante ou par défaut */
+add_filter( 'woocommerce_product_get_image', function( $html, $product, $size, $attr, $placeholder ) {
+    if ( ! $product->get_image_id() || strpos($html, 'placeholder.png') !== false ) {
+        $sku = $product->get_sku();
+        $cat = '';
+        $cats = $product->get_category_ids();
+        if ( ! empty($cats) ) {
+            $term = get_term($cats[0], 'product_cat');
+            $cat = $term ? $term->name : '';
+        }
+
+        $image_name = 'borea_huile_cbd_premium.png'; // Default
+        if ( strpos($cat, 'Inhalables') !== false ) $image_name = 'borea_vape_pen_gold.png';
+        if ( strpos($cat, 'Comestibles') !== false ) $image_name = 'borea_gummies_sommeil.png';
+        if ( strpos($cat, 'Animaux') !== false ) $image_name = 'borea_cbd_animaux.png';
+        
+        $image_url = get_template_directory_uri() . '/assets/images/products-premium/' . $image_name;
+        return sprintf( '<img src="%s" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt="%s" />', esc_url($image_url), esc_attr($product->get_name()) );
+    }
+    return $html;
+}, 10, 5 );
+
 /* Invalider les transients sidebar/toolbar quand un produit ou une catégorie change */
 function borea_flush_shop_transients() {
     delete_transient('borea_sidebar_popular_products');
