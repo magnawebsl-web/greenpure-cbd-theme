@@ -3690,11 +3690,11 @@ a:focus-visible {
 }
 
 .showcase-img {
-  max-width: 280px;
-  max-height: 280px;
-  object-fit: contain;
+  max-width: 320px;
+  max-height: 320px;
+  object-fit: cover;
   border-radius: var(--radius-xl);
-  filter: drop-shadow(0 20px 40px rgba(15,31,23,0.4));
+  box-shadow: 0 20px 60px rgba(0,0,0,0.3);
   transition: transform var(--transition-slow);
 }
 
