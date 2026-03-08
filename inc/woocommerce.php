@@ -137,6 +137,10 @@ add_action( 'wp_ajax_greenpure_mini_cart',         'greenpure_mini_cart' );
 function greenpure_product_schema() {
     if ( ! is_product() ) return;
     global $product;
+    if ( ! $product instanceof WC_Product ) {
+        $product = wc_get_product( get_queried_object_id() );
+    }
+    if ( ! $product instanceof WC_Product ) return;
     $schema = [
         '@context'    => 'https://schema.org',
         '@type'       => 'Product',
