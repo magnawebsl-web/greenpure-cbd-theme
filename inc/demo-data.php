@@ -2163,10 +2163,9 @@ function greenpure_attach_product_svg( $svg_filename, $product_id, $alt_text = '
         wp_mkdir_p( $dest_dir );
     }
 
-    if ( ! file_exists( $dest_file ) ) {
-        if ( ! copy( $source_file, $dest_file ) ) {
-            return new WP_Error( 'copy_failed', 'Could not copy SVG to uploads: ' . $dest_file );
-        }
+    // Toujours écraser pour refléter la version actuelle du thème
+    if ( ! copy( $source_file, $dest_file ) ) {
+        return new WP_Error( 'copy_failed', 'Could not copy SVG to uploads: ' . $dest_file );
     }
 
     $file_url = $upload_dir['url'] . '/greenpure-cbd/' . $svg_filename;

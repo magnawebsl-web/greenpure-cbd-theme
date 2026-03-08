@@ -571,7 +571,51 @@ if ( class_exists('WooCommerce') ) {
 }
 
 /* ──────────────────────────────────────
-   18. CACHER LA VERSION WP (sécurité)
+   18. RESYNC SVGs — écrase les copies dans uploads
+   (une seule fois, au prochain chargement admin)
+────────────────────────────────────── */
+function greenpure_sync_product_svgs() {
+    // Ne pas re-exécuter si déjà fait pour cette version
+    $done_key = 'greenpure_svgs_synced_v2';
+    if ( get_option( $done_key ) ) return;
+
+    $svgs = [
+        'huile-cbd-5.svg','huile-cbd-10.svg','huile-cbd-15.svg',
+        'huile-cbd-20.svg','huile-cbd-30.svg','huile-sommeil.svg',
+        'huile-sport.svg','fleur-indoor.svg','fleur-outdoor.svg',
+        'gummies-fruits.svg','gummies-sommeil.svg','creme-cbd.svg',
+        'baume-cbd.svg','serum-cbd.svg','infusion-cbd.svg',
+        'capsules-cbd.svg','eliquide-cbd.svg','hash-cbd.svg',
+        'pack-starter.svg','pack-sommeil.svg',
+    ];
+
+    $upload_dir = wp_upload_dir();
+    $dest_dir   = trailingslashit( $upload_dir['basedir'] ) . date('Y') . '/' . date('m') . '/greenpure-cbd/';
+    // Essaie aussi le chemin utilisé lors de l'import initial
+    $dest_dirs = [
+        trailingslashit( $upload_dir['path'] ) . 'greenpure-cbd/',
+        trailingslashit( $upload_dir['basedir'] ) . 'greenpure-cbd/',
+    ];
+
+    foreach ( $svgs as $svg ) {
+        $src = get_template_directory() . '/assets/images/products/' . $svg;
+        if ( ! file_exists( $src ) ) continue;
+        foreach ( $dest_dirs as $dir ) {
+            $dest = $dir . $svg;
+            if ( file_exists( $dest ) ) {
+                copy( $src, $dest ); // force-écrase
+            }
+        }
+        // Vide le cache d'attachement pour forcer la re-lecture
+        delete_option( 'greenpure_svg_attach_' . sanitize_key( $svg ) );
+    }
+
+    update_option( $done_key, 1 );
+}
+add_action( 'admin_init', 'greenpure_sync_product_svgs' );
+
+/* ──────────────────────────────────────
+   19. CACHER LA VERSION WP (sécurité)
 ────────────────────────────────────── */
 remove_action( 'wp_head', 'wp_generator' );
 add_filter( 'the_generator', '__return_empty_string' );
