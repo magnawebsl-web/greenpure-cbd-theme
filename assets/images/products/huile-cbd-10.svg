@@ -59,7 +59,7 @@
       <feDropShadow dx="0" dy="1" stdDeviation="2" flood-color="#000" flood-opacity="0.08"/>
     </filter>
     <clipPath id="bottle-clip-h10">
-      <rect x="150" y="115" width="100" height="235" rx="15"/>
+      <path d="M170,119 C156,130 150,155 150,175 L150,338 Q150,350 162,350 L238,350 Q250,350 250,338 L250,175 C250,155 244,130 230,119 Z"/>
     </clipPath>
   </defs>
 
@@ -68,8 +68,8 @@
   <ellipse cx="201" cy="362" rx="62" ry="10" fill="#1a3a1a" opacity="0.14"/>
 
   <g filter="url(#shadow-h10)">
-    <rect x="150" y="115" width="100" height="235" rx="15" fill="url(#oil-h10)" clip-path="url(#bottle-clip-h10)"/>
-    <rect x="150" y="115" width="100" height="235" rx="15" fill="url(#glass-h10)" stroke="#a8c8a8" stroke-width="0.8"/>
+    <path d="M170,119 C156,130 150,155 150,175 L150,338 Q150,350 162,350 L238,350 Q250,350 250,338 L250,175 C250,155 244,130 230,119 Z" fill="url(#oil-h10)" clip-path="url(#bottle-clip-h10)"/>
+    <path d="M170,119 C156,130 150,155 150,175 L150,338 Q150,350 162,350 L238,350 Q250,350 250,338 L250,175 C250,155 244,130 230,119 Z" fill="url(#glass-h10)" stroke="#a8c8a8" stroke-width="0.8"/>
     <rect x="170" y="75" width="60" height="44" rx="9" fill="url(#neck-h10)" stroke="#a0c0a0" stroke-width="0.7"/>
     <rect x="176" y="80" width="10" height="34" rx="5" fill="white" opacity="0.38"/>
     <rect x="168" y="113" width="64" height="7" rx="3.5" fill="url(#gold-h10)"/>

@@ -593,7 +593,7 @@ if ( class_exists('WooCommerce') ) {
 ────────────────────────────────────── */
 function greenpure_sync_product_svgs() {
     // Ne pas re-exécuter si déjà fait pour cette version
-    $done_key = 'greenpure_svgs_synced_v2';
+    $done_key = 'greenpure_svgs_synced_v3';
     if ( get_option( $done_key ) ) return;
 
     $svgs = [

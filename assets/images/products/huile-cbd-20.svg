@@ -60,7 +60,7 @@
       <feDropShadow dx="0" dy="1" stdDeviation="2" flood-color="#000" flood-opacity="0.08"/>
     </filter>
     <clipPath id="bottle-clip-h20">
-      <rect x="148" y="108" width="104" height="245" rx="16"/>
+      <path d="M168,112 C153,126 148,150 148,172 L148,340 Q148,353 160,353 L240,353 Q252,353 252,340 L252,172 C252,150 247,126 232,112 Z"/>
     </clipPath>
   </defs>
 
@@ -70,8 +70,8 @@
 
   <g filter="url(#shadow-h20)">
     <!-- Slightly wider bottle for 30ml -->
-    <rect x="148" y="108" width="104" height="245" rx="16" fill="url(#oil-h20)" clip-path="url(#bottle-clip-h20)"/>
-    <rect x="148" y="108" width="104" height="245" rx="16" fill="url(#glass-h20)" stroke="#a8c8a8" stroke-width="0.8"/>
+    <path d="M168,112 C153,126 148,150 148,172 L148,340 Q148,353 160,353 L240,353 Q252,353 252,340 L252,172 C252,150 247,126 232,112 Z" fill="url(#oil-h20)" clip-path="url(#bottle-clip-h20)"/>
+    <path d="M168,112 C153,126 148,150 148,172 L148,340 Q148,353 160,353 L240,353 Q252,353 252,340 L252,172 C252,150 247,126 232,112 Z" fill="url(#glass-h20)" stroke="#a8c8a8" stroke-width="0.8"/>
     <rect x="168" y="68" width="64" height="44" rx="9" fill="url(#neck-h20)" stroke="#a0c0a0" stroke-width="0.7"/>
     <rect x="174" y="73" width="10" height="34" rx="5" fill="white" opacity="0.38"/>
     <rect x="166" y="106" width="68" height="7" rx="3.5" fill="url(#gold-h20)"/>

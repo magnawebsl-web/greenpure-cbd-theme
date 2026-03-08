@@ -62,7 +62,7 @@
       <feDropShadow dx="0" dy="1" stdDeviation="2" flood-color="#000" flood-opacity="0.08"/>
     </filter>
     <clipPath id="bottle-clip-h30">
-      <rect x="145" y="100" width="110" height="255" rx="17"/>
+      <path d="M165,104 C149,118 145,145 145,168 L145,342 Q145,355 157,355 L243,355 Q255,355 255,342 L255,168 C255,145 251,118 235,104 Z"/>
     </clipPath>
   </defs>
 
@@ -73,8 +73,8 @@
 
   <g filter="url(#shadow-h30)">
     <!-- Largest bottle footprint for 30% -->
-    <rect x="145" y="100" width="110" height="255" rx="17" fill="url(#oil-h30)" clip-path="url(#bottle-clip-h30)"/>
-    <rect x="145" y="100" width="110" height="255" rx="17" fill="url(#glass-h30)" stroke="#98b898" stroke-width="1"/>
+    <path d="M165,104 C149,118 145,145 145,168 L145,342 Q145,355 157,355 L243,355 Q255,355 255,342 L255,168 C255,145 251,118 235,104 Z" fill="url(#oil-h30)" clip-path="url(#bottle-clip-h30)"/>
+    <path d="M165,104 C149,118 145,145 145,168 L145,342 Q145,355 157,355 L243,355 Q255,355 255,342 L255,168 C255,145 251,118 235,104 Z" fill="url(#glass-h30)" stroke="#98b898" stroke-width="1"/>
     <rect x="165" y="60" width="70" height="44" rx="10" fill="url(#neck-h30)" stroke="#98b898" stroke-width="0.7"/>
     <rect x="172" y="66" width="11" height="34" rx="5.5" fill="white" opacity="0.38"/>
     <rect x="163" y="98" width="74" height="8" rx="4" fill="url(#gold-h30)"/>

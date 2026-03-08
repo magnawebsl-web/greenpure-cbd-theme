@@ -72,7 +72,7 @@
     </filter>
     <!-- Bottle clip -->
     <clipPath id="bottle-clip-h5">
-      <rect x="150" y="115" width="100" height="235" rx="15"/>
+      <path d="M170,119 C156,130 150,155 150,175 L150,338 Q150,350 162,350 L238,350 Q250,350 250,338 L250,175 C250,155 244,130 230,119 Z"/>
     </clipPath>
     <!-- Neck clip -->
     <clipPath id="neck-clip-h5">
@@ -92,10 +92,10 @@
   <g filter="url(#shadow-h5)">
 
     <!-- Oil fill (through glass) -->
-    <rect x="150" y="115" width="100" height="235" rx="15" fill="url(#oil-h5)" clip-path="url(#bottle-clip-h5)"/>
+    <path d="M170,119 C156,130 150,155 150,175 L150,338 Q150,350 162,350 L238,350 Q250,350 250,338 L250,175 C250,155 244,130 230,119 Z" fill="url(#oil-h5)" clip-path="url(#bottle-clip-h5)"/>
 
     <!-- Bottle body glass -->
-    <rect x="150" y="115" width="100" height="235" rx="15" fill="url(#glass-h5)" stroke="#a8c8a8" stroke-width="0.8"/>
+    <path d="M170,119 C156,130 150,155 150,175 L150,338 Q150,350 162,350 L238,350 Q250,350 250,338 L250,175 C250,155 244,130 230,119 Z" fill="url(#glass-h5)" stroke="#a8c8a8" stroke-width="0.8"/>
 
     <!-- Bottle neck -->
     <rect x="170" y="75" width="60" height="44" rx="9" fill="url(#neck-h5)" stroke="#a0c0a0" stroke-width="0.7"/>
