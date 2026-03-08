@@ -2031,18 +2031,18 @@ function greenpure_install_demo_products() {
 
     /* ---- Mapping catégorie → fichier SVG source ---- */
     $cat_image_map = [
-        'huiles-cbd'    => 'huile-cbd.svg',
-        'fleurs-cbd'    => 'fleur-cbd.svg',
-        'gummies-cbd'   => 'gummie-cbd.svg',
-        'cosmetiques'   => 'cosmetique-cbd.svg',
+        'huiles-cbd'    => 'huile-cbd-10.svg',
+        'fleurs-cbd'    => 'fleur-indoor.svg',
+        'gummies-cbd'   => 'gummies-fruits.svg',
+        'cosmetiques'   => 'creme-cbd.svg',
         'infusions-cbd' => 'infusion-cbd.svg',
-        'capsules-cbd'  => 'capsule-cbd.svg',
-        'e-liquides'    => 'e-liquide-cbd.svg',
+        'capsules-cbd'  => 'capsules-cbd.svg',
+        'e-liquides'    => 'eliquide-cbd.svg',
         'hash-cbd'      => 'hash-cbd.svg',
-        'packs'         => 'pack-cbd.svg',
-        'pet-cbd'       => 'pet-cbd.svg',
-        'concentres'    => 'concentre-cbd.svg',
-        'cbn'           => 'cbn-cbd.svg',
+        'packs'         => 'pack-starter.svg',
+        'pet-cbd'       => 'huile-cbd-5.svg',
+        'concentres'    => 'huile-cbd-20.svg',
+        'cbn'           => 'huile-sommeil.svg',
     ];
 
     /* ---- Création des produits WooCommerce ---- */
@@ -2084,8 +2084,37 @@ function greenpure_install_demo_products() {
             update_post_meta($product_id, '_cbd_origin',        $p['cbd_origin']);
             update_post_meta($product_id, '_cbd_thc',           $p['cbd_thc']);
 
-            // Image produit via SVG
-            $svg_file = $cat_image_map[$p['cat']] ?? 'huile-cbd.svg';
+            // Image produit via SVG — mapping fin par SKU
+            $sku_image_map = [
+                'GP-HFS-05'  => 'huile-cbd-5.svg',
+                'GP-HFS-10'  => 'huile-cbd-10.svg',
+                'GP-HBS-15'  => 'huile-cbd-15.svg',
+                'GP-HBS-20'  => 'huile-cbd-20.svg',
+                'GP-HBS-30'  => 'huile-cbd-30.svg',
+                'GP-HSO'     => 'huile-sommeil.svg',
+                'GP-HSP'     => 'huile-sport.svg',
+                'GP-FIN'     => 'fleur-indoor.svg',
+                'GP-FOUT'    => 'fleur-outdoor.svg',
+                'GP-GF'      => 'gummies-fruits.svg',
+                'GP-GS'      => 'gummies-sommeil.svg',
+                'GP-CRE'     => 'creme-cbd.svg',
+                'GP-BAU'     => 'baume-cbd.svg',
+                'GP-SER'     => 'serum-cbd.svg',
+                'GP-INF'     => 'infusion-cbd.svg',
+                'GP-CAP'     => 'capsules-cbd.svg',
+                'GP-ELQ'     => 'eliquide-cbd.svg',
+                'GP-HSH'     => 'hash-cbd.svg',
+                'GP-PKS'     => 'pack-starter.svg',
+                'GP-PKD'     => 'pack-sommeil.svg',
+            ];
+            // Cherche le SVG par SKU exact, puis par préfixe, puis par catégorie
+            $svg_file = $sku_image_map[$p['sku']] ?? null;
+            if ( ! $svg_file ) {
+                foreach ( $sku_image_map as $prefix => $img ) {
+                    if ( strpos($p['sku'], $prefix) === 0 ) { $svg_file = $img; break; }
+                }
+            }
+            $svg_file = $svg_file ?? ($cat_image_map[$p['cat']] ?? 'huile-cbd-10.svg');
             $attach_id = greenpure_attach_product_svg($svg_file, $product_id, $p['name']);
             if ($attach_id && ! is_wp_error($attach_id)) {
                 set_post_thumbnail($product_id, $attach_id);

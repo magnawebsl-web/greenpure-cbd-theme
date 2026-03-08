@@ -72,10 +72,15 @@
                             echo '<div class="showcase-badge"><span>' . esc_html($prod->get_name()) . '</span><strong>' . $prod->get_price_html() . '</strong></div>';
                             echo '</a>';
                         } else {
-                            echo '<div class="showcase-placeholder">
-                                <div class="showcase-bottle">
-                                    <div class="bottle-body"></div>
-                                    <div class="bottle-label">CBD<br><small>10%</small></div>
+                            echo '<div class="showcase-product-static">
+                                <img src="' . esc_url(GREENPURE_URI . '/assets/images/products/huile-cbd-10.svg') . '"
+                                     alt="Huile CBD 10% Premium"
+                                     class="showcase-img"
+                                     width="280" height="280"
+                                     loading="eager">
+                                <div class="showcase-badge">
+                                    <span>Huile CBD Full Spectrum</span>
+                                    <strong>34,90 €</strong>
                                 </div>
                             </div>';
                         }
@@ -206,6 +211,36 @@
                         </a>
                         <?php
                     }
+                } else {
+                    // Catégories statiques fallback
+                    $static_cats = [
+                        ['name' => 'Huiles CBD', 'slug' => 'huiles-cbd', 'img' => 'huile-cbd-10.svg', 'count' => 17],
+                        ['name' => 'Fleurs CBD', 'slug' => 'fleurs-cbd', 'img' => 'fleur-indoor.svg', 'count' => 15],
+                        ['name' => 'Gummies CBD', 'slug' => 'gummies-cbd', 'img' => 'gummies-fruits.svg', 'count' => 10],
+                        ['name' => 'Cosmétiques', 'slug' => 'cosmetiques', 'img' => 'creme-cbd.svg', 'count' => 9],
+                        ['name' => 'Infusions CBD', 'slug' => 'infusions-cbd', 'img' => 'infusion-cbd.svg', 'count' => 8],
+                        ['name' => 'Capsules CBD', 'slug' => 'capsules-cbd', 'img' => 'capsules-cbd.svg', 'count' => 8],
+                        ['name' => 'E-Liquides', 'slug' => 'e-liquides', 'img' => 'eliquide-cbd.svg', 'count' => 10],
+                        ['name' => 'Hash CBD', 'slug' => 'hash-cbd', 'img' => 'hash-cbd.svg', 'count' => 5],
+                    ];
+                    foreach ($static_cats as $cat):
+                    ?>
+                    <a href="<?php echo esc_url(class_exists('WooCommerce') ? get_permalink(wc_get_page_id('shop')) : home_url('/boutique/' . $cat['slug'])); ?>" class="category-card">
+                        <div class="category-card__image">
+                            <div class="category-card__svg-wrap">
+                                <img src="<?php echo esc_url(GREENPURE_URI . '/assets/images/products/' . $cat['img']); ?>"
+                                     alt="<?php echo esc_attr($cat['name']); ?>"
+                                     width="160" height="160" loading="lazy">
+                            </div>
+                            <div class="category-card__overlay"></div>
+                        </div>
+                        <div class="category-card__content">
+                            <h3><?php echo esc_html($cat['name']); ?></h3>
+                            <span class="cat-count"><?php echo esc_html($cat['count']); ?> produits</span>
+                            <span class="cat-arrow">→</span>
+                        </div>
+                    </a>
+                    <?php endforeach;
                 }
             }
             ?>
@@ -295,14 +330,14 @@
                 } else {
                     // Produits démo
                     $demo_products = [
-                        ['name' => 'Huile CBD Full Spectrum 10%', 'price' => '34,90', 'rating' => 5, 'reviews' => 487, 'tag' => '10% CBD', 'badge' => 'Bestseller'],
-                        ['name' => 'Huile CBD Broad Spectrum 20%', 'price' => '54,90', 'rating' => 5, 'reviews' => 312, 'tag' => '20% CBD', 'badge' => 'Premium'],
-                        ['name' => 'Gummies CBD Relaxation', 'price' => '24,90', 'rating' => 4, 'reviews' => 203, 'tag' => '25mg/gummy', 'badge' => 'Nouveau'],
-                        ['name' => 'Fleurs CBD OG Kush', 'price' => '12,90', 'rating' => 5, 'reviews' => 156, 'tag' => '15% CBD', 'badge' => null],
-                        ['name' => 'Crème CBD Anti-Douleur', 'price' => '28,90', 'rating' => 4, 'reviews' => 98, 'tag' => '500mg CBD', 'badge' => null],
-                        ['name' => 'Huile CBD Sommeil 15%', 'price' => '44,90', 'rating' => 5, 'reviews' => 271, 'tag' => '15% CBD', 'badge' => 'Coup de ♥'],
-                        ['name' => 'Infusion CBD Relaxante', 'price' => '16,90', 'rating' => 4, 'reviews' => 134, 'tag' => 'Bio', 'badge' => null],
-                        ['name' => 'Capsules CBD 30mg', 'price' => '39,90', 'rating' => 5, 'reviews' => 89, 'tag' => '30mg/caps', 'badge' => null],
+                        ['name' => 'Huile CBD Full Spectrum 10%', 'price' => '34,90', 'rating' => 5, 'reviews' => 487, 'tag' => '10% CBD', 'badge' => 'Bestseller', 'img' => 'huile-cbd-10.svg'],
+                        ['name' => 'Huile CBD Broad Spectrum 20%', 'price' => '54,90', 'rating' => 5, 'reviews' => 312, 'tag' => '20% CBD', 'badge' => 'Premium', 'img' => 'huile-cbd-20.svg'],
+                        ['name' => 'Gummies CBD Relaxation', 'price' => '24,90', 'rating' => 4, 'reviews' => 203, 'tag' => '25mg/gummy', 'badge' => 'Nouveau', 'img' => 'gummies-fruits.svg'],
+                        ['name' => 'Fleurs CBD OG Kush', 'price' => '12,90', 'rating' => 5, 'reviews' => 156, 'tag' => '15% CBD', 'badge' => null, 'img' => 'fleur-indoor.svg'],
+                        ['name' => 'Crème CBD Anti-Douleur', 'price' => '28,90', 'rating' => 4, 'reviews' => 98, 'tag' => '500mg CBD', 'badge' => null, 'img' => 'creme-cbd.svg'],
+                        ['name' => 'Huile CBD Sommeil 15%', 'price' => '44,90', 'rating' => 5, 'reviews' => 271, 'tag' => '15% CBD', 'badge' => 'Coup de ♥', 'img' => 'huile-sommeil.svg'],
+                        ['name' => 'Infusion CBD Relaxante', 'price' => '16,90', 'rating' => 4, 'reviews' => 134, 'tag' => 'Bio', 'badge' => null, 'img' => 'infusion-cbd.svg'],
+                        ['name' => 'Capsules CBD 30mg', 'price' => '39,90', 'rating' => 5, 'reviews' => 89, 'tag' => '30mg/caps', 'badge' => null, 'img' => 'capsules-cbd.svg'],
                     ];
                     foreach ($demo_products as $p):
                         $sale = rand(0,1);
@@ -310,9 +345,7 @@
                     ?>
                     <div class="product-card">
                         <div class="product-card__image">
-                            <div class="product-card__img-placeholder">
-                                <div class="placeholder-bottle"></div>
-                            </div>
+                            <img src="<?php echo esc_url(GREENPURE_URI . '/assets/images/products/' . $p['img']); ?>" alt="<?php echo esc_attr($p['name']); ?>" class="product-card__img" width="300" height="300" loading="lazy">
                             <?php if ($p['badge']): ?>
                                 <span class="product-badge product-badge--featured"><?php echo esc_html($p['badge']); ?></span>
                             <?php endif; ?>
@@ -397,7 +430,7 @@
             </div>
             <div class="why-section__content" data-aos="fade-left">
                 <span class="section-eyebrow">Notre engagement</span>
-                <h2 class="section-title">Pourquoi choisir GreenPure ?</h2>
+                <h2 class="section-title">Pourquoi choisir CBD Borea ?</h2>
                 <p class="why-section__intro">Depuis 2019, nous sélectionnons les meilleures variétés de chanvre bio européen pour vous offrir des produits CBD d'exception, traçables de la graine au flacon.</p>
                 <div class="why-features">
                     <div class="why-feature">

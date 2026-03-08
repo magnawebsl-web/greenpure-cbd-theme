@@ -495,11 +495,11 @@ function greenpure_homepage_schema() {
                 'name'   => get_bloginfo('name'),
                 'url'    => home_url('/'),
                 'logo'   => ['@type' => 'ImageObject', 'url' => GREENPURE_URI . '/assets/images/logo.png'],
-                'email'  => 'contact@greenpure-cbd.com',
+                'email'  => 'contact@cbdborea.com',
                 'sameAs' => [
-                    'https://www.instagram.com/greenpurecbd',
-                    'https://www.facebook.com/greenpurecbd',
-                    'https://www.tiktok.com/@greenpurecbd',
+                    'https://www.instagram.com/cbdborea',
+                    'https://www.facebook.com/cbdborea',
+                    'https://www.tiktok.com/@cbdborea',
                 ],
                 'areaServed' => ['FR', 'DE', 'NL', 'BE', 'ES', 'IT', 'GB', 'AT', 'PL'],
                 'hasOfferCatalog' => [
