@@ -110,10 +110,30 @@ if ( function_exists('woocommerce_breadcrumb') ) {
             </aside>
             <?php endif; ?>
 
-            <!-- Contenu principal WooCommerce -->
-            <div class="woo-content">
-                <?php woocommerce_content(); ?>
-            </div>
+	            <!-- Contenu principal WooCommerce -->
+	            <div class="woo-content">
+	                <?php 
+                    if ( is_singular( 'product' ) ) {
+                        while ( have_posts() ) :
+                            the_post();
+                            wc_get_template_part( 'content', 'single-product' );
+                        endwhile;
+                    } else {
+                        if ( woocommerce_product_loop() ) {
+                            woocommerce_product_loop_start();
+                            if ( wc_get_loop_prop( 'total' ) ) {
+                                while ( have_posts() ) :
+                                    the_post();
+                                    wc_get_template_part( 'content', 'product' );
+                                endwhile;
+                            }
+                            woocommerce_product_loop_end();
+                        } else {
+                            do_action( 'woocommerce_no_products_found' );
+                        }
+                    }
+                    ?>
+	            </div>
 
         </div>
     </div>
