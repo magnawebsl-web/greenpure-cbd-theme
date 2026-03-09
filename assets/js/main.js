@@ -29,7 +29,11 @@ function initAgeGate() {
         const btnYes = document.getElementById('age-gate-yes');
         const btnNo  = document.getElementById('age-gate-no');
         if (!modal) return;
-        if (getCookie('greenpure_age') === '1') { modal.style.display='none'; return; }
+        if (getCookie('greenpure_age') === '1') { 
+            modal.style.display='none'; 
+            document.body.classList.remove('age-gate-open');
+            return; 
+        }
         modal.style.display = 'flex';
         document.body.classList.add('age-gate-open');
         btnYes && btnYes.addEventListener('click', function(){
