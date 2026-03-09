@@ -29,17 +29,25 @@ function initAgeGate() {
         const btnYes = document.getElementById('age-gate-yes');
         const btnNo  = document.getElementById('age-gate-no');
         if (!modal) return;
+        // Vérifier si l'utilisateur a déjà validé son âge
         if (getCookie('greenpure_age') === '1') { 
-            modal.style.display='none'; 
+            modal.style.display = 'none'; 
             document.body.classList.remove('age-gate-open');
             return; 
         }
+        // Afficher l'Age Gate
         modal.style.display = 'flex';
+        modal.style.zIndex = '99999';
         document.body.classList.add('age-gate-open');
+        document.body.style.overflow = 'hidden';
         btnYes && btnYes.addEventListener('click', function(){
             setCookie('greenpure_age','1',30);
             modal.classList.add('age-gate--closing');
-            setTimeout(function(){ modal.style.display='none'; document.body.classList.remove('age-gate-open'); }, 400);
+            setTimeout(function(){
+                modal.style.display = 'none';
+                document.body.classList.remove('age-gate-open');
+                document.body.style.overflow = 'auto';
+            }, 400);
         });
         btnNo && btnNo.addEventListener('click', function(){
             window.location.href = (typeof greenpureData!=='undefined' && greenpureData.ageGateRedirect) ? greenpureData.ageGateRedirect : 'https://www.google.com';
