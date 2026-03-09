@@ -95,6 +95,48 @@ add_filter( 'woocommerce_enqueue_styles', function( $styles ) {
    Remplace systématiquement les images WooCommerce par les visuels luxe du thème
 ────────────────────────────────────── */
 add_filter( 'woocommerce_product_get_image', 'borea_force_premium_images_secure', 999, 5 );
+add_filter( 'woocommerce_single_product_image_thumbnail_html', 'borea_force_premium_single_image', 999, 2 );
+add_filter( 'woocommerce_cart_item_thumbnail', 'borea_force_premium_cart_image', 999, 3 );
+
+function borea_get_premium_image_url( $product ) {
+    $cat_name = '';
+    $cats = $product->get_category_ids();
+    if ( ! empty( $cats ) ) {
+        $term = get_term( $cats[0], 'product_cat' );
+        $cat_name = ( $term && ! is_wp_error( $term ) ) ? $term->name : '';
+    }
+
+    $image_name = 'borea_huile_cbd_luxe.png';
+    if ( stripos( $cat_name, 'Inhalables' ) !== false || stripos( $cat_name, 'Vape' ) !== false ) {
+        $image_name = 'borea_vape_luxe.png';
+    } elseif ( stripos( $cat_name, 'Comestibles' ) !== false || stripos( $cat_name, 'Gummies' ) !== false ) {
+        $image_name = 'borea_gummies_luxe.png';
+    } elseif ( stripos( $cat_name, 'Animaux' ) !== false ) {
+        $image_name = 'borea_animaux_luxe.png';
+    } elseif ( stripos( $cat_name, 'Fleurs' ) !== false ) {
+        $image_name = 'borea_fleur_cbd_luxe.png';
+    }
+    
+    return get_template_directory_uri() . '/assets/images/products-premium/' . $image_name;
+}
+
+function borea_force_premium_single_image( $html, $post_id ) {
+    $product = wc_get_product( $post_id );
+    if ( ! $product ) return $html;
+    
+    $image_url = borea_get_premium_image_url( $product );
+    return sprintf( 
+        '<div class="woocommerce-product-gallery__image"><img src="%s" class="wp-post-image premium-force-img" alt="%s" /></div>', 
+        esc_url( $image_url ), 
+        esc_attr( $product->get_name() ) 
+    );
+}
+
+function borea_force_premium_cart_image( $image, $cart_item, $cart_item_key ) {
+    $product = $cart_item['data'];
+    $image_url = borea_get_premium_image_url( $product );
+    return sprintf( '<img src="%s" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail premium-force-img" alt="%s" />', esc_url( $image_url ), esc_attr( $product->get_name() ) );
+}
 function borea_force_premium_images_secure( $html, $product, $size, $attr, $placeholder ) {
     // Sécurité absolue : ne pas appliquer dans l'admin et vérifier si WooCommerce est actif
     if ( is_admin() || ! class_exists( 'WooCommerce' ) || ! is_object( $product ) ) {
