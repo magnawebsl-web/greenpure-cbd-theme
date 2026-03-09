@@ -205,10 +205,24 @@ function initProductFilter() {
 function initCountdownTimer() {
     try {
         const h=document.getElementById('timer-h'), m=document.getElementById('timer-m'), s=document.getElementById('timer-s');
-        if(!h&&!m&&!s) return;
+        if(!h||!m||!s) return;
         const pad=n=>String(n).padStart(2,'0');
-        function tick(){ let d=Math.max(0,Math.floor((new Date(new Date().setHours(23,59,59,0))-Date.now())/1000)); const hv=Math.floor(d/3600); d-=hv*3600; const mv=Math.floor(d/60); const sv=d-mv*60; if(h)h.textContent=pad(hv); if(m)m.textContent=pad(mv); if(s)s.textContent=pad(sv); }
-        tick(); setInterval(tick,1000);
+        
+        // Timer: countdown 24 hours from now, resets at midnight
+        function tick(){ 
+            const now = new Date();
+            const endOfDay = new Date(now);
+            endOfDay.setHours(23,59,59,999);
+            const diff = Math.max(0, Math.floor((endOfDay - now) / 1000));
+            const hv = Math.floor(diff / 3600);
+            const mv = Math.floor((diff % 3600) / 60);
+            const sv = diff % 60;
+            h.textContent = pad(hv);
+            m.textContent = pad(mv);
+            s.textContent = pad(sv);
+        }
+        tick();
+        setInterval(tick, 1000);
     } catch(e){ console.error('[GP] Countdown:',e); }
 }
 
