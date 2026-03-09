@@ -76,9 +76,9 @@
 <!-- ══════════════════════════════════
      HEADER PRINCIPAL
 ══════════════════════════════════ -->
-<header class="site-header" id="site-header" role="banner">
-    <div class="container">
-        <div class="site-header__inner">
+	<header class="site-header" id="site-header" role="banner">
+	    <div class="container" style="height: 100%;">
+	        <div class="site-header__inner" style="display: flex; align-items: center; justify-content: space-between; height: 100%;">
 
             <!-- Logo -->
             <a class="site-header__logo" href="<?php echo esc_url(home_url('/')); ?>" aria-label="<?php bloginfo('name'); ?>">
