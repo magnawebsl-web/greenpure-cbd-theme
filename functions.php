@@ -90,7 +90,38 @@ add_filter( 'woocommerce_enqueue_styles', function( $styles ) {
     return $styles;
 } );
 
-/* Note: Image premium display is handled via CSV import with full URLs. */
+/* ──────────────────────────────────────
+   FORCE PREMIUM IMAGES DISPLAY
+   Remplace systématiquement les images WooCommerce par les visuels luxe du thème
+────────────────────────────────────── */
+add_filter( 'woocommerce_product_get_image', 'borea_force_premium_images', 999, 5 );
+function borea_force_premium_images( $html, $product, $size, $attr, $placeholder ) {
+    // Ne pas appliquer dans l'admin pour éviter les confusions
+    if ( is_admin() ) return $html;
+
+    $cat_name = '';
+    $cats = $product->get_category_ids();
+    if ( ! empty($cats) ) {
+        $term = get_term($cats[0], 'product_cat');
+        $cat_name = $term ? $term->name : '';
+    }
+
+    // Mapping des catégories vers les images luxe
+    $image_name = 'borea_huile_cbd_luxe.png'; // Par défaut
+    if ( stripos($cat_name, 'Inhalables') !== false || stripos($cat_name, 'Vape') !== false ) $image_name = 'borea_vape_luxe.png';
+    if ( stripos($cat_name, 'Comestibles') !== false || stripos($cat_name, 'Gummies') !== false ) $image_name = 'borea_gummies_luxe.png';
+    if ( stripos($cat_name, 'Animaux') !== false ) $image_name = 'borea_animaux_luxe.png';
+    if ( stripos($cat_name, 'Fleurs') !== false ) $image_name = 'borea_fleur_cbd_luxe.png';
+    
+    $image_url = get_template_directory_uri() . '/assets/images/products-premium/' . $image_name;
+    
+    // On reconstruit le tag <img> avec les classes WooCommerce standard
+    return sprintf( 
+        '<img src="%s" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail premium-force-img" alt="%s" loading="lazy" />', 
+        esc_url($image_url), 
+        esc_attr($product->get_name()) 
+    );
+}
 
 /* Invalider les transients sidebar/toolbar quand un produit ou une catégorie change */
 function borea_flush_shop_transients() {
