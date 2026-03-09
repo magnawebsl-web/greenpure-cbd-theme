@@ -3635,19 +3635,22 @@ a:focus-visible {
   z-index: 2;
   display: block;
   text-decoration: none;
+  width: 300px;
+  padding-bottom: 44px; /* room for badge at bottom: -12px */
 }
 
 .showcase-img {
-  width: 100%;
-  max-width: 340px;
-  height: auto;
-  aspect-ratio: 1/1;
+  display: block;
+  width: 300px;
+  height: 300px;
   object-fit: contain;
   border-radius: var(--radius-xl);
   box-shadow: 0 24px 80px rgba(0,0,0,0.35), 0 8px 32px rgba(212,168,67,0.15);
-  transition: all var(--transition-slow);
+  transition: transform var(--transition-slow), box-shadow var(--transition-slow);
   border: 1px solid rgba(255,255,255,0.1);
   background: #fff;
+  padding: 20px;
+  box-sizing: border-box;
 }
 
 .showcase-img:hover {
@@ -3863,25 +3866,7 @@ a:focus-visible {
     height: 280px;
 }
 
-/* Hero visual amélioré */
-.hero__product-showcase {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.showcase-glow {
-    position: absolute;
-    width: 300px;
-    height: 300px;
-    background: radial-gradient(circle, rgba(82,183,136,0.3) 0%, transparent 70%);
-    border-radius: 50%;
-    animation: glowPulse 3s ease-in-out infinite;
-}
-@keyframes glowPulse {
-    0%,100% { transform: scale(1); opacity: 0.6; }
-    50% { transform: scale(1.15); opacity: 1; }
-}
+/* Hero visual amélioré — see section 38 above for full rules */
 
 /* ══════════════════════════════════════
    FICHE PRODUIT — SINGLE PRODUCT

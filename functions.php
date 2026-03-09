@@ -18,7 +18,10 @@ function greenpure_setup() {
     add_theme_support( 'wc-product-gallery-zoom' );
     add_theme_support( 'wc-product-gallery-lightbox' );
     add_theme_support( 'wc-product-gallery-slider' );
-    
+
+    add_image_size( 'greenpure-product', 600, 600, false );
+    add_image_size( 'greenpure-showcase', 400, 400, false );
+
     register_nav_menus( [
         'primary' => 'Menu Principal',
         'footer'  => 'Menu Footer',
@@ -27,9 +30,12 @@ function greenpure_setup() {
 add_action( 'after_setup_theme', 'greenpure_setup' );
 
 function greenpure_scripts() {
-    wp_enqueue_style( 'greenpure-style', get_stylesheet_uri(), [], '1.0.3' );
-    wp_enqueue_style( 'greenpure-main', get_template_directory_uri() . '/assets/css/main.css', [], '1.0.3' );
-    wp_enqueue_script( 'greenpure-js', get_template_directory_uri() . '/assets/js/main.js', ['jquery'], '1.0.3', true );
+    wp_enqueue_style( 'greenpure-style', get_stylesheet_uri(), [], '1.0.4' );
+    wp_enqueue_style( 'greenpure-main', get_template_directory_uri() . '/assets/css/main.css', [], '1.0.4' );
+    if ( class_exists( 'WooCommerce' ) ) {
+        wp_enqueue_style( 'greenpure-woo', get_template_directory_uri() . '/assets/css/woocommerce.css', ['greenpure-main'], '1.0.4' );
+    }
+    wp_enqueue_script( 'greenpure-js', get_template_directory_uri() . '/assets/js/main.js', ['jquery'], '1.0.4', true );
 }
 add_action( 'wp_enqueue_scripts', 'greenpure_scripts' );
 
@@ -126,6 +132,45 @@ add_filter( 'woocommerce_cart_item_thumbnail', function( $thumbnail, $cart_item,
     
     return $thumbnail;
 }, 999, 3 );
+
+/* ──────────────────────────────────────
+   SYNC DES SVG PRODUITS (v4)
+   Recopie les SVG du thème vers uploads quand la version change.
+────────────────────────────────────── */
+
+add_action( 'wp_loaded', function() {
+    $sync_key = 'greenpure_svgs_synced_v4';
+    if ( get_option( $sync_key ) ) {
+        return;
+    }
+
+    $svg_files = [
+        'huile-cbd-5.svg', 'huile-cbd-10.svg', 'huile-cbd-15.svg',
+        'huile-cbd-20.svg', 'huile-cbd-30.svg',
+        'huile-sommeil.svg', 'huile-sport.svg',
+        'fleur-indoor.svg', 'fleur-outdoor.svg',
+        'gummies-fruits.svg', 'gummies-sommeil.svg',
+        'creme-cbd.svg', 'baume-cbd.svg', 'serum-cbd.svg',
+        'infusion-cbd.svg', 'capsules-cbd.svg',
+        'eliquide-cbd.svg', 'hash-cbd.svg',
+        'pack-starter.svg', 'pack-sommeil.svg',
+    ];
+
+    foreach ( $svg_files as $svg ) {
+        $cache_key = 'greenpure_svg_attach_' . sanitize_key( $svg );
+        $attach_id = get_option( $cache_key );
+        if ( ! $attach_id ) {
+            continue;
+        }
+        $dest = get_attached_file( (int) $attach_id );
+        $source = get_template_directory() . '/assets/images/products/' . $svg;
+        if ( $dest && $source && file_exists( $source ) && is_writable( dirname( $dest ) ) ) {
+            copy( $source, $dest );
+        }
+    }
+
+    update_option( $sync_key, 1 );
+} );
 
 /* ──────────────────────────────────────
    3. LANGUAGE DETECTOR & TRANSLATION

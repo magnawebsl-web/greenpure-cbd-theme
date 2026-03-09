@@ -2152,6 +2152,11 @@ function greenpure_attach_product_svg( $svg_filename, $product_id, $alt_text = '
     $cache_key = 'greenpure_svg_attach_' . sanitize_key( $svg_filename );
     $cached_id = get_option( $cache_key );
     if ( $cached_id && get_post( $cached_id ) ) {
+        // Toujours synchroniser le fichier SVG source vers uploads (reflète les redesigns du thème)
+        $existing_file = get_attached_file( (int) $cached_id );
+        if ( $existing_file && is_writable( dirname( $existing_file ) ) ) {
+            copy( $source_file, $existing_file );
+        }
         return (int) $cached_id;
     }
 
