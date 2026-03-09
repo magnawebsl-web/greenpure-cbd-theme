@@ -115,6 +115,10 @@ function borea_get_premium_image_url( $product ) {
         $image_name = 'borea_animaux_luxe.png';
     } elseif ( stripos( $cat_name, 'Fleurs' ) !== false ) {
         $image_name = 'borea_fleur_cbd_luxe.png';
+    } elseif ( stripos( $cat_name, 'Cosmétiques' ) !== false || stripos( $cat_name, 'Baume' ) !== false || stripos( $cat_name, 'Beurre' ) !== false ) {
+        $image_name = 'borea_cosmetique_luxe.png';
+    } elseif ( stripos( $cat_name, 'Capsules' ) !== false || stripos( $cat_name, 'Gélules' ) !== false ) {
+        $image_name = 'borea_capsule_luxe.png';
     }
     
     return get_template_directory_uri() . '/assets/images/products-premium/' . $image_name;
