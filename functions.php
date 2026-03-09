@@ -8,6 +8,34 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /* ──────────────────────────────────────
+   0. CONSTANTS & HELPERS
+────────────────────────────────────── */
+
+define( 'GREENPURE_URI', get_template_directory_uri() );
+define( 'GREENPURE_VERSION', '1.0.5' );
+
+/**
+ * Return a trimmed excerpt of the current post.
+ *
+ * @param int $length Number of words.
+ * @return string
+ */
+function greenpure_excerpt( int $length = 20 ): string {
+    $text = get_the_excerpt();
+    if ( ! $text ) {
+        $text = get_the_content();
+        $text = strip_shortcodes( $text );
+        $text = wp_strip_all_tags( $text );
+    }
+    $words = explode( ' ', $text );
+    if ( count( $words ) > $length ) {
+        $words = array_slice( $words, 0, $length );
+        return implode( ' ', $words ) . '…';
+    }
+    return $text;
+}
+
+/* ──────────────────────────────────────
    1. SETUP & ENQUEUE
 ────────────────────────────────────── */
 
@@ -212,6 +240,11 @@ add_filter( 'body_class', function( $classes ) {
     }
     return $classes;
 });
+
+// Limiter le nombre de produits par page pour éviter l'épuisement mémoire
+add_filter( 'loop_shop_per_page', function() {
+    return 12;
+}, 20 );
 
 // Fin du fichier
 ?>
