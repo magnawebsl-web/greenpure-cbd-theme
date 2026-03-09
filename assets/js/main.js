@@ -31,8 +31,11 @@ function initAgeGate() {
         if (!modal) return;
         // Vérifier si l'utilisateur a déjà validé son âge
         if (getCookie('greenpure_age') === '1') { 
-            modal.style.display = 'none'; 
+            modal.style.display = 'none';
+            modal.style.visibility = 'hidden';
+            modal.style.pointerEvents = 'none';
             document.body.classList.remove('age-gate-open');
+            document.body.style.overflow = 'auto';
             return; 
         }
         // Afficher l'Age Gate

@@ -89,7 +89,7 @@ add_filter( 'woocommerce_product_get_image', function( $html, $product ) {
     if ( ! $image_id ) {
         $premium_url = borea_get_premium_image_url( $product );
         if ( $premium_url ) {
-            return '<img src="' . esc_url( $premium_url ) . '" alt="' . esc_attr( $product->get_name() ) . '" class="product-image" />';
+            return '<img src="' . esc_url( $premium_url ) . '" alt="' . esc_attr( $product->get_name() ) . '" class="product-image" loading="lazy" decoding="async" />';
         }
     }
     
@@ -111,7 +111,7 @@ add_filter( 'woocommerce_cart_item_thumbnail', function( $thumbnail, $cart_item,
     if ( ! $image_id ) {
         $premium_url = borea_get_premium_image_url( $product );
         if ( $premium_url ) {
-            return '<img src="' . esc_url( $premium_url ) . '" alt="' . esc_attr( $product->get_name() ) . '" class="product-image" />';
+            return '<img src="' . esc_url( $premium_url ) . '" alt="' . esc_attr( $product->get_name() ) . '" class="product-image" loading="lazy" decoding="async" />';
         }
     }
     
