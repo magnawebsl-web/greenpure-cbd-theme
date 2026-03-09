@@ -73,10 +73,10 @@
                             echo '</a>';
                         } else {
                             echo '<div class="showcase-product-static">
-                                <img src="' . esc_url(GREENPURE_URI . '/assets/images/products-premium/borea_huile_cbd_premium.png') . '"
-                                     alt="Huile CBD 10% Premium"
+                                <img src="' . esc_url(GREENPURE_URI . '/assets/images/products-premium/borea_huile_cbd_luxe.png') . '"
+                                     alt="Huile CBD Premium Boréa CBD"
                                      class="showcase-img"
-                                     width="280" height="280"
+                                     width="340" height="340"
                                      loading="eager">
                                 <div class="showcase-badge">
                                     <span>Huile CBD Full Spectrum</span>

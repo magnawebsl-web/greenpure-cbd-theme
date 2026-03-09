@@ -101,10 +101,12 @@ add_filter( 'woocommerce_product_get_image', function( $html, $product, $size, $
             $cat = $term ? $term->name : '';
         }
 
-        $image_name = 'borea_huile_cbd_premium.png'; // Default
-        if ( strpos($cat, 'Inhalables') !== false ) $image_name = 'borea_vape_pen_gold.png';
-        if ( strpos($cat, 'Comestibles') !== false ) $image_name = 'borea_gummies_sommeil.png';
-        if ( strpos($cat, 'Animaux') !== false ) $image_name = 'borea_cbd_animaux.png';
+        $image_name = 'borea_huile_cbd_luxe.png'; // Default luxe
+        if ( strpos($cat, 'Inhalables') !== false ) $image_name = 'borea_vape_luxe.png';
+        if ( strpos($cat, 'Comestibles') !== false ) $image_name = 'borea_gummies_luxe.png';
+        if ( strpos($cat, 'Topiques et Cosmétiques') !== false ) $image_name = 'borea_huile_cbd_luxe.png';
+        if ( strpos($cat, 'Animaux') !== false ) $image_name = 'borea_animaux_luxe.png';
+        if ( strpos($cat, 'Fleurs') !== false ) $image_name = 'borea_fleur_cbd_luxe.png';
         
         $image_url = get_template_directory_uri() . '/assets/images/products-premium/' . $image_name;
         return sprintf( '<img src="%s" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt="%s" />', esc_url($image_url), esc_attr($product->get_name()) );
