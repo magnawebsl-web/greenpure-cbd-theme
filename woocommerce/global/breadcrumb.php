@@ -7,7 +7,7 @@ defined('ABSPATH') || exit;
 <nav class="woo-breadcrumb" aria-label="<?php esc_attr_e('Fil d\'Ariane', 'greenpure-cbd'); ?>">
     <div class="container">
         <ol class="breadcrumb__list" itemscope itemtype="https://schema.org/BreadcrumbList">
-            <?php foreach ( $crumbs as $key => $crumb ) : ?>
+            <?php if ( ! empty( $crumbs ) ) : foreach ( $crumbs as $key => $crumb ) : ?>
             <li class="breadcrumb__item<?php echo $key === array_key_last($crumbs) ? ' breadcrumb__item--current' : ''; ?>"
                 itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
 
@@ -30,7 +30,7 @@ defined('ABSPATH') || exit;
                 <?php endif; ?>
 
             </li>
-            <?php endforeach; ?>
+            <?php endforeach; endif; ?>
         </ol>
     </div>
 </nav>
