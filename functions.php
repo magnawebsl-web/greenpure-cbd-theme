@@ -90,7 +90,51 @@ add_filter( 'woocommerce_enqueue_styles', function( $styles ) {
     return $styles;
 } );
 
-/* Images premium : gérées via CSS et imports WooCommerce natifs */
+/* ──────────────────────────────────────
+   FORCE PREMIUM IMAGES DISPLAY (SECURE VERSION)
+   Remplace systématiquement les images WooCommerce par les visuels luxe du thème
+────────────────────────────────────── */
+add_filter( 'woocommerce_product_get_image', 'borea_force_premium_images_secure', 999, 5 );
+function borea_force_premium_images_secure( $html, $product, $size, $attr, $placeholder ) {
+    // Sécurité absolue : ne pas appliquer dans l'admin et vérifier si WooCommerce est actif
+    if ( is_admin() || ! class_exists( 'WooCommerce' ) || ! is_object( $product ) ) {
+        return $html;
+    }
+
+    try {
+        $cat_name = '';
+        $cats = $product->get_category_ids();
+        if ( ! empty( $cats ) ) {
+            $term = get_term( $cats[0], 'product_cat' );
+            $cat_name = ( $term && ! is_wp_error( $term ) ) ? $term->name : '';
+        }
+
+        // Mapping des catégories vers les images luxe générées
+        $image_name = 'borea_huile_cbd_luxe.png'; // Par défaut
+        
+        if ( stripos( $cat_name, 'Inhalables' ) !== false || stripos( $cat_name, 'Vape' ) !== false ) {
+            $image_name = 'borea_vape_luxe.png';
+        } elseif ( stripos( $cat_name, 'Comestibles' ) !== false || stripos( $cat_name, 'Gummies' ) !== false ) {
+            $image_name = 'borea_gummies_luxe.png';
+        } elseif ( stripos( $cat_name, 'Animaux' ) !== false ) {
+            $image_name = 'borea_animaux_luxe.png';
+        } elseif ( stripos( $cat_name, 'Fleurs' ) !== false ) {
+            $image_name = 'borea_fleur_cbd_luxe.png';
+        }
+        
+        $image_url = get_template_directory_uri() . '/assets/images/products-premium/' . $image_name;
+        
+        // Reconstruire le tag <img> avec les classes WooCommerce standard
+        return sprintf( 
+            '<img src="%s" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail premium-force-img" alt="%s" loading="lazy" style="object-fit: cover; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.15);" />', 
+            esc_url( $image_url ), 
+            esc_attr( $product->get_name() ) 
+        );
+    } catch ( Exception $e ) {
+        // En cas d'erreur imprévue, on retourne l'image d'origine pour ne pas faire planter le site
+        return $html;
+    }
+}
 
 /* Invalider les transients sidebar/toolbar quand un produit ou une catégorie change */
 function borea_flush_shop_transients() {
