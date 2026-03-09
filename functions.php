@@ -27,9 +27,9 @@ function greenpure_setup() {
 add_action( 'after_setup_theme', 'greenpure_setup' );
 
 function greenpure_scripts() {
-    wp_enqueue_style( 'greenpure-style', get_stylesheet_uri(), [], '1.0.1' );
-    wp_enqueue_style( 'greenpure-main', get_template_directory_uri() . '/assets/css/main.css', [], '1.0.1' );
-    wp_enqueue_script( 'greenpure-js', get_template_directory_uri() . '/assets/js/main.js', ['jquery'], '1.0.1', true );
+    wp_enqueue_style( 'greenpure-style', get_stylesheet_uri(), [], '1.0.2' );
+    wp_enqueue_style( 'greenpure-main', get_template_directory_uri() . '/assets/css/main.css', [], '1.0.2' );
+    wp_enqueue_script( 'greenpure-js', get_template_directory_uri() . '/assets/js/main.js', ['jquery'], '1.0.2', true );
 }
 add_action( 'wp_enqueue_scripts', 'greenpure_scripts' );
 
@@ -41,7 +41,7 @@ add_action( 'wp_enqueue_scripts', 'greenpure_scripts' );
 add_filter( 'woocommerce_enqueue_styles', '__return_empty_array' );
 
 /* ──────────────────────────────────────
-   FORCE PREMIUM IMAGES DISPLAY (V4 - ULTRA SMART)
+   FORCE PREMIUM IMAGES DISPLAY (V5 - FINAL)
    Ne remplace l'image QUE si aucune image réelle n'est définie.
 ────────────────────────────────────── */
 
@@ -58,8 +58,6 @@ function borea_get_premium_image_url( $product ) {
     }
 
     $image_name = 'borea_huile_cbd_luxe.png'; // Par défaut
-    
-    // Mapping précis basé sur le nom de la catégorie ou du produit
     $product_name = $product->get_name();
     
     if ( stripos($cat_name, 'Fleurs') !== false || stripos($product_name, 'Fleur') !== false ) {
