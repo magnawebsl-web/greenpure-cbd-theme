@@ -1,7 +1,7 @@
 <?php
 /*
 Template Name: Mentions légales
-Description: Page des mentions légales CBDBorea
+Description: Page des mentions légales CBDBorea - Conformité droit bulgare et européen
 */
 get_header(); 
 ?>
@@ -14,47 +14,100 @@ get_header();
 
 <div class="container">
     <div class="page-content entry-content legal-content">
-        <h2>Informations légales</h2>
         
-        <p>Le site <strong>cbdborea.com</strong> est exploité par :</p>
+        <h2>1. Informations relatives à l'entreprise</h2>
+        
+        <p>Le site de commerce électronique <strong>cbdborea.com</strong> (ci-après le « Site ») est exploité par la société :</p>
         
         <div class="legal-info">
-            <p><strong>Raison sociale :</strong> TP Software Ltd.</p>
-            <p><strong>Numéro d'immatriculation :</strong> 208135048</p>
-            <p><strong>Forme juridique :</strong> Société à responsabilité limitée (OOD)</p>
-            <p><strong>Pays d'immatriculation :</strong> Bulgarie</p>
-            <p><strong>Adresse du siège social :</strong> Bulgarie, Sofia, région Stolichna</p>
+            <p><strong>Dénomination sociale :</strong> TP SOFTWARE Ltd.</p>
+            <p><strong>Numéro d'entreprise (Bulgarie) :</strong> 208135048</p>
+            <p><strong>Numéro de TVA (Bulgarie) :</strong> BG208135048</p>
+            <p><strong>Forme juridique :</strong> Дружество с ограничена отговорност (OOD) - Société à responsabilité limitée</p>
+            <p><strong>Date de constitution :</strong> 20 janvier 2025</p>
+            <p><strong>Siège social :</strong> Bulgarie, Ville de Sofia, Région Stolichna</p>
+            <p><strong>Adresse complète :</strong> Bulgarie, Sofia, région Stolichna (adresse enregistrée auprès du Registre du commerce bulgare)</p>
+            <p><strong>Capital social :</strong> [Capital social enregistré auprès du Registre du commerce]</p>
             <p><strong>Email :</strong> contact@cbdborea.com</p>
         </div>
         
-        <h2>Directeur de la publication</h2>
-        <p>Le directeur de la publication est <strong>Thomas Paul Manuel Giro</strong>.</p>
+        <h2>2. Direction et représentation</h2>
         
-        <h2>Hébergement</h2>
-        <p>Le site est hébergé par un fournisseur d'hébergement web sécurisé.</p>
+        <p><strong>Directeur de la publication :</strong> Monsieur <strong>Thomas Paul Manuel Giraud</strong></p>
+        <p><strong>Gérant :</strong> Monsieur Thomas Paul Manuel Giraud</p>
         
-        <h2>Activité de l'entreprise</h2>
-        <p>TP Software Ltd. est une entreprise spécialisée dans :</p>
+        <h2>3. Hébergement du Site</h2>
+        
+        <p>Le Site est hébergé par :</p>
+        
+        <div class="legal-info">
+            <p><strong>Hostinger International Limited</strong></p>
+            <p><strong>Adresse du siège :</strong> Lumin Building, Floor 4, 61 Lordou Vyronos, 6023 Larnaca, Chypre</p>
+            <p><strong>Site web :</strong> www.hostinger.com</p>
+            <p><strong>Contact support :</strong> https://www.hostinger.com/contact</p>
+        </div>
+        
+        <h2>4. Activité de l'entreprise</h2>
+        
+        <p>TP SOFTWARE Ltd. est une société bulgare dont l'activité principale (code NACE bulgare) comprend :</p>
         <ul>
-            <li>Conseil en conception de systèmes d'information</li>
-            <li>Développement de logiciels et applications mobiles</li>
-            <li>Maintenance et gestion de systèmes IT</li>
-            <li>Commerce de services et produits liés aux technologies de l'information</li>
+            <li>Consultance en matière de conception de systèmes et technologies informatiques</li>
+            <li>Développement, surveillance, gestion et maintenance de systèmes informatiques</li>
+            <li>Développement de logiciels et d'applications mobiles</li>
+            <li>Commerce de gros et de détail de produits et services liés aux technologies de l'information</li>
+            <li>Commerce de produits à base de chanvre (CBD) conformément à la législation bulgare et européenne</li>
         </ul>
         
-        <h2>Propriété intellectuelle</h2>
-        <p>Tous les contenus présents sur ce site (textes, images, logos, vidéos) sont protégés par les droits de propriété intellectuelle. Toute reproduction est interdite sans autorisation préalable.</p>
+        <h2>5. Propriété intellectuelle</h2>
         
-        <h2>Responsabilité</h2>
-        <p>Les informations fournies sur ce site le sont à titre purement informatif. CBD Borea s'efforce d'assurer l'exactitude des informations présentes sur ce site mais ne peut garantir l'absence d'erreurs.</p>
+        <p>L'ensemble des éléments du Site (structure, design, textes, graphiques, logos, images, vidéos, sons, logiciels, bases de données) est protégé par les droits de propriété intellectuelle.</p>
         
-        <h2>Produits CBD</h2>
-        <p>Tous nos produits CBD contiennent moins de 0,3% de THC conformément à la législation française et européenne en vigueur. Les produits à base de CBD ne sont pas des médicaments et ne doivent pas être utilisés comme tels. Nos produits sont réservés aux personnes majeures.</p>
+        <p>La reproduction, représentation, modification, publication, transmission, ou dénaturation, totale ou partielle du Site ou de son contenu, par quelque procédé que ce soit, sans l'autorisation préalable et écrite de TP SOFTWARE Ltd., est interdite et constitutive de contrefaçon.</p>
         
-        <h2>Droit applicable</h2>
-        <p>Les présentes mentions légales sont régies par le droit bulgare et européen.</p>
+        <p>Les marques et logos TP SOFTWARE Ltd. ainsi que les marques des partenaires commerciales présentes sur le Site sont des marques déposées. Toute reproduction non autorisée est interdite.</p>
+        
+        <h2>6. Responsabilité</h2>
+        
+        <p>Les informations fournies sur le Site le sont à titre purement informatif et illustratif. TP SOFTWARE Ltd. s'efforce d'assurer l'exactitude et la mise à jour des informations présentes sur le Site, mais ne peut garantir l'absence d'erreurs, d'omissions ou de modifications.</p>
+        
+        <p>TP SOFTWARE Ltd. ne pourra être tenue responsable :</p>
+        <ul>
+            <li>Des erreurs ou omissions éventuelles dans les contenus</li>
+            <li>Des dommages directs ou indirects résultant de l'utilisation du Site</li>
+            <li>Des dommages résultant d'une mauvaise utilisation des produits achetés</li>
+        </ul>
+        
+        <h2>7. Produits CBD - Information légale</h2>
+        
+        <p>Tous les produits CBD proposés à la vente sur le Site :</p>
+        <ul>
+            <li>Contiennent moins de <strong>0,3% de THC</strong> conformément à la législation bulgare (Loi sur le contrôle des stupéfiants) et européenne</li>
+            <li>Ne sont pas des médicaments et ne sont pas destinés à diagnostiquer, traiter, guérir ou prévenir une maladie</li>
+            <li>Sont réservés aux <strong>personnes majeures (18 ans et plus)</strong></li>
+            <li>Sont conformes aux normes de sécurité et de qualité européennes</li>
+        </ul>
+        
+        <p><strong>Avertissement :</strong> Les produits CBD ne doivent pas être utilisés comme substituts à un traitement médical. En cas de doute, consultez un professionnel de santé.</p>
+        
+        <h2>8. Liens hypertextes</h2>
+        
+        <p>Le Site peut contenir des liens vers d'autres sites internet. TP SOFTWARE Ltd. n'exerce aucun contrôle sur ces sites et décline toute responsabilité quant à leur contenu.</p>
+        
+        <h2>9. Droit applicable et juridiction compétente</h2>
+        
+        <p>Les présentes mentions légales sont régies par le <strong>droit bulgare</strong> et le <strong>droit de l'Union européenne</strong>.</p>
+        
+        <p>En cas de litige, les tribunaux bulgares seront seuls compétents, conformément aux règles de procédure civile bulgare et au Règlement (UE) n°1215/2012 (Bruxelles I).</p>
+        
+        <p>Conformément à la Directive 2013/11/UE relative au règlement extrajudiciaire des litiges de consommation, vous pouvez recourir au mécanisme de règlement extrajudiciaire des litiges de consommation via la plateforme de règlement en ligne des litiges (RLL) : <a href="https://ec.europa.eu/consumers/odr" target="_blank" rel="noopener">https://ec.europa.eu/consumers/odr</a></p>
+        
+        <h2>10. Contact</h2>
+        
+        <p>Pour toute question relative aux présentes mentions légales, vous pouvez nous contacter à :</p>
+        <p><strong>Email :</strong> contact@cbdborea.com</p>
         
         <p class="last-update">Dernière mise à jour : <?php echo date('d/m/Y'); ?></p>
+        
     </div>
 </div>
 
