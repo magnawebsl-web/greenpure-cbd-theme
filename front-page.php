@@ -14,7 +14,7 @@
     <div id="particles" class="hero__particles" aria-hidden="true"></div>
     <div class="container">
         <div class="hero__inner">
-            <div class="hero__content" data-aos="fade-right">
+            <div class="hero__content hero__content--animated">
                 <span class="hero__eyebrow">
                     <svg width="8" height="8" viewBox="0 0 8 8" fill="#F4CC6A"><circle cx="4" cy="4" r="4"/></svg>
                     Certifié &lt; 0,3% THC • Agriculture Biologique
@@ -53,7 +53,7 @@
                     </div>
                 </div>
             </div>
-            <div class="hero__visual" data-aos="fade-left">
+            <div class="hero__visual hero__visual--animated">
                 <div class="hero__product-showcase">
                     <div class="showcase-glow"></div>
                     <div class="showcase-rings">
