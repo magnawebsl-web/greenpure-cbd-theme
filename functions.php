@@ -27,9 +27,9 @@ function greenpure_setup() {
 add_action( 'after_setup_theme', 'greenpure_setup' );
 
 function greenpure_scripts() {
-    wp_enqueue_style( 'greenpure-style', get_stylesheet_uri(), [], '1.0.0' );
-    wp_enqueue_style( 'greenpure-main', get_template_directory_uri() . '/assets/css/main.css', [], '1.0.0' );
-    wp_enqueue_script( 'greenpure-js', get_template_directory_uri() . '/assets/js/main.js', ['jquery'], '1.0.0', true );
+    wp_enqueue_style( 'greenpure-style', get_stylesheet_uri(), [], '1.0.1' );
+    wp_enqueue_style( 'greenpure-main', get_template_directory_uri() . '/assets/css/main.css', [], '1.0.1' );
+    wp_enqueue_script( 'greenpure-js', get_template_directory_uri() . '/assets/js/main.js', ['jquery'], '1.0.1', true );
 }
 add_action( 'wp_enqueue_scripts', 'greenpure_scripts' );
 
@@ -41,7 +41,7 @@ add_action( 'wp_enqueue_scripts', 'greenpure_scripts' );
 add_filter( 'woocommerce_enqueue_styles', '__return_empty_array' );
 
 /* ──────────────────────────────────────
-   FORCE PREMIUM IMAGES DISPLAY (V3 - SMART)
+   FORCE PREMIUM IMAGES DISPLAY (V4 - ULTRA SMART)
    Ne remplace l'image QUE si aucune image réelle n'est définie.
 ────────────────────────────────────── */
 
@@ -57,22 +57,41 @@ function borea_get_premium_image_url( $product ) {
         $cat_name = ( $term && ! is_wp_error( $term ) ) ? $term->name : '';
     }
 
-    $image_name = 'borea_huile_cbd_luxe.png';
-    if ( stripos( $cat_name, 'Inhalables' ) !== false || stripos( $cat_name, 'Vape' ) !== false ) {
-        $image_name = 'borea_vape_luxe.png';
-    } elseif ( stripos( $cat_name, 'Comestibles' ) !== false || stripos( $cat_name, 'Gummies' ) !== false ) {
-        $image_name = 'borea_gummies_luxe.png';
-    } elseif ( stripos( $cat_name, 'Animaux' ) !== false ) {
-        $image_name = 'borea_animaux_luxe.png';
-    } elseif ( stripos( $cat_name, 'Fleurs' ) !== false ) {
+    $image_name = 'borea_huile_cbd_luxe.png'; // Par défaut
+    
+    // Mapping précis basé sur le nom de la catégorie ou du produit
+    $product_name = $product->get_name();
+    
+    if ( stripos($cat_name, 'Fleurs') !== false || stripos($product_name, 'Fleur') !== false ) {
         $image_name = 'borea_fleur_cbd_luxe.png';
-    } elseif ( stripos( $cat_name, 'Cosmétiques' ) !== false || stripos( $cat_name, 'Baume' ) !== false || stripos( $cat_name, 'Beurre' ) !== false ) {
+    } elseif ( stripos($cat_name, 'Vape') !== false || stripos($cat_name, 'Inhalables') !== false || stripos($product_name, 'Vape') !== false ) {
+        $image_name = 'borea_vape_luxe.png';
+    } elseif ( stripos($cat_name, 'Gummies') !== false || stripos($cat_name, 'Comestibles') !== false || stripos($product_name, 'Gummies') !== false ) {
+        $image_name = 'borea_gummies_luxe.png';
+    } elseif ( stripos($cat_name, 'Animaux') !== false || stripos($product_name, 'Animaux') !== false || stripos($product_name, 'Chien') !== false || stripos($product_name, 'Chat') !== false ) {
+        $image_name = 'borea_animaux_luxe.png';
+    } elseif ( stripos($cat_name, 'Cosmétiques') !== false || stripos($product_name, 'Baume') !== false || stripos($product_name, 'Beurre') !== false || stripos($product_name, 'Crème') !== false ) {
         $image_name = 'borea_cosmetique_luxe.png';
-    } elseif ( stripos( $cat_name, 'Capsules' ) !== false || stripos( $cat_name, 'Gélules' ) !== false ) {
+    } elseif ( stripos($cat_name, 'Capsules') !== false || stripos($cat_name, 'Gélules') !== false || stripos($product_name, 'Capsule') !== false || stripos($product_name, 'Gélule') !== false ) {
         $image_name = 'borea_capsule_luxe.png';
     }
     
     return get_template_directory_uri() . '/assets/images/products-premium/' . $image_name;
+}
+
+function borea_has_real_image( $product ) {
+    $image_id = $product->get_image_id();
+    if ( ! $image_id ) return false;
+    
+    $image_src = wp_get_attachment_image_src( $image_id, 'full' );
+    if ( ! $image_src || empty( $image_src[0] ) ) return false;
+    
+    // Si l'image contient "placeholder" ou est un SVG de base, on considère qu'elle n'est pas réelle
+    if ( stripos( $image_src[0], 'placeholder' ) !== false || stripos( $image_src[0], '.svg' ) !== false ) {
+        return false;
+    }
+    
+    return true;
 }
 
 function borea_force_premium_images_secure( $html, $product, $size, $attr, $placeholder ) {
@@ -80,12 +99,8 @@ function borea_force_premium_images_secure( $html, $product, $size, $attr, $plac
         return $html;
     }
 
-    // SI LE PRODUIT A DÉJÀ UNE IMAGE RÉELLE, ON LA GARDE
-    if ( $product->get_image_id() ) {
-        $image_src = wp_get_attachment_image_src( $product->get_image_id(), 'full' );
-        if ( $image_src && ! empty( $image_src[0] ) && stripos( $image_src[0], 'placeholder' ) === false ) {
-            return $html;
-        }
+    if ( borea_has_real_image( $product ) ) {
+        return $html;
     }
 
     try {
@@ -104,11 +119,8 @@ function borea_force_premium_single_image( $html, $post_id ) {
     $product = wc_get_product( $post_id );
     if ( ! $product ) return $html;
 
-    if ( $product->get_image_id() ) {
-        $image_src = wp_get_attachment_image_src( $product->get_image_id(), 'full' );
-        if ( $image_src && ! empty( $image_src[0] ) && stripos( $image_src[0], 'placeholder' ) === false ) {
-            return $html;
-        }
+    if ( borea_has_real_image( $product ) ) {
+        return $html;
     }
     
     $image_url = borea_get_premium_image_url( $product );
@@ -121,11 +133,8 @@ function borea_force_premium_single_image( $html, $post_id ) {
 
 function borea_force_premium_cart_image( $image, $cart_item, $cart_item_key ) {
     $product = $cart_item['data'];
-    if ( $product->get_image_id() ) {
-        $image_src = wp_get_attachment_image_src( $product->get_image_id(), 'full' );
-        if ( $image_src && ! empty( $image_src[0] ) && stripos( $image_src[0], 'placeholder' ) === false ) {
-            return $image;
-        }
+    if ( borea_has_real_image( $product ) ) {
+        return $image;
     }
     $image_url = borea_get_premium_image_url( $product );
     return sprintf( '<img src="%s" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail premium-force-img" alt="%s" style="border-radius: 8px;" />', esc_url( $image_url ), esc_attr( $product->get_name() ) );
@@ -158,4 +167,6 @@ function greenpure_widgets_init() {
 add_action( 'widgets_init', 'greenpure_widgets_init' );
 
 // Inclusion des fichiers de support
-require_once get_template_directory() . '/inc/language-detector.php';
+if ( file_exists( get_template_directory() . '/inc/language-detector.php' ) ) {
+    require_once get_template_directory() . '/inc/language-detector.php';
+}
