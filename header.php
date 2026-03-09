@@ -16,25 +16,7 @@
 <!-- Skip link pour l'accessibilité -->
 <a href="#main-content" class="skip-link"><?php echo esc_html(greenpure_t('skip_to_content') ?: 'Aller au contenu'); ?></a>
 
-<!-- ══════════════════════════════════
-     AGE GATE MODAL (ROBUSTE & SÉCURISÉ)
-══════════════════════════════════ -->
-<div id="age-gate" class="age-gate" role="dialog" aria-modal="true" aria-label="Vérification d'âge" style="display: none;">
-    <div class="age-gate__overlay"></div>
-    <div class="age-gate__box">
-        <div class="age-gate__logo">
-            <svg width="48" height="48" viewBox="0 0 48 48" fill="none"><path d="M24 4C13 4 4 13 4 24s9 20 20 20 20-9 20-20S35 4 24 4z" fill="#2D6A4F"/><path d="M24 12c-1 5-4 9-8 11 2 3 5 5 8 5s6-2 8-5c-4-2-7-6-8-11z" fill="#B7E4C7"/><path d="M24 12c1 5 4 9 8 11-2 3-5 5-8 5s-6-2-8-5c4-2 7-6 8-11z" fill="#52B788"/></svg>
-            <span><?php bloginfo('name'); ?></span>
-        </div>
-        <h2><?php echo esc_html(greenpure_t('age_title')); ?></h2>
-        <p><?php echo esc_html(greenpure_t('age_text')); ?><br><?php echo wp_kses(greenpure_t('age_question'), ['strong'=>[]]); ?></p>
-        <div class="age-gate__actions">
-            <button id="age-gate-yes" class="btn btn--primary btn--lg"><?php echo esc_html(greenpure_t('age_yes')); ?></button>
-            <button id="age-gate-no" class="btn btn--outline"><?php echo esc_html(greenpure_t('age_no')); ?></button>
-        </div>
-        <p class="age-gate__legal"><?php echo esc_html(greenpure_t('age_legal')); ?> <a href="<?php echo esc_url(get_privacy_policy_url()); ?>"><?php echo esc_html(greenpure_t('age_legal_link')); ?></a>.</p>
-    </div>
-</div>
+<!-- Age Gate removed for stability - Use a WordPress plugin instead -->
 
 <!-- ══════════════════════════════════
      TOP BAR

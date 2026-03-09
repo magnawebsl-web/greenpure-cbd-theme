@@ -22,41 +22,8 @@ function throttle(fn, limit) {
     return function(...args){ const now=Date.now(); if(now-last>=limit){ last=now; fn.apply(this,args); } };
 }
 
-/* === 1. AGE GATE — id correct : #age-gate === */
-function initAgeGate() {
-    try {
-        const modal  = document.getElementById('age-gate');
-        const btnYes = document.getElementById('age-gate-yes');
-        const btnNo  = document.getElementById('age-gate-no');
-        if (!modal) return;
-        // Vérifier si l'utilisateur a déjà validé son âge
-        if (getCookie('greenpure_age') === '1') { 
-            modal.style.display = 'none';
-            modal.style.visibility = 'hidden';
-            modal.style.pointerEvents = 'none';
-            document.body.classList.remove('age-gate-open');
-            document.body.style.overflow = 'auto';
-            return; 
-        }
-        // Afficher l'Age Gate
-        modal.style.display = 'flex';
-        modal.style.zIndex = '99999';
-        document.body.classList.add('age-gate-open');
-        document.body.style.overflow = 'hidden';
-        btnYes && btnYes.addEventListener('click', function(){
-            setCookie('greenpure_age','1',30);
-            modal.classList.add('age-gate--closing');
-            setTimeout(function(){
-                modal.style.display = 'none';
-                document.body.classList.remove('age-gate-open');
-                document.body.style.overflow = 'auto';
-            }, 400);
-        });
-        btnNo && btnNo.addEventListener('click', function(){
-            window.location.href = (typeof greenpureData!=='undefined' && greenpureData.ageGateRedirect) ? greenpureData.ageGateRedirect : 'https://www.google.com';
-        });
-    } catch(e){ console.error('[GP] AgeGate:',e); }
-}
+/* === 1. AGE GATE — REMOVED FOR STABILITY === */
+/* Use a WordPress plugin instead for better stability */
 
 /* === 2. STICKY HEADER === */
 function initStickyHeader() {
@@ -452,7 +419,7 @@ function initProductFilterAnim() {
 
 /* === BOOTSTRAP === */
 document.addEventListener('DOMContentLoaded',function(){
-    initAgeGate();
+    // Age Gate removed - use a WordPress plugin instead
     initStickyHeader();
     initStickyBehavior();
     initMobileMenu();
