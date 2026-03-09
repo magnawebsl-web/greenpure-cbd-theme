@@ -838,10 +838,10 @@ a:focus-visible {
 ────────────────────────────────────── */
 .hero {
   position: relative;
-  min-height: clamp(600px, 90vh, 1000px);
+  min-height: clamp(500px, 85vh, 1000px);
   display: flex;
   align-items: center;
-  overflow: hidden;
+  overflow: visible; /* was hidden — was clipping product showcase at narrow viewports */
   background: linear-gradient(135deg, var(--color-primary-dark) 0%, var(--color-primary) 40%, var(--color-secondary) 100%);
   box-shadow: inset 0 0 100px rgba(0,0,0,0.2);
 }
@@ -909,18 +909,27 @@ a:focus-visible {
   z-index: 1;
   display: grid;
   grid-template-columns: 1fr;
-  gap: 48px;
+  gap: 32px;
   align-items: center;
-  padding: 80px 0;
+  padding: 60px 0;
 }
 
-@media (min-width: 900px) {
+@media (min-width: 640px) {
   .hero__inner {
     grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    padding: 80px 0;
   }
 }
 
-.hero__content { max-width: 560px; }
+@media (min-width: 1024px) {
+  .hero__inner {
+    grid-template-columns: 55% 45%;
+    gap: 48px;
+  }
+}
+
+.hero__content { max-width: 560px; min-width: 0; }
 
 /* Animations CSS directes — ne dépendent PAS du JS */
 @keyframes heroSlideRight {
@@ -3587,7 +3596,13 @@ a:focus-visible {
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 400px;
+  min-height: 260px;
+}
+
+@media (min-width: 640px) {
+  .hero__product-showcase {
+    min-height: 380px;
+  }
 }
 
 .showcase-glow {
@@ -3621,9 +3636,15 @@ a:focus-visible {
   animation: ringExpand 6s ease-in-out infinite;
 }
 
-.ring--1 { width: 280px; height: 280px; animation-delay: 0s; }
-.ring--2 { width: 360px; height: 360px; animation-delay: 1.5s; }
-.ring--3 { width: 440px; height: 440px; animation-delay: 3s; }
+.ring--1 { width: 200px; height: 200px; animation-delay: 0s; }
+.ring--2 { width: 260px; height: 260px; animation-delay: 1.5s; }
+.ring--3 { width: 320px; height: 320px; animation-delay: 3s; }
+
+@media (min-width: 640px) {
+  .ring--1 { width: 280px; height: 280px; }
+  .ring--2 { width: 360px; height: 360px; }
+  .ring--3 { width: 440px; height: 440px; }
+}
 
 @keyframes ringExpand {
   0%, 100% { opacity: 0.15; transform: scale(1); }
@@ -3635,21 +3656,29 @@ a:focus-visible {
   z-index: 2;
   display: block;
   text-decoration: none;
-  width: 300px;
-  padding-bottom: 44px; /* room for badge at bottom: -12px */
+  width: 220px;
+  padding-bottom: 44px;
+}
+
+@media (min-width: 640px) {
+  .showcase-product { width: 280px; }
+}
+
+@media (min-width: 1024px) {
+  .showcase-product { width: 300px; }
 }
 
 .showcase-img {
   display: block;
-  width: 300px;
-  height: 300px;
+  width: 100%;
+  aspect-ratio: 1 / 1;
   object-fit: contain;
   border-radius: var(--radius-xl);
   box-shadow: 0 24px 80px rgba(0,0,0,0.35), 0 8px 32px rgba(212,168,67,0.15);
   transition: transform var(--transition-slow), box-shadow var(--transition-slow);
   border: 1px solid rgba(255,255,255,0.1);
   background: #fff;
-  padding: 20px;
+  padding: 16px;
   box-sizing: border-box;
 }
 
@@ -3725,7 +3754,7 @@ a:focus-visible {
 
 .bottle-label small { font-size: 10px; opacity: 0.8; }
 
-/* Floating badges hero */
+/* Floating badges hero — masqués sous 640px pour éviter le chevauchement */
 .floating-badge,
 .hero__floating-badge {
   position: absolute;
@@ -3733,12 +3762,19 @@ a:focus-visible {
   border-radius: var(--radius-md);
   padding: 10px 14px;
   box-shadow: var(--shadow-lg);
-  display: flex;
+  display: none; /* hidden by default on mobile */
   align-items: center;
   gap: 8px;
   animation: badgeFloat 6s ease-in-out infinite;
   z-index: 3;
   white-space: nowrap;
+}
+
+@media (min-width: 640px) {
+  .floating-badge,
+  .hero__floating-badge {
+    display: flex;
+  }
 }
 
 .floating-badge--1,
