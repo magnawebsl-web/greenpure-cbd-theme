@@ -26,11 +26,11 @@
         <div class="topbar__inner">
             <div class="topbar__promo">
                 <span class="topbar__icon">🌿</span>
-                <span><?php echo esc_html(greenpure_t('free_shipping')); ?> — <?php echo esc_html(greenpure_t('shipping_24h')); ?></span>
+                <span><?php echo wp_kses_post(greenpure_t('free_shipping')); ?> — <?php echo wp_kses_post(greenpure_t('shipping_24h')); ?></span>
                 <span class="topbar__sep">|</span>
-                <span><?php echo esc_html(greenpure_t('secure_payment')); ?></span>
+                <span><?php echo wp_kses_post(greenpure_t('secure_payment')); ?></span>
                 <span class="topbar__sep">|</span>
-                <span><?php echo esc_html(greenpure_t('certified_thc')); ?></span>
+                <span><?php echo wp_kses_post(greenpure_t('certified_thc')); ?></span>
             </div>
             <div class="topbar__right">
                 <?php if ( is_user_logged_in() ): ?>

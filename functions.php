@@ -40,6 +40,15 @@ add_action( 'wp_enqueue_scripts', 'greenpure_scripts' );
 // Retirer les styles WooCommerce par défaut pour garder le contrôle
 add_filter( 'woocommerce_enqueue_styles', '__return_empty_array' );
 
+// Forcer la devise EUR (€) pour éviter l'affichage $
+add_filter( 'woocommerce_currency', function( $currency ) {
+    return 'EUR';
+} );
+
+add_filter( 'woocommerce_currency_symbol', function( $symbol ) {
+    return '€';
+} );
+
 /* ──────────────────────────────────────
    FORCE PREMIUM IMAGES DISPLAY (V6 - ULTRA-SIMPLE & SECURE)
    Méthode directe : remplace l'image au moment du rendu HTML
