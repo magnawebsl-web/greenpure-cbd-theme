@@ -16,7 +16,36 @@
 <!-- Skip link pour l'accessibilité -->
 <a href="#main-content" class="skip-link"><?php echo esc_html(greenpure_t('skip_to_content') ?: 'Aller au contenu'); ?></a>
 
-<!-- Age Gate removed for stability - Use a WordPress plugin instead -->
+<!-- ══════════════════════════════════
+     AGE GATE
+══════════════════════════════════ -->
+<div class="age-gate" id="age-gate" aria-modal="true" role="dialog" aria-labelledby="age-gate-title" style="display:none;">
+    <div class="age-gate__overlay"></div>
+    <div class="age-gate__box">
+        <div class="age-gate__logo">
+            <?php if ( has_custom_logo() ): the_custom_logo(); else: ?>
+                <div class="logo-default">
+                    <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                        <path d="M24 4C13 4 4 13 4 24s9 20 20 20 20-9 20-20S35 4 24 4z" fill="#2D6A4F"/>
+                        <path d="M24 12c-1 5-4 9-8 11 2 3 5 5 8 5s6-2 8-5c-4-2-7-6-8-11z" fill="#B7E4C7"/>
+                        <path d="M24 12c1 5 4 9 8 11-2 3-5 5-8 5s-6-2-8-5c4-2 7-6 8-11z" fill="#52B788"/>
+                    </svg>
+                </div>
+            <?php endif; ?>
+        </div>
+        <h2 class="age-gate__title" id="age-gate-title"><?php echo esc_html(greenpure_t('age_gate_title') ?: 'Confirmation d\'âge'); ?></h2>
+        <p class="age-gate__text"><?php echo esc_html(greenpure_t('age_gate_text') ?: 'Ce site est réservé aux personnes âgées de 18 ans et plus. Avez-vous l\'âge légal pour accéder à ce contenu ?'); ?></p>
+        <div class="age-gate__actions">
+            <button class="age-gate__btn age-gate__btn--yes js-age-yes" type="button">
+                <?php echo esc_html(greenpure_t('age_gate_yes') ?: 'Oui, j\'ai 18 ans ou plus'); ?>
+            </button>
+            <button class="age-gate__btn age-gate__btn--no js-age-no" type="button">
+                <?php echo esc_html(greenpure_t('age_gate_no') ?: 'Non, j\'ai moins de 18 ans'); ?>
+            </button>
+        </div>
+        <p class="age-gate__legal"><?php echo esc_html(greenpure_t('age_gate_legal') ?: 'En entrant sur ce site, vous acceptez nos conditions d\'utilisation et confirmez avoir l\'âge légal dans votre pays.'); ?></p>
+    </div>
+</div>
 
 <!-- ══════════════════════════════════
      TOP BAR

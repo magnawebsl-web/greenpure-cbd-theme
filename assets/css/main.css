@@ -2441,7 +2441,109 @@ a:focus-visible {
   transform: translateY(-2px);
 }
 
-/* Age Gate CSS removed for stability - Use a WordPress plugin instead */
+/* ══════════════════════════════════
+   AGE GATE
+══════════════════════════════════ */
+.age-gate {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.age-gate__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(4px);
+}
+.age-gate__box {
+  position: relative;
+  z-index: 1;
+  background: #fff;
+  border-radius: var(--radius-lg, 16px);
+  padding: 48px 40px 36px;
+  max-width: 480px;
+  width: calc(100% - 32px);
+  text-align: center;
+  box-shadow: 0 24px 64px rgba(0,0,0,.35);
+  animation: ageFadeIn .3s ease;
+}
+@keyframes ageFadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.age-gate__logo {
+  margin-bottom: 24px;
+}
+.age-gate__logo img,
+.age-gate__logo svg {
+  max-height: 60px;
+  width: auto;
+}
+.age-gate__title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-text, #1a1a1a);
+  margin: 0 0 12px;
+}
+.age-gate__text {
+  font-size: 1rem;
+  color: var(--color-text-light, #555);
+  line-height: 1.6;
+  margin: 0 0 28px;
+}
+.age-gate__actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+.age-gate__btn {
+  display: block;
+  width: 100%;
+  padding: 14px 20px;
+  border: none;
+  border-radius: var(--radius-md, 10px);
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background .2s, transform .15s;
+}
+.age-gate__btn--yes {
+  background: var(--color-primary, #2D6A4F);
+  color: #fff;
+}
+.age-gate__btn--yes:hover {
+  background: var(--color-primary-dark, #1b4332);
+  transform: translateY(-1px);
+}
+.age-gate__btn--no {
+  background: #f0f0f0;
+  color: var(--color-text-light, #555);
+}
+.age-gate__btn--no:hover {
+  background: #e0e0e0;
+}
+.age-gate__legal {
+  font-size: 0.75rem;
+  color: #aaa;
+  line-height: 1.5;
+  margin: 0;
+}
+/* Bloquer le scroll quand age gate visible */
+body.age-gate-active {
+  overflow: hidden;
+}
+@media (max-width: 480px) {
+  .age-gate__box {
+    padding: 36px 24px 28px;
+  }
+  .age-gate__title {
+    font-size: 1.25rem;
+  }
+}
 
 /* Sections misc */
 .section-cta {

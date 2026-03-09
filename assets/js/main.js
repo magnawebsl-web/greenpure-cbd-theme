@@ -22,8 +22,34 @@ function throttle(fn, limit) {
     return function(...args){ const now=Date.now(); if(now-last>=limit){ last=now; fn.apply(this,args); } };
 }
 
-/* === 1. AGE GATE — REMOVED FOR STABILITY === */
-/* Use a WordPress plugin instead for better stability */
+/* === 1. AGE GATE === */
+function initAgeGate() {
+    try {
+        var gate = document.getElementById('age-gate');
+        if (!gate) return;
+        // Si le cookie existe déjà, ne pas afficher
+        if (getCookie('age_verified') === '1') return;
+        // Afficher le gate
+        gate.style.display = 'flex';
+        document.body.classList.add('age-gate-active');
+        // Bouton OUI
+        var btnYes = gate.querySelector('.js-age-yes');
+        if (btnYes) {
+            btnYes.addEventListener('click', function() {
+                setCookie('age_verified', '1', 30);
+                gate.style.display = 'none';
+                document.body.classList.remove('age-gate-active');
+            });
+        }
+        // Bouton NON → redirection
+        var btnNo = gate.querySelector('.js-age-no');
+        if (btnNo) {
+            btnNo.addEventListener('click', function() {
+                window.location.href = 'https://www.google.com';
+            });
+        }
+    } catch(e){ console.error('[GP] AgeGate:', e); }
+}
 
 /* === 2. STICKY HEADER === */
 function initStickyHeader() {
@@ -433,7 +459,7 @@ function initProductFilterAnim() {
 
 /* === BOOTSTRAP === */
 document.addEventListener('DOMContentLoaded',function(){
-    // Age Gate removed - use a WordPress plugin instead
+    initAgeGate();
     initStickyHeader();
     initStickyBehavior();
     initMobileMenu();
