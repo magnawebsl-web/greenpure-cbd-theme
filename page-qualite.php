@@ -53,6 +53,7 @@ get_header();
         <section class="quality-cta">
             <h2>Des questions sur notre qualité ?</h2>
             <p>Notre équipe est disponible pour répondre à toutes vos questions.</p>
+            <p><strong>Entreprise :</strong> TP Software Ltd. | <strong>Email :</strong> contact@cbdborea.com</p>
             <a href="/contact" class="btn btn--primary">Nous contacter</a>
         </section>
         

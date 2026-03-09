@@ -89,8 +89,12 @@ get_header();
         <div class="faq-section">
             <h2>Contact</h2>
             <p>Vous n'avez pas trouvé votre réponse ?</p>
-            <p><strong>Email :</strong> contact@cbdborea.com</p>
-            <p><strong>Horaire :</strong> Lun-Sam 9h-18h</p>
+            <div class="legal-info">
+                <p><strong>Entreprise :</strong> TP Software Ltd.</p>
+                <p><strong>Numéro d'immatriculation :</strong> 208135048</p>
+                <p><strong>Email :</strong> contact@cbdborea.com</p>
+                <p><strong>Horaire :</strong> Lun-Sam 9h-18h</p>
+            </div>
         </div>
         
     </div>
