@@ -27,9 +27,9 @@ function greenpure_setup() {
 add_action( 'after_setup_theme', 'greenpure_setup' );
 
 function greenpure_scripts() {
-    wp_enqueue_style( 'greenpure-style', get_stylesheet_uri(), [], '1.0.2' );
-    wp_enqueue_style( 'greenpure-main', get_template_directory_uri() . '/assets/css/main.css', [], '1.0.2' );
-    wp_enqueue_script( 'greenpure-js', get_template_directory_uri() . '/assets/js/main.js', ['jquery'], '1.0.2', true );
+    wp_enqueue_style( 'greenpure-style', get_stylesheet_uri(), [], '1.0.3' );
+    wp_enqueue_style( 'greenpure-main', get_template_directory_uri() . '/assets/css/main.css', [], '1.0.3' );
+    wp_enqueue_script( 'greenpure-js', get_template_directory_uri() . '/assets/js/main.js', ['jquery'], '1.0.3', true );
 }
 add_action( 'wp_enqueue_scripts', 'greenpure_scripts' );
 
@@ -41,15 +41,15 @@ add_action( 'wp_enqueue_scripts', 'greenpure_scripts' );
 add_filter( 'woocommerce_enqueue_styles', '__return_empty_array' );
 
 /* ──────────────────────────────────────
-   FORCE PREMIUM IMAGES DISPLAY (V5 - FINAL)
-   Ne remplace l'image QUE si aucune image réelle n'est définie.
+   FORCE PREMIUM IMAGES DISPLAY (V6 - ULTRA-SIMPLE & SECURE)
+   Méthode directe : remplace l'image au moment du rendu HTML
 ────────────────────────────────────── */
 
-add_filter( 'woocommerce_product_get_image', 'borea_force_premium_images_secure', 999, 5 );
-add_filter( 'woocommerce_single_product_image_thumbnail_html', 'borea_force_premium_single_image', 999, 2 );
-add_filter( 'woocommerce_cart_item_thumbnail', 'borea_force_premium_cart_image', 999, 3 );
-
 function borea_get_premium_image_url( $product ) {
+    if ( ! is_object( $product ) ) {
+        return '';
+    }
+    
     $cat_name = '';
     $cats = $product->get_category_ids();
     if ( ! empty( $cats ) ) {
@@ -77,94 +77,87 @@ function borea_get_premium_image_url( $product ) {
     return get_template_directory_uri() . '/assets/images/products-premium/' . $image_name;
 }
 
-function borea_has_real_image( $product ) {
-    $image_id = $product->get_image_id();
-    if ( ! $image_id ) return false;
-    
-    $image_src = wp_get_attachment_image_src( $image_id, 'full' );
-    if ( ! $image_src || empty( $image_src[0] ) ) return false;
-    
-    // Si l'image contient "placeholder" ou est un SVG de base, on considère qu'elle n'est pas réelle
-    if ( stripos( $image_src[0], 'placeholder' ) !== false || stripos( $image_src[0], '.svg' ) !== false ) {
-        return false;
-    }
-    
-    return true;
-}
-
-function borea_force_premium_images_secure( $html, $product, $size, $attr, $placeholder ) {
+// Filtre pour remplacer l'image produit sur la boutique et les fiches individuelles
+add_filter( 'woocommerce_product_get_image', function( $html, $product ) {
     if ( is_admin() || ! class_exists( 'WooCommerce' ) || ! is_object( $product ) ) {
         return $html;
     }
-
-    if ( borea_has_real_image( $product ) ) {
-        return $html;
-    }
-
-    try {
-        $image_url = borea_get_premium_image_url( $product );
-        return sprintf( 
-            '<img src="%s" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail premium-force-img" alt="%s" loading="lazy" style="object-fit: cover; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.15);" />', 
-            esc_url( $image_url ), 
-            esc_attr( $product->get_name() ) 
-        );
-    } catch ( Exception $e ) {
-        return $html;
-    }
-}
-
-function borea_force_premium_single_image( $html, $post_id ) {
-    $product = wc_get_product( $post_id );
-    if ( ! $product ) return $html;
-
-    if ( borea_has_real_image( $product ) ) {
-        return $html;
+    
+    $image_id = $product->get_image_id();
+    
+    // Si le produit n'a pas d'image, on utilise la premium
+    if ( ! $image_id ) {
+        $premium_url = borea_get_premium_image_url( $product );
+        if ( $premium_url ) {
+            return '<img src="' . esc_url( $premium_url ) . '" alt="' . esc_attr( $product->get_name() ) . '" class="product-image" />';
+        }
     }
     
-    $image_url = borea_get_premium_image_url( $product );
-    return sprintf( 
-        '<div class="woocommerce-product-gallery__image"><img src="%s" class="wp-post-image premium-force-img" alt="%s" style="border-radius: 20px; box-shadow: 0 20px 50px rgba(0,0,0,0.1);" /></div>', 
-        esc_url( $image_url ), 
-        esc_attr( $product->get_name() ) 
-    );
-}
+    return $html;
+}, 999, 2 );
 
-function borea_force_premium_cart_image( $image, $cart_item, $cart_item_key ) {
-    $product = $cart_item['data'];
-    if ( borea_has_real_image( $product ) ) {
-        return $image;
+// Filtre pour les images dans le panier
+add_filter( 'woocommerce_cart_item_thumbnail', function( $thumbnail, $cart_item, $cart_item_key ) {
+    if ( is_admin() || ! isset( $cart_item['product_id'] ) ) {
+        return $thumbnail;
     }
-    $image_url = borea_get_premium_image_url( $product );
-    return sprintf( '<img src="%s" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail premium-force-img" alt="%s" style="border-radius: 8px;" />', esc_url( $image_url ), esc_attr( $product->get_name() ) );
-}
-
-/* Invalider les transients sidebar/toolbar quand un produit ou une catégorie change */
-function borea_flush_shop_transients() {
-    delete_transient('borea_sidebar_popular_products');
-    delete_transient('borea_toolbar_top_cats');
-}
-add_action( 'save_post_product',          'borea_flush_shop_transients' );
-add_action( 'woocommerce_product_set_stock', 'borea_flush_shop_transients' );
-add_action( 'created_product_cat',        'borea_flush_shop_transients' );
-add_action( 'edited_product_cat',         'borea_flush_shop_transients' );
-add_action( 'deleted_product_cat',        'borea_flush_shop_transients' );
+    
+    $product = wc_get_product( $cart_item['product_id'] );
+    if ( ! $product ) {
+        return $thumbnail;
+    }
+    
+    $image_id = $product->get_image_id();
+    if ( ! $image_id ) {
+        $premium_url = borea_get_premium_image_url( $product );
+        if ( $premium_url ) {
+            return '<img src="' . esc_url( $premium_url ) . '" alt="' . esc_attr( $product->get_name() ) . '" class="product-image" />';
+        }
+    }
+    
+    return $thumbnail;
+}, 999, 3 );
 
 /* ──────────────────────────────────────
-   3. WIDGETS / SIDEBARS
+   3. LANGUAGE DETECTOR & TRANSLATION
 ────────────────────────────────────── */
-function greenpure_widgets_init() {
-    register_sidebar( [
-        'name'          => 'Sidebar Boutique',
-        'id'            => 'sidebar-shop',
-        'before_widget' => '<div class="sidebar-widget">',
-        'after_widget'  => '</div>',
-        'before_title'  => '<h3 class="widget__title">',
-        'after_title'   => '</h3>',
-    ] );
-}
-add_action( 'widgets_init', 'greenpure_widgets_init' );
 
-// Inclusion des fichiers de support
-if ( file_exists( get_template_directory() . '/inc/language-detector.php' ) ) {
-    require_once get_template_directory() . '/inc/language-detector.php';
+function greenpure_t( $key ) {
+    $translations = [
+        'skip_to_content' => 'Aller au contenu',
+        'free_shipping' => '🚚 Livraison gratuite',
+        'shipping_24h' => '24h en France',
+        'secure_payment' => '💳 Paiement sécurisé',
+        'certified_thc' => '✓ Certifié 0% THC',
+        'my_account' => 'Mon compte',
+        'login' => 'Connexion',
+        'age_title' => 'Confirmation d\'âge',
+        'age_text' => 'Nos produits CBD sont réservés aux personnes majeures.',
+        'age_question' => 'Avez-vous <strong>18 ans ou plus</strong> ?',
+        'age_yes' => 'Oui, j\'ai 18 ans ou plus',
+        'age_no' => 'Non, je suis mineur',
+        'age_legal' => 'En entrant sur ce site, vous confirmez avoir pris connaissance de nos',
+        'age_legal_link' => 'Mentions légales',
+    ];
+    
+    return isset( $translations[ $key ] ) ? $translations[ $key ] : '';
 }
+
+function greenpure_lang_switcher_html() {
+    return '<span class="lang-switcher">FR</span>';
+}
+
+/* ──────────────────────────────────────
+   4. CUSTOM HOOKS & FILTERS
+────────────────────────────────────── */
+
+// Ajouter des classes au body
+add_filter( 'body_class', function( $classes ) {
+    if ( is_woocommerce() ) {
+        $classes[] = 'woocommerce-page';
+    }
+    return $classes;
+});
+
+// Fin du fichier
+?>
