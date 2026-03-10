@@ -80,31 +80,15 @@ if ( ! $placeholder_cfg ) {
     ];
 }
 
-/* Déterminer si le produit a une image réelle */
-$has_image = $product->get_image_id() > 0;
 ?>
 <li <?php wc_product_class('product-card', $product); ?> data-category="<?php echo esc_attr($cat_str); ?>">
 
     <div class="product-card__image">
         <a href="<?php echo esc_url( $product->get_permalink() ); ?>">
-            <?php if ( $has_image ) : ?>
-                <?php echo $product->get_image( 'greenpure-product', [ 'class' => 'product-card__img', 'loading' => 'lazy', 'decoding' => 'async' ] ); ?>
-            <?php else : ?>
-                <!-- SVG Placeholder coloré selon la catégorie -->
-                <div class="product-card__placeholder"
-                     style="background:<?php echo esc_attr( $placeholder_cfg['bg'] ); ?>;">
-                    <div class="product-card__placeholder-icon"
-                         style="background:rgba(255,255,255,0.15); color:<?php echo esc_attr( $placeholder_cfg['text'] ); ?>;">
-                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <?php echo $placeholder_cfg['icon']; ?>
-                        </svg>
-                    </div>
-                    <span class="product-card__placeholder-name"
-                          style="color:<?php echo esc_attr( $placeholder_cfg['text'] ); ?>;">
-                        <?php echo esc_html( get_the_title() ); ?>
-                    </span>
-                </div>
-            <?php endif; ?>
+            <?php
+            $premium_url = borea_get_premium_image_url( $product );
+            echo '<img src="' . esc_url( $premium_url ) . '" alt="' . esc_attr( $product->get_name() ) . '" class="product-card__img" loading="lazy" decoding="async" />';
+            ?>
         </a>
 
         <?php if ( $product->is_on_sale() && $pct > 0 ) : ?>
