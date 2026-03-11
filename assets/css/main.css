@@ -1673,12 +1673,6 @@ a:focus-visible {
   text-decoration: line-through;
 }
 
-.product-card__price ins {
-  text-decoration: none;
-  color: #E53E3E;
-  font-weight: 700;
-}
-
 .product-card__footer {
   display: flex;
   align-items: center;
@@ -1709,6 +1703,7 @@ a:focus-visible {
 .product-card__price ins {
   text-decoration: none;
   color: #E53E3E;
+  font-weight: 700;
 }
 
 /* Filtres produits */
