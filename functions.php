@@ -12,7 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 ────────────────────────────────────── */
 
 define( 'GREENPURE_URI', get_template_directory_uri() );
-define( 'GREENPURE_VERSION', '1.0.5' );
+define( 'GREENPURE_VERSION', '1.0.6' );
 
 /**
  * Return a trimmed excerpt of the current post.
@@ -58,12 +58,12 @@ function greenpure_setup() {
 add_action( 'after_setup_theme', 'greenpure_setup' );
 
 function greenpure_scripts() {
-    wp_enqueue_style( 'greenpure-style', get_stylesheet_uri(), [], '1.0.5' );
-    wp_enqueue_style( 'greenpure-main', get_template_directory_uri() . '/assets/css/main.css', [], '1.0.5' );
+    wp_enqueue_style( 'greenpure-style', get_stylesheet_uri(), [], GREENPURE_VERSION );
+    wp_enqueue_style( 'greenpure-main', get_template_directory_uri() . '/assets/css/main.css', [], GREENPURE_VERSION );
     if ( class_exists( 'WooCommerce' ) ) {
-        wp_enqueue_style( 'greenpure-woo', get_template_directory_uri() . '/assets/css/woocommerce.css', ['greenpure-main'], '1.0.5' );
+        wp_enqueue_style( 'greenpure-woo', get_template_directory_uri() . '/assets/css/woocommerce.css', ['greenpure-main'], GREENPURE_VERSION );
     }
-    wp_enqueue_script( 'greenpure-js', get_template_directory_uri() . '/assets/js/main.js', ['jquery'], '1.0.5', true );
+    wp_enqueue_script( 'greenpure-js', get_template_directory_uri() . '/assets/js/main.js', ['jquery'], GREENPURE_VERSION, true );
 }
 add_action( 'wp_enqueue_scripts', 'greenpure_scripts' );
 
@@ -92,81 +92,124 @@ function borea_get_premium_image_url( $product ) {
     if ( ! is_object( $product ) ) {
         return '';
     }
-    
-    $cat_name = '';
-    $cats = $product->get_category_ids();
-    if ( ! empty( $cats ) ) {
-        $term = get_term( $cats[0], 'product_cat' );
-        $cat_name = ( $term && ! is_wp_error( $term ) ) ? $term->name : '';
-    }
 
-    $image_name = 'borea_huile_cbd_luxe.png'; // Par défaut
+    // Récupère le vrai nom : pour les variations, get_name() inclut les attributs
     $product_name = $product->get_name();
 
-    // Cosmétiques/Baumes — vérifié en PREMIER sur le nom pour éviter faux positif "Animaux"
-    if ( stripos($cat_name, 'Cosmétiques') !== false || stripos($cat_name, 'Topiques') !== false
-         || stripos($product_name, 'Baume') !== false || stripos($product_name, 'Beurre') !== false
-         || stripos($product_name, 'Crème') !== false || stripos($product_name, 'Sérum') !== false
-         || stripos($product_name, 'Masque') !== false || stripos($product_name, 'Gommage') !== false
-         || stripos($product_name, 'Capillaire') !== false ) {
-        $image_name = 'borea_cosmetique_luxe.png';
-
-    // Fleurs, Résines, Hash, Moonrocks — tout ce qui se fume/inhale mais n'est pas une vape
-    } elseif ( stripos($cat_name, 'Fleurs') !== false || stripos($product_name, 'Fleur') !== false
-               || stripos($product_name, 'Résine') !== false || stripos($product_name, 'Hash') !== false
-               || stripos($product_name, 'Moonrock') !== false || stripos($product_name, 'Icerock') !== false ) {
-        // Gorilla uniquement pour les souches spécifiques (pas juste "Premium")
-        if ( stripos($product_name, 'Gorilla') !== false || stripos($product_name, 'Indoor') !== false ) {
-            $image_name = 'borea_fleur_cbd_gorilla.png';
-        } else {
-            $image_name = 'borea_fleur_cbd_luxe.png';
-        }
-
-    // Vapes / Puffs / Cartouches / E-liquides
-    } elseif ( stripos($cat_name, 'Vape') !== false || stripos($cat_name, 'Inhalables') !== false
-               || stripos($product_name, 'Vape') !== false || stripos($product_name, 'Pen') !== false
-               || stripos($product_name, 'Puff') !== false || stripos($product_name, 'Cartouche') !== false
-               || stripos($product_name, 'E-liquide') !== false || stripos($product_name, 'Disposable') !== false ) {
-        if ( stripos($product_name, 'Gold') !== false ) {
-            $image_name = 'borea_vape_pen_gold.png';
-        } else {
-            $image_name = 'borea_vape_luxe.png';
-        }
-
-    // Gummies / Comestibles
-    } elseif ( stripos($cat_name, 'Gummies') !== false || stripos($cat_name, 'Comestibles') !== false
-               || stripos($product_name, 'Gummies') !== false || stripos($product_name, 'Gommes') !== false
-               || stripos($product_name, 'Chocolat') !== false || stripos($product_name, 'Boisson') !== false
-               || stripos($product_name, 'Aliment') !== false || stripos($product_name, 'Confiserie') !== false ) {
-        if ( stripos($product_name, 'Sommeil') !== false || stripos($product_name, 'Nuit') !== false || stripos($product_name, 'Sleep') !== false ) {
-            $image_name = 'borea_gummies_sommeil.png';
-        } else {
-            $image_name = 'borea_gummies_luxe.png';
-        }
-
-    // Animaux
-    } elseif ( stripos($cat_name, 'Animaux') !== false || stripos($product_name, 'Animaux') !== false
-               || stripos($product_name, 'Chien') !== false || stripos($product_name, 'Chat') !== false
-               || stripos($product_name, 'Pet') !== false || stripos($product_name, 'Friandise') !== false ) {
-        $image_name = 'borea_animaux_luxe.png';
-
-    // Capsules / Gélules
-    } elseif ( stripos($cat_name, 'Capsules') !== false || stripos($cat_name, 'Gélules') !== false
-               || stripos($product_name, 'Capsule') !== false || stripos($product_name, 'Gélule') !== false ) {
-        $image_name = 'borea_capsule_luxe.png';
-
-    // Huiles CBD
-    } elseif ( stripos($cat_name, 'Huile') !== false || stripos($product_name, 'Huile') !== false
-               || stripos($product_name, 'Oil') !== false || stripos($product_name, 'Teinture') !== false
-               || stripos($product_name, 'Spray') !== false ) {
-        if ( preg_match('/\b(20|25|30|40)\s*%/i', $product_name) || stripos($product_name, 'Luxe') !== false ) {
-            $image_name = 'borea_huile_cbd_premium.png';
-        } else {
-            $image_name = 'borea_huile_cbd_luxe.png';
-        }
+    // Pour les variations, on récupère aussi les catégories depuis le parent
+    $product_id = $product->get_id();
+    if ( $product->is_type( 'variation' ) ) {
+        $product_id = $product->get_parent_id();
     }
-    
-    return get_template_directory_uri() . '/assets/images/products-premium/' . $image_name;
+
+    $cat_name = '';
+    $terms = get_the_terms( $product_id, 'product_cat' );
+    if ( $terms && ! is_wp_error( $terms ) ) {
+        $cat_name = implode( ' ', wp_list_pluck( $terms, 'name' ) );
+    }
+
+    $n = $product_name; // alias court pour les stripos
+    $c = $cat_name;
+
+    // ── Packs / Coffrets / Bundles ──────────────────────────────────────────
+    if ( stripos($c, 'Pack') !== false || stripos($c, 'Coffret') !== false || stripos($c, 'Bundle') !== false
+         || stripos($n, 'Pack') !== false || stripos($n, 'Coffret') !== false || stripos($n, 'Bundle') !== false
+         || stripos($n, 'Starter') !== false || stripos($n, 'Découverte') !== false || stripos($n, 'Collection') !== false ) {
+        return get_template_directory_uri() . '/assets/images/products-premium/cbd_lifestyle_hero.png';
+    }
+
+    // ── Cosmétiques / Soins topiques ────────────────────────────────────────
+    if ( stripos($c, 'Cosmétique') !== false || stripos($c, 'Topique') !== false || stripos($c, 'Soin') !== false
+         || stripos($n, 'Baume') !== false || stripos($n, 'Beurre') !== false || stripos($n, 'Crème') !== false
+         || stripos($n, 'Sérum') !== false || stripos($n, 'Masque') !== false || stripos($n, 'Gommage') !== false
+         || stripos($n, 'Capillaire') !== false || stripos($n, 'Lotion') !== false || stripos($n, 'Roll-on') !== false ) {
+        return get_template_directory_uri() . '/assets/images/products-premium/borea_cosmetique_luxe.png';
+    }
+
+    // ── Animaux ─────────────────────────────────────────────────────────────
+    if ( stripos($c, 'Animaux') !== false || stripos($c, 'Pet') !== false
+         || stripos($n, 'Animaux') !== false || stripos($n, 'Chien') !== false
+         || stripos($n, 'Chat') !== false || stripos($n, 'Pet') !== false ) {
+        // Huile pour animaux → image spécifique huile pet
+        if ( stripos($n, 'Huile') !== false || stripos($n, 'Oil') !== false || stripos($n, 'Gouttes') !== false ) {
+            return get_template_directory_uri() . '/assets/images/products-premium/cbd_pet_oil_realistic.png';
+        }
+        // Friandises / snacks animaux
+        if ( stripos($n, 'Friandise') !== false || stripos($n, 'Snack') !== false || stripos($n, 'Treat') !== false ) {
+            return get_template_directory_uri() . '/assets/images/products-premium/borea_cbd_animaux.png';
+        }
+        return get_template_directory_uri() . '/assets/images/products-premium/borea_animaux_luxe.png';
+    }
+
+    // ── Fleurs / Résines / Hash ─────────────────────────────────────────────
+    if ( stripos($c, 'Fleur') !== false || stripos($c, 'Hash') !== false || stripos($c, 'Résine') !== false
+         || stripos($n, 'Fleur') !== false || stripos($n, 'Résine') !== false || stripos($n, 'Hash') !== false
+         || stripos($n, 'Moonrock') !== false || stripos($n, 'Icerock') !== false || stripos($n, 'Pollen') !== false ) {
+        // Gorilla / Indoor / souches premium
+        if ( stripos($n, 'Gorilla') !== false || stripos($n, 'Indoor') !== false || stripos($n, 'Gold') !== false ) {
+            return get_template_directory_uri() . '/assets/images/products-premium/borea_fleur_cbd_gorilla.png';
+        }
+        // Souches nommées (OG, Amnesia, Gelato, Mimosa, Cheese, Purple, Lemon, Haze…)
+        if ( preg_match('/\b(OG|Amnesia|Gelato|Mimosa|Cheese|Purple|Lemon|Haze|Kush|Zkittlez|Runtz|Ice|Diesel|Mango|Berry|Tropical)\b/i', $n) ) {
+            return get_template_directory_uri() . '/assets/images/products-premium/cbd_flower_realistic.png';
+        }
+        return get_template_directory_uri() . '/assets/images/products-premium/borea_fleur_cbd_luxe.png';
+    }
+
+    // ── Vapes / Puffs / E-liquides / Cartouches ─────────────────────────────
+    if ( stripos($c, 'Vape') !== false || stripos($c, 'Inhalable') !== false || stripos($c, 'E-liquide') !== false
+         || stripos($n, 'Vape') !== false || stripos($n, 'Pen') !== false || stripos($n, 'Puff') !== false
+         || stripos($n, 'Cartouche') !== false || stripos($n, 'E-liquide') !== false
+         || stripos($n, 'Disposable') !== false || stripos($n, 'Jetable') !== false ) {
+        if ( stripos($n, 'Gold') !== false || stripos($n, 'Premium') !== false || stripos($n, 'Luxe') !== false ) {
+            return get_template_directory_uri() . '/assets/images/products-premium/borea_vape_pen_gold.png';
+        }
+        if ( stripos($n, 'Puff') !== false || stripos($n, 'Disposable') !== false || stripos($n, 'Jetable') !== false ) {
+            return get_template_directory_uri() . '/assets/images/products-premium/cbd_vape_realistic.png';
+        }
+        return get_template_directory_uri() . '/assets/images/products-premium/borea_vape_luxe.png';
+    }
+
+    // ── Gummies / Comestibles ────────────────────────────────────────────────
+    if ( stripos($c, 'Gummie') !== false || stripos($c, 'Comestible') !== false || stripos($c, 'Alimentaire') !== false
+         || stripos($n, 'Gummies') !== false || stripos($n, 'Gomme') !== false || stripos($n, 'Bonbon') !== false
+         || stripos($n, 'Chocolat') !== false || stripos($n, 'Boisson') !== false || stripos($n, 'Confiserie') !== false
+         || stripos($n, 'Caramel') !== false || stripos($n, 'Jelly') !== false || stripos($n, 'Marshmallow') !== false ) {
+        if ( stripos($n, 'Sommeil') !== false || stripos($n, 'Nuit') !== false || stripos($n, 'Sleep') !== false
+             || stripos($n, 'Mélatonine') !== false || stripos($n, 'Détente') !== false ) {
+            return get_template_directory_uri() . '/assets/images/products-premium/borea_gummies_sommeil.png';
+        }
+        // Gummies aux fruits / saveurs
+        if ( preg_match('/\b(Fraise|Framboise|Mangue|Citron|Orange|Cerise|Pastèque|Pêche|Ananas|Fruits|Berry|Tropical)\b/i', $n) ) {
+            return get_template_directory_uri() . '/assets/images/products-premium/cbd_gummies_realistic.png';
+        }
+        return get_template_directory_uri() . '/assets/images/products-premium/borea_gummies_luxe.png';
+    }
+
+    // ── Capsules / Gélules ───────────────────────────────────────────────────
+    if ( stripos($c, 'Capsule') !== false || stripos($c, 'Gélule') !== false
+         || stripos($n, 'Capsule') !== false || stripos($n, 'Gélule') !== false || stripos($n, 'Softgel') !== false ) {
+        return get_template_directory_uri() . '/assets/images/products-premium/borea_capsule_luxe.png';
+    }
+
+    // ── Huiles CBD (catégorie ou nom) ────────────────────────────────────────
+    if ( stripos($c, 'Huile') !== false || stripos($c, 'Oil') !== false || stripos($c, 'Teinture') !== false
+         || stripos($n, 'Huile') !== false || stripos($n, 'Oil') !== false
+         || stripos($n, 'Teinture') !== false || stripos($n, 'Spray') !== false || stripos($n, 'Gouttes') !== false ) {
+        // Haute concentration (20 % et +) ou label Premium/Luxe/Gold → image premium
+        if ( preg_match('/\b(20|25|30|40|50)\s*%/i', $n)
+             || stripos($n, 'Premium') !== false || stripos($n, 'Luxe') !== false || stripos($n, 'Gold') !== false ) {
+            return get_template_directory_uri() . '/assets/images/products-premium/borea_huile_cbd_premium.png';
+        }
+        // Petites concentrations (5 %, 10 %, 15 %) → image réaliste
+        if ( preg_match('/\b(5|10|15)\s*%/i', $n) ) {
+            return get_template_directory_uri() . '/assets/images/products-premium/cbd_oil_realistic.png';
+        }
+        return get_template_directory_uri() . '/assets/images/products-premium/borea_huile_cbd_luxe.png';
+    }
+
+    // ── Fallback générique (huile CBD) ───────────────────────────────────────
+    return get_template_directory_uri() . '/assets/images/products-premium/borea_huile_cbd_luxe.png';
 }
 
 // Filtre pour remplacer l'image produit sur la boutique et les fiches individuelles
@@ -185,11 +228,15 @@ add_filter( 'woocommerce_product_get_image', function( $html, $product ) {
 
 // Filtre pour les images dans le panier
 add_filter( 'woocommerce_cart_item_thumbnail', function( $thumbnail, $cart_item, $cart_item_key ) {
-    if ( is_admin() || ! isset( $cart_item['product_id'] ) ) {
+    if ( is_admin() ) {
         return $thumbnail;
     }
 
-    $product = wc_get_product( $cart_item['product_id'] );
+    // Utilise l'objet produit/variation directement (plus précis qu'un ID parent)
+    $product = isset( $cart_item['data'] ) && is_object( $cart_item['data'] )
+        ? $cart_item['data']
+        : ( isset( $cart_item['product_id'] ) ? wc_get_product( $cart_item['product_id'] ) : null );
+
     if ( ! $product ) {
         return $thumbnail;
     }
