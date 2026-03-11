@@ -15,6 +15,24 @@ $pct     = $product->is_on_sale() && $product->get_regular_price()
            ? round( ( ($product->get_regular_price() - $product->get_sale_price()) / $product->get_regular_price() ) * 100 )
            : 0;
 
+/* ── Données de variations (grammages) pour les produits variables ── */
+$variations_data = [];
+if ( $product->is_type( 'variable' ) ) {
+    foreach ( $product->get_available_variations() as $var ) {
+        if ( empty( $var['variation_id'] ) ) continue;
+        $attr_values = array_filter( array_values( $var['attributes'] ) );
+        $label       = ! empty( $attr_values ) ? reset( $attr_values ) : '';
+        if ( ! $label ) continue;
+        $variations_data[] = [
+            'id'            => (int) $var['variation_id'],
+            'label'         => $label,
+            'price'         => (float) $var['display_price'],
+            'regular_price' => (float) $var['display_regular_price'],
+            'in_stock'      => (bool) $var['is_in_stock'],
+        ];
+    }
+}
+
 /* ── Placeholder par catégorie ── */
 $cat_config = [
     'huiles-cbd'    => [
@@ -138,27 +156,44 @@ if ( ! $placeholder_cfg ) {
             <?php endif; ?>
         </div>
 
-        <?php if ( $product->is_type('variable') ) : ?>
-            <p class="product-card__variants">
-                <?php
-                $attributes = $product->get_variation_attributes();
-                $first_attr = reset( $attributes );
-                if ( is_array( $first_attr ) ) {
-                    /* translators: %d = number of variations */
-                    printf( _n( '%d variante disponible', '%d variantes disponibles', count( $first_attr ), 'greenpure-cbd' ), count( $first_attr ) );
-                }
-                ?>
-            </p>
+        <?php if ( ! empty( $variations_data ) ) : ?>
+            <div class="product-card__grammages" role="group" aria-label="<?php esc_attr_e( 'Choisir un grammage', 'greenpure-cbd' ); ?>">
+                <?php foreach ( $variations_data as $i => $var ) : ?>
+                    <button class="grammage-pill<?php echo $i === 0 ? ' is-active' : ''; ?><?php echo ! $var['in_stock'] ? ' is-disabled' : ''; ?>"
+                            data-variation-id="<?php echo esc_attr( $var['id'] ); ?>"
+                            data-price="<?php echo esc_attr( $var['price'] ); ?>"
+                            data-regular-price="<?php echo esc_attr( $var['regular_price'] ); ?>"
+                            type="button"
+                            <?php echo ! $var['in_stock'] ? 'disabled aria-disabled="true"' : ''; ?>>
+                        <?php echo esc_html( $var['label'] ); ?>
+                    </button>
+                <?php endforeach; ?>
+            </div>
         <?php endif; ?>
 
         <div class="product-card__footer">
-            <div class="product-card__price"><?php echo $product->get_price_html(); ?></div>
-
-            <?php if ( $product->is_purchasable() && $product->is_in_stock() && $product->is_type('simple') ) : ?>
+            <?php if ( $product->is_type( 'variable' ) && ! empty( $variations_data ) ) :
+                $first           = $variations_data[0];
+                $first_price_html = wc_price( $first['price'] );
+                if ( $first['regular_price'] > $first['price'] ) {
+                    $first_price_html = '<del>' . wc_price( $first['regular_price'] ) . '</del><ins>' . wc_price( $first['price'] ) . '</ins>';
+                }
+            ?>
+                <div class="product-card__price js-gram-price"><?php echo $first_price_html; // phpcs:ignore WordPress.Security.EscapeOutput ?></div>
+                <a href="<?php echo esc_url( home_url( '/?add-to-cart=' . $first['id'] . '&quantity=1' ) ); ?>"
+                   data-product_id="<?php echo esc_attr( $first['id'] ); ?>"
+                   data-quantity="1"
+                   class="btn btn--cart btn--sm add_to_cart_button ajax_add_to_cart js-gram-atc"
+                   aria-label="<?php esc_attr_e( 'Ajouter au panier', 'greenpure-cbd' ); ?>">
+                    <?php esc_html_e( 'Ajouter', 'greenpure-cbd' ); ?>
+                </a>
+            <?php elseif ( $product->is_purchasable() && $product->is_in_stock() && $product->is_type( 'simple' ) ) : ?>
+                <div class="product-card__price"><?php echo $product->get_price_html(); // phpcs:ignore WordPress.Security.EscapeOutput ?></div>
                 <?php woocommerce_template_loop_add_to_cart( ['class' => 'btn btn--cart btn--sm'] ); ?>
             <?php else : ?>
+                <div class="product-card__price"><?php echo $product->get_price_html(); // phpcs:ignore WordPress.Security.EscapeOutput ?></div>
                 <a href="<?php echo esc_url( $product->get_permalink() ); ?>" class="btn btn--outline btn--sm">
-                    <?php echo $product->is_type('variable') ? esc_html__( 'Choisir', 'greenpure-cbd' ) : esc_html__( 'Voir', 'greenpure-cbd' ); ?>
+                    <?php esc_html_e( 'Voir', 'greenpure-cbd' ); ?>
                 </a>
             <?php endif; ?>
         </div>

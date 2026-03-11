@@ -457,6 +457,47 @@ function initProductFilterAnim() {
     $(document).ready(function(){ initMiniCart(); initAddToCart(); initNewsletter(); });
 }(typeof jQuery!=='undefined'?jQuery:{fn:{},ready:function(cb){document.addEventListener('DOMContentLoaded',cb);},on:function(){}}));
 
+/* === GRAMMAGE PICKER === */
+function initGrammagePicker(){
+    // Format price in FR locale
+    function fmtPrice(amount){
+        return new Intl.NumberFormat('fr-FR',{style:'currency',currency:'EUR'}).format(amount);
+    }
+
+    document.addEventListener('click',function(e){
+        var pill=e.target.closest('.grammage-pill');
+        if(!pill||pill.disabled) return;
+
+        var card=pill.closest('.product-card');
+        if(!card) return;
+
+        // Toggle active pill
+        card.querySelectorAll('.grammage-pill').forEach(function(p){ p.classList.remove('is-active'); });
+        pill.classList.add('is-active');
+
+        var varId   = pill.dataset.variationId;
+        var price   = parseFloat(pill.dataset.price)||0;
+        var regular = parseFloat(pill.dataset.regularPrice)||0;
+
+        // Update price display
+        var priceEl=card.querySelector('.js-gram-price');
+        if(priceEl){
+            var html = (regular>price)
+                ? '<del>'+fmtPrice(regular)+'</del><ins>'+fmtPrice(price)+'</ins>'
+                : fmtPrice(price);
+            priceEl.innerHTML=html;
+        }
+
+        // Update add-to-cart button
+        var atc=card.querySelector('.js-gram-atc');
+        if(atc){
+            atc.href='/?add-to-cart='+varId+'&quantity=1';
+            atc.dataset.product_id=varId;
+            atc.classList.remove('added');
+        }
+    });
+}
+
 /* === BOOTSTRAP === */
 document.addEventListener('DOMContentLoaded',function(){
     initAgeGate();
@@ -479,4 +520,5 @@ document.addEventListener('DOMContentLoaded',function(){
     initSmoothScroll();
     initWooGallery();
     initLangSwitcher();
+    initGrammagePicker();
 });
