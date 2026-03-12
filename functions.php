@@ -498,15 +498,25 @@ add_filter( 'woocommerce_add_to_cart_redirect', function ( $url ) {
 } );
 
 /**
- * Override le prix avec le montant stocké dans les données du cart item.
- * C'est la méthode standard WooCommerce pour les prix custom : le montant
- * voyage avec l'item dans la session cart, pas dans une clé séparée.
+ * Restaure borea_custom_price quand WooCommerce recharge le panier
+ * depuis la session (indispensable sur les pages suivantes comme /checkout).
+ * Sans ce hook, les données custom sont perdues entre deux requêtes.
+ */
+add_filter( 'woocommerce_get_cart_item_from_session', function ( $cart_item, $values ) {
+    if ( isset( $values['borea_custom_price'] ) ) {
+        $cart_item['borea_custom_price'] = $values['borea_custom_price'];
+    }
+    return $cart_item;
+}, 10, 2 );
+
+/**
+ * Override le prix avec le montant restauré depuis la session du cart item.
  */
 add_action( 'woocommerce_before_calculate_totals', function ( $cart ) {
     if ( is_admin() && ! defined( 'DOING_AJAX' ) ) return;
 
     foreach ( $cart->get_cart() as $cart_item ) {
-        if ( isset( $cart_item['borea_custom_price'] ) && $cart_item['borea_custom_price'] > 0 ) {
+        if ( isset( $cart_item['borea_custom_price'] ) && (float) $cart_item['borea_custom_price'] > 0 ) {
             $cart_item['data']->set_price( (float) $cart_item['borea_custom_price'] );
         }
     }
