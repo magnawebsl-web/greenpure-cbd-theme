@@ -145,13 +145,21 @@ function borea_get_premium_image_url( $product ) {
     if ( stripos($c, 'Fleur') !== false || stripos($c, 'Hash') !== false || stripos($c, 'Résine') !== false
          || stripos($n, 'Fleur') !== false || stripos($n, 'Résine') !== false || stripos($n, 'Hash') !== false
          || stripos($n, 'Moonrock') !== false || stripos($n, 'Icerock') !== false || stripos($n, 'Pollen') !== false ) {
-        // Gorilla / Indoor / souches premium
-        if ( stripos($n, 'Gorilla') !== false || stripos($n, 'Indoor') !== false || stripos($n, 'Gold') !== false ) {
+        // ── Amnesia Haze → image dédiée ──────────────────────────────────────
+        if ( stripos($n, 'Amnesia') !== false ) {
+            return get_template_directory_uri() . '/assets/images/products-premium/cbd_flower_realistic.png';
+        }
+        // ── OG Kush / Gorilla / Gold → image gorilla premium ─────────────────
+        if ( stripos($n, 'OG Kush') !== false || stripos($n, 'Gorilla') !== false || stripos($n, 'Gold') !== false ) {
             return get_template_directory_uri() . '/assets/images/products-premium/borea_fleur_cbd_gorilla.png';
         }
-        // Souches nommées (OG, Amnesia, Gelato, Mimosa, Cheese, Purple, Lemon, Haze…)
-        if ( preg_match('/\b(OG|Amnesia|Gelato|Mimosa|Cheese|Purple|Lemon|Haze|Kush|Zkittlez|Runtz|Ice|Diesel|Mango|Berry|Tropical)\b/i', $n) ) {
+        // ── Souches nommées (Purple, Haze, Gelato, Kush…) → réaliste ─────────
+        if ( preg_match('/\b(Purple|Haze|Kush|Gelato|Mimosa|Cheese|Lemon|Zkittlez|Runtz|Diesel|Mango|Berry|Tropical|White Widow|Critical|Outdoor)\b/i', $n) ) {
             return get_template_directory_uri() . '/assets/images/products-premium/cbd_flower_realistic.png';
+        }
+        // ── Indoor générique → gorilla ────────────────────────────────────────
+        if ( stripos($n, 'Indoor') !== false ) {
+            return get_template_directory_uri() . '/assets/images/products-premium/borea_fleur_cbd_gorilla.png';
         }
         return get_template_directory_uri() . '/assets/images/products-premium/borea_fleur_cbd_luxe.png';
     }
@@ -284,7 +292,7 @@ add_action( 'wp_loaded', function() {
 
     $png_files = [
         'borea_huile_cbd_luxe.png', 'borea_huile_cbd_premium.png',
-        'borea_fleur_amnesia_haze.png', 'borea_fleur_cbd_gorilla.png', 'borea_fleur_cbd_luxe.png',
+        'borea_fleur_cbd_gorilla.png', 'borea_fleur_cbd_luxe.png',
         'cbd_flower_realistic.png', 'cbd_oil_realistic.png', 'cbd_lifestyle_hero.png',
         'borea_gummies_luxe.png', 'borea_gummies_sommeil.png', 'cbd_gummies_realistic.png',
         'borea_capsule_luxe.png', 'borea_cosmetique_luxe.png',

@@ -367,7 +367,7 @@ function greenpure_install_demo_products() {
             'cbd_origin'        => 'Indoor France',
             'cbd_thc'           => '< 0,2 %',
             'stock'             => 5,
-            'weight'            => '1.000',
+            'weight'            => '0.1.000',
         ],
 
         /* ── AMNESIA HAZE INDOOR ~16% CBD ── */
@@ -539,7 +539,7 @@ function greenpure_install_demo_products() {
             'cbd_origin'        => 'Indoor Espagne',
             'cbd_thc'           => '< 0,2 %',
             'stock'             => 5,
-            'weight'            => '1.000',
+            'weight'            => '0.1.000',
         ],
 
         /* ── PURPLE HAZE INDOOR ~15% CBD ── */
@@ -711,7 +711,7 @@ function greenpure_install_demo_products() {
             'cbd_origin'        => 'Indoor Pays-Bas',
             'cbd_thc'           => '< 0,2 %',
             'stock'             => 5,
-            'weight'            => '1.000',
+            'weight'            => '0.1.000',
         ],
 
         /* ── CRITICAL+ GREENHOUSE ~14% CBD ── */
@@ -883,7 +883,7 @@ function greenpure_install_demo_products() {
             'cbd_origin'        => 'Greenhouse Suisse',
             'cbd_thc'           => '< 0,2 %',
             'stock'             => 8,
-            'weight'            => '1.000',
+            'weight'            => '0.1.000',
         ],
 
         /* ── WHITE WIDOW OUTDOOR BIO ~12% CBD ── */
@@ -1055,9 +1055,8 @@ function greenpure_install_demo_products() {
             'cbd_origin'        => 'Outdoor France Bio',
             'cbd_thc'           => '< 0,2 %',
             'stock'             => 10,
-            'weight'            => '1.000',
+            'weight'            => '0.1.000',
         ],
-
                 /* ══════════════ GUMMIES CBD ══════════════ */
         [
             'name'        => 'Gummies CBD Relaxation — 25mg x10',
@@ -3033,3 +3032,4 @@ function greenpure_attach_product_png( $png_filename, $product_id, $alt_text = '
 
     return $attach_id;
 }
+
