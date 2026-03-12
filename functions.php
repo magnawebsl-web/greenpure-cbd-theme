@@ -388,5 +388,135 @@ add_filter( 'loop_shop_per_page', function() {
     return 12;
 }, 20 );
 
+/* ──────────────────────────────────────
+   5. MONTANT LIBRE — Page paiement privée
+   URL : /montant-libre (non indexée, hors menus)
+   Flux : saisie montant → checkout direct (panier invisible)
+────────────────────────────────────── */
+
+/**
+ * Crée automatiquement :
+ *   1. Le produit virtuel WooCommerce "Montant libre" (caché du catalogue)
+ *   2. La page WordPress avec slug "montant-libre"
+ * Exécuté une seule fois via option.
+ */
+add_action( 'wp_loaded', function () {
+    if ( ! class_exists( 'WooCommerce' ) ) return;
+
+    // ── Produit virtuel ──────────────────────────────────────────────────
+    $product_id = (int) get_option( 'borea_montant_libre_product_id', 0 );
+    if ( ! $product_id || ! wc_get_product( $product_id ) ) {
+        $product = new WC_Product_Simple();
+        $product->set_name( 'Montant libre' );
+        $product->set_slug( 'montant-libre-product' );
+        $product->set_status( 'publish' );
+        $product->set_catalog_visibility( 'hidden' );  // invisible boutique
+        $product->set_virtual( true );
+        $product->set_sold_individually( false );
+        $product->set_price( 1 );
+        $product->set_regular_price( 1 );
+        $product->set_sku( 'BOREA-MONTANT-LIBRE' );
+        $product_id = $product->save();
+        update_option( 'borea_montant_libre_product_id', $product_id );
+    }
+
+    // ── Page WP ─────────────────────────────────────────────────────────
+    if ( ! get_page_by_path( 'montant-libre' ) ) {
+        wp_insert_post( [
+            'post_title'   => 'Montant libre',
+            'post_name'    => 'montant-libre',
+            'post_status'  => 'publish',
+            'post_type'    => 'page',
+            'post_content' => '',
+        ] );
+    }
+} );
+
+/**
+ * Intercepte le POST du formulaire /montant-libre.
+ * Vide le panier, ajoute le produit avec le montant custom,
+ * stocke en session puis redirige DIRECTEMENT vers le checkout.
+ * L'utilisateur ne voit jamais la page /cart.
+ */
+add_action( 'template_redirect', function () {
+    if ( ! is_page( 'montant-libre' ) ) return;
+    if ( $_SERVER['REQUEST_METHOD'] !== 'POST' ) return;
+    if ( ! isset( $_POST['borea_action'] ) || $_POST['borea_action'] !== 'montant_libre' ) return;
+
+    // Vérification nonce (sécurité CSRF)
+    if ( ! isset( $_POST['_borea_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['_borea_nonce'] ) ), 'borea_montant_libre' ) ) {
+        wc_add_notice( 'Requête invalide. Veuillez réessayer.', 'error' );
+        return;
+    }
+
+    if ( ! class_exists( 'WooCommerce' ) ) return;
+
+    $raw_amount  = isset( $_POST['borea_amount'] ) ? sanitize_text_field( wp_unslash( $_POST['borea_amount'] ) ) : '';
+    $currency    = isset( $_POST['borea_currency_hidden'] ) ? sanitize_text_field( wp_unslash( $_POST['borea_currency_hidden'] ) ) : 'EUR';
+    $amount      = (float) str_replace( ',', '.', $raw_amount );
+
+    // Validation montant
+    if ( $amount < 1 || $amount > 99999 ) {
+        wc_add_notice( 'Veuillez saisir un montant compris entre 1 € et 99 999 €.', 'error' );
+        return;
+    }
+
+    // Conversion USD → EUR (taux indicatif 0.92)
+    if ( $currency === 'USD' ) {
+        $amount = round( $amount * 0.92, 2 );
+        if ( $amount < 1 ) {
+            wc_add_notice( 'Montant converti trop faible. Veuillez saisir un montant supérieur.', 'error' );
+            return;
+        }
+    }
+
+    $product_id = (int) get_option( 'borea_montant_libre_product_id', 0 );
+    if ( ! $product_id ) {
+        wc_add_notice( 'Configuration incorrecte. Contactez l\'administrateur.', 'error' );
+        return;
+    }
+
+    // Stocke le montant en session WooCommerce
+    WC()->session->set( 'borea_custom_amount', $amount );
+
+    // Vide le panier et ajoute le produit (quantité 1)
+    WC()->cart->empty_cart();
+    WC()->cart->add_to_cart( $product_id, 1 );
+
+    // Redirige DIRECTEMENT vers le checkout (jamais vers /cart)
+    wp_safe_redirect( wc_get_checkout_url() );
+    exit;
+} );
+
+/**
+ * Override le prix du produit "Montant libre" dans le panier
+ * avec le montant stocké en session.
+ */
+add_action( 'woocommerce_before_calculate_totals', function ( $cart ) {
+    if ( is_admin() && ! defined( 'DOING_AJAX' ) ) return;
+
+    $custom_amount = (float) WC()->session->get( 'borea_custom_amount', 0 );
+    if ( $custom_amount <= 0 ) return;
+
+    $target_sku = 'BOREA-MONTANT-LIBRE';
+
+    foreach ( $cart->get_cart() as $cart_item ) {
+        $product = $cart_item['data'];
+        if ( $product && $product->get_sku() === $target_sku ) {
+            $product->set_price( $custom_amount );
+        }
+    }
+}, 20 );
+
+/**
+ * Libère la session une fois la commande passée
+ * pour éviter une confusion lors du prochain achat.
+ */
+add_action( 'woocommerce_thankyou', function () {
+    if ( WC()->session ) {
+        WC()->session->set( 'borea_custom_amount', 0 );
+    }
+} );
+
 // Fin du fichier
 ?>
