@@ -277,31 +277,29 @@ add_filter( 'woocommerce_single_product_image_html', function( $html, $post_thum
 ────────────────────────────────────── */
 
 add_action( 'wp_loaded', function() {
-    $sync_key = 'greenpure_svgs_synced_v4';
+    $sync_key = 'greenpure_pngs_synced_v5';
     if ( get_option( $sync_key ) ) {
         return;
     }
 
-    $svg_files = [
-        'huile-cbd-5.svg', 'huile-cbd-10.svg', 'huile-cbd-15.svg',
-        'huile-cbd-20.svg', 'huile-cbd-30.svg',
-        'huile-sommeil.svg', 'huile-sport.svg',
-        'fleur-indoor.svg', 'fleur-outdoor.svg',
-        'gummies-fruits.svg', 'gummies-sommeil.svg',
-        'creme-cbd.svg', 'baume-cbd.svg', 'serum-cbd.svg',
-        'infusion-cbd.svg', 'capsules-cbd.svg',
-        'eliquide-cbd.svg', 'hash-cbd.svg',
-        'pack-starter.svg', 'pack-sommeil.svg',
+    $png_files = [
+        'borea_huile_cbd_luxe.png', 'borea_huile_cbd_premium.png',
+        'borea_fleur_amnesia_haze.png', 'borea_fleur_cbd_gorilla.png', 'borea_fleur_cbd_luxe.png',
+        'cbd_flower_realistic.png', 'cbd_oil_realistic.png', 'cbd_lifestyle_hero.png',
+        'borea_gummies_luxe.png', 'borea_gummies_sommeil.png', 'cbd_gummies_realistic.png',
+        'borea_capsule_luxe.png', 'borea_cosmetique_luxe.png',
+        'borea_vape_luxe.png', 'borea_vape_pen_gold.png', 'cbd_vape_realistic.png',
+        'borea_animaux_luxe.png', 'borea_cbd_animaux.png', 'cbd_pet_oil_realistic.png',
     ];
 
-    foreach ( $svg_files as $svg ) {
-        $cache_key = 'greenpure_svg_attach_' . sanitize_key( $svg );
+    foreach ( $png_files as $png ) {
+        $cache_key = 'greenpure_png_attach_' . sanitize_key( $png );
         $attach_id = get_option( $cache_key );
         if ( ! $attach_id ) {
             continue;
         }
-        $dest = get_attached_file( (int) $attach_id );
-        $source = get_template_directory() . '/assets/images/products/' . $svg;
+        $dest   = get_attached_file( (int) $attach_id );
+        $source = get_template_directory() . '/assets/images/products-premium/' . $png;
         if ( $dest && $source && file_exists( $source ) && is_writable( dirname( $dest ) ) ) {
             copy( $source, $dest );
         }
