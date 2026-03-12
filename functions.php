@@ -279,9 +279,35 @@ add_filter( 'woocommerce_single_product_image_html', function( $html, $post_thum
     return $html;
 }, 999, 2 );
 
+// Hook post_thumbnail_html — intercepte get_the_post_thumbnail() utilisé par certains templates
+add_filter( 'post_thumbnail_html', function( $html, $post_id, $post_thumbnail_id, $size, $attr ) {
+    if ( is_admin() ) return $html;
+    $product = wc_get_product( $post_id );
+    if ( ! $product ) return $html;
+    $premium_url = borea_get_premium_image_url( $product );
+    if ( ! $premium_url ) return $html;
+    $alt = esc_attr( $product->get_name() );
+    $cls = 'product-card__img wp-post-image';
+    return '<img src="' . esc_url( $premium_url ) . '" alt="' . $alt . '" class="' . $cls . '" loading="lazy" decoding="async" />';
+}, 999, 5 );
+
+// Intercepte le placeholder WooCommerce (produits sans image)
+add_filter( 'woocommerce_placeholder_img_src', function( $src ) {
+    return get_template_directory_uri() . '/assets/images/products-premium/borea_huile_cbd_luxe.png';
+} );
+
+// Intercepte woocommerce_product_thumbnail_src — hook présent sur certains blocs Gutenberg
+add_filter( 'woocommerce_product_get_image', function( $html, $product, $size = 'woocommerce_thumbnail', $attr = [], $placeholder = true, $image = false ) {
+    if ( is_admin() || ! is_object( $product ) ) return $html;
+    $premium_url = borea_get_premium_image_url( $product );
+    if ( ! $premium_url ) return $html;
+    $alt = esc_attr( $product->get_name() );
+    return '<img src="' . esc_url( $premium_url ) . '" alt="' . $alt . '" class="product-card__img" loading="lazy" decoding="async" />';
+}, 1000, 6 );
+
 /* ──────────────────────────────────────
-   SYNC DES SVG PRODUITS (v4)
-   Recopie les SVG du thème vers uploads quand la version change.
+   SYNC DES IMAGES PNG PREMIUM (v5)
+   Recopie les PNG du thème vers uploads quand la version change.
 ────────────────────────────────────── */
 
 add_action( 'wp_loaded', function() {
