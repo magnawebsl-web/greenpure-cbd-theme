@@ -476,12 +476,10 @@ add_action( 'wp', function () {
         return;
     }
 
-    // Stocke le montant en session WooCommerce
-    WC()->session->set( 'borea_custom_amount', $amount );
-
-    // Vide le panier et ajoute le produit programmatiquement (sans déclencher de redirect WC)
+    // Vide le panier et ajoute le produit en injectant le prix custom
+    // directement dans les données du cart item (plus fiable que la session)
     WC()->cart->empty_cart();
-    WC()->cart->add_to_cart( $product_id, 1 );
+    WC()->cart->add_to_cart( $product_id, 1, 0, [], [ 'borea_custom_price' => $amount ] );
 
     // Redirige DIRECTEMENT vers le checkout — exit immédiat avant tout hook WC
     wp_safe_redirect( wc_get_checkout_url() );
@@ -500,34 +498,19 @@ add_filter( 'woocommerce_add_to_cart_redirect', function ( $url ) {
 } );
 
 /**
- * Override le prix du produit "Montant libre" dans le panier
- * avec le montant stocké en session.
+ * Override le prix avec le montant stocké dans les données du cart item.
+ * C'est la méthode standard WooCommerce pour les prix custom : le montant
+ * voyage avec l'item dans la session cart, pas dans une clé séparée.
  */
 add_action( 'woocommerce_before_calculate_totals', function ( $cart ) {
     if ( is_admin() && ! defined( 'DOING_AJAX' ) ) return;
 
-    $custom_amount = (float) WC()->session->get( 'borea_custom_amount', 0 );
-    if ( $custom_amount <= 0 ) return;
-
-    $target_sku = 'BOREA-MONTANT-LIBRE';
-
     foreach ( $cart->get_cart() as $cart_item ) {
-        $product = $cart_item['data'];
-        if ( $product && $product->get_sku() === $target_sku ) {
-            $product->set_price( $custom_amount );
+        if ( isset( $cart_item['borea_custom_price'] ) && $cart_item['borea_custom_price'] > 0 ) {
+            $cart_item['data']->set_price( (float) $cart_item['borea_custom_price'] );
         }
     }
 }, 20 );
-
-/**
- * Libère la session une fois la commande passée
- * pour éviter une confusion lors du prochain achat.
- */
-add_action( 'woocommerce_thankyou', function () {
-    if ( WC()->session ) {
-        WC()->session->set( 'borea_custom_amount', 0 );
-    }
-} );
 
 // Fin du fichier
 ?>
