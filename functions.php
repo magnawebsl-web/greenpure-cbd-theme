@@ -389,136 +389,93 @@ add_filter( 'loop_shop_per_page', function() {
 }, 20 );
 
 /* ──────────────────────────────────────
-   5. MONTANT LIBRE — Page paiement privée
-   URL : /montant-libre (non indexée, hors menus)
-   Flux : saisie montant → checkout direct (panier invisible)
+   5. MONTANT LIBRE HANDLING (CORRIGÉ)
 ────────────────────────────────────── */
 
 /**
- * Crée automatiquement :
- *   1. Le produit virtuel WooCommerce "Montant libre" (caché du catalogue)
- *   2. La page WordPress avec slug "montant-libre"
- * Exécuté une seule fois via option.
+ * Crée automatiquement le produit virtuel "Montant libre"
  */
 add_action( 'wp_loaded', function () {
     if ( ! class_exists( 'WooCommerce' ) ) return;
 
-    // ── Produit virtuel ──────────────────────────────────────────────────
     $product_id = (int) get_option( 'borea_montant_libre_product_id', 0 );
     if ( ! $product_id || ! wc_get_product( $product_id ) ) {
         $product = new WC_Product_Simple();
         $product->set_name( 'Montant libre' );
         $product->set_slug( 'montant-libre-product' );
         $product->set_status( 'publish' );
-        $product->set_catalog_visibility( 'hidden' );  // invisible boutique
+        $product->set_catalog_visibility( 'hidden' );
         $product->set_virtual( true );
-        $product->set_sold_individually( false );
         $product->set_price( 1 );
         $product->set_regular_price( 1 );
         $product->set_sku( 'BOREA-MONTANT-LIBRE' );
         $product_id = $product->save();
         update_option( 'borea_montant_libre_product_id', $product_id );
     }
-
-    // ── Page WP ─────────────────────────────────────────────────────────
-    if ( ! get_page_by_path( 'montant-libre' ) ) {
-        wp_insert_post( [
-            'post_title'   => 'Montant libre',
-            'post_name'    => 'montant-libre',
-            'post_status'  => 'publish',
-            'post_type'    => 'page',
-            'post_content' => '',
-        ] );
-    }
 } );
 
 /**
- * Intercepte le POST du formulaire /montant-libre.
- * Utilise l'action 'wp' (avant template_redirect) pour que notre
- * redirect vers /checkout parte AVANT les hooks WooCommerce qui
- * redirigent vers /cart après un add_to_cart.
+ * Intercepte le formulaire de montant libre
  */
 add_action( 'wp', function () {
     if ( ! is_page( 'montant-libre' ) ) return;
-    if ( ! isset( $_SERVER['REQUEST_METHOD'] ) || $_SERVER['REQUEST_METHOD'] !== 'POST' ) return;
-    if ( ! isset( $_POST['borea_action'] ) || $_POST['borea_action'] !== 'montant_libre' ) return;
-
-    // Vérification nonce (sécurité CSRF)
-    if ( ! isset( $_POST['_borea_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['_borea_nonce'] ) ), 'borea_montant_libre' ) ) {
-        wc_add_notice( 'Requête invalide. Veuillez réessayer.', 'error' );
-        return;
-    }
+    if ( ! isset( $_POST['submit_custom_amount'] ) && ! isset( $_POST['borea_action'] ) ) return;
 
     if ( ! class_exists( 'WooCommerce' ) ) return;
 
-    $raw_amount = isset( $_POST['borea_amount'] ) ? sanitize_text_field( wp_unslash( $_POST['borea_amount'] ) ) : '';
-    $currency   = isset( $_POST['borea_currency_hidden'] ) ? sanitize_text_field( wp_unslash( $_POST['borea_currency_hidden'] ) ) : 'EUR';
-    $amount     = (float) str_replace( ',', '.', $raw_amount );
+    // Récupère le montant (supporte les virgules et les deux noms de champs possibles)
+    $raw_amount = isset( $_POST['custom_amount'] ) ? $_POST['custom_amount'] : (isset($_POST['borea_amount']) ? $_POST['borea_amount'] : '');
+    $amount = (float) str_replace( ',', '.', $raw_amount );
 
-    // Validation montant
-    if ( $amount < 1 || $amount > 99999 ) {
-        wc_add_notice( 'Veuillez saisir un montant compris entre 1 € et 99 999 €.', 'error' );
+    if ( $amount < 1 ) {
+        wc_add_notice( 'Le montant doit être d\'au moins 1 €.', 'error' );
         return;
     }
 
-    // Conversion USD → EUR (taux indicatif 0.92)
-    if ( $currency === 'USD' ) {
-        $amount = round( $amount * 0.92, 2 );
-        if ( $amount < 1 ) {
-            wc_add_notice( 'Montant converti trop faible. Veuillez saisir un montant supérieur.', 'error' );
-            return;
-        }
-    }
+    $product_id = (int) get_option( 'borea_montant_libre_product_id' );
+    if ( ! $product_id ) return;
 
-    $product_id = (int) get_option( 'borea_montant_libre_product_id', 0 );
-    if ( ! $product_id ) {
-        wc_add_notice( 'Configuration incorrecte. Contactez l\'administrateur.', 'error' );
-        return;
-    }
-
-    // Vide le panier et ajoute le produit en injectant le prix custom
-    // directement dans les données du cart item (plus fiable que la session)
+    // Vider le panier et ajouter le produit avec le prix injecté
     WC()->cart->empty_cart();
     WC()->cart->add_to_cart( $product_id, 1, 0, [], [ 'borea_custom_price' => $amount ] );
 
-    // Redirige DIRECTEMENT vers le checkout — exit immédiat avant tout hook WC
+    // Rediriger vers le checkout
     wp_safe_redirect( wc_get_checkout_url() );
     exit;
 }, 1 );
 
 /**
- * Filet de sécurité : si WooCommerce tente malgré tout de rediriger
- * vers le panier après un add_to_cart, on force le checkout.
- */
-add_filter( 'woocommerce_add_to_cart_redirect', function ( $url ) {
-    if ( WC()->session && (float) WC()->session->get( 'borea_custom_amount', 0 ) > 0 ) {
-        return wc_get_checkout_url();
-    }
-    return $url;
-} );
-
-/**
- * Injecte le prix custom DIRECTEMENT sur l'objet produit au moment
- * où l'item est ajouté au panier (même requête que le POST).
+ * Applique le prix personnalisé lors de l'ajout au panier
  */
 add_filter( 'woocommerce_add_cart_item', function ( $cart_item ) {
-    if ( isset( $cart_item['borea_custom_price'] ) && (float) $cart_item['borea_custom_price'] > 0 ) {
+    if ( isset( $cart_item['borea_custom_price'] ) ) {
         $cart_item['data']->set_price( (float) $cart_item['borea_custom_price'] );
     }
     return $cart_item;
 } );
 
 /**
- * Recharge la clé borea_custom_price depuis la session ET réapplique
- * le prix sur l'objet produit à chaque nouvelle requête (ex: /checkout).
+ * Persiste le prix personnalisé depuis la session
  */
 add_filter( 'woocommerce_get_cart_item_from_session', function ( $cart_item, $values ) {
-    if ( isset( $values['borea_custom_price'] ) && (float) $values['borea_custom_price'] > 0 ) {
-        $cart_item['borea_custom_price'] = (float) $values['borea_custom_price'];
+    if ( isset( $values['borea_custom_price'] ) ) {
+        $cart_item['borea_custom_price'] = $values['borea_custom_price'];
         $cart_item['data']->set_price( (float) $values['borea_custom_price'] );
     }
     return $cart_item;
 }, 10, 2 );
+
+/**
+ * Force le prix lors du calcul des totaux (sécurité ultime pour TagadaPay)
+ */
+add_action( 'woocommerce_before_calculate_totals', function( $cart ) {
+    if ( is_admin() && ! defined( 'DOING_AJAX' ) ) return;
+    foreach ( $cart->get_cart() as $cart_item ) {
+        if ( isset( $cart_item['borea_custom_price'] ) ) {
+            $cart_item['data']->set_price( (float) $cart_item['borea_custom_price'] );
+        }
+    }
+}, 20 );
 
 // Fin du fichier
 ?>
