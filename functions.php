@@ -434,13 +434,13 @@ add_action( 'wp_loaded', function () {
 
 /**
  * Intercepte le POST du formulaire /montant-libre.
- * Vide le panier, ajoute le produit avec le montant custom,
- * stocke en session puis redirige DIRECTEMENT vers le checkout.
- * L'utilisateur ne voit jamais la page /cart.
+ * Utilise l'action 'wp' (avant template_redirect) pour que notre
+ * redirect vers /checkout parte AVANT les hooks WooCommerce qui
+ * redirigent vers /cart après un add_to_cart.
  */
-add_action( 'template_redirect', function () {
+add_action( 'wp', function () {
     if ( ! is_page( 'montant-libre' ) ) return;
-    if ( $_SERVER['REQUEST_METHOD'] !== 'POST' ) return;
+    if ( ! isset( $_SERVER['REQUEST_METHOD'] ) || $_SERVER['REQUEST_METHOD'] !== 'POST' ) return;
     if ( ! isset( $_POST['borea_action'] ) || $_POST['borea_action'] !== 'montant_libre' ) return;
 
     // Vérification nonce (sécurité CSRF)
@@ -451,9 +451,9 @@ add_action( 'template_redirect', function () {
 
     if ( ! class_exists( 'WooCommerce' ) ) return;
 
-    $raw_amount  = isset( $_POST['borea_amount'] ) ? sanitize_text_field( wp_unslash( $_POST['borea_amount'] ) ) : '';
-    $currency    = isset( $_POST['borea_currency_hidden'] ) ? sanitize_text_field( wp_unslash( $_POST['borea_currency_hidden'] ) ) : 'EUR';
-    $amount      = (float) str_replace( ',', '.', $raw_amount );
+    $raw_amount = isset( $_POST['borea_amount'] ) ? sanitize_text_field( wp_unslash( $_POST['borea_amount'] ) ) : '';
+    $currency   = isset( $_POST['borea_currency_hidden'] ) ? sanitize_text_field( wp_unslash( $_POST['borea_currency_hidden'] ) ) : 'EUR';
+    $amount     = (float) str_replace( ',', '.', $raw_amount );
 
     // Validation montant
     if ( $amount < 1 || $amount > 99999 ) {
@@ -479,13 +479,24 @@ add_action( 'template_redirect', function () {
     // Stocke le montant en session WooCommerce
     WC()->session->set( 'borea_custom_amount', $amount );
 
-    // Vide le panier et ajoute le produit (quantité 1)
+    // Vide le panier et ajoute le produit programmatiquement (sans déclencher de redirect WC)
     WC()->cart->empty_cart();
     WC()->cart->add_to_cart( $product_id, 1 );
 
-    // Redirige DIRECTEMENT vers le checkout (jamais vers /cart)
+    // Redirige DIRECTEMENT vers le checkout — exit immédiat avant tout hook WC
     wp_safe_redirect( wc_get_checkout_url() );
     exit;
+}, 1 );
+
+/**
+ * Filet de sécurité : si WooCommerce tente malgré tout de rediriger
+ * vers le panier après un add_to_cart, on force le checkout.
+ */
+add_filter( 'woocommerce_add_to_cart_redirect', function ( $url ) {
+    if ( WC()->session && (float) WC()->session->get( 'borea_custom_amount', 0 ) > 0 ) {
+        return wc_get_checkout_url();
+    }
+    return $url;
 } );
 
 /**
